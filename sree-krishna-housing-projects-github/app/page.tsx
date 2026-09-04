@@ -4,18 +4,18 @@ const properties = [
   {
     name: "Premium Open Plots",
     location: "Tirupati",
-    type: "Open Plots",
+    type: "Open Plots"
   },
   {
     name: "Krishna Enclave",
     location: "Tirupati",
-    type: "Residential",
+    type: "Residential"
   },
   {
     name: "Modern Villas",
     location: "Tirupati",
-    type: "Villas",
-  },
+    type: "Villas"
+  }
 ];
 
 export default function Home() {
@@ -24,6 +24,7 @@ export default function Home() {
 
       {/* NAVIGATION */}
       <header className="nav">
+
         <div className="brand">
           <span>SK</span>
 
@@ -35,31 +36,21 @@ export default function Home() {
 
         <nav>
           <a href="#about">About</a>
-
-          <a href="/properties">
-            Properties
-          </a>
-
-          <a href="#services">
-            Services
-          </a>
-
-          <a href="#contact">
-            Contact
-          </a>
+          <a href="/properties">Properties</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
         </nav>
 
-        <a
-          className="btn gold"
-          href="#visit"
-        >
+        <a className="btn gold" href="#visit">
           Book Site Visit
         </a>
+
       </header>
 
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="hero">
+
         <div className="heroOverlay">
 
           <p className="eyebrow">
@@ -67,8 +58,7 @@ export default function Home() {
           </p>
 
           <h1>
-            Find a Place You’ll Love to Call{" "}
-            <em>Home.</em>
+            Find a Place You’ll Love to Call <em>Home.</em>
           </h1>
 
           <p>
@@ -78,32 +68,26 @@ export default function Home() {
 
           <div className="actions">
 
-            <a
-              className="btn gold"
-              href="/properties"
-            >
+            <a className="btn gold" href="/properties">
               Explore Properties
             </a>
 
-            <a
-              className="btn outline"
-              href="#visit"
-            >
+            <a className="btn outline" href="#visit">
               Book a Site Visit
             </a>
 
           </div>
+
         </div>
+
       </section>
 
 
-      {/* ABOUT SECTION */}
-      <section
-        id="about"
-        className="section split"
-      >
+      {/* ABOUT */}
+      <section id="about" className="section split">
 
         <div>
+
           <p className="eyebrow dark">
             ABOUT US
           </p>
@@ -118,29 +102,19 @@ export default function Home() {
             customer support.
           </p>
 
+
           <div className="checks">
 
-            <span>
-              ✓ Transparent Process
-            </span>
-
-            <span>
-              ✓ Prime Locations
-            </span>
-
-            <span>
-              ✓ Customer Support
-            </span>
-
-            <span>
-              ✓ Investment Guidance
-            </span>
+            <span>✓ Transparent Process</span>
+            <span>✓ Prime Locations</span>
+            <span>✓ Customer Support</span>
+            <span>✓ Investment Guidance</span>
 
           </div>
+
         </div>
 
 
-        {/* STATS */}
         <div className="stats">
 
           <div>
@@ -174,6 +148,7 @@ export default function Home() {
         <div className="sectionHead">
 
           <div>
+
             <p className="eyebrow dark">
               FEATURED
             </p>
@@ -181,6 +156,7 @@ export default function Home() {
             <h2>
               Explore Our Properties
             </h2>
+
           </div>
 
           <a href="/properties">
@@ -194,14 +170,10 @@ export default function Home() {
 
           {properties.map((p, i) => (
 
-            <article
-              className="card"
-              key={p.name}
-            >
+            <article className="card" key={p.name}>
 
-              <div
-                className={"propertyImage img" + i}
-              />
+              <div className={"propertyImage img" + i}></div>
+
 
               <div className="cardBody">
 
@@ -233,10 +205,7 @@ export default function Home() {
 
 
       {/* SERVICES */}
-      <section
-        id="services"
-        className="section"
-      >
+      <section id="services" className="section">
 
         <p className="eyebrow dark">
           WHAT WE DO
@@ -253,13 +222,10 @@ export default function Home() {
             "Open Plot Development",
             "Residential Properties",
             "Construction Services",
-            "Property Consultation",
+            "Property Consultation"
           ].map((service, i) => (
 
-            <div
-              className="service"
-              key={service}
-            >
+            <div className="service" key={service}>
 
               <b>
                 0{i + 1}
@@ -270,8 +236,8 @@ export default function Home() {
               </h3>
 
               <p>
-                Professional support to help you make confident
-                property decisions.
+                Professional support to help you make confident property
+                decisions.
               </p>
 
             </div>
@@ -283,16 +249,13 @@ export default function Home() {
       </section>
 
 
-      {/* CONTACT SECTION */}
-      <section
-        id="contact"
-        className="section contactSection"
-      >
+      {/* CONTACT */}
+      <section id="contact" className="section contactSection">
 
         <div className="contactGrid">
 
 
-          {/* LEFT SIDE - CONTACT INFO */}
+          {/* LEFT SIDE */}
           <div className="contactInfo">
 
             <h2>
@@ -300,7 +263,7 @@ export default function Home() {
             </h2>
 
 
-            {/* PHONE */}
+            {/* CALL */}
             <a
               href="tel:+919494444818"
               className="contactBox"
@@ -311,6 +274,7 @@ export default function Home() {
               </div>
 
               <div>
+
                 <small>
                   Call Us
                 </small>
@@ -318,6 +282,7 @@ export default function Home() {
                 <h3>
                   +91 9494444818
                 </h3>
+
               </div>
 
             </a>
@@ -336,6 +301,7 @@ export default function Home() {
               </div>
 
               <div>
+
                 <small>
                   WhatsApp
                 </small>
@@ -343,6 +309,7 @@ export default function Home() {
                 <h3>
                   Chat Now
                 </h3>
+
               </div>
 
             </a>
@@ -359,6 +326,7 @@ export default function Home() {
               </div>
 
               <div>
+
                 <small>
                   Email Us
                 </small>
@@ -366,6 +334,7 @@ export default function Home() {
                 <h3>
                   sreekrishna.housingprojects@gmail.com
                 </h3>
+
               </div>
 
             </a>
@@ -378,30 +347,95 @@ export default function Home() {
                 Office Location
               </h2>
 
-              <p>
-                📍{" "}
-                <b>
-                  Sree Krishna Housing Projects
-                </b>
-              </p>
 
-              <p>
-                2nd Floor, American Towers,
-                <br />
+              <div className="locationDetails">
 
-                Opp. Ruchi Medicals,
-                Leela Mahal Circle,
-                <br />
+                <div className="locationIcon">
+                  📍
+                </div>
 
-                Tirupati, Andhra Pradesh
-              </p>
+
+                <div>
+
+                  <h3>
+                    Sree Krishna Housing Projects
+                  </h3>
+
+                  <p>
+                    2nd Floor, American Towers,
+                    <br />
+
+                    Opp Keerthi Medicals, Leela Mahal Circle,
+                    <br />
+
+                    TML By Pass Road, Tirupati - 517501
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* BUSINESS HOURS */}
+              <div className="businessHours">
+
+                <div className="locationIcon">
+                  🕒
+                </div>
+
+
+                <div>
+
+                  <h3>
+                    Business Hours
+                  </h3>
+
+                  <p>
+                    Mon - Sat: 9:00 AM - 6:00 PM
+                  </p>
+
+                  <p>
+                    Sunday: Closed
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* GOOGLE MAP */}
+              <div className="mapContainer">
+
+                <iframe
+                  title="Sree Krishna Housing Projects Location"
+                  src="https://www.google.com/maps?q=Saideep%20Towers%20Leela%20Mahal%20Road%20Tirupati&output=embed"
+                  width="100%"
+                  height="350"
+                  loading="lazy"
+                ></iframe>
+
+              </div>
+
+
+              {/* NAVIGATE BUTTON */}
+              <a
+                className="navigateButton"
+                href="https://www.google.com/maps/dir/?api=1&destination=Saideep+Towers,+Leela+Mahal+Road,+Tirupati,+Andhra+Pradesh"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+
+                🧭 Navigate
+
+              </a>
+
 
             </div>
 
           </div>
 
 
-          {/* RIGHT SIDE - CONTACT FORM */}
+          {/* RIGHT SIDE CONTACT FORM */}
           <div className="contactForm">
 
             <h2>
@@ -423,7 +457,6 @@ export default function Home() {
               <input
                 type="text"
                 placeholder="Your Name"
-                required
               />
 
 
@@ -434,7 +467,6 @@ export default function Home() {
               <input
                 type="tel"
                 placeholder="+91 9494444818"
-                required
               />
 
 
@@ -454,32 +486,31 @@ export default function Home() {
 
               <textarea
                 placeholder="How can we help you?"
-                rows={5}
-                required
-              />
+                rows={6}
+              ></textarea>
 
 
               <button
                 className="btn gold"
                 type="submit"
               >
+
                 Send Message →
+
               </button>
 
             </form>
 
           </div>
 
+
         </div>
 
       </section>
 
 
-      {/* SITE VISIT SECTION */}
-      <section
-        id="visit"
-        className="visit"
-      >
+      {/* BOOK SITE VISIT */}
+      <section id="visit" className="visit">
 
         <div>
 
@@ -533,11 +564,18 @@ export default function Home() {
         </p>
 
 
+        <p>
+          Contact us for property enquiries, site visits and
+          construction services.
+        </p>
+
+
         <small>
           © {new Date().getFullYear()} Sree Krishna Housing Projects
         </small>
 
       </footer>
+
 
     </main>
   );
