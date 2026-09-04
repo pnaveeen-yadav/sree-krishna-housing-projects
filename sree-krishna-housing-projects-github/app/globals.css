@@ -556,17 +556,24 @@ main {
 
 .card {
   min-width: 0;
+
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
+
   background: #ffffff;
+
   border: 1px solid #d9dde2;
+
   border-radius: 8px;
+
   transition: 0.25s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
+
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
