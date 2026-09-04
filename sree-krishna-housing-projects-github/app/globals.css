@@ -555,6 +555,11 @@ main {
 }
 
 .card {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
 
   background: #ffffff;
@@ -571,10 +576,16 @@ main {
 }
 
 .propertyImage {
+  display: block;
+
+  width: 100%;
+  min-width: 100%;
   height: 230px;
+  flex: 0 0 230px;
 
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .img0 {
@@ -590,6 +601,8 @@ main {
 }
 
 .cardBody {
+  width: 100%;
+
   padding: 24px;
 }
 
@@ -1302,6 +1315,9 @@ footer p {
 .propertiesPage .propertyCard {
   min-width: 0;
 
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
 
   background: #ffffff;
@@ -1335,11 +1351,16 @@ footer p {
 .propertiesPage .propertyCardImage {
   position: relative;
 
+  display: block;
+
   width: 100%;
+  min-width: 100%;
   height: 240px;
+  flex: 0 0 240px;
 
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
 
   background-color: #e9ecef;
 }
@@ -1397,6 +1418,8 @@ footer p {
 ========================================= */
 
 .propertyCardBody {
+  width: 100%;
+
   padding: 24px;
 }
 
