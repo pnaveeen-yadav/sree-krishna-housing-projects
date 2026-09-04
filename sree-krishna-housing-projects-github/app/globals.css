@@ -547,15 +547,26 @@ main {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
   gap: 28px;
 }
 
 .card {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
   overflow: hidden;
+
   background: #ffffff;
+
   border: 1px solid #d9dde2;
-  border-radius: 10px;
+  border-radius: 8px;
+
   transition: 0.25s ease;
 }
 
@@ -564,53 +575,57 @@ main {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
-/* HOME PROPERTY IMAGE */
-
-.grid .propertyImage {
-  width: 100%;
-  height: 230px;
+.propertyImage {
   display: block;
 
+  width: 100%;
+  min-width: 100%;
+  height: 230px;
+  flex: 0 0 230px;
+
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
-/* PROPERTY 1 */
-
-.grid .propertyImage.img0 {
+.img0 {
   background-image: url("/property1.jpg");
 }
 
-/* PROPERTY 2 */
-
-.grid .propertyImage.img1 {
+.img1 {
   background-image: url("/property2.jpg");
 }
 
-/* PROPERTY 3 */
-
-.grid .propertyImage.img2 {
+.img2 {
   background-image: url("/property3.jpg");
 }
 
 .cardBody {
+  width: 100%;
+
   padding: 24px;
 }
 
 .tag {
   display: inline-block;
+
   margin-bottom: 12px;
+
   padding: 6px 10px;
+
   background: #f1e7d3;
+
   color: #896b37;
+
   border-radius: 3px;
+
   font-size: 11px;
   font-weight: 700;
 }
 
 .cardBody h3 {
   margin-bottom: 10px;
+
   font-size: 22px;
 }
 
@@ -622,6 +637,7 @@ main {
   color: var(--gold-dark);
   font-weight: 600;
 }
+
 
 /* =========================================
    SERVICES
