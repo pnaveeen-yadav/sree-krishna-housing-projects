@@ -96,12 +96,10 @@ export default function Properties() {
       <header className="nav">
 
         <Link href="/" className="brand">
-          <span>SK</span>
-
-          <div>
-            <b>SREE KRISHNA</b>
-            <small>HOUSING PROJECTS</small>
-          </div>
+          <img
+            src="/logo.webp"
+            alt="Sree Krishna Housing Projects"
+          />
         </Link>
 
         <nav>

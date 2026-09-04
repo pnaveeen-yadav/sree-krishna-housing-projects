@@ -7,12 +7,10 @@ export default function VisitPage() {
       {/* HEADER - SAME AS HOME PAGE */}
       <header className="nav visitNav">
         <Link href="/" className="brand">
-          <span>SK</span>
-
-          <div>
-            <b>SREE KRISHNA</b>
-            <small>HOUSING PROJECTS</small>
-          </div>
+          <img
+            src="/logo.webp"
+            alt="Sree Krishna Housing Projects"
+          />
         </Link>
 
         <nav className="visitNavLinks">
