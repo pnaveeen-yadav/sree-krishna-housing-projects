@@ -40,7 +40,6 @@ export default function Home() {
           <a href="/">Home</a>
           <a href="/properties">Properties</a>
           <a href="#services">Services</a>
-          <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -138,7 +137,6 @@ export default function Home() {
         <div className="grid">
           {properties.map((property) => (
             <article className="card" key={property.name}>
-
               {/* PROPERTY IMAGE */}
 
               <div className="propertyImage">
@@ -193,60 +191,6 @@ export default function Home() {
               </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ================= TESTIMONIALS ================= */}
-
-      <section
-        id="testimonials"
-        className="section muted"
-      >
-        <p className="eyebrow dark">
-          TESTIMONIALS
-        </p>
-
-        <h2>What Our Customers Say</h2>
-
-        <div className="services">
-          <div className="service testimonialCard">
-            <div className="stars">
-              ★★★★★
-            </div>
-
-            <p>
-              Excellent support and transparent guidance
-              throughout the property selection process.
-            </p>
-
-            <b>— Happy Customer</b>
-          </div>
-
-          <div className="service testimonialCard">
-            <div className="stars">
-              ★★★★★
-            </div>
-
-            <p>
-              The team helped us find the right property
-              and explained everything clearly.
-            </p>
-
-            <b>— Property Buyer</b>
-          </div>
-
-          <div className="service testimonialCard">
-            <div className="stars">
-              ★★★★★
-            </div>
-
-            <p>
-              Professional service and great support
-              from beginning to end.
-            </p>
-
-            <b>— Investor</b>
-          </div>
         </div>
       </section>
 
