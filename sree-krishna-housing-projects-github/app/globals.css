@@ -508,10 +508,9 @@ main {
 
 .contactGrid {
   display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 70px;
+  align-items: start;
 }
 
 .contactInfo h2,
@@ -522,29 +521,28 @@ main {
 .contactBox {
   display: flex;
   align-items: center;
-
   gap: 18px;
-
   margin-bottom: 20px;
-
   padding: 20px;
-
   background: #ffffff;
-
   border: 1px solid #e1e4e8;
-  border-radius: 6px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contactBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(31, 42, 55, 0.08);
 }
 
 .contactIcon {
   width: 48px;
   height: 48px;
-
+  flex: 0 0 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: #f6f1e7;
-
   border-radius: 50%;
 }
 
@@ -554,29 +552,154 @@ main {
 
 .contactBox h3 {
   margin-top: 5px;
-
   font-size: 16px;
+  color: #34404b;
+  overflow-wrap: anywhere;
 }
 
+
+/* =========================================
+   OFFICE LOCATION
+========================================= */
+
 .officeLocation {
-  margin-top: 35px;
-
-  padding: 25px;
-
+  margin-top: 34px;
+  padding: 28px;
   background: #ffffff;
-
   border: 1px solid #e1e4e8;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .officeLocation h2 {
+  margin-bottom: 26px;
   font-size: 24px;
+  color: #2d3743;
 }
 
-.officeLocation p {
-  margin-top: 10px;
+.locationDetails,
+.businessHours {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
 
+.locationDetails {
+  margin-bottom: 26px;
+}
+
+.businessHours {
+  padding-top: 22px;
+  border-top: 1px solid #e7e9eb;
+}
+
+.locationIcon {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.locationDetails h3,
+.businessHours h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #4b535c;
+}
+
+.locationDetails p,
+.businessHours p {
+  margin: 0 0 6px;
+  color: #59636e;
+  line-height: 1.65;
+}
+
+.businessHours p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================
+   GOOGLE MAP
+========================================= */
+
+.mapContainer {
+  width: 100%;
+  margin-top: 28px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #d8dde2;
+  border-radius: 8px;
+}
+
+.mapContainer iframe {
+  display: block;
+  width: 100%;
+  height: 350px;
+  border: 0;
+}
+
+
+/* =========================================
+   NAVIGATE BUTTON
+========================================= */
+
+.navigateButton,
+.navigateBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 11px 18px;
+  background: transparent;
+  color: #8f733f;
+  border: 1px solid #b79a61;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.navigateButton:hover,
+.navigateBtn:hover {
+  background: #b79a61;
+  color: #ffffff;
+}
+
+
+/* =========================================
+   CONTACT RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .officeLocation {
+    padding: 22px 18px;
+  }
+
+  .locationDetails,
+  .businessHours {
+    gap: 12px;
+  }
+
+  .locationIcon {
+    width: 30px;
+    min-width: 30px;
+  }
+
+  .mapContainer iframe {
+    height: 300px;
+  }
+}
 
 /* =========================================
    CONTACT FORM

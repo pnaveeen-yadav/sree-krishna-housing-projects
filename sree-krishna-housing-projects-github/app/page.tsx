@@ -4,20 +4,19 @@ const properties = [
   {
     name: "Premium Open Plots",
     location: "Tirupati",
-    type: "Open Plots"
+    type: "Open Plots",
   },
   {
     name: "Krishna Enclave",
     location: "Tirupati",
-    type: "Residential"
+    type: "Residential",
   },
   {
     name: "Modern Villas",
     location: "Tirupati",
-    type: "Villas"
-  }
+    type: "Villas",
+  },
 ];
-
 
 export default function Home() {
   return (
@@ -38,7 +37,6 @@ export default function Home() {
           <a href="/">Home</a>
           <a href="/properties">Properties</a>
           <a href="#services">Services</a>
-          <a href="#testimonials">Testimonials</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -136,20 +134,14 @@ export default function Home() {
         <div className="grid">
           {properties.map((property, index) => (
             <article className="card" key={property.name}>
-              <div
-                className={"propertyImage img" + index}
-              ></div>
+              <div className={"propertyImage img" + index}></div>
 
               <div className="cardBody">
-                <span className="tag">
-                  {property.type}
-                </span>
+                <span className="tag">{property.type}</span>
 
                 <h3>{property.name}</h3>
 
-                <p>
-                  📍 {property.location}
-                </p>
+                <p>📍 {property.location}</p>
 
                 <a href="/properties">
                   View Details →
@@ -172,7 +164,7 @@ export default function Home() {
             "Open Plot Development",
             "Residential Properties",
             "Construction Services",
-            "Property Consultation"
+            "Property Consultation",
           ].map((service, index) => (
             <div className="service" key={service}>
               <b>0{index + 1}</b>
@@ -185,60 +177,6 @@ export default function Home() {
               </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ================= TESTIMONIALS ================= */}
-
-      <section
-        id="testimonials"
-        className="section muted"
-      >
-        <p className="eyebrow dark">
-          TESTIMONIALS
-        </p>
-
-        <h2>What Our Customers Say</h2>
-
-        <div className="services">
-          <div className="service testimonialCard">
-            <div className="stars">
-              ★★★★★
-            </div>
-
-            <p>
-              Excellent support and transparent guidance
-              throughout the property selection process.
-            </p>
-
-            <b>— Happy Customer</b>
-          </div>
-
-          <div className="service testimonialCard">
-            <div className="stars">
-              ★★★★★
-            </div>
-
-            <p>
-              The team helped us find the right property
-              and explained everything clearly.
-            </p>
-
-            <b>— Property Buyer</b>
-          </div>
-
-          <div className="service testimonialCard">
-            <div className="stars">
-              ★★★★★
-            </div>
-
-            <p>
-              Professional service and great support
-              from beginning to end.
-            </p>
-
-            <b>— Investor</b>
-          </div>
         </div>
       </section>
 
@@ -415,8 +353,6 @@ export default function Home() {
             regarding a site visit.
           </p>
 
-          {/* GO TO FULL BOOKING PAGE */}
-
           <a
             className="btn gold"
             href="/visit"
@@ -424,8 +360,6 @@ export default function Home() {
             Schedule Your Visit
           </a>
         </div>
-
-        {/* CURRENT SITE VISIT FORM */}
 
         <SiteVisitForm />
       </section>
