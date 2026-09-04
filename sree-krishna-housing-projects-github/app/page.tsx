@@ -18,6 +18,7 @@ const properties = [
   }
 ];
 
+
 export default function Home() {
   return (
     <main>
