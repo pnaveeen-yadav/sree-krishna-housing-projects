@@ -2,133 +2,103 @@
 
 import { useState } from "react";
 
-const properties = [
-  {
-    id: 1,
-    name: "Sree Krishna Heights",
-    location: "Tirupati Central",
-    propertyType: "Residential",
-    category: "Apartment",
-    status: "READY TO MOVE",
-    price: "₹ 85 Lakhs",
-    size: "1850 Sq.Ft",
-    details: "3 BHK",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 2,
-    name: "Green Valley Plots",
-    location: "Renigunta Road",
-    propertyType: "Land",
-    category: "Land",
-    status: "NEW LAUNCH",
-    price: "₹ 45 Lakhs",
-    size: "2400 Sq.Ft",
-    details: "Plot",
-    image:
-      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 3,
-    name: "Royal Commercial Complex",
-    location: "Chandragiri",
-    propertyType: "Commercial",
-    category: "Commercial",
-    status: "UNDER CONSTRUCTION",
-    price: "₹ 2.5 Cr",
-    size: "3500 Sq.Ft",
-    details: "Office Space",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 4,
-    name: "Sree Krishna Villas",
-    location: "Tirupati",
-    propertyType: "Residential",
-    category: "Villa",
-    status: "READY TO MOVE",
-    price: "₹ 1.2 Cr",
-    size: "2200 Sq.Ft",
-    details: "4 BHK",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 5,
-    name: "Krishna Enclave",
-    location: "Renigunta",
-    propertyType: "Residential",
-    category: "Apartment",
-    status: "READY TO MOVE",
-    price: "₹ 65 Lakhs",
-    size: "1450 Sq.Ft",
-    details: "2 BHK",
-    image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 6,
-    name: "Modern Business Park",
-    location: "Chandragiri",
-    propertyType: "Commercial",
-    category: "Commercial",
-    status: "NEW LAUNCH",
-    price: "₹ 1.8 Cr",
-    size: "2800 Sq.Ft",
-    details: "Commercial Space",
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
-  },
+const timeSlots = [
+  "09:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "02:00 PM",
+  "04:00 PM",
+  "06:00 PM"
 ];
 
-export default function Properties() {
-  const [location, setLocation] = useState("All Locations");
-  const [propertyType, setPropertyType] = useState("All");
-  const [budget, setBudget] = useState("Any Budget");
+export default function VisitPage() {
+  const [step, setStep] = useState(1);
 
-  const filteredProperties = properties.filter((property) => {
-    const locationMatch =
-      location === "All Locations" ||
-      property.location.toLowerCase().includes(location.toLowerCase());
+  const [visitType, setVisitType] = useState<
+    "Site Visit" | "Consultation" | ""
+  >("");
 
-    const typeMatch =
-      propertyType === "All" ||
-      property.propertyType === propertyType;
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
-    let budgetMatch = true;
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
 
-    if (budget === "Less than 50L") {
-      budgetMatch = property.price.includes("45");
+  const today = new Date();
+
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+
+  function formatDate(date: Date) {
+    return date.toISOString().split("T")[0];
+  }
+
+  function formatDisplayDate(date: Date) {
+    return date.toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+  }
+
+  function selectToday() {
+    setSelectedDate(formatDate(today));
+  }
+
+  function selectTomorrow() {
+    setSelectedDate(formatDate(tomorrow));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!name || !phone) {
+      alert("Please enter your name and phone number.");
+      return;
     }
 
-    if (budget === "50L - 1Cr") {
-      budgetMatch =
-        property.price.includes("65") ||
-        property.price.includes("85");
+    try {
+      setMessage("Submitting your booking...");
+
+      const response = await fetch("/api/site-visit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          visitType,
+          name,
+          phone,
+          preferredDate: selectedDate,
+          preferredTime: selectedTime
+        })
+      });
+
+      if (response.ok) {
+        setMessage(
+          "Thank you! Your booking request has been submitted successfully."
+        );
+
+        setStep(4);
+      } else {
+        setMessage(
+          "Unable to submit your booking. Please try again."
+        );
+      }
+    } catch (error) {
+      setMessage(
+        "Something went wrong. Please try again."
+      );
     }
-
-    if (budget === "1 Cr+") {
-      budgetMatch =
-        property.price.includes("Cr") &&
-        !property.price.includes("₹ 2.5 Cr");
-    }
-
-    return locationMatch && typeMatch && budgetMatch;
-  });
-
-  function clearFilters() {
-    setLocation("All Locations");
-    setPropertyType("All");
-    setBudget("Any Budget");
   }
 
   return (
-    <main className="propertiesPage">
+    <main className="visitPage">
 
       {/* HEADER */}
-      <header className="nav propertiesNav">
+
+      <header className="nav">
         <a href="/" className="brand">
           <span>SK</span>
 
@@ -146,269 +116,335 @@ export default function Properties() {
           <a href="/#contact">Contact</a>
         </nav>
 
-        <a href="/visit" className="btn darkBtn">
+        <a className="btn gold" href="/visit">
           Book Site Visit
         </a>
       </header>
 
 
-      {/* PAGE HEADER */}
-      <section className="propertiesHero">
+      {/* PAGE CONTENT */}
 
-        <p className="eyebrow dark">
-          OUR PROPERTIES
-        </p>
+      <section className="visitPageContent">
 
-        <h1>Find Your Ideal Property</h1>
-
-        <p>
-          Explore our available property opportunities in and around Tirupati.
-          Find the right property based on your needs and investment goals.
-        </p>
-
-      </section>
+        <h1>Schedule Your Visit</h1>
 
 
-      {/* PROPERTIES CONTENT */}
-      <section className="propertiesLayout">
+        {/* ================= STEP 1 ================= */}
 
-        {/* FILTER SIDEBAR */}
-        <aside className="filterSidebar">
+        {step === 1 && (
+          <div className="bookingContainer">
 
-          <div className="filterHeader">
-            <h2>
-              <span>▽</span> Filters
-            </h2>
+            <h2>What would you like to schedule?</h2>
 
-            <button onClick={clearFilters}>
-              Clear All
-            </button>
-          </div>
-
-
-          {/* LOCATION */}
-          <div className="filterGroup">
-
-            <label>
-              ⊙ &nbsp; Location
-            </label>
-
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            >
-              <option>All Locations</option>
-              <option>Tirupati</option>
-              <option>Renigunta</option>
-              <option>Chandragiri</option>
-            </select>
-
-          </div>
-
-
-          {/* PROPERTY TYPE */}
-          <div className="filterGroup">
-
-            <label>
-              ▫ &nbsp; Property Type
-            </label>
-
-            <div className="propertyTypeButtons">
+            <div className="visitTypeGrid">
 
               <button
-                className={
-                  propertyType === "All"
-                    ? "filterActive"
-                    : ""
-                }
-                onClick={() => setPropertyType("All")}
+                type="button"
+                className={`visitTypeCard ${
+                  visitType === "Site Visit" ? "selected" : ""
+                }`}
+                onClick={() => {
+                  setVisitType("Site Visit");
+                  setStep(2);
+                }}
               >
-                All
+                <div className="visitIcon">
+                  📍
+                </div>
+
+                <h3>Site Visit</h3>
+
+                <p>
+                  Tour properties in person with our experts.
+                </p>
               </button>
 
-              <button
-                className={
-                  propertyType === "Residential"
-                    ? "filterActive"
-                    : ""
-                }
-                onClick={() => setPropertyType("Residential")}
-              >
-                Residential
-              </button>
 
               <button
-                className={
-                  propertyType === "Commercial"
-                    ? "filterActive"
-                    : ""
-                }
-                onClick={() => setPropertyType("Commercial")}
+                type="button"
+                className={`visitTypeCard ${
+                  visitType === "Consultation" ? "selected" : ""
+                }`}
+                onClick={() => {
+                  setVisitType("Consultation");
+                  setStep(2);
+                }}
               >
-                Commercial
-              </button>
+                <div className="visitIcon">
+                  👥
+                </div>
 
-              <button
-                className={
-                  propertyType === "Land"
-                    ? "filterActive"
-                    : ""
-                }
-                onClick={() => setPropertyType("Land")}
-              >
-                Land
+                <h3>Consultation</h3>
+
+                <p>
+                  Discuss investment, legality, or construction.
+                </p>
               </button>
 
             </div>
 
           </div>
+        )}
 
 
-          {/* BUDGET */}
-          <div className="filterGroup">
+        {/* ================= STEP 2 ================= */}
 
-            <label>
-              ◇ &nbsp; Budget
-            </label>
+        {step === 2 && (
+          <div className="bookingContainer">
 
-            <select
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-            >
-              <option>Any Budget</option>
-              <option>Less than 50L</option>
-              <option>50L - 1Cr</option>
-              <option>1 Cr+</option>
-            </select>
-
-          </div>
+            <h2>Select Date & Time</h2>
 
 
-          <button
-            className="applyFiltersBtn"
-          >
-            Apply Filters
-          </button>
+            <div className="bookingSection">
 
-        </aside>
+              <h3>Select Date</h3>
 
+              <div className="dateOptions">
 
-        {/* PROPERTY GRID */}
-        <div className="propertyCardsContainer">
-
-          {filteredProperties.length > 0 ? (
-            <div className="propertiesGrid">
-
-              {filteredProperties.map((property) => (
-
-                <article
-                  className="propertyListingCard"
-                  key={property.id}
+                <button
+                  type="button"
+                  className={
+                    selectedDate === formatDate(today)
+                      ? "dateButton active"
+                      : "dateButton"
+                  }
+                  onClick={selectToday}
                 >
-
-                  <div
-                    className="propertyListingImage"
-                    style={{
-                      backgroundImage: `url(${property.image})`,
-                    }}
-                  >
-
-                    <div className="propertyBadges">
-
-                      <span className="statusBadge">
-                        {property.status}
-                      </span>
-
-                      <span className="categoryBadge">
-                        {property.category.toUpperCase()}
-                      </span>
-
-                    </div>
-
-                  </div>
+                  Today
+                </button>
 
 
-                  <div className="propertyListingBody">
-
-                    <h2>
-                      {property.name}
-                    </h2>
-
-
-                    <p className="propertyLocation">
-                      ⊙ &nbsp; {property.location}
-                    </p>
-
-
-                    <div className="propertyDivider"></div>
+                <button
+                  type="button"
+                  className={
+                    selectedDate === formatDate(tomorrow)
+                      ? "dateButton active"
+                      : "dateButton"
+                  }
+                  onClick={selectTomorrow}
+                >
+                  Tomorrow
+                </button>
 
 
-                    <div className="propertyFeatures">
+                <label className="calendarButton">
 
-                      <span>
-                        🛏 &nbsp; {property.details}
-                      </span>
+                  <input
+                    type="date"
+                    min={formatDate(today)}
+                    value={
+                      selectedDate !== formatDate(today) &&
+                      selectedDate !== formatDate(tomorrow)
+                        ? selectedDate
+                        : ""
+                    }
+                    onChange={(e) =>
+                      setSelectedDate(e.target.value)
+                    }
+                  />
 
-                      <span className="featureDivider"></span>
+                  <span>
+                    {selectedDate &&
+                    selectedDate !== formatDate(today) &&
+                    selectedDate !== formatDate(tomorrow)
+                      ? formatDisplayDate(
+                          new Date(selectedDate + "T00:00:00")
+                        )
+                      : "Select Date 📅"}
+                  </span>
 
-                      <span>
-                        📐 &nbsp; {property.size}
-                      </span>
+                </label>
 
-                    </div>
-
-
-                    <div className="propertyDivider"></div>
-
-
-                    <div className="propertyBottom">
-
-                      <strong>
-                        {property.price}
-                      </strong>
-
-
-                      <div className="propertyActions">
-
-                        <button className="detailsBtn">
-                          Details
-                        </button>
-
-                        <a
-                          href="/visit"
-                          className="enquireBtn"
-                        >
-                          Enquire
-                        </a>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </article>
-
-              ))}
+              </div>
 
             </div>
-          ) : (
 
-            <div className="noProperties">
-              <h2>No Properties Found</h2>
+
+            {/* TIME SLOTS */}
+
+            <div className="bookingSection">
+
+              <h3>Select Time Slot</h3>
+
+              <div className="timeSlots">
+
+                {timeSlots.map((time) => (
+                  <button
+                    key={time}
+                    type="button"
+                    className={
+                      selectedTime === time
+                        ? "timeButton active"
+                        : "timeButton"
+                    }
+                    onClick={() => setSelectedTime(time)}
+                  >
+                    {time}
+                  </button>
+                ))}
+
+              </div>
+
+            </div>
+
+
+            {/* BUTTONS */}
+
+            <div className="bookingActions">
+
+              <button
+                type="button"
+                className="backButton"
+                onClick={() => setStep(1)}
+              >
+                ← Back
+              </button>
+
+
+              <button
+                type="button"
+                className="continueButton"
+                disabled={
+                  !selectedDate || !selectedTime
+                }
+                onClick={() => setStep(3)}
+              >
+                Continue →
+              </button>
+
+            </div>
+
+          </div>
+        )}
+
+
+        {/* ================= STEP 3 ================= */}
+
+        {step === 3 && (
+          <div className="bookingContainer">
+
+            <h2>Your Details</h2>
+
+
+            <form
+              className="bookingForm"
+              onSubmit={handleSubmit}
+            >
+
+              <label>Full Name</label>
+
+              <input
+                type="text"
+                placeholder="John Doe"
+                value={name}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
+                required
+              />
+
+
+              <label>Phone Number</label>
+
+              <input
+                type="tel"
+                placeholder="+91 9494444818"
+                value={phone}
+                onChange={(e) =>
+                  setPhone(e.target.value)
+                }
+                required
+              />
+
+
+              <label>
+                Message (Optional)
+              </label>
+
+              <textarea
+                placeholder="Any specific requests?"
+                rows={5}
+                value={message}
+                onChange={(e) =>
+                  setMessage(e.target.value)
+                }
+              />
+
+
+              <div className="bookingActions">
+
+                <button
+                  type="button"
+                  className="backButton"
+                  onClick={() => setStep(2)}
+                >
+                  ← Back
+                </button>
+
+
+                <button
+                  type="submit"
+                  className="continueButton"
+                >
+                  Confirm Booking →
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+        )}
+
+
+        {/* ================= STEP 4 ================= */}
+
+        {step === 4 && (
+          <div className="bookingContainer bookingSuccess">
+
+            <div className="successIcon">
+              ✓
+            </div>
+
+            <h2>Booking Request Received!</h2>
+
+            <p>
+              Thank you for choosing Sree Krishna Housing Projects.
+            </p>
+
+            <div className="bookingSummary">
 
               <p>
-                Try changing your filters.
+                <b>Booking Type:</b>{" "}
+                {visitType}
               </p>
 
-              <button onClick={clearFilters}>
-                Clear Filters
-              </button>
+              <p>
+                <b>Date:</b>{" "}
+                {selectedDate}
+              </p>
+
+              <p>
+                <b>Time:</b>{" "}
+                {selectedTime}
+              </p>
+
+              <p>
+                <b>Name:</b>{" "}
+                {name}
+              </p>
+
             </div>
 
-          )}
+            <a
+              href="/"
+              className="btn gold"
+            >
+              Back to Home
+            </a>
 
-        </div>
+          </div>
+        )}
 
       </section>
 

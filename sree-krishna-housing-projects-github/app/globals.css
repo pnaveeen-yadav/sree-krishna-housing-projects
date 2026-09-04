@@ -15,7 +15,7 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #27313b;
-  background: #f6f7f8;
+  background: #f5f6f7;
 }
 
 a {
@@ -27,7 +27,16 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 
@@ -36,14 +45,21 @@ textarea {
 ========================================================= */
 
 :root {
-  --dark: #222629;
+  --dark: #242729;
   --dark-green: #18362a;
   --gold: #b99a61;
   --gold-dark: #9a7635;
-  --light: #f7f7f6;
-  --border: #d9dce0;
+
   --text: #27313b;
   --muted: #66707a;
+
+  --background: #f5f6f7;
+  --white: #ffffff;
+
+  --border: #d8dce0;
+  --light-border: #e7e9eb;
+
+  --shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -55,13 +71,21 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   padding: 13px 22px;
-  border-radius: 4px;
+
   border: 1px solid transparent;
+  border-radius: 4px;
+
   font-size: 14px;
   font-weight: 700;
+
   cursor: pointer;
-  transition: 0.2s ease;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .btn:hover {
@@ -94,15 +118,20 @@ textarea {
 }
 
 .darkBtn:hover {
-  opacity: 0.9;
+  background: #111315;
 }
 
 
 /* =========================================================
-   NAVIGATION / HEADER
+   FIXED NAVIGATION
 ========================================================= */
 
 .nav {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
   width: 100%;
   min-height: 78px;
 
@@ -112,36 +141,46 @@ textarea {
 
   padding: 10px 5%;
 
-  background: rgba(255, 255, 255, 0.97);
-
-  position: fixed;
-  top: 0;
-  left: 0;
+  background: rgba(255, 255, 255, 0.98);
 
   z-index: 1000;
 
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.06);
 }
+
+
+/* NAV LINKS */
 
 .nav nav {
   display: flex;
   align-items: center;
+  justify-content: center;
+
   gap: 32px;
 }
 
 .nav nav a {
   color: #3f454b;
+
   font-size: 15px;
-  transition: 0.2s ease;
+
+  transition: color 0.2s ease;
 }
 
 .nav nav a:hover {
   color: var(--gold-dark);
 }
 
+
+/* =========================================================
+   BRAND
+========================================================= */
+
 .brand {
   display: flex;
   align-items: center;
+
   gap: 10px;
 }
 
@@ -156,19 +195,29 @@ textarea {
   border-radius: 50%;
 
   color: var(--gold-dark);
+
   font-weight: bold;
 }
 
 .brand b {
   display: block;
+
+  color: #37404a;
+
+  font-size: 15px;
+
   letter-spacing: 1px;
 }
 
 .brand small {
   display: block;
+
   margin-top: 3px;
 
+  color: #555e67;
+
   font-size: 9px;
+
   letter-spacing: 1.8px;
 }
 
@@ -178,20 +227,19 @@ textarea {
 ========================================================= */
 
 .logoImage {
-  width: 360px;
-  max-width: 100%;
+  width: 220px;
   height: auto;
+
   object-fit: contain;
 }
 
 .nav .logoImage {
-  width: 360px;
-  max-height: 140px;
+  max-height: 58px;
 }
 
 
 /* =========================================================
-   HOME PAGE HERO
+   HOME HERO
 ========================================================= */
 
 .hero {
@@ -205,14 +253,16 @@ textarea {
       rgba(11, 29, 22, 0.84),
       rgba(11, 29, 22, 0.38)
     ),
-    url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80");
+    url(
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80"
+    );
 
   background-position: center;
   background-size: cover;
 }
 
 .heroOverlay {
-  max-width: 780px;
+  max-width: 800px;
 
   padding:
     150px
@@ -225,12 +275,12 @@ textarea {
 .eyebrow {
   margin: 0 0 12px;
 
+  color: #d7b36c;
+
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
 
   letter-spacing: 3px;
-
-  color: #d7b36c;
 }
 
 .eyebrow.dark {
@@ -258,6 +308,7 @@ textarea {
 .actions {
   display: flex;
   flex-wrap: wrap;
+
   gap: 14px;
 
   margin-top: 28px;
@@ -272,7 +323,7 @@ textarea {
   width: 100%;
   max-width: 1500px;
 
-  margin: auto;
+  margin: 0 auto;
 
   padding:
     90px
@@ -288,17 +339,21 @@ textarea {
 
 .section p {
   color: #5e655f;
+
   line-height: 1.8;
 }
 
 
 /* =========================================================
-   ABOUT SECTION
+   ABOUT
 ========================================================= */
 
 .split {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+
+  grid-template-columns:
+    1.1fr
+    1fr;
 
   gap: 80px;
 
@@ -307,7 +362,9 @@ textarea {
 
 .checks {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
 
   gap: 15px;
 
@@ -318,9 +375,16 @@ textarea {
   color: #455248;
 }
 
+
+/* =========================================================
+   STATS
+========================================================= */
+
 .stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
 
   gap: 14px;
 }
@@ -334,9 +398,9 @@ textarea {
 .stats b {
   display: block;
 
-  font-size: 34px;
-
   color: var(--gold-dark);
+
+  font-size: 34px;
 }
 
 .stats span {
@@ -356,6 +420,7 @@ textarea {
 
 .sectionHead {
   display: flex;
+
   align-items: flex-end;
   justify-content: space-between;
 
@@ -364,17 +429,20 @@ textarea {
 
 .sectionHead a {
   color: var(--gold-dark);
+
   font-weight: 600;
 }
 
 
 /* =========================================================
-   PROPERTY GRID
+   HOME PROPERTY GRID
 ========================================================= */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 28px;
 
@@ -389,15 +457,19 @@ textarea {
   border: 1px solid #e2e4e7;
   border-radius: 8px;
 
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.05);
 
-  transition: 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
 
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.1);
 }
 
 .propertyImage {
@@ -409,20 +481,51 @@ textarea {
   background-repeat: no-repeat;
 }
 
+
+/* PROPERTY IMAGES */
+
 .img0 {
   background-image:
-    url("https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80");
+    url(
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80"
+    );
 }
 
 .img1 {
   background-image:
-    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80");
+    url(
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80"
+    );
 }
 
 .img2 {
   background-image:
-    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80");
+    url(
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
+    );
 }
+
+.img3 {
+  background-image:
+    url(
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=80"
+    );
+}
+
+.img4 {
+  background-image:
+    url(
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1000&q=80"
+    );
+}
+
+.img5 {
+  background-image:
+    url(
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=80"
+    );
+}
+
 
 .cardBody {
   padding: 22px;
@@ -440,7 +543,7 @@ textarea {
   color: var(--gold-dark);
 
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .cardBody h3 {
@@ -457,8 +560,9 @@ textarea {
 
 .cardBody a {
   color: var(--gold-dark);
+
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 
@@ -468,7 +572,9 @@ textarea {
 
 .services {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  grid-template-columns:
+    repeat(4, 1fr);
 
   gap: 20px;
 
@@ -478,9 +584,9 @@ textarea {
 .service {
   padding: 30px;
 
-  border: 1px solid #e8e4dc;
-
   background: #ffffff;
+
+  border: 1px solid #e8e4dc;
 }
 
 .service > b {
@@ -503,12 +609,21 @@ textarea {
 ========================================================= */
 
 .contactSection {
+  max-width: none;
+
   background: #ffffff;
 }
 
 .contactGrid {
+  max-width: 1400px;
+
+  margin: auto;
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
 
   gap: 60px;
 }
@@ -517,6 +632,9 @@ textarea {
 .contactForm h2 {
   margin-top: 0;
 }
+
+
+/* CONTACT BOX */
 
 .contactBox {
   display: flex;
@@ -546,6 +664,8 @@ textarea {
   border-radius: 50%;
 
   font-size: 20px;
+
+  flex-shrink: 0;
 }
 
 .contactBox small {
@@ -556,7 +676,14 @@ textarea {
   margin: 5px 0 0;
 
   font-size: 16px;
+
+  word-break: break-word;
 }
+
+
+/* =========================================================
+   OFFICE LOCATION
+========================================================= */
 
 .officeLocation {
   margin-top: 35px;
@@ -568,7 +695,7 @@ textarea {
 
 
 /* =========================================================
-   MAP
+   GOOGLE MAP
 ========================================================= */
 
 .mapContainer {
@@ -579,6 +706,8 @@ textarea {
   overflow: hidden;
 
   border-radius: 8px;
+
+  border: 1px solid #e2e4e7;
 }
 
 .mapContainer iframe {
@@ -588,6 +717,37 @@ textarea {
   height: 350px;
 
   border: 0;
+}
+
+
+/* NAVIGATE BUTTON */
+
+.navigateButton {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 18px;
+
+  padding: 13px 22px;
+
+  background: var(--dark);
+
+  color: #ffffff;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.navigateButton:hover {
+  background: #111315;
+
+  transform: translateY(-1px);
 }
 
 
@@ -631,20 +791,35 @@ textarea {
   background: #ffffff;
 
   font-size: 14px;
+
+  outline: none;
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+  border-color: var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(185, 154, 97, 0.12);
 }
 
 .contactForm textarea {
   resize: vertical;
+
+  min-height: 120px;
 }
 
 
 /* =========================================================
-   OLD SITE VISIT SECTION ON HOME
+   HOME SITE VISIT SECTION
 ========================================================= */
 
 .visit {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
 
   gap: 60px;
 
@@ -655,6 +830,8 @@ textarea {
   background: var(--dark-green);
 
   color: #ffffff;
+
+  align-items: center;
 }
 
 .visit h2 {
@@ -665,39 +842,47 @@ textarea {
 
 .visit > div > p:last-child {
   color: #d2d8d4;
+
   line-height: 1.8;
 }
 
 
 /* =========================================================
-   SITE VISIT SIMPLE FORM
+   HOME SITE VISIT FORM
 ========================================================= */
 
-.visit form {
+.siteVisitWrapper {
+  width: 100%;
+}
+
+.siteVisitWrapper form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
 
   gap: 12px;
 }
 
-.visit input,
-.visit select,
-.visit textarea {
+.siteVisitWrapper input,
+.siteVisitWrapper select,
+.siteVisitWrapper textarea {
   width: 100%;
 
   padding: 14px;
 
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
+
+  background: #ffffff;
 
   font-size: 14px;
+
+  outline: none;
 }
 
-.visit button {
-  cursor: pointer;
-}
-
-.visit button:last-of-type {
+.siteVisitWrapper button {
   grid-column: span 2;
 }
 
@@ -726,12 +911,14 @@ footer {
   color: #d9ddd9;
 }
 
-footer p {
-  color: #aab4ae;
-}
-
 footer .brand {
   margin-bottom: 20px;
+}
+
+footer p {
+  color: #aab4ae;
+
+  line-height: 1.7;
 }
 
 
@@ -766,126 +953,198 @@ footer .brand {
 .propertiesPage {
   min-height: 100vh;
 
-  padding-top: 100px;
+  padding-top: 78px;
 
-  background: #f5f6f7;
-}
-
-.propertiesHeader {
-  padding:
-    30px
-    6%;
-
-  background: #ffffff;
-
-  border-bottom: 1px solid #e5e6e8;
-}
-
-.propertiesHeader h1 {
-  margin: 0 0 10px;
-
-  font-size: 40px;
-}
-
-.propertiesHeader p {
-  margin: 0;
-
-  color: #59636c;
+  background: #f6f6f4;
 }
 
 
 /* =========================================================
-   PROPERTIES LAYOUT
+   PROPERTIES HERO
 ========================================================= */
 
-.propertiesLayout {
+.propertiesHero {
+  min-height: 280px;
+
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(13, 32, 24, 0.88),
+      rgba(13, 32, 24, 0.45)
+    ),
+    url(
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80"
+    );
+
+  background-size: cover;
+  background-position: center;
+
+  color: #ffffff;
+}
+
+.propertiesHeroContent {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: auto;
+
+  padding:
+    55px
+    6%;
+}
+
+.propertiesHero h1 {
+  margin: 8px 0 15px;
+
+  font-size: 48px;
+
+  line-height: 1.1;
+}
+
+.propertiesHero p {
+  max-width: 720px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   PROPERTIES CONTENT
+========================================================= */
+
+.propertiesContent {
+  max-width: 1600px;
+
+  margin: auto;
+
+  padding:
+    45px
+    4%
+    70px;
+
   display: grid;
-  grid-template-columns: 300px 1fr;
+
+  grid-template-columns:
+    300px
+    minmax(0, 1fr);
 
   gap: 30px;
 
-  padding:
-    35px
-    5%;
+  align-items: start;
 }
 
 
 /* =========================================================
-   FILTER SIDEBAR
+   FILTER PANEL
 ========================================================= */
 
-.filters {
-  height: fit-content;
+.propertyFilters {
+  position: sticky;
+
+  top: 100px;
 
   padding: 24px;
 
   background: #ffffff;
 
-  border: 1px solid #dfe2e5;
-  border-radius: 8px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
 
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.05);
 }
 
-.filtersTop {
+.filterHeader {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 20px;
+  padding-bottom: 18px;
 
-  padding-bottom: 16px;
+  margin-bottom: 22px;
 
-  border-bottom: 1px solid #e6e7e8;
+  border-bottom: 1px solid #e8e8e8;
 }
 
-.filtersTop h3 {
+.filterHeader h2 {
   margin: 0;
 
-  font-size: 20px;
+  font-size: 22px;
+
+  color: #28332d;
 }
 
-.clearFilter {
+.filterHeader button {
   padding: 0;
 
   border: none;
 
   background: transparent;
 
-  color: #6e7479;
+  color: var(--gold-dark);
+
+  font-size: 14px;
 
   text-decoration: underline;
 
   cursor: pointer;
 }
 
+
+/* =========================================================
+   FILTER GROUP
+========================================================= */
+
 .filterGroup {
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 }
 
-.filterGroup label,
-.filterTitle {
+.filterGroup label {
   display: block;
 
   margin-bottom: 12px;
 
   font-weight: 600;
 
-  color: #3c444b;
+  color: #37433c;
 }
 
 .filterGroup select {
   width: 100%;
+  height: 45px;
 
-  padding: 13px;
+  padding: 0 14px;
 
-  border: 1px solid #d7dade;
-  border-radius: 5px;
+  border: 1px solid #d5d5d5;
+  border-radius: 6px;
 
   background: #ffffff;
 
+  color: #38443d;
+
   font-size: 15px;
+
+  outline: none;
 }
+
+.filterGroup select:focus {
+  border-color: var(--gold);
+}
+
+
+/* =========================================================
+   PROPERTY TYPE FILTERS
+========================================================= */
 
 .propertyTypeButtons {
   display: flex;
@@ -894,30 +1153,41 @@ footer .brand {
   gap: 8px;
 }
 
-.filterChip {
-  padding:
-    8px
-    13px;
+.filterPill {
+  padding: 8px 14px;
 
-  border: 1px solid #d7dade;
+  border: 1px solid #d4d4d4;
   border-radius: 20px;
 
   background: #ffffff;
 
-  color: #596169;
+  color: #526058;
+
+  font-size: 14px;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
-.filterChip.active {
+.filterPill:hover {
   border-color: var(--gold);
+}
 
+.filterPill.active {
   background: var(--gold);
+
+  border-color: var(--gold);
 
   color: #ffffff;
 }
 
-.applyFilters {
+
+/* =========================================================
+   APPLY FILTERS
+========================================================= */
+
+.applyFiltersButton {
   width: 100%;
 
   padding: 14px;
@@ -930,69 +1200,72 @@ footer .brand {
   color: #ffffff;
 
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 600;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.applyFiltersButton:hover {
+  background: #111315;
 }
 
 
 /* =========================================================
-   PROPERTIES CONTENT
-========================================================= */
-
-.propertiesContent {
-  min-width: 0;
-}
-
-.propertiesContentTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 20px;
-}
-
-.propertiesContentTop h2 {
-  margin: 0;
-}
-
-
-/* =========================================================
-   PROPERTY LISTING CARDS
+   PROPERTIES GRID
 ========================================================= */
 
 .propertiesGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
 
   gap: 30px;
 }
+
+
+/* =========================================================
+   PROPERTY CARD
+========================================================= */
 
 .propertyCard {
   overflow: hidden;
 
   background: #ffffff;
 
-  border: 1px solid #dfe2e5;
-  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+  border-radius: 9px;
 
-  transition: 0.25s ease;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .propertyCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.12);
 }
 
-.propertyCardImage {
+.propertyCard .propertyImage {
   position: relative;
 
-  height: 230px;
+  height: 240px;
 
-  background-position: center;
   background-size: cover;
+  background-position: center;
 }
+
+
+/* =========================================================
+   PROPERTY BADGES
+========================================================= */
 
 .propertyBadges {
   position: absolute;
@@ -1007,102 +1280,154 @@ footer .brand {
 }
 
 .statusBadge,
-.typeBadge {
-  padding:
-    6px
-    10px;
+.categoryBadge {
+  padding: 7px 10px;
 
   border-radius: 4px;
 
   color: #ffffff;
 
   font-size: 11px;
-  font-weight: bold;
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
 }
 
 .statusBadge {
   background: var(--gold);
 }
 
-.typeBadge {
-  background: #3d444a;
+.categoryBadge {
+  background: rgba(28, 35, 38, 0.9);
 }
+
+
+/* =========================================================
+   PROPERTY CARD BODY
+========================================================= */
 
 .propertyCardBody {
   padding: 24px;
 }
 
-.propertyCardBody h3 {
-  margin:
-    0
-    0
-    10px;
+.propertyCardBody h2 {
+  margin: 0 0 10px;
 
-  font-size: 21px;
+  color: #28332d;
+
+  font-size: 22px;
 }
+
+
+/* =========================================================
+   PROPERTY LOCATION
+========================================================= */
 
 .propertyLocation {
-  margin-bottom: 18px;
+  margin: 0;
 
-  color: #69727a;
+  color: #68736d;
+
+  font-size: 15px;
 }
 
-.propertyFeatures {
+
+/* =========================================================
+   PROPERTY DIVIDER
+========================================================= */
+
+.propertyDivider {
+  height: 1px;
+
+  margin: 18px 0;
+
+  background: #e8e8e8;
+}
+
+
+/* =========================================================
+   PROPERTY DETAILS
+========================================================= */
+
+.propertyDetails {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  color: #4c5751;
+
+  font-size: 15px;
+}
+
+.detailsDivider {
+  width: 1px;
+  height: 26px;
+
+  background: #dddddd;
+}
+
+
+/* =========================================================
+   PROPERTY BOTTOM
+========================================================= */
+
+.propertyBottom {
   display: flex;
 
-  gap: 14px;
-
-  margin: 20px 0;
-
-  padding:
-    15px
-    0;
-
-  border-top: 1px solid #eceeef;
-  border-bottom: 1px solid #eceeef;
-}
-
-.propertyFeatures span {
-  color: #4f5961;
-
-  font-size: 14px;
-}
-
-.propertyPriceRow {
-  display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: 12px;
+  gap: 15px;
 }
 
-.propertyPrice {
-  font-size: 23px;
-  font-weight: bold;
+.propertyBottom h3 {
+  margin: 0;
+
+  color: #29352e;
+
+  font-size: 22px;
 }
+
+
+/* =========================================================
+   PROPERTY ACTIONS
+========================================================= */
 
 .propertyActions {
   display: flex;
+
+  align-items: center;
+
   gap: 8px;
 }
 
 .detailsButton {
-  padding:
-    10px
-    16px;
+  padding: 10px 16px;
 
-  border: 1px solid #343a40;
+  border: 1px solid #555;
   border-radius: 4px;
 
   background: #ffffff;
 
+  color: #2f3933;
+
+  font-size: 14px;
+
   cursor: pointer;
 }
 
+.detailsButton:hover {
+  background: #f4f4f4;
+}
+
 .enquireButton {
-  padding:
-    10px
-    16px;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 11px 18px;
 
   border: none;
   border-radius: 4px;
@@ -1111,66 +1436,34 @@ footer .brand {
 
   color: #ffffff;
 
+  font-size: 14px;
   font-weight: 600;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.enquireButton:hover {
+  background: #111315;
 }
 
 
 /* =========================================================
-   PROPERTY DETAIL PAGE
+   NO PROPERTIES
 ========================================================= */
 
-.propertyDetailPage {
-  min-height: 100vh;
+.noProperties {
+  grid-column: 1 / -1;
 
-  padding-top: 78px;
+  padding: 70px 20px;
 
-  background: #f6f7f8;
-}
-
-.propertyHeroImage {
-  width: 100%;
-  height: 430px;
-
-  background-size: cover;
-  background-position: center;
-}
-
-.propertyDetailContent {
-  max-width: 1200px;
-
-  margin: auto;
-
-  padding:
-    45px
-    30px;
-}
-
-.propertyDetailContent h1 {
-  font-size: 40px;
-}
-
-.propertyDetailBox {
-  padding: 30px;
-
-  background: #ffffff;
-
-  border-radius: 8px;
-}
-
-.propertyDetailActions {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 15px;
-
-  margin-top: 30px;
+  text-align: center;
 }
 
 
 /* =========================================================
-   BOOK VISIT PAGE
+   VISIT PAGE
 ========================================================= */
 
 .visitPage {
@@ -1184,6 +1477,11 @@ footer .brand {
   background: #f5f6f7;
 }
 
+
+/* =========================================================
+   VISIT PAGE TITLE
+========================================================= */
+
 .visitPageTitle {
   margin:
     0
@@ -1192,8 +1490,16 @@ footer .brand {
 
   text-align: center;
 
+  color: #27313b;
+
   font-size: 36px;
+  font-weight: 700;
 }
+
+
+/* =========================================================
+   VISIT WIZARD
+========================================================= */
 
 .visitWizard {
   position: relative;
@@ -1202,13 +1508,17 @@ footer .brand {
 
   margin: auto;
 
-  padding: 38px 32px 32px;
+  padding:
+    38px
+    32px
+    32px;
 
   background: #ffffff;
 
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
 
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
 .visitWizard::before {
@@ -1225,6 +1535,11 @@ footer .brand {
   background: var(--gold);
 }
 
+
+/* =========================================================
+   VISIT STEP TITLE
+========================================================= */
+
 .visitStepTitle {
   margin:
     0
@@ -1232,6 +1547,8 @@ footer .brand {
     28px;
 
   text-align: center;
+
+  color: #27313b;
 
   font-size: 27px;
 }
@@ -1243,7 +1560,9 @@ footer .brand {
 
 .visitTypeGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
 
   gap: 24px;
 }
@@ -1252,7 +1571,9 @@ footer .brand {
   min-height: 225px;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
 
@@ -1267,13 +1588,19 @@ footer .brand {
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .visitTypeCard:hover {
   border-color: var(--gold);
 
   transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 .visitTypeIcon {
@@ -1298,6 +1625,8 @@ footer .brand {
     0
     10px;
 
+  color: #27313b;
+
   font-size: 21px;
 }
 
@@ -1307,12 +1636,13 @@ footer .brand {
   color: #66707a;
 
   font-size: 14px;
+
   line-height: 1.6;
 }
 
 
 /* =========================================================
-   STEP 2 - DATE & TIME
+   STEP 2 - DATE AND TIME
 ========================================================= */
 
 .visitFormSection {
@@ -1324,18 +1654,29 @@ footer .brand {
 
   margin-bottom: 12px;
 
+  color: #37414d;
+
   font-size: 15px;
   font-weight: 600;
 }
 
+
+/* =========================================================
+   DATE OPTIONS
+========================================================= */
+
 .dateOptions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 12px;
 }
 
 .dateOption {
+  min-height: 45px;
+
   padding: 13px;
 
   border: 1px solid #d8dce0;
@@ -1348,9 +1689,14 @@ footer .brand {
   font-size: 14px;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
-.dateOption:hover,
+.dateOption:hover {
+  border-color: var(--gold);
+}
+
 .dateOption.selected {
   border-color: var(--gold);
 
@@ -1361,11 +1707,12 @@ footer .brand {
 
 
 /* =========================================================
-   CALENDAR
+   CALENDAR INPUT
 ========================================================= */
 
 .calendarInput {
   width: 100%;
+  min-height: 45px;
 
   padding: 13px;
 
@@ -1374,7 +1721,18 @@ footer .brand {
 
   background: #ffffff;
 
+  color: #37414d;
+
   font-size: 15px;
+
+  outline: none;
+}
+
+.calendarInput:focus {
+  border-color: var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(185, 154, 97, 0.12);
 }
 
 
@@ -1384,12 +1742,16 @@ footer .brand {
 
 .timeSlots {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 12px;
 }
 
 .timeSlot {
+  min-height: 45px;
+
   padding: 13px;
 
   border: 1px solid #d8dce0;
@@ -1402,9 +1764,14 @@ footer .brand {
   font-size: 14px;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
-.timeSlot:hover,
+.timeSlot:hover {
+  border-color: var(--gold);
+}
+
 .timeSlot.selected {
   border-color: var(--gold);
 
@@ -1415,11 +1782,12 @@ footer .brand {
 
 
 /* =========================================================
-   WIZARD BUTTONS
+   VISIT WIZARD ACTIONS
 ========================================================= */
 
 .visitWizardActions {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -1428,7 +1796,12 @@ footer .brand {
   margin-top: 35px;
 }
 
+
+/* BACK BUTTON */
+
 .backButton {
+  min-width: 110px;
+
   padding:
     12px
     22px;
@@ -1438,13 +1811,26 @@ footer .brand {
 
   background: #ffffff;
 
+  color: #27313b;
+
   font-size: 15px;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
 }
+
+.backButton:hover {
+  background: #f5f5f5;
+}
+
+
+/* CONTINUE BUTTON */
 
 .continueButton,
 .confirmButton {
+  min-width: 145px;
+
   padding:
     12px
     24px;
@@ -1460,6 +1846,13 @@ footer .brand {
   font-weight: 600;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.continueButton:hover,
+.confirmButton:hover {
+  background: #111315;
 }
 
 .continueButton:disabled,
@@ -1476,6 +1869,7 @@ footer .brand {
 
 .detailsForm {
   display: flex;
+
   flex-direction: column;
 
   gap: 10px;
@@ -1483,6 +1877,8 @@ footer .brand {
 
 .detailsForm label {
   margin-top: 8px;
+
+  color: #37414d;
 
   font-size: 14px;
   font-weight: 600;
@@ -1499,7 +1895,19 @@ footer .brand {
 
   background: #ffffff;
 
+  color: #27313b;
+
   font-size: 15px;
+
+  outline: none;
+}
+
+.detailsForm input:focus,
+.detailsForm textarea:focus {
+  border-color: var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(185, 154, 97, 0.12);
 }
 
 .detailsForm textarea {
@@ -1510,7 +1918,7 @@ footer .brand {
 
 
 /* =========================================================
-   SUCCESS MESSAGE
+   BOOKING SUCCESS
 ========================================================= */
 
 .visitSuccess {
@@ -1527,6 +1935,7 @@ footer .brand {
 
 .visitSuccess p {
   color: #66707a;
+
   line-height: 1.7;
 }
 
@@ -1539,11 +1948,15 @@ footer .brand {
   min-height: 100vh;
 
   display: grid;
-  grid-template-columns: 240px 1fr;
+
+  grid-template-columns:
+    240px
+    1fr;
 }
 
 .admin aside {
   display: flex;
+
   flex-direction: column;
 
   gap: 20px;
@@ -1561,7 +1974,9 @@ footer .brand {
 
 .dashboardCards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 20px;
 
@@ -1607,7 +2022,8 @@ footer .brand {
 
   background: #ffffff;
 
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.08);
 }
 
 .loginBox input,
@@ -1615,6 +2031,7 @@ footer .brand {
   width: 100%;
 
   margin: 8px 0;
+
   padding: 14px;
 
   border: 1px solid #dddddd;
@@ -1646,21 +2063,58 @@ footer .brand {
 
 
 /* =========================================================
-   MOBILE RESPONSIVE
+   TABLET
 ========================================================= */
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
 
   .propertiesGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
   .services {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, 1fr);
   }
 
 }
 
+
+/* =========================================================
+   TABLET / MEDIUM
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .propertiesContent {
+    grid-template-columns:
+      270px
+      minmax(0, 1fr);
+
+    gap: 20px;
+  }
+
+  .propertiesGrid {
+    gap: 20px;
+  }
+
+  .propertyCardBody {
+    padding: 20px;
+  }
+
+  .propertyBottom {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 850px) {
 
@@ -1669,7 +2123,9 @@ footer .brand {
   .nav {
     min-height: 70px;
 
-    padding: 8px 20px;
+    padding:
+      8px
+      20px;
   }
 
   .nav nav {
@@ -1677,9 +2133,16 @@ footer .brand {
   }
 
   .nav .btn {
-    padding: 10px 14px;
+    padding:
+      10px
+      14px;
 
     font-size: 12px;
+  }
+
+  .brand > span {
+    width: 38px;
+    height: 38px;
   }
 
   .brand b {
@@ -1691,10 +2154,12 @@ footer .brand {
   }
 
 
-  /* HOME */
+  /* HERO */
 
   .hero {
     min-height: 650px;
+
+    padding-top: 70px;
   }
 
   .heroOverlay {
@@ -1706,6 +2171,10 @@ footer .brand {
 
   .hero h1 {
     font-size: 44px;
+  }
+
+  .hero p {
+    font-size: 16px;
   }
 
 
@@ -1721,6 +2190,9 @@ footer .brand {
     font-size: 32px;
   }
 
+
+  /* ABOUT */
+
   .split {
     grid-template-columns: 1fr;
 
@@ -1732,7 +2204,14 @@ footer .brand {
   }
 
 
-  /* GRID */
+  /* STATS */
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* HOME GRID */
 
   .grid {
     grid-template-columns: 1fr;
@@ -1746,6 +2225,15 @@ footer .brand {
   }
 
 
+  /* SECTION HEAD */
+
+  .sectionHead {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+
   /* CONTACT */
 
   .contactGrid {
@@ -1754,20 +2242,32 @@ footer .brand {
     gap: 35px;
   }
 
+  .contactForm {
+    padding: 25px;
+  }
 
-  /* SITE VISIT */
+
+  /* HOME VISIT */
 
   .visit {
     grid-template-columns: 1fr;
 
     gap: 35px;
+
+    padding:
+      60px
+      7%;
   }
 
-  .visit form {
+  .visit h2 {
+    font-size: 32px;
+  }
+
+  .siteVisitWrapper form {
     grid-template-columns: 1fr;
   }
 
-  .visit button:last-of-type {
+  .siteVisitWrapper button {
     grid-column: auto;
   }
 
@@ -1778,34 +2278,39 @@ footer .brand {
 
   /* PROPERTIES */
 
-  .propertiesLayout {
+  .propertiesPage {
+    padding-top: 70px;
+  }
+
+  .propertiesHero {
+    min-height: 250px;
+  }
+
+  .propertiesHeroContent {
+    padding:
+      45px
+      7%;
+  }
+
+  .propertiesHero h1 {
+    font-size: 36px;
+  }
+
+  .propertiesContent {
     grid-template-columns: 1fr;
 
     padding:
-      25px
-      15px;
+      30px
+      5%
+      60px;
   }
 
-  .filters {
-    width: 100%;
+  .propertyFilters {
+    position: static;
   }
 
   .propertiesGrid {
     grid-template-columns: 1fr;
-  }
-
-
-  /* INNER */
-
-  .inner {
-    padding:
-      110px
-      20px
-      50px;
-  }
-
-  .inner > h1 {
-    font-size: 36px;
   }
 
 
@@ -1842,11 +2347,31 @@ footer .brand {
   }
 
   .timeSlots {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  /* ADMIN */
+
+  .admin {
+    grid-template-columns: 1fr;
+  }
+
+  .admin section {
+    padding: 30px;
+  }
+
+  .dashboardCards {
+    grid-template-columns: 1fr;
   }
 
 }
 
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
 @media (max-width: 500px) {
 
@@ -1858,6 +2383,9 @@ footer .brand {
     font-size: 16px;
   }
 
+
+  /* ACTIONS */
+
   .actions {
     flex-direction: column;
 
@@ -1868,13 +2396,65 @@ footer .brand {
     width: 100%;
   }
 
-  .stats {
-    grid-template-columns: 1fr;
+
+  /* NAV */
+
+  .brand b {
+    font-size: 10px;
   }
 
-  .sectionHead {
-    align-items: flex-start;
+  .nav .btn {
+    padding:
+      9px
+      10px;
+
+    font-size: 11px;
+  }
+
+
+  /* PROPERTIES */
+
+  .propertiesHero h1 {
+    font-size: 30px;
+  }
+
+  .propertyBottom {
     flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .propertyActions {
+    width: 100%;
+  }
+
+  .detailsButton,
+  .enquireButton {
+    flex: 1;
+
+    text-align: center;
+  }
+
+
+  /* VISIT PAGE */
+
+  .visitPageTitle {
+    font-size: 28px;
+  }
+
+  .visitWizard {
+    padding:
+      30px
+      18px
+      22px;
+  }
+
+  .visitStepTitle {
+    font-size: 22px;
+  }
+
+  .visitTypeCard {
+    min-height: 210px;
   }
 
   .timeSlots {
@@ -1883,23 +2463,18 @@ footer .brand {
 
   .visitWizardActions {
     flex-direction: column-reverse;
+
+    align-items: stretch;
   }
 
   .visitWizardActions button {
     width: 100%;
   }
 
-  .propertyPriceRow {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .propertyActions {
+  .backButton,
+  .continueButton,
+  .confirmButton {
     width: 100%;
-  }
-
-  .propertyActions button {
-    flex: 1;
   }
 
 }
