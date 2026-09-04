@@ -941,95 +941,108 @@ footer p {
 }
 
 
-/* =========================================
+/* ==========================================
    VISIT PAGE
-   MATCHES YOUR REFERENCE IMAGE
-========================================= */
+========================================== */
 
 .visitPage {
   min-height: 100vh;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f7f8fa 0%,
-      #edf0f4 100%
-    );
+  background: #f5f6f8;
+  color: #24313f;
 }
 
 
-/* Visit Header */
+/* ==========================================
+   VISIT HEADER
+========================================== */
 
-.visitNav {
-  background: #ffffff;
+.visitHeader {
+  width: 100%;
+  padding: 28px 20px 15px;
 }
 
 
-/* Main Visit Content */
+.visitNavLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 38px;
+}
+
+
+.visitNavLinks a {
+  text-decoration: none;
+  color: #3d4650;
+  font-size: 16px;
+  font-weight: 400;
+  transition: 0.2s ease;
+}
+
+
+.visitNavLinks a:hover {
+  color: #b69a63;
+}
+
+
+/* ==========================================
+   PAGE CONTENT
+========================================== */
 
 .visitPageContent {
   width: 100%;
-
-  min-height: calc(100vh - 72px);
-
-  padding: 75px 20px 100px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 760px;
+  margin: 60px auto 0;
+  padding: 0 20px 80px;
 }
 
-
-/* Schedule Heading */
 
 .visitPageContent > h1 {
-  margin-bottom: 34px;
-
-  color: #26313d;
-
+  text-align: center;
   font-size: 34px;
+  line-height: 1.2;
   font-weight: 700;
-
-  letter-spacing: 0.5px;
+  margin-bottom: 34px;
+  color: #24313f;
+  letter-spacing: 0.3px;
 }
 
 
-/* =========================================
-   SITE VISIT FORM WRAPPER
-========================================= */
+/* ==========================================
+   SITE VISIT WRAPPER
+========================================== */
 
 .siteVisitWrapper {
   width: 100%;
-  max-width: 600px;
-
-  margin: 0 auto;
 }
 
 
-/* =========================================
+/* ==========================================
    MAIN BOOKING CARD
-========================================= */
+========================================== */
 
-.bookingCard {
-  width: 100%;
-
-  padding: 38px 32px 32px;
-
+.bookingContainer {
   position: relative;
 
-  background:
-    rgba(255, 255, 255, 0.78);
+  width: 100%;
+
+  background: #ffffff;
 
   border-radius: 14px;
 
+  padding: 36px 40px 32px;
+
   box-shadow:
-    0 20px 45px rgba(41, 50, 60, 0.08);
+    0 18px 40px rgba(31, 42, 55, 0.10);
+
+  border: 1px solid #edf0f3;
+
+  overflow: hidden;
 }
 
 
-/* Gold Line on Top */
+/* GOLD TOP LINE */
 
-.bookingCard::before {
+.bookingContainer::before {
   content: "";
 
   position: absolute;
@@ -1037,35 +1050,37 @@ footer p {
   top: 0;
   left: 0;
 
-  width: 150px;
-  height: 6px;
+  width: 50%;
 
-  background: var(--gold);
+  height: 5px;
 
-  border-radius:
-    14px 0 0 0;
+  background: #b79a61;
 }
 
 
-/* =========================================
-   BOOKING TITLES
-========================================= */
+/* ==========================================
+   BOOKING TITLE
+========================================== */
 
-.bookingTitle {
-  margin-bottom: 32px;
-
+.bookingContainer h2 {
   text-align: center;
 
-  font-size: 26px;
+  font-size: 27px;
+
+  line-height: 1.3;
+
   font-weight: 700;
 
-  color: #26313d;
+  margin: 0 0 30px;
+
+  color: #24313f;
 }
 
 
-/* =========================================
-   VISIT TYPE OPTIONS
-========================================= */
+/* ==========================================
+   STEP 1
+   BOOKING OPTIONS
+========================================== */
 
 .bookingOptions {
   display: grid;
@@ -1075,191 +1090,213 @@ footer p {
   gap: 24px;
 }
 
+
 .bookingOption {
   min-height: 225px;
 
-  padding: 30px 20px;
+  padding: 34px 20px;
 
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  background:
-    rgba(255, 255, 255, 0.45);
-
-  border: 2px solid #d8dde2;
+  border: 2px solid #e2e5e8;
 
   border-radius: 10px;
 
+  background: #ffffff;
+
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
 
 .bookingOption:hover {
-  border-color: var(--gold);
+  border-color: #b79a61;
 
   transform: translateY(-2px);
-}
 
-.bookingOption.active {
-  border-color: var(--gold);
-
-  background: #ffffff;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 
-/* Icon Circle */
+/* ==========================================
+   BOOKING ICON
+========================================== */
 
 .bookingIcon {
   width: 68px;
+
   height: 68px;
-
-  margin-bottom: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   border-radius: 50%;
 
-  background: #f2f4f7;
+  background: #f6f7f8;
 
-  font-size: 32px;
+  display: flex;
 
-  color: #303941;
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 34px;
+
+  color: #26323c;
+
+  margin-bottom: 18px;
 }
 
-
-/* Option Title */
 
 .bookingOption h3 {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 
-  color: #26313d;
+  font-size: 22px;
 
-  font-size: 21px;
+  font-weight: 700;
+
+  color: #24313f;
 }
 
-
-/* Option Description */
 
 .bookingOption p {
-  max-width: 230px;
-
-  color: #66717c;
-
-  line-height: 1.6;
-
-  font-size: 14px;
-}
-
-
-/* =========================================
-   DATE AND TIME STEP
-========================================= */
-
-.dateTimeSection {
-  width: 100%;
-}
-
-.dateTimeTitle {
-  margin-bottom: 30px;
+  margin: 0;
 
   text-align: center;
 
-  font-size: 26px;
-
-  color: #26313d;
-}
-
-
-/* =========================================
-   FORM LABEL
-========================================= */
-
-.bookingLabel {
-  display: block;
-
-  margin-bottom: 12px;
-
-  color: #3b4651;
+  color: #66707a;
 
   font-size: 15px;
-  font-weight: 600;
+
+  line-height: 1.55;
 }
 
 
-/* =========================================
-   DATE OPTIONS
-========================================= */
+/* ==========================================
+   DATE & TIME
+========================================== */
+
+.dateTimeContainer {
+  padding-bottom: 28px;
+}
+
+
+.selectionGroup {
+  margin-bottom: 30px;
+}
+
+
+.selectionGroup > label {
+  display: block;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: #34404b;
+
+  margin-bottom: 12px;
+}
+
+
+/* ==========================================
+   DATE BUTTONS
+========================================== */
 
 .dateOptions {
   display: grid;
 
   grid-template-columns:
-    repeat(3, 1fr);
+    1fr
+    1fr
+    1fr;
 
   gap: 12px;
-
-  margin-bottom: 30px;
 }
+
 
 .dateButton {
-  min-height: 48px;
+  height: 46px;
 
-  padding: 10px;
+  border: 1px solid #d9dde1;
 
   background: #ffffff;
 
-  color: #56616c;
+  border-radius: 6px;
 
-  border: 1px solid #d5dbe1;
-  border-radius: 5px;
+  font-size: 15px;
 
-  transition: 0.2s;
+  color: #56616b;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
 }
+
 
 .dateButton:hover {
-  border-color: var(--gold);
+  border-color: #b79a61;
 }
 
-.dateButton.active {
-  background: var(--gold);
+
+.dateButton.selected {
+  background: #b79a61;
+
+  border-color: #b79a61;
 
   color: #ffffff;
-
-  border-color: var(--gold);
 }
 
 
-/* =========================================
+/* ==========================================
    CALENDAR INPUT
-========================================= */
+========================================== */
 
 .calendarInput {
-  width: 100%;
+  height: 46px;
 
-  padding: 13px;
+  border: 1px solid #d9dde1;
 
-  margin-bottom: 28px;
+  border-radius: 6px;
 
   background: #ffffff;
 
-  border: 1px solid #d5dbe1;
-  border-radius: 5px;
+  display: flex;
 
-  color: #4d5660;
+  align-items: center;
+
+  padding: 0 12px;
 }
 
 
-/* =========================================
+.calendarInput input {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #4f5963;
+
+  font-size: 15px;
+
+  font-family: inherit;
+}
+
+
+/* ==========================================
    TIME SLOTS
-========================================= */
+========================================== */
 
 .timeSlots {
   display: grid;
@@ -1268,497 +1305,348 @@ footer p {
     repeat(3, 1fr);
 
   gap: 12px;
-
-  margin-bottom: 35px;
 }
 
-.timeSlot {
-  min-height: 46px;
+
+.timeButton {
+  height: 44px;
+
+  border: 1px solid #d9dde1;
 
   background: #ffffff;
 
-  color: #59636d;
+  border-radius: 6px;
 
-  border: 1px solid #d5dbe1;
-  border-radius: 5px;
+  font-size: 15px;
 
-  transition: 0.2s;
+  color: #56616b;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
 }
 
-.timeSlot:hover {
-  border-color: var(--gold);
+
+.timeButton:hover {
+  border-color: #b79a61;
 }
 
-.timeSlot.active {
-  background: var(--gold);
+
+.timeButton.selected {
+  background: #b79a61;
+
+  border-color: #b79a61;
 
   color: #ffffff;
-
-  border-color: var(--gold);
 }
 
 
-/* =========================================
-   BOOKING NAVIGATION
-========================================= */
+/* ==========================================
+   FORM DETAILS
+========================================== */
 
-.bookingNavigation {
-  margin-top: 25px;
+.detailsContainer {
+  padding-left: 44px;
 
+  padding-right: 44px;
+}
+
+
+.formGroup {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  gap: 15px;
-}
+  flex-direction: column;
 
-.backButton {
-  min-width: 110px;
-
-  padding: 13px 20px;
-
-  background: transparent;
-
-  color: #36404a;
-
-  border: 1px solid #3f4851;
-  border-radius: 4px;
-}
-
-.continueButton,
-.confirmButton {
-  min-width: 150px;
-
-  padding: 13px 20px;
-
-  background: var(--dark);
-
-  color: #ffffff;
-
-  border: none;
-  border-radius: 4px;
-
-  font-weight: 600;
-}
-
-.continueButton:hover,
-.confirmButton:hover {
-  background: #121416;
-}
-
-
-/* =========================================
-   DETAILS STEP
-========================================= */
-
-.detailsSection {
-  width: 100%;
-}
-
-.detailsSection h2 {
-  margin-bottom: 30px;
-
-  text-align: center;
-
-  color: #26313d;
-
-  font-size: 26px;
-}
-
-
-/* =========================================
-   BOOKING FORM FIELDS
-========================================= */
-
-.bookingField {
   margin-bottom: 20px;
 }
 
-.bookingField label {
-  display: block;
+
+.formGroup label {
+  font-size: 16px;
+
+  font-weight: 500;
+
+  color: #34404b;
 
   margin-bottom: 8px;
-
-  color: #3d4752;
-
-  font-size: 14px;
-  font-weight: 600;
 }
 
-.bookingField input,
-.bookingField textarea {
+
+.formGroup input,
+.formGroup textarea {
   width: 100%;
 
-  padding: 14px;
+  border: 1px solid #d9dde1;
+
+  border-radius: 6px;
 
   background: #ffffff;
 
-  color: #303941;
+  padding: 14px 14px;
 
-  border: 1px solid #d5dbe1;
-  border-radius: 5px;
+  font-size: 16px;
+
+  font-family: inherit;
+
+  color: #3d4650;
 
   outline: none;
 
-  transition: 0.2s;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
 }
 
-.bookingField textarea {
-  min-height: 100px;
+
+.formGroup input {
+  height: 48px;
+}
+
+
+.formGroup textarea {
   resize: vertical;
+
+  min-height: 100px;
 }
 
-.bookingField input:focus,
-.bookingField textarea:focus {
-  border-color: var(--gold);
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #7d8791;
+}
+
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: #b79a61;
 
   box-shadow:
-    0 0 0 3px
-    rgba(184, 154, 97, 0.12);
+    0 0 0 3px rgba(183, 154, 97, 0.12);
 }
 
 
-/* =========================================
-   BOOKING STATUS
-========================================= */
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
 
-.bookingStatus {
-  margin-top: 20px;
+.bookingActions {
+  display: flex;
 
-  padding: 12px;
+  justify-content: space-between;
 
-  text-align: center;
+  align-items: center;
+
+  margin-top: 28px;
+}
+
+
+.backButton,
+.continueButton {
+  min-width: 120px;
+
+  height: 46px;
+
+  padding: 0 22px;
 
   border-radius: 5px;
 
-  background: #f1f3f5;
+  font-size: 16px;
 
-  color: #4f5963;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  font-family: inherit;
 }
 
 
-/* =========================================
-   SUCCESS STEP
-========================================= */
+/* BACK */
 
-.bookingSuccess {
-  min-height: 300px;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-}
-
-.successIcon {
-  width: 70px;
-  height: 70px;
-
-  margin-bottom: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #edf4ec;
-
-  border-radius: 50%;
-
-  font-size: 35px;
-}
-
-.bookingSuccess h2 {
-  margin-bottom: 12px;
-
-  color: #26313d;
-}
-
-.bookingSuccess p {
-  color: #68727c;
-}
-
-
-/* =========================================
-   LEGACY SITE VISIT FORM
-========================================= */
-
-.visit form {
-  display: flex;
-  flex-direction: column;
-
-  gap: 12px;
-
-  padding: 30px;
-
+.backButton {
   background: #ffffff;
 
-  border-radius: 8px;
-}
+  border: 1px solid #2f353a;
 
-.visit form input,
-.visit form textarea {
-  width: 100%;
-
-  padding: 13px;
-
-  border: 1px solid #d5dbe1;
-  border-radius: 4px;
+  color: #35404a;
 }
 
 
-/* =========================================
-   RESPONSIVE - TABLET
-========================================= */
-
-@media (max-width: 1024px) {
-
-  .nav {
-    padding: 10px 4%;
-  }
-
-  .nav nav {
-    gap: 22px;
-  }
-
-  .grid,
-  .propertyListing {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .services {
-    grid-template-columns:
-      repeat(2, 1fr);
-  }
-
-  .propertiesLayout {
-    grid-template-columns: 250px 1fr;
-  }
-
-  .split,
-  .contactGrid,
-  .visit {
-    grid-template-columns: 1fr;
-  }
+.backButton:hover {
+  background: #f3f4f5;
 }
 
 
-/* =========================================
-   RESPONSIVE - MOBILE
-========================================= */
+/* CONTINUE */
+
+.continueButton {
+  background: #25292d;
+
+  border: 1px solid #25292d;
+
+  color: #ffffff;
+
+  min-width: 145px;
+}
+
+
+.continueButton:hover {
+  background: #3a4045;
+
+  border-color: #3a4045;
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.bookingStatus {
+  text-align: center;
+
+  margin: 20px 0 0;
+
+  color: #66707a;
+
+  font-size: 14px;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media (max-width: 768px) {
 
-  .nav {
-    min-height: auto;
-
-    flex-wrap: wrap;
-
-    gap: 15px;
-
-    padding: 12px 20px;
+  .visitHeader {
+    padding-top: 20px;
   }
 
-  .brand b {
+
+  .visitNavLinks {
+    gap: 18px;
+
+    flex-wrap: wrap;
+  }
+
+
+  .visitNavLinks a {
     font-size: 14px;
   }
 
-  .brand small {
-    font-size: 7px;
-  }
-
-  .brand > span {
-    width: 40px;
-    height: 40px;
-  }
-
-  .nav nav {
-    width: 100%;
-
-    order: 3;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    flex-wrap: wrap;
-  }
-
-  .nav nav a {
-    font-size: 13px;
-  }
-
-  .nav .btn {
-    padding: 10px 14px;
-    font-size: 12px;
-  }
-
-
-  /* Home */
-
-  .hero {
-    min-height: 550px;
-  }
-
-  .heroOverlay {
-    margin-left: 5%;
-  }
-
-  .section {
-    padding: 60px 6%;
-  }
-
-  .checks {
-    grid-template-columns: 1fr;
-  }
-
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .grid,
-  .propertyListing {
-    grid-template-columns: 1fr;
-  }
-
-  .services {
-    grid-template-columns: 1fr;
-  }
-
-
-  /* Properties */
-
-  .propertiesHero {
-    padding: 110px 6% 45px;
-  }
-
-  .propertiesHero h1 {
-    font-size: 36px;
-  }
-
-  .propertiesLayout {
-    padding: 25px 5% 60px;
-
-    grid-template-columns: 1fr;
-  }
-
-  .filters {
-    position: static;
-  }
-
-
-  /* Visit */
 
   .visitPageContent {
-    padding: 55px 20px 80px;
+    margin-top: 35px;
+
+    padding-left: 15px;
+
+    padding-right: 15px;
   }
+
 
   .visitPageContent > h1 {
     font-size: 30px;
 
-    margin-bottom: 28px;
-
-    text-align: center;
+    margin-bottom: 25px;
   }
 
-  .siteVisitWrapper {
-    max-width: 100%;
+
+  .bookingContainer {
+    padding:
+      30px
+      20px
+      25px;
   }
 
-  .bookingCard {
-    padding: 32px 20px 25px;
-  }
 
-  .bookingTitle {
+  .bookingContainer h2 {
     font-size: 23px;
   }
 
+
   .bookingOptions {
+    grid-template-columns: 1fr;
+
     gap: 16px;
   }
 
+
   .bookingOption {
     min-height: 200px;
-
-    padding: 20px 12px;
   }
 
-  .bookingIcon {
-    width: 58px;
-    height: 58px;
-
-    font-size: 26px;
-  }
-
-  .bookingOption h3 {
-    font-size: 18px;
-  }
 
   .dateOptions {
     grid-template-columns: 1fr;
   }
 
+
   .timeSlots {
     grid-template-columns:
       repeat(2, 1fr);
   }
+
+
+  .detailsContainer {
+    padding-left: 20px;
+
+    padding-right: 20px;
+  }
+
 }
 
 
-/* =========================================
-   RESPONSIVE - SMALL MOBILE
-========================================= */
+/* ==========================================
+   SMALL MOBILE
+========================================== */
 
 @media (max-width: 480px) {
 
-  .nav {
-    justify-content: center;
+  .visitNavLinks {
+    gap: 13px;
   }
 
-  .brand {
-    width: 100%;
-    justify-content: center;
+
+  .visitNavLinks a {
+    font-size: 13px;
   }
 
-  .nav .btn {
-    width: 100%;
+
+  .visitPageContent > h1 {
+    font-size: 27px;
   }
 
-  .bookingOptions {
-    grid-template-columns: 1fr;
+
+  .bookingContainer {
+    border-radius: 10px;
   }
 
-  .bookingOption {
-    min-height: 180px;
+
+  .bookingContainer h2 {
+    font-size: 21px;
   }
+
+
+  .bookingActions {
+    gap: 12px;
+  }
+
+
+  .backButton,
+  .continueButton {
+    min-width: auto;
+
+    flex: 1;
+
+    padding: 0 12px;
+  }
+
 
   .timeSlots {
     grid-template-columns: 1fr;
   }
 
-  .bookingNavigation {
-    flex-direction: column-reverse;
-  }
-
-  .backButton,
-  .continueButton,
-  .confirmButton {
-    width: 100%;
-  }
-
-  .propertyBottom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .propertyActions {
-    width: 100%;
-  }
-
-  .propertyActions button {
-    flex: 1;
-  }
 }

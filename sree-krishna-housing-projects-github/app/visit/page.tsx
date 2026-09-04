@@ -5,7 +5,7 @@ export default function VisitPage() {
   return (
     <main className="visitPage">
       {/* HEADER */}
-      <header className="visitNav">
+      <header className="visitHeader">
         <nav className="visitNavLinks">
           <Link href="/">Home</Link>
           <Link href="/properties">Properties</Link>

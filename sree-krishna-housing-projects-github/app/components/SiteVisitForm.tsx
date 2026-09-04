@@ -19,10 +19,10 @@ export default function SiteVisitForm() {
   const [bookingType, setBookingType] =
     useState<BookingType>("");
 
-  const [selectedDate, setSelectedDate] =
+  const [preferredDate, setPreferredDate] =
     useState("");
 
-  const [selectedTime, setSelectedTime] =
+  const [preferredTime, setPreferredTime] =
     useState("");
 
   const [name, setName] = useState("");
@@ -33,58 +33,50 @@ export default function SiteVisitForm() {
 
   const [status, setStatus] = useState("");
 
-  const today = new Date();
+  const todayDate = new Date();
 
-  const tomorrow = new Date();
-  tomorrow.setDate(today.getDate() + 1);
+  const tomorrowDate = new Date();
+  tomorrowDate.setDate(todayDate.getDate() + 1);
 
   const formatDate = (date: Date) => {
     return date.toISOString().split("T")[0];
   };
 
-  const formatDisplayDate = (date: Date) => {
-    return date.toLocaleDateString("en-IN", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    });
+  const selectToday = () => {
+    setPreferredDate(formatDate(todayDate));
   };
 
-  function selectToday() {
-    setSelectedDate(formatDate(today));
-  }
+  const selectTomorrow = () => {
+    setPreferredDate(formatDate(tomorrowDate));
+  };
 
-  function selectTomorrow() {
-    setSelectedDate(formatDate(tomorrow));
-  }
-
-  function handleBookingType(type: BookingType) {
-    setBookingType(type);
-    setStep(2);
-  }
-
-  function continueToDetails() {
-    if (!selectedDate) {
-      alert("Please select a date.");
+  const handleContinue = () => {
+    if (!preferredDate) {
+      setStatus("Please select a date.");
       return;
     }
 
-    if (!selectedTime) {
-      alert("Please select a time slot.");
+    if (!preferredTime) {
+      setStatus("Please select a time slot.");
       return;
     }
 
+    setStatus("");
     setStep(3);
-  }
+  };
 
-  async function confirmBooking() {
+  const submitBooking = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
     if (!name.trim()) {
-      alert("Please enter your name.");
+      setStatus("Please enter your full name.");
       return;
     }
 
     if (!phone.trim()) {
-      alert("Please enter your phone number.");
+      setStatus("Please enter your phone number.");
       return;
     }
 
@@ -102,18 +94,25 @@ export default function SiteVisitForm() {
           bookingType,
           name,
           phone,
-          preferredDate: selectedDate,
-          preferredTime: selectedTime,
           message,
+          preferredDate,
+          preferredTime,
         }),
       });
 
       if (response.ok) {
         setStatus(
-          "Thank you! Your booking has been confirmed. We will contact you shortly."
+          "Thank you! Your booking has been submitted successfully."
         );
 
-        setStep(4);
+        setName("");
+        setPhone("");
+        setMessage("");
+        setPreferredDate("");
+        setPreferredTime("");
+        setBookingType("");
+
+        setStep(1);
       } else {
         setStatus(
           "Unable to submit your booking. Please try again."
@@ -126,7 +125,7 @@ export default function SiteVisitForm() {
         "Something went wrong. Please try again."
       );
     }
-  }
+  };
 
   return (
     <div className="siteVisitWrapper">
@@ -136,7 +135,8 @@ export default function SiteVisitForm() {
       ========================== */}
 
       {step === 1 && (
-        <div className="bookingContainer bookingTypeContainer">
+        <div className="bookingContainer">
+
           <h2>
             What would you like to schedule?
           </h2>
@@ -148,59 +148,69 @@ export default function SiteVisitForm() {
             <button
               type="button"
               className="bookingOption"
-              onClick={() =>
-                handleBookingType("siteVisit")
-              }
+              onClick={() => {
+                setBookingType("siteVisit");
+                setStep(2);
+              }}
             >
               <div className="bookingIcon">
-                ⌖
+                ♧
               </div>
 
               <h3>Site Visit</h3>
 
               <p>
                 Tour properties in person with
+                <br />
                 our experts.
               </p>
             </button>
+
 
             {/* CONSULTATION */}
 
             <button
               type="button"
               className="bookingOption"
-              onClick={() =>
-                handleBookingType("consultation")
-              }
+              onClick={() => {
+                setBookingType("consultation");
+                setStep(2);
+              }}
             >
               <div className="bookingIcon">
-                ♙
+                ♧
               </div>
 
               <h3>Consultation</h3>
 
               <p>
                 Discuss investment, legality, or
+                <br />
                 construction.
               </p>
             </button>
 
           </div>
+
         </div>
       )}
+
 
       {/* =========================
           STEP 2 - DATE & TIME
       ========================== */}
 
       {step === 2 && (
-        <div className="bookingContainer">
+        <div className="bookingContainer dateTimeContainer">
 
           <h2>Select Date & Time</h2>
 
-          <div className="bookingFormSection">
 
-            <label className="bookingLabel">
+          {/* DATE */}
+
+          <div className="selectionGroup">
+
+            <label>
               Select Date
             </label>
 
@@ -209,8 +219,9 @@ export default function SiteVisitForm() {
               <button
                 type="button"
                 className={
-                  selectedDate === formatDate(today)
-                    ? "dateButton active"
+                  preferredDate ===
+                  formatDate(todayDate)
+                    ? "dateButton selected"
                     : "dateButton"
                 }
                 onClick={selectToday}
@@ -218,11 +229,13 @@ export default function SiteVisitForm() {
                 Today
               </button>
 
+
               <button
                 type="button"
                 className={
-                  selectedDate === formatDate(tomorrow)
-                    ? "dateButton active"
+                  preferredDate ===
+                  formatDate(tomorrowDate)
+                    ? "dateButton selected"
                     : "dateButton"
                 }
                 onClick={selectTomorrow}
@@ -230,49 +243,30 @@ export default function SiteVisitForm() {
                 Tomorrow
               </button>
 
-              <label
-                className={
-                  selectedDate &&
-                  selectedDate !== formatDate(today) &&
-                  selectedDate !== formatDate(tomorrow)
-                    ? "dateButton active calendarButton"
-                    : "dateButton calendarButton"
-                }
-              >
-                <span>
-                  {selectedDate &&
-                  selectedDate !== formatDate(today) &&
-                  selectedDate !== formatDate(tomorrow)
-                    ? new Date(
-                        selectedDate + "T00:00:00"
-                      ).toLocaleDateString(
-                        "en-IN",
-                        {
-                          weekday: "short",
-                          day: "numeric",
-                          month: "short",
-                        }
-                      )
-                    : "Select Date"}
-                </span>
+
+              <div className="calendarInput">
 
                 <input
                   type="date"
-                  min={formatDate(today)}
-                  value={selectedDate}
+                  value={preferredDate}
+                  min={formatDate(todayDate)}
                   onChange={(e) =>
-                    setSelectedDate(e.target.value)
+                    setPreferredDate(e.target.value)
                   }
                 />
-              </label>
+
+              </div>
 
             </div>
 
           </div>
 
-          <div className="bookingFormSection">
 
-            <label className="bookingLabel">
+          {/* TIME */}
+
+          <div className="selectionGroup timeGroup">
+
+            <label>
               Select Time Slot
             </label>
 
@@ -283,12 +277,12 @@ export default function SiteVisitForm() {
                   key={time}
                   type="button"
                   className={
-                    selectedTime === time
-                      ? "timeButton active"
+                    preferredTime === time
+                      ? "timeButton selected"
                       : "timeButton"
                   }
                   onClick={() =>
-                    setSelectedTime(time)
+                    setPreferredTime(time)
                   }
                 >
                   {time}
@@ -298,6 +292,9 @@ export default function SiteVisitForm() {
             </div>
 
           </div>
+
+
+          {/* BUTTONS */}
 
           <div className="bookingActions">
 
@@ -309,72 +306,104 @@ export default function SiteVisitForm() {
               ← Back
             </button>
 
+
             <button
               type="button"
               className="continueButton"
-              onClick={continueToDetails}
+              onClick={handleContinue}
             >
               Continue →
             </button>
 
           </div>
 
+
+          {status && (
+            <p className="bookingStatus">
+              {status}
+            </p>
+          )}
+
         </div>
       )}
+
 
       {/* =========================
           STEP 3 - USER DETAILS
       ========================== */}
 
       {step === 3 && (
-        <div className="bookingContainer">
+        <form
+          className="bookingContainer detailsContainer"
+          onSubmit={submitBooking}
+        >
 
           <h2>Your Details</h2>
 
-          <div className="detailsForm">
 
-            <div className="inputGroup">
-              <label>Full Name</label>
+          {/* NAME */}
 
-              <input
-                type="text"
-                placeholder="John Doe"
-                value={name}
-                onChange={(e) =>
-                  setName(e.target.value)
-                }
-              />
-            </div>
+          <div className="formGroup">
 
-            <div className="inputGroup">
-              <label>Phone Number</label>
+            <label>
+              Full Name
+            </label>
 
-              <input
-                type="tel"
-                placeholder="+91 9494444818"
-                value={phone}
-                onChange={(e) =>
-                  setPhone(e.target.value)
-                }
-              />
-            </div>
-
-            <div className="inputGroup">
-              <label>
-                Message (Optional)
-              </label>
-
-              <textarea
-                rows={4}
-                placeholder="Any specific requests?"
-                value={message}
-                onChange={(e) =>
-                  setMessage(e.target.value)
-                }
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) =>
+                setName(e.target.value)
+              }
+              required
+            />
 
           </div>
+
+
+          {/* PHONE */}
+
+          <div className="formGroup">
+
+            <label>
+              Phone Number
+            </label>
+
+            <input
+              type="tel"
+              placeholder="+91 9494444818"
+              value={phone}
+              onChange={(e) =>
+                setPhone(e.target.value)
+              }
+              required
+            />
+
+          </div>
+
+
+          {/* MESSAGE */}
+
+          <div className="formGroup">
+
+            <label>
+              Message (Optional)
+            </label>
+
+            <textarea
+              placeholder="Any specific requests?"
+              value={message}
+              onChange={(e) =>
+                setMessage(e.target.value)
+              }
+              rows={4}
+            />
+
+          </div>
+
+
+          {/* ACTIONS */}
 
           <div className="bookingActions">
 
@@ -386,15 +415,16 @@ export default function SiteVisitForm() {
               ← Back
             </button>
 
+
             <button
-              type="button"
+              type="submit"
               className="continueButton"
-              onClick={confirmBooking}
             >
               Confirm Booking →
             </button>
 
           </div>
+
 
           {status && (
             <p className="bookingStatus">
@@ -402,58 +432,7 @@ export default function SiteVisitForm() {
             </p>
           )}
 
-        </div>
-      )}
-
-      {/* =========================
-          STEP 4 - SUCCESS
-      ========================== */}
-
-      {step === 4 && (
-        <div className="bookingContainer successContainer">
-
-          <div className="successIcon">
-            ✓
-          </div>
-
-          <h2>Booking Confirmed!</h2>
-
-          <p>
-            Thank you, {name}.
-          </p>
-
-          <p>
-            Your {bookingType === "siteVisit"
-              ? "site visit"
-              : "consultation"}{" "}
-            is scheduled for:
-          </p>
-
-          <div className="bookingSummary">
-
-            <p>
-              <strong>Date:</strong>{" "}
-              {new Date(
-                selectedDate + "T00:00:00"
-              ).toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </p>
-
-            <p>
-              <strong>Time:</strong>{" "}
-              {selectedTime}
-            </p>
-
-          </div>
-
-          <p className="successText">
-            Our team will contact you shortly.
-          </p>
-
-        </div>
+        </form>
       )}
 
     </div>
