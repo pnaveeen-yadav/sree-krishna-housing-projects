@@ -5,16 +5,19 @@ const properties = [
     name: "Premium Open Plots",
     location: "Tirupati",
     type: "Open Plots",
+    image: "/property1.png",
   },
   {
     name: "Krishna Enclave",
     location: "Tirupati",
     type: "Residential",
+    image: "/property2.png",
   },
   {
     name: "Modern Villas",
     location: "Tirupati",
     type: "Villas",
+    image: "/property3.png",
   },
 ];
 
@@ -47,13 +50,6 @@ export default function Home() {
       {/* ================= HERO ================= */}
 
       <section className="hero">
-        {/* HERO BACKGROUND IMAGE */}
-        <div className="heroBackground"></div>
-
-        {/* DARK OVERLAY */}
-        <div className="heroShade"></div>
-
-        {/* HERO CONTENT */}
         <div className="heroOverlay">
           <p className="eyebrow">
             TIRUPATI • REAL ESTATE • CONSTRUCTION
@@ -138,18 +134,27 @@ export default function Home() {
         </div>
 
         <div className="grid">
-          {properties.map((property, index) => (
+          {properties.map((property) => (
             <article className="card" key={property.name}>
-              <div
-                className={"propertyImage img" + index}
-              ></div>
+              {/* PROPERTY IMAGE */}
+
+              <div className="propertyImage">
+                <img
+                  src={property.image}
+                  alt={property.name}
+                />
+              </div>
 
               <div className="cardBody">
-                <span className="tag">{property.type}</span>
+                <span className="tag">
+                  {property.type}
+                </span>
 
                 <h3>{property.name}</h3>
 
-                <p>📍 {property.location}</p>
+                <p>
+                  📍 {property.location}
+                </p>
 
                 <a href="/properties">
                   View Details →
@@ -196,7 +201,7 @@ export default function Home() {
       >
         <div className="contactGrid">
 
-          {/* ================= CONTACT INFORMATION ================= */}
+          {/* CONTACT INFORMATION */}
 
           <div className="contactInfo">
             <p className="eyebrow dark">
@@ -260,7 +265,7 @@ export default function Home() {
               </div>
             </a>
 
-            {/* ================= OFFICE LOCATION ================= */}
+            {/* OFFICE LOCATION */}
 
             <div className="officeLocation">
               <h2>Office Location</h2>
@@ -290,7 +295,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ================= CONTACT FORM ================= */}
+          {/* CONTACT FORM */}
 
           <div className="contactForm">
             <p className="eyebrow dark">
@@ -379,7 +384,7 @@ export default function Home() {
           <img
             src="/logo.webp"
             alt="Sree Krishna Housing Projects"
-            className="companyLogo"
+            className="companyLogo footerLogo"
           />
         </div>
 
