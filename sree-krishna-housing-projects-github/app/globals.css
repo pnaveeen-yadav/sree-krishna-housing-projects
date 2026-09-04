@@ -376,7 +376,7 @@ main {
 
 
 /* =========================================
-   PROPERTY GRID
+   HOME PROPERTY GRID
 ========================================= */
 
 .grid {
@@ -539,9 +539,11 @@ main {
   width: 48px;
   height: 48px;
   flex: 0 0 48px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   background: #f6f1e7;
   border-radius: 50%;
 }
@@ -565,7 +567,9 @@ main {
 .officeLocation {
   margin-top: 34px;
   padding: 28px;
+
   background: #ffffff;
+
   border: 1px solid #e1e4e8;
   border-radius: 8px;
 }
@@ -596,9 +600,11 @@ main {
   width: 34px;
   min-width: 34px;
   height: 34px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 22px;
   line-height: 1;
 }
@@ -630,7 +636,9 @@ main {
   width: 100%;
   margin-top: 28px;
   overflow: hidden;
+
   background: #ffffff;
+
   border: 1px solid #d8dde2;
   border-radius: 8px;
 }
@@ -652,14 +660,20 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   margin-top: 20px;
+
   padding: 11px 18px;
+
   background: transparent;
   color: #8f733f;
+
   border: 1px solid #b79a61;
   border-radius: 5px;
+
   font-size: 14px;
   font-weight: 600;
+
   transition: all 0.2s ease;
 }
 
@@ -675,13 +689,16 @@ main {
 ========================================= */
 
 @media (max-width: 900px) {
+
   .contactGrid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
 }
 
 @media (max-width: 600px) {
+
   .officeLocation {
     padding: 22px 18px;
   }
@@ -699,7 +716,9 @@ main {
   .mapContainer iframe {
     height: 300px;
   }
+
 }
+
 
 /* =========================================
    CONTACT FORM
@@ -812,40 +831,73 @@ footer p {
 }
 
 
-/* =========================================
+/* =====================================================
    PROPERTIES PAGE
-========================================= */
+   UPDATED FOR app/properties/page.tsx
+===================================================== */
 
 .propertiesPage {
   min-height: 100vh;
   background: #f5f6f8;
 }
 
-.propertiesHero {
-  padding: 130px 8% 60px;
 
+/* =========================================
+   PROPERTIES HERO
+========================================= */
+
+.propertiesHero {
+  padding: 65px 5% 45px;
   background: #ffffff;
+  border-bottom: 1px solid #e5e8eb;
+}
+
+.propertiesHeroContent {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.propertiesHero .eyebrow {
+  margin-bottom: 10px;
 }
 
 .propertiesHero h1 {
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 
-  font-size: 48px;
+  color: #2c3744;
+
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.15;
 }
 
 .propertiesHero p {
-  max-width: 700px;
+  max-width: 850px;
 
-  color: #66707c;
+  color: #59636e;
+
+  font-size: 16px;
   line-height: 1.7;
 }
 
+
+/* =========================================
+   PROPERTIES MAIN LAYOUT
+========================================= */
+
+.propertiesSection {
+  width: 100%;
+  padding: 40px 2.5% 80px;
+}
+
 .propertiesLayout {
-  padding: 40px 4% 80px;
+  width: 100%;
+  max-width: 1600px;
+
+  margin: 0 auto;
 
   display: grid;
-
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 300px minmax(0, 1fr);
 
   gap: 30px;
 
@@ -854,116 +906,220 @@ footer p {
 
 
 /* =========================================
-   FILTERS
+   FILTER PANEL
 ========================================= */
 
-.filters {
+.filtersPanel {
+  width: 100%;
+
   padding: 24px;
 
   background: #ffffff;
 
   border: 1px solid #d9dde2;
-  border-radius: 8px;
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 24px rgba(31, 42, 55, 0.05);
 
   position: sticky;
   top: 95px;
 }
 
 .filtersHeader {
-  padding-bottom: 18px;
-  margin-bottom: 20px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  border-bottom: 1px solid #e5e7ea;
+  gap: 15px;
 }
 
 .filtersHeader h2 {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0;
+
+  color: #29333f;
+
   font-size: 21px;
 }
 
-.clearFilter {
-  background: transparent;
-  border: none;
-
-  color: #737b84;
-
-  text-decoration: underline;
+.filtersHeader h2 span {
+  font-size: 24px;
+  font-weight: 400;
 }
 
+.clearFilters {
+  padding: 0;
+
+  background: transparent;
+
+  border: none;
+
+  color: #69727c;
+
+  font-size: 14px;
+
+  text-decoration: underline;
+
+  transition: color 0.2s ease;
+}
+
+.clearFilters:hover {
+  color: var(--gold-dark);
+}
+
+.filterDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 20px 0 24px;
+
+  background: #e5e8eb;
+}
+
+
+/* =========================================
+   FILTER GROUP
+========================================= */
+
 .filterGroup {
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 }
 
 .filterGroup label {
-  display: block;
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
 
   margin-bottom: 12px;
 
+  color: #47515c;
+
+  font-size: 15px;
   font-weight: 600;
-  color: #4a535d;
+}
+
+.filterGroup label span {
+  color: #56616b;
+  font-size: 17px;
 }
 
 .filterGroup select {
   width: 100%;
+  height: 46px;
 
-  padding: 13px;
-
-  border: 1px solid #d5d9de;
-  border-radius: 5px;
+  padding: 0 13px;
 
   background: #ffffff;
 
-  color: #4a535d;
+  border: 1px solid #d5d9de;
+  border-radius: 6px;
+
+  color: #4d5761;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.filterButtons {
+.filterGroup select:focus {
+  border-color: var(--gold);
+
+  box-shadow:
+    0 0 0 3px rgba(184, 154, 97, 0.12);
+}
+
+
+/* =========================================
+   PROPERTY TYPE FILTER BUTTONS
+========================================= */
+
+.propertyTypeButtons {
   display: flex;
   flex-wrap: wrap;
 
   gap: 8px;
 }
 
-.filterButtons button {
-  padding: 8px 13px;
+.filterChip {
+  min-height: 32px;
+
+  padding: 6px 13px;
 
   background: #ffffff;
 
   border: 1px solid #d7dbe0;
   border-radius: 20px;
 
-  color: #59626c;
+  color: #59636e;
+
+  font-size: 14px;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.filterButtons button.active {
-  background: var(--gold);
-  color: #ffffff;
+.filterChip:hover {
   border-color: var(--gold);
 }
 
-.applyFilters {
-  width: 100%;
+.filterChip.active {
+  background: var(--gold);
 
-  padding: 14px;
+  border-color: var(--gold);
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   APPLY FILTER BUTTON
+========================================= */
+
+.applyFiltersButton {
+  width: 100%;
+  min-height: 48px;
+
+  margin-top: 4px;
+
+  padding: 12px 16px;
 
   background: var(--dark);
 
   color: #ffffff;
 
-  border: none;
-  border-radius: 4px;
+  border: 1px solid var(--dark);
+  border-radius: 5px;
 
   font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.applyFiltersButton:hover {
+  background: #17191b;
+  transform: translateY(-1px);
 }
 
 
 /* =========================================
-   PROPERTY LISTING
+   PROPERTIES GRID
 ========================================= */
 
-.propertyListing {
+.propertiesGrid {
+  min-width: 0;
+
   display: grid;
 
   grid-template-columns:
@@ -972,59 +1128,206 @@ footer p {
   gap: 30px;
 }
 
-.propertyCard {
+
+/* =========================================
+   PROPERTY CARD
+========================================= */
+
+.propertiesPage .propertyCard {
+  min-width: 0;
+
   overflow: hidden;
 
   background: #ffffff;
 
-  border: 1px solid #d7dbe0;
-  border-radius: 8px;
+  border: 1px solid #d8dde2;
+  border-radius: 10px;
+
+  box-shadow:
+    0 5px 18px rgba(31, 42, 55, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
-.propertyCardImage {
-  height: 230px;
+.propertiesPage .propertyCard:hover {
+  transform: translateY(-4px);
+
+  border-color: #cfc39f;
+
+  box-shadow:
+    0 16px 35px rgba(31, 42, 55, 0.10);
+}
+
+
+/* =========================================
+   PROPERTY IMAGE
+========================================= */
+
+.propertiesPage .propertyCardImage {
+  position: relative;
+
+  width: 100%;
+  height: 240px;
 
   background-size: cover;
   background-position: center;
+
+  background-color: #e9ecef;
 }
 
-.propertyCardContent {
+
+/* =========================================
+   PROPERTY BADGES
+========================================= */
+
+.propertyBadges {
+  position: absolute;
+
+  top: 16px;
+  left: 16px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.statusBadge,
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 27px;
+
+  padding: 6px 11px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+.statusBadge {
+  background: var(--gold);
+  color: #ffffff;
+}
+
+.categoryBadge {
+  background: rgba(37, 40, 43, 0.88);
+  color: #ffffff;
+}
+
+
+/* =========================================
+   PROPERTY CARD BODY
+========================================= */
+
+.propertyCardBody {
   padding: 24px;
 }
 
-.propertyCardTags {
-  position: absolute;
-}
+.propertyCardBody h2 {
+  margin: 0 0 10px;
 
-.propertyCardContent h2,
-.propertyCardContent h3 {
-  margin-bottom: 10px;
+  color: #303a46;
 
   font-size: 22px;
+  line-height: 1.3;
 }
+
+
+/* =========================================
+   PROPERTY LOCATION
+========================================= */
 
 .propertyLocation {
-  margin-bottom: 20px;
-
-  color: #69727d;
-}
-
-.propertyDetails {
-  padding: 18px 0;
-
   display: flex;
+  align-items: center;
 
-  gap: 20px;
+  gap: 8px;
 
-  border-top: 1px solid #e7e9eb;
-  border-bottom: 1px solid #e7e9eb;
+  margin: 0;
 
-  color: #505a64;
+  color: #68727d;
+
+  font-size: 15px;
 }
+
+.propertyLocation span {
+  color: var(--gold);
+  font-size: 17px;
+}
+
+
+/* =========================================
+   PROPERTY DIVIDER
+========================================= */
+
+.propertyDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 20px 0;
+
+  background: #e6e9ec;
+}
+
+
+/* =========================================
+   PROPERTY INFORMATION
+========================================= */
+
+.propertyInfo {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  color: #56616b;
+
+  font-size: 15px;
+}
+
+.propertyInfo > div:not(.infoDivider) {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  white-space: nowrap;
+}
+
+.propertyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #4f5963;
+
+  font-size: 17px;
+}
+
+.infoDivider {
+  width: 1px;
+  height: 28px;
+
+  background: #dfe3e7;
+}
+
+
+/* =========================================
+   PROPERTY BOTTOM
+========================================= */
 
 .propertyBottom {
-  margin-top: 20px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1032,35 +1335,108 @@ footer p {
   gap: 15px;
 }
 
-.propertyPrice {
+.propertyBottom strong {
+  color: #2f3944;
+
   font-size: 24px;
   font-weight: 700;
+
+  white-space: nowrap;
 }
 
-.propertyActions {
+
+/* =========================================
+   PROPERTY ACTIONS
+========================================= */
+
+.propertiesPage .propertyActions {
   display: flex;
-  gap: 10px;
+  align-items: center;
+
+  gap: 9px;
+
+  flex-shrink: 0;
 }
 
-.detailsButton {
-  padding: 10px 16px;
+.propertiesPage .detailsButton {
+  min-height: 39px;
+
+  padding: 9px 16px;
 
   background: #ffffff;
 
-  border: 1px solid #555d66;
-  border-radius: 4px;
+  border: 1px solid #59616a;
+  border-radius: 5px;
+
+  color: #35404a;
+
+  font-size: 14px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
-.enquireButton {
-  padding: 10px 16px;
+.propertiesPage .detailsButton:hover {
+  background: #f4f5f6;
+}
+
+.propertiesPage .enquireButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 39px;
+
+  padding: 9px 16px;
 
   background: var(--dark);
+
   color: #ffffff;
 
   border: 1px solid var(--dark);
-  border-radius: 4px;
+  border-radius: 5px;
 
+  font-size: 14px;
   font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.propertiesPage .enquireButton:hover {
+  background: #17191b;
+}
+
+
+/* =========================================
+   NO PROPERTIES
+========================================= */
+
+.noProperties {
+  grid-column: 1 / -1;
+
+  padding: 70px 20px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #d9dde2;
+  border-radius: 10px;
+}
+
+.noProperties h2 {
+  margin-bottom: 12px;
+
+  color: #303a46;
+}
+
+.noProperties p {
+  margin-bottom: 22px;
+
+  color: #69727d;
 }
 
 
@@ -1084,14 +1460,12 @@ footer p {
   padding: 28px 20px 15px;
 }
 
-
 .visitNavLinks {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 38px;
 }
-
 
 .visitNavLinks a {
   text-decoration: none;
@@ -1101,31 +1475,35 @@ footer p {
   transition: 0.2s ease;
 }
 
-
 .visitNavLinks a:hover {
   color: #b69a63;
 }
 
 
 /* ==========================================
-   PAGE CONTENT
+   VISIT PAGE CONTENT
 ========================================== */
 
 .visitPageContent {
   width: 100%;
   max-width: 760px;
+
   margin: 60px auto 0;
+
   padding: 0 20px 80px;
 }
 
-
 .visitPageContent > h1 {
   text-align: center;
+
   font-size: 34px;
   line-height: 1.2;
   font-weight: 700;
+
   margin-bottom: 34px;
+
   color: #24313f;
+
   letter-spacing: 0.3px;
 }
 
@@ -1213,7 +1591,6 @@ footer p {
   gap: 24px;
 }
 
-
 .bookingOption {
   min-height: 225px;
 
@@ -1240,7 +1617,6 @@ footer p {
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
-
 
 .bookingOption:hover {
   border-color: #b79a61;
@@ -1278,7 +1654,6 @@ footer p {
   margin-bottom: 18px;
 }
 
-
 .bookingOption h3 {
   margin: 0 0 10px;
 
@@ -1288,7 +1663,6 @@ footer p {
 
   color: #24313f;
 }
-
 
 .bookingOption p {
   margin: 0;
@@ -1311,11 +1685,9 @@ footer p {
   padding-bottom: 28px;
 }
 
-
 .selectionGroup {
   margin-bottom: 30px;
 }
-
 
 .selectionGroup > label {
   display: block;
@@ -1345,7 +1717,6 @@ footer p {
   gap: 12px;
 }
 
-
 .dateButton {
   height: 46px;
 
@@ -1364,11 +1735,9 @@ footer p {
   transition: 0.2s ease;
 }
 
-
 .dateButton:hover {
   border-color: #b79a61;
 }
-
 
 .dateButton.selected {
   background: #b79a61;
@@ -1398,7 +1767,6 @@ footer p {
 
   padding: 0 12px;
 }
-
 
 .calendarInput input {
   width: 100%;
@@ -1430,7 +1798,6 @@ footer p {
   gap: 12px;
 }
 
-
 .timeButton {
   height: 44px;
 
@@ -1449,11 +1816,9 @@ footer p {
   transition: 0.2s ease;
 }
 
-
 .timeButton:hover {
   border-color: #b79a61;
 }
-
 
 .timeButton.selected {
   background: #b79a61;
@@ -1474,7 +1839,6 @@ footer p {
   padding-right: 44px;
 }
 
-
 .formGroup {
   display: flex;
 
@@ -1482,7 +1846,6 @@ footer p {
 
   margin-bottom: 20px;
 }
-
 
 .formGroup label {
   font-size: 16px;
@@ -1493,7 +1856,6 @@ footer p {
 
   margin-bottom: 8px;
 }
-
 
 .formGroup input,
 .formGroup textarea {
@@ -1522,11 +1884,9 @@ footer p {
   box-sizing: border-box;
 }
 
-
 .formGroup input {
   height: 48px;
 }
-
 
 .formGroup textarea {
   resize: vertical;
@@ -1534,12 +1894,10 @@ footer p {
   min-height: 100px;
 }
 
-
 .formGroup input::placeholder,
 .formGroup textarea::placeholder {
   color: #7d8791;
 }
-
 
 .formGroup input:focus,
 .formGroup textarea:focus {
@@ -1563,7 +1921,6 @@ footer p {
 
   margin-top: 28px;
 }
-
 
 .backButton,
 .continueButton {
@@ -1597,7 +1954,6 @@ footer p {
   color: #35404a;
 }
 
-
 .backButton:hover {
   background: #f3f4f5;
 }
@@ -1614,7 +1970,6 @@ footer p {
 
   min-width: 145px;
 }
-
 
 .continueButton:hover {
   background: #3a4045;
@@ -1638,8 +1993,103 @@ footer p {
 }
 
 
+/* =========================================
+   PROPERTIES RESPONSIVE
+========================================= */
+
+@media (max-width: 1250px) {
+
+  .propertiesGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .propertiesHero {
+    padding: 45px 5% 35px;
+  }
+
+  .propertiesLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .filtersPanel {
+    position: static;
+  }
+
+  .propertiesGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .propertiesSection {
+    padding:
+      25px 15px 60px;
+  }
+
+  .propertiesHero {
+    padding:
+      35px 20px 30px;
+  }
+
+  .propertiesHero h1 {
+    font-size: 34px;
+  }
+
+  .filtersPanel {
+    padding: 20px;
+  }
+
+  .propertiesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .propertiesPage .propertyCardImage {
+    height: 220px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .propertyCardBody {
+    padding: 20px;
+  }
+
+  .propertyBottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .propertiesPage .propertyActions {
+    width: 100%;
+  }
+
+  .propertiesPage .detailsButton,
+  .propertiesPage .enquireButton {
+    flex: 1;
+  }
+
+  .propertyInfo {
+    gap: 10px;
+    font-size: 14px;
+  }
+
+}
+
+
 /* ==========================================
-   MOBILE
+   VISIT MOBILE
 ========================================== */
 
 @media (max-width: 768px) {
@@ -1648,18 +2098,15 @@ footer p {
     padding-top: 20px;
   }
 
-
   .visitNavLinks {
     gap: 18px;
 
     flex-wrap: wrap;
   }
 
-
   .visitNavLinks a {
     font-size: 14px;
   }
-
 
   .visitPageContent {
     margin-top: 35px;
@@ -1669,13 +2116,11 @@ footer p {
     padding-right: 15px;
   }
 
-
   .visitPageContent > h1 {
     font-size: 30px;
 
     margin-bottom: 25px;
   }
-
 
   .bookingContainer {
     padding:
@@ -1684,11 +2129,9 @@ footer p {
       25px;
   }
 
-
   .bookingContainer h2 {
     font-size: 23px;
   }
-
 
   .bookingOptions {
     grid-template-columns: 1fr;
@@ -1696,22 +2139,18 @@ footer p {
     gap: 16px;
   }
 
-
   .bookingOption {
     min-height: 200px;
   }
-
 
   .dateOptions {
     grid-template-columns: 1fr;
   }
 
-
   .timeSlots {
     grid-template-columns:
       repeat(2, 1fr);
   }
-
 
   .detailsContainer {
     padding-left: 20px;
@@ -1732,31 +2171,25 @@ footer p {
     gap: 13px;
   }
 
-
   .visitNavLinks a {
     font-size: 13px;
   }
-
 
   .visitPageContent > h1 {
     font-size: 27px;
   }
 
-
   .bookingContainer {
     border-radius: 10px;
   }
-
 
   .bookingContainer h2 {
     font-size: 21px;
   }
 
-
   .bookingActions {
     gap: 12px;
   }
-
 
   .backButton,
   .continueButton {
@@ -1767,9 +2200,108 @@ footer p {
     padding: 0 12px;
   }
 
-
   .timeSlots {
     grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================
+   GLOBAL MOBILE NAVIGATION
+========================================= */
+
+@media (max-width: 900px) {
+
+  .nav {
+    padding:
+      10px 20px;
+
+    gap: 15px;
+  }
+
+  .nav nav {
+    gap: 18px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .nav {
+    min-height: auto;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    padding: 12px 15px;
+  }
+
+  .brand {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .nav nav {
+    width: 100%;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 14px 20px;
+  }
+
+  .nav nav a {
+    font-size: 14px;
+  }
+
+  .nav .btn {
+    margin-top: 4px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .checks {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  .visit {
+    grid-template-columns: 1fr;
+    gap: 35px;
+
+    padding: 60px 6%;
+  }
+
+  .visit h2 {
+    font-size: 34px;
+  }
+
+  .section {
+    padding: 60px 6%;
+  }
+
+  .heroOverlay {
+    margin-left: 6%;
   }
 
 }
