@@ -42,6 +42,14 @@ export default function SiteVisitForm() {
     return date.toISOString().split("T")[0];
   };
 
+  const formatCustomDate = (date: Date) => {
+    return date.toLocaleDateString("en-US", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    });
+  };
+
   const selectToday = () => {
     setPreferredDate(formatDate(todayDate));
   };
@@ -150,11 +158,36 @@ export default function SiteVisitForm() {
               className="bookingOption"
               onClick={() => {
                 setBookingType("siteVisit");
+                setStatus("");
                 setStep(2);
               }}
             >
               <div className="bookingIcon">
-                ♧
+
+                <svg
+                  width="34"
+                  height="34"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 10C20 15.5 12 21 12 21C12 21 4 15.5 4 10C4 5.58 7.58 2 12 2C16.42 2 20 5.58 20 10Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+
+                  <circle
+                    cx="12"
+                    cy="10"
+                    r="3"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                </svg>
+
               </div>
 
               <h3>Site Visit</h3>
@@ -164,6 +197,7 @@ export default function SiteVisitForm() {
                 <br />
                 our experts.
               </p>
+
             </button>
 
 
@@ -174,11 +208,49 @@ export default function SiteVisitForm() {
               className="bookingOption"
               onClick={() => {
                 setBookingType("consultation");
+                setStatus("");
                 setStep(2);
               }}
             >
               <div className="bookingIcon">
-                ♧
+
+                <svg
+                  width="38"
+                  height="38"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="9"
+                    cy="7"
+                    r="4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+
+                  <path
+                    d="M2 21V18C2 15.79 3.79 14 6 14H12C14.21 14 16 15.79 16 18V21"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M17 11C19.21 11 21 12.79 21 15V18"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+
+                  <path
+                    d="M16 3.5C17.75 3.9 19 5.45 19 7.25C19 9.05 17.75 10.6 16 11"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
               </div>
 
               <h3>Consultation</h3>
@@ -188,6 +260,7 @@ export default function SiteVisitForm() {
                 <br />
                 construction.
               </p>
+
             </button>
 
           </div>
@@ -203,7 +276,7 @@ export default function SiteVisitForm() {
       {step === 2 && (
         <div className="bookingContainer dateTimeContainer">
 
-          <h2>Select Date & Time</h2>
+          <h2>Select Date &amp; Time</h2>
 
 
           {/* DATE */}
@@ -219,8 +292,7 @@ export default function SiteVisitForm() {
               <button
                 type="button"
                 className={
-                  preferredDate ===
-                  formatDate(todayDate)
+                  preferredDate === formatDate(todayDate)
                     ? "dateButton selected"
                     : "dateButton"
                 }
@@ -233,8 +305,7 @@ export default function SiteVisitForm() {
               <button
                 type="button"
                 className={
-                  preferredDate ===
-                  formatDate(tomorrowDate)
+                  preferredDate === formatDate(tomorrowDate)
                     ? "dateButton selected"
                     : "dateButton"
                 }
@@ -244,18 +315,29 @@ export default function SiteVisitForm() {
               </button>
 
 
-              <div className="calendarInput">
+              <label
+                className="calendarInput"
+              >
+                <span>
+                  {preferredDate
+                    ? formatCustomDate(
+                        new Date(
+                          `${preferredDate}T00:00:00`
+                        )
+                      )
+                    : "Select Date"}
+                </span>
 
                 <input
                   type="date"
                   value={preferredDate}
                   min={formatDate(todayDate)}
-                  onChange={(e) =>
-                    setPreferredDate(e.target.value)
-                  }
+                  onChange={(e) => {
+                    setPreferredDate(e.target.value);
+                    setStatus("");
+                  }}
                 />
-
-              </div>
+              </label>
 
             </div>
 
@@ -281,9 +363,10 @@ export default function SiteVisitForm() {
                       ? "timeButton selected"
                       : "timeButton"
                   }
-                  onClick={() =>
-                    setPreferredTime(time)
-                  }
+                  onClick={() => {
+                    setPreferredTime(time);
+                    setStatus("");
+                  }}
                 >
                   {time}
                 </button>
@@ -301,9 +384,13 @@ export default function SiteVisitForm() {
             <button
               type="button"
               className="backButton"
-              onClick={() => setStep(1)}
+              onClick={() => {
+                setStatus("");
+                setStep(1);
+              }}
             >
-              ← Back
+              <span>←</span>
+              Back
             </button>
 
 
@@ -312,7 +399,8 @@ export default function SiteVisitForm() {
               className="continueButton"
               onClick={handleContinue}
             >
-              Continue →
+              Continue
+              <span>→</span>
             </button>
 
           </div>
@@ -353,9 +441,10 @@ export default function SiteVisitForm() {
               type="text"
               placeholder="John Doe"
               value={name}
-              onChange={(e) =>
-                setName(e.target.value)
-              }
+              onChange={(e) => {
+                setName(e.target.value);
+                setStatus("");
+              }}
               required
             />
 
@@ -374,9 +463,10 @@ export default function SiteVisitForm() {
               type="tel"
               placeholder="+91 9494444818"
               value={phone}
-              onChange={(e) =>
-                setPhone(e.target.value)
-              }
+              onChange={(e) => {
+                setPhone(e.target.value);
+                setStatus("");
+              }}
               required
             />
 
@@ -394,9 +484,9 @@ export default function SiteVisitForm() {
             <textarea
               placeholder="Any specific requests?"
               value={message}
-              onChange={(e) =>
-                setMessage(e.target.value)
-              }
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
               rows={4}
             />
 
@@ -410,9 +500,13 @@ export default function SiteVisitForm() {
             <button
               type="button"
               className="backButton"
-              onClick={() => setStep(2)}
+              onClick={() => {
+                setStatus("");
+                setStep(2);
+              }}
             >
-              ← Back
+              <span>←</span>
+              Back
             </button>
 
 
@@ -420,7 +514,8 @@ export default function SiteVisitForm() {
               type="submit"
               className="continueButton"
             >
-              Confirm Booking →
+              Confirm Booking
+              <span>→</span>
             </button>
 
           </div>
