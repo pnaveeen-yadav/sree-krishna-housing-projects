@@ -28,12 +28,10 @@ export default function Home() {
 
       <header className="nav">
         <a href="/" className="brand">
-          <span>SK</span>
-
-          <div>
-            <b>SREE KRISHNA</b>
-            <small>HOUSING PROJECTS</small>
-          </div>
+          <img
+            src="/logo.webp"
+            alt="Sree Krishna Housing Projects"
+          />
         </a>
 
         <nav>
@@ -438,12 +436,11 @@ export default function Home() {
 
       <footer>
         <div className="brand">
-          <span>SK</span>
-
-          <div>
-            <b>SREE KRISHNA</b>
-            <small>HOUSING PROJECTS</small>
-          </div>
+          
+          <img
+            src="/logo.webp"
+            alt="Sree Krishna Housing Projects"
+          />
         </div>
 
         <p>
