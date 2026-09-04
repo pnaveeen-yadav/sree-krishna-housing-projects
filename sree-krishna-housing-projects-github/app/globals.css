@@ -2272,21 +2272,35 @@ footer p {
 
 .propertyImage {
   width: 100%;
-  height: 230px;
+  height: 300px;
+
   display: block;
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
+
+/* PROPERTY 1 */
+
 .img0 {
   background-image: url("/property1.png");
+  background-position: center;
 }
+
+
+/* PROPERTY 2 */
 
 .img1 {
   background-image: url("/property2.png");
+  background-position: center;
 }
+
+
+/* PROPERTY 3 */
 
 .img2 {
   background-image: url("/property3.png");
+  background-position: center;
 }
