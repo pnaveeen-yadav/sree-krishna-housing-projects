@@ -22,7 +22,8 @@ export default function Home() {
   return (
     <main>
 
-      {/* NAVIGATION */}
+      {/* ================= HEADER / NAVIGATION ================= */}
+
       <header className="nav">
 
         <div className="brand">
@@ -34,21 +35,51 @@ export default function Home() {
           </div>
         </div>
 
+
         <nav>
-          <a href="#about">About</a>
-          <a href="/properties">Properties</a>
-          <a href="#services">Services</a>
-          <a href="#contact">Contact</a>
+
+          {/* HOME */}
+          <a href="/">
+            Home
+          </a>
+
+
+          {/* PROPERTIES PAGE */}
+          <a href="/properties">
+            Properties
+          </a>
+
+
+          {/* SERVICES SECTION */}
+          <a href="#services">
+            Services
+          </a>
+
+
+          {/* TESTIMONIALS SECTION */}
+          <a href="#testimonials">
+            Testimonials
+          </a>
+
+
+          {/* CONTACT SECTION */}
+          <a href="#contact">
+            Contact
+          </a>
+
         </nav>
 
-        <a className="btn gold" href="#visit">
+
+        {/* BOOK SITE VISIT PAGE */}
+        <a className="btn gold" href="/visit">
           Book Site Visit
         </a>
 
       </header>
 
 
-      {/* HERO */}
+      {/* ================= HERO SECTION ================= */}
+
       <section className="hero">
 
         <div className="heroOverlay">
@@ -57,14 +88,17 @@ export default function Home() {
             TIRUPATI • REAL ESTATE • CONSTRUCTION
           </p>
 
+
           <h1>
             Find a Place You’ll Love to Call <em>Home.</em>
           </h1>
+
 
           <p>
             Discover quality open plots, residential properties and
             construction opportunities with Sree Krishna Housing Projects.
           </p>
+
 
           <div className="actions">
 
@@ -72,7 +106,8 @@ export default function Home() {
               Explore Properties
             </a>
 
-            <a className="btn outline" href="#visit">
+
+            <a className="btn outline" href="/visit">
               Book a Site Visit
             </a>
 
@@ -83,7 +118,8 @@ export default function Home() {
       </section>
 
 
-      {/* ABOUT */}
+      {/* ================= ABOUT SECTION ================= */}
+
       <section id="about" className="section split">
 
         <div>
@@ -92,9 +128,11 @@ export default function Home() {
             ABOUT US
           </p>
 
+
           <h2>
             Your Trusted Property Partner in Tirupati
           </h2>
+
 
           <p>
             We help customers explore carefully selected property
@@ -105,15 +143,28 @@ export default function Home() {
 
           <div className="checks">
 
-            <span>✓ Transparent Process</span>
-            <span>✓ Prime Locations</span>
-            <span>✓ Customer Support</span>
-            <span>✓ Investment Guidance</span>
+            <span>
+              ✓ Transparent Process
+            </span>
+
+            <span>
+              ✓ Prime Locations
+            </span>
+
+            <span>
+              ✓ Customer Support
+            </span>
+
+            <span>
+              ✓ Investment Guidance
+            </span>
 
           </div>
 
         </div>
 
+
+        {/* STATISTICS */}
 
         <div className="stats">
 
@@ -122,15 +173,18 @@ export default function Home() {
             <span>Years Experience</span>
           </div>
 
+
           <div>
             <b>100+</b>
             <span>Happy Customers</span>
           </div>
 
+
           <div>
             <b>25+</b>
             <span>Projects</span>
           </div>
+
 
           <div>
             <b>100%</b>
@@ -142,7 +196,8 @@ export default function Home() {
       </section>
 
 
-      {/* FEATURED PROPERTIES */}
+      {/* ================= FEATURED PROPERTIES ================= */}
+
       <section className="section muted">
 
         <div className="sectionHead">
@@ -159,6 +214,7 @@ export default function Home() {
 
           </div>
 
+
           <a href="/properties">
             View All →
           </a>
@@ -172,7 +228,9 @@ export default function Home() {
 
             <article className="card" key={p.name}>
 
-              <div className={"propertyImage img" + i}></div>
+              <div
+                className={"propertyImage img" + i}
+              ></div>
 
 
               <div className="cardBody">
@@ -181,13 +239,16 @@ export default function Home() {
                   {p.type}
                 </span>
 
+
                 <h3>
                   {p.name}
                 </h3>
 
+
                 <p>
                   📍 {p.location}
                 </p>
+
 
                 <a href="/properties">
                   View Details →
@@ -204,12 +265,14 @@ export default function Home() {
       </section>
 
 
-      {/* SERVICES */}
+      {/* ================= SERVICES SECTION ================= */}
+
       <section id="services" className="section">
 
         <p className="eyebrow dark">
           WHAT WE DO
         </p>
+
 
         <h2>
           Complete Real Estate Services
@@ -231,13 +294,15 @@ export default function Home() {
                 0{i + 1}
               </b>
 
+
               <h3>
                 {service}
               </h3>
 
+
               <p>
-                Professional support to help you make confident property
-                decisions.
+                Professional support to help you make confident
+                property decisions.
               </p>
 
             </div>
@@ -249,14 +314,114 @@ export default function Home() {
       </section>
 
 
-      {/* CONTACT */}
-      <section id="contact" className="section contactSection">
+      {/* ================= TESTIMONIALS ================= */}
+
+      <section
+        id="testimonials"
+        className="section muted"
+      >
+
+        <p className="eyebrow dark">
+          TESTIMONIALS
+        </p>
+
+
+        <h2>
+          What Our Customers Say
+        </h2>
+
+
+        <div className="services">
+
+
+          {/* TESTIMONIAL 1 */}
+
+          <div className="service testimonialCard">
+
+            <div className="stars">
+              ★★★★★
+            </div>
+
+
+            <p>
+              Excellent support and transparent guidance
+              throughout the property selection process.
+            </p>
+
+
+            <b>
+              — Happy Customer
+            </b>
+
+          </div>
+
+
+          {/* TESTIMONIAL 2 */}
+
+          <div className="service testimonialCard">
+
+            <div className="stars">
+              ★★★★★
+            </div>
+
+
+            <p>
+              The team helped us find the right property
+              and explained everything clearly.
+            </p>
+
+
+            <b>
+              — Property Buyer
+            </b>
+
+          </div>
+
+
+          {/* TESTIMONIAL 3 */}
+
+          <div className="service testimonialCard">
+
+            <div className="stars">
+              ★★★★★
+            </div>
+
+
+            <p>
+              Professional service and great support
+              from beginning to end.
+            </p>
+
+
+            <b>
+              — Investor
+            </b>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= CONTACT SECTION ================= */}
+
+      <section
+        id="contact"
+        className="section contactSection"
+      >
 
         <div className="contactGrid">
 
 
-          {/* LEFT SIDE */}
+          {/* LEFT SIDE CONTACT INFORMATION */}
+
           <div className="contactInfo">
+
+            <p className="eyebrow dark">
+              GET IN TOUCH
+            </p>
+
 
             <h2>
               Direct Contact
@@ -264,6 +429,7 @@ export default function Home() {
 
 
             {/* CALL */}
+
             <a
               href="tel:+919494444818"
               className="contactBox"
@@ -273,11 +439,13 @@ export default function Home() {
                 📞
               </div>
 
+
               <div>
 
                 <small>
                   Call Us
                 </small>
+
 
                 <h3>
                   +91 9494444818
@@ -289,6 +457,7 @@ export default function Home() {
 
 
             {/* WHATSAPP */}
+
             <a
               href="https://wa.me/919494444818"
               target="_blank"
@@ -300,14 +469,16 @@ export default function Home() {
                 💬
               </div>
 
+
               <div>
 
                 <small>
                   WhatsApp
                 </small>
 
+
                 <h3>
-                  Chat Now
+                  Chat With Us
                 </h3>
 
               </div>
@@ -316,6 +487,7 @@ export default function Home() {
 
 
             {/* EMAIL */}
+
             <a
               href="mailto:sreekrishna.housingprojects@gmail.com"
               className="contactBox"
@@ -325,11 +497,13 @@ export default function Home() {
                 ✉️
               </div>
 
+
               <div>
 
                 <small>
                   Email Us
                 </small>
+
 
                 <h3>
                   sreekrishna.housingprojects@gmail.com
@@ -341,6 +515,7 @@ export default function Home() {
 
 
             {/* OFFICE LOCATION */}
+
             <div className="officeLocation">
 
               <h2>
@@ -348,87 +523,35 @@ export default function Home() {
               </h2>
 
 
-              <div className="locationDetails">
-
-                <div className="locationIcon">
-                  📍
-                </div>
+              <p>
+                📍 <b>Sree Krishna Housing Projects</b>
+              </p>
 
 
-                <div>
+              <p>
+                2nd Floor, American Towers,
+                <br />
 
-                  <h3>
-                    Sree Krishna Housing Projects
-                  </h3>
+                Opp. Ruchi Medicals,
+                <br />
 
-                  <p>
-                    2nd Floor, American Towers,
-                    <br />
+                Leela Mahal Circle,
+                <br />
 
-                    Opp Keerthi Medicals, Leela Mahal Circle,
-                    <br />
-
-                    TML By Pass Road, Tirupati - 517501
-                  </p>
-
-                </div>
-
-              </div>
+                Tirupati, Andhra Pradesh
+              </p>
 
 
-              {/* BUSINESS HOURS */}
-              <div className="businessHours">
+              {/* GOOGLE MAP NAVIGATION */}
 
-                <div className="locationIcon">
-                  🕒
-                </div>
-
-
-                <div>
-
-                  <h3>
-                    Business Hours
-                  </h3>
-
-                  <p>
-                    Mon - Sat: 9:00 AM - 6:00 PM
-                  </p>
-
-                  <p>
-                    Sunday: Closed
-                  </p>
-
-                </div>
-
-              </div>
-
-
-              {/* GOOGLE MAP */}
-              <div className="mapContainer">
-
-                <iframe
-                  title="Sree Krishna Housing Projects Location"
-                  src="https://www.google.com/maps?q=Saideep%20Towers%20Leela%20Mahal%20Road%20Tirupati&output=embed"
-                  width="100%"
-                  height="350"
-                  loading="lazy"
-                ></iframe>
-
-              </div>
-
-
-              {/* NAVIGATE BUTTON */}
               <a
-                className="navigateButton"
-                href="https://www.google.com/maps/dir/?api=1&destination=Saideep+Towers,+Leela+Mahal+Road,+Tirupati,+Andhra+Pradesh"
+                className="navigateBtn"
+                href="https://www.google.com/maps/search/?api=1&query=Sree+Krishna+Housing+Projects+American+Towers+Leela+Mahal+Circle+Tirupati"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-
                 🧭 Navigate
-
               </a>
-
 
             </div>
 
@@ -436,15 +559,22 @@ export default function Home() {
 
 
           {/* RIGHT SIDE CONTACT FORM */}
+
           <div className="contactForm">
+
+            <p className="eyebrow dark">
+              CONTACT FORM
+            </p>
+
 
             <h2>
               Send us a Message
             </h2>
 
+
             <p>
               Interested in a property? Have a question?
-              Fill out the form below.
+              Fill out the form below and our team will contact you.
             </p>
 
 
@@ -453,6 +583,7 @@ export default function Home() {
               <label>
                 Full Name
               </label>
+
 
               <input
                 type="text"
@@ -464,6 +595,7 @@ export default function Home() {
                 Phone Number
               </label>
 
+
               <input
                 type="tel"
                 placeholder="+91 9494444818"
@@ -473,6 +605,7 @@ export default function Home() {
               <label>
                 Email (Optional)
               </label>
+
 
               <input
                 type="email"
@@ -484,9 +617,10 @@ export default function Home() {
                 Message
               </label>
 
+
               <textarea
                 placeholder="How can we help you?"
-                rows={6}
+                rows={5}
               ></textarea>
 
 
@@ -494,22 +628,20 @@ export default function Home() {
                 className="btn gold"
                 type="submit"
               >
-
                 Send Message →
-
               </button>
 
             </form>
 
           </div>
 
-
         </div>
 
       </section>
 
 
-      {/* BOOK SITE VISIT */}
+      {/* ================= BOOK SITE VISIT ================= */}
+
       <section id="visit" className="visit">
 
         <div>
@@ -518,13 +650,15 @@ export default function Home() {
             BOOK A VISIT
           </p>
 
+
           <h2>
             See Your Future Property in Person
           </h2>
 
+
           <p>
-            Submit your details and our team can contact you regarding
-            a site visit.
+            Submit your details and our team can contact you
+            regarding a site visit.
           </p>
 
         </div>
@@ -535,7 +669,8 @@ export default function Home() {
       </section>
 
 
-      {/* FOOTER */}
+      {/* ================= FOOTER ================= */}
+
       <footer>
 
         <div className="brand">
@@ -544,11 +679,13 @@ export default function Home() {
             SK
           </span>
 
+
           <div>
 
             <b>
               SREE KRISHNA
             </b>
+
 
             <small>
               HOUSING PROJECTS
@@ -565,17 +702,16 @@ export default function Home() {
 
 
         <p>
-          Contact us for property enquiries, site visits and
-          construction services.
+          Tirupati, Andhra Pradesh
         </p>
 
 
         <small>
-          © {new Date().getFullYear()} Sree Krishna Housing Projects
+          © {new Date().getFullYear()} Sree Krishna Housing Projects.
+          All Rights Reserved.
         </small>
 
       </footer>
-
 
     </main>
   );
