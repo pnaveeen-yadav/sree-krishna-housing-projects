@@ -198,7 +198,7 @@ main {
 
 
 /* =========================================
-   HOME HERO - 
+   HOME HERO
 ========================================= */
 
 .hero {
@@ -212,7 +212,6 @@ main {
 
 .hero::before {
   content: "";
-
   position: absolute;
 
   top: -30px;
@@ -227,7 +226,7 @@ main {
       rgba(10, 16, 22, 0.60) 45%,
       rgba(10, 16, 22, 0.25) 100%
     ),
-    url("/hero-real-estate.png");
+    url("/hero.png");
 
   background-size: cover;
   background-position: center;
