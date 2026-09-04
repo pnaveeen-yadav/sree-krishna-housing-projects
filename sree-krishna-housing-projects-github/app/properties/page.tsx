@@ -1,0 +1,4 @@
+export default function Properties(){
+ const items=["Premium Open Plots","Krishna Enclave","Modern Villas","Residential Plots","Commercial Property","New Project"];
+ return <main className="inner"><a href="/">← Back to Home</a><p className="eyebrow dark">PROPERTIES</p><h1>Find Your Ideal Property</h1><p>These are placeholder listings. The final version will load properties from Supabase.</p><div className="grid">{items.map((x,i)=><article className="card" key={x}><div className={"propertyImage img"+(i%3)}></div><div className="cardBody"><span className="tag">Available</span><h3>{x}</h3><p>📍 Tirupati</p><button>View Details</button></div></article>)}</div></main>
+}
