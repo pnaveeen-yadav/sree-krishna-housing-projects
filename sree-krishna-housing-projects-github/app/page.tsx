@@ -48,6 +48,13 @@ export default function Home() {
       {/* ================= HERO ================= */}
 
       <section className="hero">
+        {/* HERO BACKGROUND IMAGE */}
+        <div className="heroBackground"></div>
+
+        {/* DARK OVERLAY */}
+        <div className="heroShade"></div>
+
+        {/* HERO CONTENT */}
         <div className="heroOverlay">
           <p className="eyebrow">
             TIRUPATI • REAL ESTATE • CONSTRUCTION

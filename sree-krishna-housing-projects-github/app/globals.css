@@ -198,8 +198,7 @@ main {
 
 
 /* =========================================
-   HOME HERO - BACKGROUND + ZOOM EFFECT
-   ONLY
+   HOME HERO - 
 ========================================= */
 
 .hero {
@@ -210,8 +209,10 @@ main {
 }
 
 /* Background image layer */
+
 .hero::before {
   content: "";
+
   position: absolute;
 
   top: -30px;
@@ -226,7 +227,7 @@ main {
       rgba(10, 16, 22, 0.60) 45%,
       rgba(10, 16, 22, 0.25) 100%
     ),
-    url("/hero.jpg"); /* KEEP YOUR CURRENT IMAGE PATH */
+    url("/hero-real-estate.png");
 
   background-size: cover;
   background-position: center;
@@ -234,10 +235,15 @@ main {
 
   z-index: -1;
 
+  transform-origin: center center;
+
   animation: homeHeroZoom 14s ease-in-out infinite;
 }
 
-/* Zoom In → Zoom Out */
+/* =========================================
+   SMOOTH ZOOM IN → ZOOM OUT
+========================================= */
+
 @keyframes homeHeroZoom {
   0% {
     transform: scale(1);
@@ -252,13 +258,26 @@ main {
   }
 }
 
-/* Keep text above the background */
+/* Keep hero content above background */
+
 .hero > * {
   position: relative;
   z-index: 1;
 }
 
+/* =========================================
+   MOBILE
+========================================= */
 
+@media (max-width: 768px) {
+  .hero {
+    min-height: 580px;
+  }
+
+  .hero::before {
+    background-position: center;
+  }
+}
 /* =========================================
    GENERAL SECTIONS
 ========================================= */
