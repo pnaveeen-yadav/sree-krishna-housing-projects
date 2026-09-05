@@ -196,8 +196,6 @@ export default function Home() {
         id="contact"
         className="section contactSection"
       >
-        {/* CONTACT HEADING */}
-
         <div className="contactSectionHeading">
           <h2>Get in Touch</h2>
 
@@ -271,62 +269,78 @@ export default function Home() {
 
             {/* ================= OFFICE LOCATION ================= */}
 
-            <div className="contactDetailsBlock">
+            <div className="office-location">
 
-              <div className="contactDetailsIcon">
-                📍
+              <h2>Office Location</h2>
+
+              {/* LOCATION */}
+
+              <div className="office-info-item">
+
+                <div className="office-icon">
+                  📍
+                </div>
+
+                <div className="office-info-content">
+
+                  <strong>
+                    Sree Krishna Housing Projects
+                  </strong>
+
+                  <p>
+                    Saideep Towers, 20-03-131, B4,
+                    <br />
+                    Leela Mahal Road, Srinivasa Nagar,
+                    <br />
+                    Akkarampalle, Tirupati,
+                    <br />
+                    Andhra Pradesh - 517501
+                  </p>
+
+                </div>
+
               </div>
 
-              <div>
-                <h3>Sree Krishna Housing Projects</h3>
+              {/* BUSINESS HOURS */}
 
-                <p>
-                  Saideep Towers,
-                  <br />
-                  20-03-131, B4, Leela Mahal Road,
-                  <br />
-                  Srinivasa Nagar, Akkarampalle,
-                  <br />
-                  Tirupati, Andhra Pradesh - 517501
-                </p>
+              <div className="office-info-item">
+
+                <div className="office-icon">
+                  ◷
+                </div>
+
+                <div className="office-info-content">
+
+                  <strong>
+                    Business Hours
+                  </strong>
+
+                  <p>
+                    Mon - Sat: 9:00 AM - 6:00 PM
+                    <br />
+                    Sunday: Closed
+                  </p>
+
+                </div>
+
               </div>
 
-            </div>
+              {/* GOOGLE MAP */}
 
-            {/* ================= BUSINESS HOURS ================= */}
+              <div className="office-map">
 
-            <div className="contactDetailsBlock">
+                <iframe
+                  title="Sree Krishna Housing Projects Location"
+                  src="https://www.google.com/maps?q=Saideep%20Towers%2C%2020-03-131%2C%20B4%2C%20Leela%20Mahal%20Rd%2C%20Srinivasa%20Nagar%2C%20Akkarampalle%2C%20Tirupati%2C%20Andhra%20Pradesh%20517501&output=embed"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
 
-              <div className="contactDetailsIcon">
-                ◷
               </div>
-
-              <div>
-                <h3>Business Hours</h3>
-
-                <p>
-                  Mon - Sat: 9:00 AM - 6:00 PM
-                  <br />
-                  Sunday: Closed
-                </p>
-              </div>
-
-            </div>
-
-            {/* ================= GOOGLE MAP ================= */}
-
-            <div className="contactMap">
-
-              <iframe
-                title="Sree Krishna Housing Projects Location"
-                src="https://www.google.com/maps?q=Saideep%20Towers%2C%2020-03-131%2C%20B4%2C%20Leela%20Mahal%20Rd%2C%20Srinivasa%20Nagar%2C%20Akkarampalle%2C%20Tirupati%2C%20Andhra%20Pradesh%20517501&output=embed"
-                width="100%"
-                height="300"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
 
             </div>
 
@@ -356,7 +370,7 @@ export default function Home() {
 
               <input
                 type="tel"
-                placeholder="+91 6303688516"
+                placeholder="Your Number"
               />
 
               <label>Email (Optional)</label>
