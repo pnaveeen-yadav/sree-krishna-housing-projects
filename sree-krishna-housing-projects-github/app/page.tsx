@@ -330,12 +330,14 @@ export default function Home() {
 
               <iframe
                 title="Sree Krishna Housing Projects Location"
-                src="https://www.google.com/maps/search/?api=1&query=Saideep+Towers%2C+20-03%2C131%2C+B4%2C+Leela+Mahal+Rd%2C+Srinivasa+Nagar%2C+Akkarampalle%2C+Tirupati%2C+Andhra+Pradesh+517501&utm_source=chatgpt.com"
+                src="https://www.google.com/maps?q=Saideep%20Towers%2C%2020-03-131%2C%20B4%2C%20Leela%20Mahal%20Rd%2C%20Srinivasa%20Nagar%2C%20Akkarampalle%2C%20Tirupati%2C%20Andhra%20Pradesh%20517501&output=embed"
                 width="100%"
                 height="300"
+                style={{ border: 0 }}
+                allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-              />
+              ></iframe>
 
             </div>
 
