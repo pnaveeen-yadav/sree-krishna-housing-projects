@@ -63,17 +63,23 @@ main {
 
 .nav {
   width: 100%;
+
   min-height: 72px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   padding: 10px 5%;
+
   background: #ffffff;
 
   position: sticky;
+
   top: 0;
+
   z-index: 1000;
 
   border-bottom: 1px solid #eceef1;
@@ -81,53 +87,35 @@ main {
 
 .brand {
   display: flex;
+
   align-items: center;
+
   gap: 10px;
 }
 
-.brand > span {
-  width: 46px;
-  height: 46px;
+.brand img {
+  width: 180px;
 
-  border: 2px solid var(--gold);
-  border-radius: 50%;
+  height: 70px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
 
-  color: var(--gold-dark);
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.brand div {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand b {
-  font-size: 17px;
-  letter-spacing: 1.5px;
-  color: #2d3743;
-}
-
-.brand small {
-  margin-top: 3px;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: #59616b;
+  display: block;
 }
 
 .nav nav {
   display: flex;
+
   align-items: center;
+
   gap: 38px;
 }
 
 .nav nav a {
   color: #454b52;
+
   font-size: 15px;
+
   transition: 0.2s;
 }
 
@@ -138,7 +126,6 @@ main {
 .nav .btn {
   white-space: nowrap;
 }
-
 
 /* =========================================
    BUTTONS
