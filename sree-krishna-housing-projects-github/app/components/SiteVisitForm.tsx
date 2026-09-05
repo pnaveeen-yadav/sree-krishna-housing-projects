@@ -33,13 +33,24 @@ export default function SiteVisitForm() {
 
   const [status, setStatus] = useState("");
 
-  const todayDate = new Date();
+  const today = new Date();
 
-  const tomorrowDate = new Date();
-  tomorrowDate.setDate(todayDate.getDate() + 1);
+  const [calendarMonth, setCalendarMonth] = useState(
+    new Date(today.getFullYear(), today.getMonth(), 1)
+  );
 
   const formatDate = (date: Date) => {
-    return date.toISOString().split("T")[0];
+    const year = date.getFullYear();
+
+    const month = String(
+      date.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      date.getDate()
+    ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
   };
 
   const formatCustomDate = (date: Date) => {
@@ -47,15 +58,97 @@ export default function SiteVisitForm() {
       weekday: "short",
       day: "numeric",
       month: "short",
+      year: "numeric",
     });
   };
 
-  const selectToday = () => {
-    setPreferredDate(formatDate(todayDate));
+  const isToday = (date: Date) => {
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
   };
 
-  const selectTomorrow = () => {
-    setPreferredDate(formatDate(tomorrowDate));
+  const isPastDate = (date: Date) => {
+    const checkDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
+    const currentDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    return checkDate < currentDate;
+  };
+
+  const selectDate = (date: Date) => {
+    if (isPastDate(date)) {
+      return;
+    }
+
+    setPreferredDate(formatDate(date));
+    setStatus("");
+  };
+
+  const changeMonth = (direction: number) => {
+    const newMonth = new Date(
+      calendarMonth.getFullYear(),
+      calendarMonth.getMonth() + direction,
+      1
+    );
+
+    const currentMonth = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      1
+    );
+
+    if (newMonth < currentMonth) {
+      return;
+    }
+
+    setCalendarMonth(newMonth);
+  };
+
+  const generateCalendarDays = () => {
+    const year = calendarMonth.getFullYear();
+
+    const month = calendarMonth.getMonth();
+
+    const firstDay = new Date(
+      year,
+      month,
+      1
+    ).getDay();
+
+    const daysInMonth = new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
+
+    const days: (Date | null)[] = [];
+
+    for (let i = 0; i < firstDay; i++) {
+      days.push(null);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      days.push(
+        new Date(year, month, day)
+      );
+    }
+
+    while (days.length % 7 !== 0) {
+      days.push(null);
+    }
+
+    return days;
   };
 
   const handleContinue = () => {
@@ -91,22 +184,25 @@ export default function SiteVisitForm() {
     setStatus("Submitting...");
 
     try {
-      const response = await fetch("/api/site-visit", {
-        method: "POST",
+      const response = await fetch(
+        "/api/site-visit",
+        {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          bookingType,
-          name,
-          phone,
-          message,
-          preferredDate,
-          preferredTime,
-        }),
-      });
+          body: JSON.stringify({
+            bookingType,
+            name,
+            phone,
+            message,
+            preferredDate,
+            preferredTime,
+          }),
+        }
+      );
 
       if (response.ok) {
         setStatus(
@@ -134,6 +230,18 @@ export default function SiteVisitForm() {
       );
     }
   };
+
+  const calendarDays = generateCalendarDays();
+
+  const weekDays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
 
   return (
     <div className="siteVisitWrapper">
@@ -287,57 +395,221 @@ export default function SiteVisitForm() {
               Select Date
             </label>
 
-            <div className="dateOptions">
 
-              <button
-                type="button"
-                className={
-                  preferredDate === formatDate(todayDate)
-                    ? "dateButton selected"
-                    : "dateButton"
-                }
-                onClick={selectToday}
+            {/* SELECTED DATE */}
+
+            {preferredDate && (
+              <p
+                style={{
+                  marginBottom: "15px",
+                  fontWeight: 600,
+                }}
               >
-                Today
-              </button>
+                Selected:{" "}
+                {formatCustomDate(
+                  new Date(
+                    `${preferredDate}T00:00:00`
+                  )
+                )}
+              </p>
+            )}
 
 
-              <button
-                type="button"
-                className={
-                  preferredDate === formatDate(tomorrowDate)
-                    ? "dateButton selected"
-                    : "dateButton"
-                }
-                onClick={selectTomorrow}
+            {/* CALENDAR */}
+
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "640px",
+                margin: "0 auto",
+                border: "1px solid #ddd",
+                borderRadius: "10px",
+                padding: "18px",
+                background: "#fff",
+              }}
+            >
+
+              {/* MONTH HEADER */}
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "18px",
+                }}
               >
-                Tomorrow
-              </button>
 
-
-              <label
-                className="calendarInput"
-              >
-                <span>
-                  {preferredDate
-                    ? formatCustomDate(
-                        new Date(
-                          `${preferredDate}T00:00:00`
-                        )
-                      )
-                    : "Select Date"}
-                </span>
-
-                <input
-                  type="date"
-                  value={preferredDate}
-                  min={formatDate(todayDate)}
-                  onChange={(e) => {
-                    setPreferredDate(e.target.value);
-                    setStatus("");
+                <button
+                  type="button"
+                  onClick={() =>
+                    changeMonth(-1)
+                  }
+                  disabled={
+                    calendarMonth.getFullYear() ===
+                      today.getFullYear() &&
+                    calendarMonth.getMonth() ===
+                      today.getMonth()
+                  }
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    fontSize: "22px",
+                    cursor: "pointer",
+                    padding: "5px 12px",
                   }}
-                />
-              </label>
+                >
+                  ←
+                </button>
+
+
+                <strong
+                  style={{
+                    fontSize: "18px",
+                  }}
+                >
+                  {calendarMonth.toLocaleDateString(
+                    "en-US",
+                    {
+                      month: "long",
+                      year: "numeric",
+                    }
+                  )}
+                </strong>
+
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    changeMonth(1)
+                  }
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    fontSize: "22px",
+                    cursor: "pointer",
+                    padding: "5px 12px",
+                  }}
+                >
+                  →
+                </button>
+
+              </div>
+
+
+              {/* WEEK DAYS */}
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    "repeat(7, 1fr)",
+                  gap: "6px",
+                  marginBottom: "8px",
+                }}
+              >
+                {weekDays.map((day) => (
+                  <div
+                    key={day}
+                    style={{
+                      textAlign: "center",
+                      fontWeight: 600,
+                      fontSize: "13px",
+                      padding: "6px 0",
+                    }}
+                  >
+                    {day}
+                  </div>
+                ))}
+              </div>
+
+
+              {/* CALENDAR DAYS */}
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    "repeat(7, 1fr)",
+                  gap: "6px",
+                }}
+              >
+                {calendarDays.map(
+                  (date, index) => {
+
+                    if (!date) {
+                      return (
+                        <div
+                          key={`empty-${index}`}
+                        />
+                      );
+                    }
+
+                    const dateValue =
+                      formatDate(date);
+
+                    const selected =
+                      preferredDate === dateValue;
+
+                    const past =
+                      isPastDate(date);
+
+                    const todaySelected =
+                      isToday(date);
+
+                    return (
+                      <button
+                        key={dateValue}
+                        type="button"
+                        disabled={past}
+                        onClick={() =>
+                          selectDate(date)
+                        }
+                        style={{
+                          aspectRatio: "1",
+                          borderRadius: "8px",
+                          border:
+                            selected
+                              ? "1px solid #b79a63"
+                              : todaySelected
+                              ? "1px solid #b79a63"
+                              : "1px solid #ddd",
+
+                          background:
+                            selected
+                              ? "#b79a63"
+                              : "#fff",
+
+                          color:
+                            selected
+                              ? "#fff"
+                              : past
+                              ? "#bbb"
+                              : "#333",
+
+                          cursor:
+                            past
+                              ? "not-allowed"
+                              : "pointer",
+
+                          fontWeight:
+                            selected ||
+                            todaySelected
+                              ? 600
+                              : 400,
+
+                          opacity:
+                            past
+                              ? 0.5
+                              : 1,
+                        }}
+                      >
+                        {date.getDate()}
+                      </button>
+                    );
+                  }
+                )}
+              </div>
 
             </div>
 
