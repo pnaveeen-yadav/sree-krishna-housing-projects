@@ -139,8 +139,7 @@ export async function POST(request: Request) {
 
               body: JSON.stringify({
 
-                from:
-                  "Sree Krishna Housing Projects <onboarding@resend.dev>",
+                from: "Sree Krishna Housing Projects <bookings@sreekrishnahousingprojects.com>",
 
                 to: [
                   receiverEmail,
