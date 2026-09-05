@@ -1819,7 +1819,9 @@ footer p {
 }
 
 /* ==========================================
+
    STEP 2 - DATE & TIME
+
 ========================================== */
 
 .dateTimeContainer {
@@ -1844,23 +1846,26 @@ footer p {
   gap: 12px;
 }
 
-.dateButton,
-.calendarInput {
-  height: 46px;
-  border: 1px solid #d9dde1;
-  border-radius: 6px;
-  background: #ffffff;
-  color: #56616b;
-  font-size: 15px;
-}
+
+/* DATE BUTTONS */
 
 .dateButton {
+  width: 100%;
+  height: 46px;
+
+  border: 1px solid #d9dde1;
+  border-radius: 6px;
+
+  background: #ffffff;
+  color: #56616b;
+
+  font-size: 15px;
+
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.dateButton:hover,
-.calendarInput:hover {
+.dateButton:hover {
   border-color: #b79a61;
 }
 
@@ -1870,28 +1875,33 @@ footer p {
   color: #ffffff;
 }
 
-.calendarInput {
+
+/* CUSTOM DATE BUTTON */
+
+.customDateWrapper {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 12px;
-  cursor: pointer;
-}
-
-.calendarInput span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.calendarInput input {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+}
+
+.customDateWrapper .dateButton {
+  width: 100%;
+}
+
+
+/* HIDDEN DATE INPUT */
+
+.hiddenDateInput {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
   opacity: 0;
-  cursor: pointer;
+
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
 }
 
 /* ==========================================

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type BookingType = "siteVisit" | "consultation" | "";
 
@@ -33,6 +33,8 @@ export default function SiteVisitForm() {
 
   const [status, setStatus] = useState("");
 
+  const dateInputRef = useRef<HTMLInputElement>(null);
+
   const todayDate = new Date();
 
   const tomorrowDate = new Date();
@@ -40,8 +42,14 @@ export default function SiteVisitForm() {
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
+
+    const month = String(
+      date.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      date.getDate()
+    ).padStart(2, "0");
 
     return `${year}-${month}-${day}`;
   };
@@ -62,6 +70,23 @@ export default function SiteVisitForm() {
   const selectTomorrow = () => {
     setPreferredDate(formatDate(tomorrowDate));
     setStatus("");
+  };
+
+  const openCalendar = () => {
+    if (!dateInputRef.current) return;
+
+    try {
+      if (
+        typeof dateInputRef.current.showPicker ===
+        "function"
+      ) {
+        dateInputRef.current.showPicker();
+      } else {
+        dateInputRef.current.click();
+      }
+    } catch (error) {
+      dateInputRef.current.click();
+    }
   };
 
   const handleContinue = () => {
@@ -114,26 +139,36 @@ export default function SiteVisitForm() {
         }),
       });
 
-      if (response.ok) {
-        setStatus(
-          "Thank you! Your booking has been submitted successfully."
-        );
+      const data = await response.json();
 
-        setName("");
-        setPhone("");
-        setMessage("");
-        setPreferredDate("");
-        setPreferredTime("");
-        setBookingType("");
+      if (!response.ok) {
+        console.error("Booking error:", data);
 
-        setStep(1);
-      } else {
         setStatus(
           "Unable to submit your booking. Please try again."
         );
+
+        return;
       }
+
+      setStatus(
+        "Thank you! Your booking has been submitted successfully."
+      );
+
+      setName("");
+      setPhone("");
+      setMessage("");
+      setPreferredDate("");
+      setPreferredTime("");
+      setBookingType("");
+
+      setTimeout(() => {
+        setStep(1);
+        setStatus("");
+      }, 2500);
+
     } catch (error) {
-      console.error(error);
+      console.error("Booking error:", error);
 
       setStatus(
         "Something went wrong. Please try again."
@@ -282,7 +317,9 @@ export default function SiteVisitForm() {
       {step === 2 && (
         <div className="bookingContainer dateTimeContainer">
 
-          <h2>Select Date &amp; Time</h2>
+          <h2>
+            Select Date &amp; Time
+          </h2>
 
 
           {/* DATE */}
@@ -316,7 +353,8 @@ export default function SiteVisitForm() {
               <button
                 type="button"
                 className={
-                  preferredDate === formatDate(tomorrowDate)
+                  preferredDate ===
+                  formatDate(tomorrowDate)
                     ? "dateButton selected"
                     : "dateButton"
                 }
@@ -326,33 +364,55 @@ export default function SiteVisitForm() {
               </button>
 
 
-              {/* CUSTOM DATE CALENDAR */}
+              {/* SELECT CUSTOM DATE */}
 
-              <label className="calendarInput">
+              <div className="customDateWrapper">
 
-                <span>
+                <button
+                  type="button"
+                  className={
+                    preferredDate &&
+                    preferredDate !==
+                      formatDate(todayDate) &&
+                    preferredDate !==
+                      formatDate(tomorrowDate)
+                      ? "dateButton selected"
+                      : "dateButton"
+                  }
+                  onClick={openCalendar}
+                >
+                  📅{" "}
+
                   {preferredDate &&
-                  preferredDate !== formatDate(todayDate) &&
-                  preferredDate !== formatDate(tomorrowDate)
+                  preferredDate !==
+                    formatDate(todayDate) &&
+                  preferredDate !==
+                    formatDate(tomorrowDate)
                     ? formatCustomDate(
                         new Date(
                           `${preferredDate}T00:00:00`
                         )
                       )
-                    : "📅 Select Date"}
-                </span>
+                    : "Select Date"}
+
+                </button>
+
+
+                {/* HIDDEN NATIVE DATE PICKER */}
 
                 <input
+                  ref={dateInputRef}
                   type="date"
                   value={preferredDate}
                   min={formatDate(todayDate)}
+                  className="hiddenDateInput"
                   onChange={(e) => {
                     setPreferredDate(e.target.value);
                     setStatus("");
                   }}
                 />
 
-              </label>
+              </div>
 
             </div>
 
@@ -404,8 +464,7 @@ export default function SiteVisitForm() {
                 setStep(1);
               }}
             >
-              <span>←</span>
-              Back
+              ← Back
             </button>
 
 
@@ -414,8 +473,7 @@ export default function SiteVisitForm() {
               className="continueButton"
               onClick={handleContinue}
             >
-              Continue
-              <span>→</span>
+              Continue →
             </button>
 
           </div>
@@ -441,10 +499,12 @@ export default function SiteVisitForm() {
           onSubmit={submitBooking}
         >
 
-          <h2>Your Details</h2>
+          <h2>
+            Your Details
+          </h2>
 
 
-          {/* NAME */}
+          {/* FULL NAME */}
 
           <div className="formGroup">
 
@@ -454,7 +514,7 @@ export default function SiteVisitForm() {
 
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Enter your full name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -476,7 +536,7 @@ export default function SiteVisitForm() {
 
             <input
               type="tel"
-              placeholder="Your Number"
+              placeholder="+91 9494444818"
               value={phone}
               onChange={(e) => {
                 setPhone(e.target.value);
@@ -508,7 +568,7 @@ export default function SiteVisitForm() {
           </div>
 
 
-          {/* ACTIONS */}
+          {/* BUTTONS */}
 
           <div className="bookingActions">
 
@@ -520,8 +580,7 @@ export default function SiteVisitForm() {
                 setStep(2);
               }}
             >
-              <span>←</span>
-              Back
+              ← Back
             </button>
 
 
@@ -529,8 +588,7 @@ export default function SiteVisitForm() {
               type="submit"
               className="continueButton"
             >
-              Confirm Booking
-              <span>→</span>
+              Confirm Booking →
             </button>
 
           </div>
