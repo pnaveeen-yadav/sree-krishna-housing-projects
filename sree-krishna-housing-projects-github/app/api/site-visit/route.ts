@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
+export const runtime = "nodejs";
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -16,12 +18,16 @@ export async function POST(request: Request) {
       );
     }
 
+    /* =========================================
+       SAVE BOOKING IN SUPABASE
+    ========================================= */
+
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
-    const { error } = await supabase
+    const { error: supabaseError } = await supabase
       .from("site_visits")
       .insert({
         name: body.name,
@@ -30,10 +36,15 @@ export async function POST(request: Request) {
         preferred_time: body.preferredTime || null
       });
 
-    if (error) {
+    if (supabaseError) {
+      console.error(
+        "Supabase error:",
+        supabaseError
+      );
+
       return NextResponse.json(
         {
-          error: error.message
+          error: supabaseError.message
         },
         {
           status: 400
@@ -45,76 +56,138 @@ export async function POST(request: Request) {
        SEND EMAIL USING RESEND
     ========================================= */
 
-    const emailResponse = await fetch(
-      "https://api.resend.com/emails",
-      {
-        method: "POST",
+    let emailSent = false;
 
-        headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-          "Content-Type": "application/json"
-        },
+    try {
+      const resendApiKey =
+        process.env.RESEND_API_KEY;
 
-        body: JSON.stringify({
-          from: "Sree Krishna Housing Projects <onboarding@resend.dev>",
+      const receiverEmail =
+        process.env.SITE_VISIT_RECEIVER_EMAIL;
 
-          to: [
-            process.env.SITE_VISIT_RECEIVER_EMAIL
-          ],
-
-          subject: "New Site Visit Booking",
-
-          html: `
-            <h2>New Site Visit Booking</h2>
-
-            <p>
-              <strong>Name:</strong> ${body.name}
-            </p>
-
-            <p>
-              <strong>Phone:</strong> ${body.phone}
-            </p>
-
-            <p>
-              <strong>Preferred Date:</strong>
-              ${body.preferredDate || "Not specified"}
-            </p>
-
-            <p>
-              <strong>Preferred Time:</strong>
-              ${body.preferredTime || "Not specified"}
-            </p>
-
-            <br />
-
-            <p>
-              Sree Krishna Housing Projects Website
-            </p>
-          `
-        })
+      if (!resendApiKey) {
+        throw new Error(
+          "RESEND_API_KEY is missing"
+        );
       }
-    );
 
-    if (!emailResponse.ok) {
-      const emailError = await emailResponse.text();
+      if (!receiverEmail) {
+        throw new Error(
+          "SITE_VISIT_RECEIVER_EMAIL is missing"
+        );
+      }
 
+      const emailResponse = await fetch(
+        "https://api.resend.com/emails",
+        {
+          method: "POST",
+
+          headers: {
+            Authorization:
+              `Bearer ${resendApiKey}`,
+
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            from:
+              "Sree Krishna Housing Projects <onboarding@resend.dev>",
+
+            to: [receiverEmail],
+
+            subject:
+              "New Site Visit Booking",
+
+            html: `
+              <h2>New Site Visit Booking</h2>
+
+              <hr />
+
+              <p>
+                <strong>Name:</strong>
+                ${body.name}
+              </p>
+
+              <p>
+                <strong>Phone:</strong>
+                ${body.phone}
+              </p>
+
+              <p>
+                <strong>Preferred Date:</strong>
+                ${body.preferredDate || "Not specified"}
+              </p>
+
+              <p>
+                <strong>Preferred Time:</strong>
+                ${body.preferredTime || "Not specified"}
+              </p>
+
+              <p>
+                <strong>Message:</strong>
+                ${body.message || "No message provided"}
+              </p>
+
+              <br />
+
+              <hr />
+
+              <p>
+                <strong>
+                  Sree Krishna Housing Projects
+                </strong>
+              </p>
+
+              <p>
+                New booking received from your website.
+              </p>
+            `
+          })
+        }
+      );
+
+      if (!emailResponse.ok) {
+        const emailError =
+          await emailResponse.text();
+
+        console.error(
+          "Resend API error:",
+          emailError
+        );
+      } else {
+        emailSent = true;
+      }
+
+    } catch (emailError) {
       console.error(
-        "Resend email error:",
+        "Email sending failed:",
         emailError
       );
     }
 
+    /* =========================================
+       SUCCESS RESPONSE
+    ========================================= */
+
     return NextResponse.json({
-      success: true
+      success: true,
+      emailSent
     });
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Site visit API error:",
+      error
+    );
 
     return NextResponse.json(
       {
-        error: "Invalid request"
+        error:
+          error instanceof Error
+            ? error.message
+            : "Invalid request"
       },
       {
         status: 400
