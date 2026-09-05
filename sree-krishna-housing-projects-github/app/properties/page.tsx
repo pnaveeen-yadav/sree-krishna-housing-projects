@@ -63,6 +63,7 @@ const properties = [
 export default function Properties() {
   const [selectedType, setSelectedType] = useState("All");
   const [location, setLocation] = useState("All Locations");
+  const [budget, setBudget] = useState("Any Budget");
 
   const propertyTypes = [
     "All",
@@ -86,6 +87,7 @@ export default function Properties() {
   function clearFilters() {
     setSelectedType("All");
     setLocation("All Locations");
+    setBudget("Any Budget");
   }
 
   return (
@@ -164,7 +166,7 @@ export default function Properties() {
             <div className="filtersHeader">
 
               <h2>
-                <span>⚙</span>
+                <span>▽</span>
                 Filters
               </h2>
 
@@ -173,7 +175,7 @@ export default function Properties() {
                 className="clearFilters"
                 onClick={clearFilters}
               >
-                Clear
+                Clear All
               </button>
 
             </div>
@@ -182,12 +184,12 @@ export default function Properties() {
             <div className="filterDivider"></div>
 
 
-            {/* LOCATION */}
+            {/* ================= LOCATION ================= */}
 
             <div className="filterGroup">
 
               <label>
-                <span>📍</span>
+                <span>⌾</span>
                 Location
               </label>
 
@@ -197,25 +199,25 @@ export default function Properties() {
                   setLocation(e.target.value)
                 }
               >
-                <option>
-                  All Locations
-                </option>
+                <option>All Locations</option>
 
-                <option>
-                  Tirupati
-                </option>
+                <option>Tirupati</option>
+
+                <option>Renigunta</option>
+
+                <option>Chandragiri</option>
 
               </select>
 
             </div>
 
 
-            {/* PROPERTY TYPE */}
+            {/* ================= PROPERTY TYPE ================= */}
 
             <div className="filterGroup">
 
               <label>
-                <span>⌂</span>
+                <span>▦</span>
                 Property Type
               </label>
 
@@ -246,12 +248,32 @@ export default function Properties() {
             </div>
 
 
-            <button
-              type="button"
-              className="applyFiltersButton"
-            >
-              Apply Filters
-            </button>
+            {/* ================= BUDGET ================= */}
+
+            <div className="filterGroup">
+
+              <label>
+                <span>◇</span>
+                Budget
+              </label>
+
+              <select
+                value={budget}
+                onChange={(e) =>
+                  setBudget(e.target.value)
+                }
+              >
+                <option>Any Budget</option>
+
+                <option>Less than 50L</option>
+
+                <option>50L - 1Cr</option>
+
+                <option>1 Cr+</option>
+
+              </select>
+
+            </div>
 
           </aside>
 
