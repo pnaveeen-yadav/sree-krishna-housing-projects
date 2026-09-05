@@ -33,7 +33,7 @@ const properties = [
   },
   {
     name: "Residential Plots",
-    location: "Tirupati Outskirts",
+    location: "Gajulamandyam",
     type: "Open Plots",
     size: "1800 Sq.ft",
     price: "₹ 15 Lakhs",
@@ -206,6 +206,7 @@ export default function Properties() {
                 <option>Renigunta</option>
 
                 <option>Chandragiri</option>
+                <option>Gajulamandyam</option>                
 
               </select>
 
