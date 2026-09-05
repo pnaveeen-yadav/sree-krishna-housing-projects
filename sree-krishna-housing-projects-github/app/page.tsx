@@ -199,18 +199,28 @@ export default function Home() {
         id="contact"
         className="section contactSection"
       >
+
+        {/* CONTACT HEADING */}
+
+        <div className="contactSectionHeading">
+          <h2>Get in Touch</h2>
+
+          <p>
+            We are here to answer your questions and guide you home.
+          </p>
+        </div>
+
+
         <div className="contactGrid">
 
-          {/* CONTACT INFORMATION */}
+          {/* ================= LEFT SIDE ================= */}
 
           <div className="contactInfo">
-            <p className="eyebrow dark">
-              GET IN TOUCH
-            </p>
 
             <h2>Direct Contact</h2>
 
-            {/* CALL */}
+
+            {/* CALL US */}
 
             <a
               href="tel:+919494444818"
@@ -227,6 +237,7 @@ export default function Home() {
               </div>
             </a>
 
+
             {/* WHATSAPP */}
 
             <a
@@ -242,9 +253,10 @@ export default function Home() {
               <div>
                 <small>WhatsApp</small>
 
-                <h3>Chat With Us</h3>
+                <h3>Chat Now</h3>
               </div>
             </a>
+
 
             {/* EMAIL */}
 
@@ -265,57 +277,92 @@ export default function Home() {
               </div>
             </a>
 
+
             {/* OFFICE LOCATION */}
 
-            <div className="officeLocation">
-              <h2>Office Location</h2>
+            <div className="contactDetailsBlock">
 
-              <p>
-                📍 <b>Sree Krishna Housing Projects</b>
-              </p>
+              <div className="contactDetailsIcon">
+                📍
+              </div>
 
-              <p>
-                2nd Floor, American Towers,
-                <br />
-                Opp. Ruchi Medicals,
-                <br />
-                Leela Mahal Circle,
-                <br />
-                Tirupati, Andhra Pradesh
-              </p>
+              <div>
+                <h3>Sree Krishna Housing Projects</h3>
 
-              <a
-                className="navigateBtn"
-                href="https://www.google.com/maps/search/?api=1&query=Sree+Krishna+Housing+Projects+American+Towers+Leela+Mahal+Circle+Tirupati"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                🧭 Navigate
-              </a>
+                <p>
+                  2nd Floor, American Towers,
+                  <br />
+                  Opp. Ruchi Medicals,
+                  Leela Mahal Circle,
+                  <br />
+                  TML By Pass Road,
+                  Tirupati - 517501
+                </p>
+              </div>
+
             </div>
+
+
+            {/* BUSINESS HOURS */}
+
+            <div className="contactDetailsBlock">
+
+              <div className="contactDetailsIcon">
+                ◷
+              </div>
+
+              <div>
+                <h3>Business Hours</h3>
+
+                <p>
+                  Mon - Sat: 9:00 AM - 6:00 PM
+                  <br />
+                  Sunday: Closed
+                </p>
+              </div>
+
+            </div>
+
+
+            {/* GOOGLE MAP */}
+
+            <div className="contactMap">
+
+              <iframe
+                title="Sree Krishna Housing Projects Location"
+                src="https://www.google.com/maps?q=Sree%20Krishna%20Housing%20Projects%2C%20American%20Towers%2C%20Leela%20Mahal%20Circle%2C%20Tirupati&output=embed"
+                width="100%"
+                height="300"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+            </div>
+
           </div>
 
-          {/* CONTACT FORM */}
+
+          {/* ================= RIGHT SIDE - CONTACT FORM ================= */}
 
           <div className="contactForm">
-            <p className="eyebrow dark">
-              CONTACT FORM
-            </p>
 
             <h2>Send us a Message</h2>
 
             <p>
               Interested in a property? Have a question?
-              Fill out the form below and our team will contact you.
+              Fill out the form below.
             </p>
 
+
             <form>
+
               <label>Full Name</label>
 
               <input
                 type="text"
                 placeholder="Your Name"
               />
+
 
               <label>Phone Number</label>
 
@@ -324,12 +371,14 @@ export default function Home() {
                 placeholder="+91 9494444818"
               />
 
+
               <label>Email (Optional)</label>
 
               <input
                 type="email"
                 placeholder="you@example.com"
               />
+
 
               <label>Message</label>
 
@@ -338,15 +387,20 @@ export default function Home() {
                 rows={5}
               />
 
+
               <button
                 className="btn gold"
                 type="submit"
               >
                 Send Message →
               </button>
+
             </form>
+
           </div>
+
         </div>
+
       </section>
 
       {/* ================= BOOK SITE VISIT ================= */}
@@ -380,6 +434,7 @@ export default function Home() {
       {/* ================= FOOTER ================= */}
 
       <footer>
+
         <div className="brand">
           <img
             src="/logo.webp"
@@ -399,7 +454,9 @@ export default function Home() {
           © {new Date().getFullYear()} Sree Krishna Housing Projects.
           All Rights Reserved.
         </small>
+
       </footer>
+
     </main>
   );
 }
