@@ -223,7 +223,7 @@ export default function Home() {
             {/* CALL US */}
 
             <a
-              href="tel:+919494444818"
+              href="tel:+916303688516"
               className="contactBox"
             >
               <div className="contactIcon">
@@ -233,7 +233,7 @@ export default function Home() {
               <div>
                 <small>Call Us</small>
 
-                <h3>+91 9494444818</h3>
+                <h3>+91 6303688516</h3>
               </div>
             </a>
 
@@ -241,7 +241,7 @@ export default function Home() {
             {/* WHATSAPP */}
 
             <a
-              href="https://wa.me/919494444818"
+              href="https://wa.me/916303688516"
               target="_blank"
               rel="noopener noreferrer"
               className="contactBox"
@@ -330,7 +330,7 @@ export default function Home() {
 
               <iframe
                 title="Sree Krishna Housing Projects Location"
-                src="https://www.google.com/maps?q=Sree%20Krishna%20Housing%20Projects%2C%20American%20Towers%2C%20Leela%20Mahal%20Circle%2C%20Tirupati&output=embed"
+                src="https://www.google.com/maps/search/?api=1&query=Saideep+Towers%2C+20-03%2C131%2C+B4%2C+Leela+Mahal+Rd%2C+Srinivasa+Nagar%2C+Akkarampalle%2C+Tirupati%2C+Andhra+Pradesh+517501&utm_source=chatgpt.com"
                 width="100%"
                 height="300"
                 loading="lazy"
@@ -368,7 +368,7 @@ export default function Home() {
 
               <input
                 type="tel"
-                placeholder="+91 9494444818"
+                placeholder="+91 6303688516"
               />
 
 

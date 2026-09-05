@@ -53,21 +53,21 @@ export default function ContactPage() {
 
             {/* CALL */}
             <a
-              href="tel:+919494441818"
+              href="tel:+916303688516"
               className="contactCard"
             >
               <div className="contactIcon">☎</div>
 
               <div className="contactCardContent">
                 <small>Call Us</small>
-                <b>+91 9494441818</b>
+                <b>+91 6303688516</b>
               </div>
             </a>
 
 
             {/* WHATSAPP */}
             <a
-              href="https://wa.me/919494441818"
+              href="https://wa.me/916303688516"
               target="_blank"
               className="contactCard"
             >
@@ -159,7 +159,7 @@ export default function ContactPage() {
 
             <input
               type="tel"
-              placeholder="+91 9494441818"
+              placeholder="+91 6303688516"
               required
             />
 
