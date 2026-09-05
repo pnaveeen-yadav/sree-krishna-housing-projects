@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { Resend } from "resend";
-
-export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    console.log("Received booking:", body);
 
     if (!body.name || !body.phone) {
       return NextResponse.json(
@@ -21,30 +18,43 @@ export async function POST(request: Request) {
       );
     }
 
-    /* =========================================
-       SAVE BOOKING IN SUPABASE
-    ========================================= */
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      console.error("Missing Supabase environment variables");
+
+      return NextResponse.json(
+        {
+          error: "Supabase environment variables are missing"
+        },
+        {
+          status: 500
+        }
+      );
+    }
 
     const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      supabaseUrl,
+      supabaseKey
     );
 
-    const { error: supabaseError } = await supabase
+    const { data, error } = await supabase
       .from("site_visits")
       .insert({
         name: body.name,
         phone: body.phone,
         preferred_date: body.preferredDate || null,
         preferred_time: body.preferredTime || null
-      });
+      })
+      .select();
 
-    if (supabaseError) {
-      console.error("Supabase error:", supabaseError);
+    if (error) {
+      console.error("Supabase error:", error);
 
       return NextResponse.json(
         {
-          error: supabaseError.message
+          error: error.message
         },
         {
           status: 400
@@ -52,119 +62,25 @@ export async function POST(request: Request) {
       );
     }
 
-    /* =========================================
-       SEND EMAIL USING RESEND
-    ========================================= */
-
-    let emailSent = false;
-
-    try {
-      const receiverEmail =
-        process.env.SITE_VISIT_RECEIVER_EMAIL;
-
-      if (!receiverEmail) {
-        throw new Error(
-          "SITE_VISIT_RECEIVER_EMAIL is missing"
-        );
-      }
-
-      const { error: resendError } =
-        await resend.emails.send({
-          from:
-            "Sree Krishna Housing Projects <onboarding@resend.dev>",
-
-          to: [receiverEmail],
-
-          subject:
-            "New Site Visit Booking",
-
-          html: `
-            <h2>New Site Visit Booking</h2>
-
-            <hr />
-
-            <p>
-              <strong>Name:</strong>
-              ${body.name}
-            </p>
-
-            <p>
-              <strong>Phone:</strong>
-              ${body.phone}
-            </p>
-
-            <p>
-              <strong>Preferred Date:</strong>
-              ${body.preferredDate || "Not specified"}
-            </p>
-
-            <p>
-              <strong>Preferred Time:</strong>
-              ${body.preferredTime || "Not specified"}
-            </p>
-
-            <p>
-              <strong>Message:</strong>
-              ${body.message || "No message provided"}
-            </p>
-
-            <br />
-
-            <hr />
-
-            <p>
-              <strong>
-                Sree Krishna Housing Projects
-              </strong>
-            </p>
-
-            <p>
-              New booking received from your website.
-            </p>
-          `
-        });
-
-      if (resendError) {
-        console.error(
-          "Resend error:",
-          resendError
-        );
-      } else {
-        emailSent = true;
-      }
-
-    } catch (emailError) {
-      console.error(
-        "Email sending failed:",
-        emailError
-      );
-    }
-
-    /* =========================================
-       SUCCESS RESPONSE
-    ========================================= */
+    console.log("Booking saved successfully:", data);
 
     return NextResponse.json({
       success: true,
-      emailSent
+      data
     });
 
   } catch (error) {
-
-    console.error(
-      "Site visit API error:",
-      error
-    );
+    console.error("API error:", error);
 
     return NextResponse.json(
       {
         error:
           error instanceof Error
             ? error.message
-            : "Invalid request"
+            : "Unknown error"
       },
       {
-        status: 400
+        status: 500
       }
     );
   }
