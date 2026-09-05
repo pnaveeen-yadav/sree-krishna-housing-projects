@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { MapPin } from "lucide-react";
 
 const properties = [
   {
     name: "Premium Open Plots",
-    location: "Tirupati",
+    location: "Tirupati Central",
     type: "Open Plots",
     size: "1500 Sq.ft",
     price: "₹ 12 Lakhs",
@@ -15,7 +16,7 @@ const properties = [
   },
   {
     name: "Krishna Enclave",
-    location: "Tirupati",
+    location: "Renigunta",
     type: "Residential",
     size: "1200 Sq.ft",
     price: "₹ 18 Lakhs",
@@ -24,7 +25,7 @@ const properties = [
   },
   {
     name: "Modern Villas",
-    location: "Tirupati",
+    location: "Chandragiri",
     type: "Villas",
     size: "2000 Sq.ft",
     price: "₹ 45 Lakhs",
@@ -33,7 +34,7 @@ const properties = [
   },
   {
     name: "Residential Plots",
-    location: "Tirupati",
+    location: "Tirupati Outskirts",
     type: "Open Plots",
     size: "1800 Sq.ft",
     price: "₹ 15 Lakhs",
@@ -42,7 +43,7 @@ const properties = [
   },
   {
     name: "Commercial Property",
-    location: "Tirupati",
+    location: "Tirupati Centarl",
     type: "Commercial",
     size: "2500 Sq.ft",
     price: "₹ 60 Lakhs",
@@ -51,7 +52,7 @@ const properties = [
   },
   {
     name: "New Project",
-    location: "Tirupati",
+    location: "Renigunta",
     type: "Residential",
     size: "1400 Sq.ft",
     price: "₹ 20 Lakhs",
@@ -336,8 +337,8 @@ export default function Properties() {
 
                     <p className="propertyLocation">
 
-                      <span>
-                        📍
+                      <span className="locationIcon">
+                        <MapPin size={16} />
                       </span>
 
                       {property.location}
