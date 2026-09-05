@@ -536,7 +536,7 @@ export default function SiteVisitForm() {
 
             <input
               type="tel"
-              placeholder="+91 9494444818"
+              placeholder="Your Number"
               value={phone}
               onChange={(e) => {
                 setPhone(e.target.value);
