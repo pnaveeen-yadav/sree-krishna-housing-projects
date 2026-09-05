@@ -135,9 +135,6 @@ export default function Home() {
         <div className="grid">
           {properties.map((property) => (
             <article className="card" key={property.name}>
-
-              {/* PROPERTY IMAGE */}
-
               <div className="propertyImage">
                 <img
                   src={property.image}
@@ -199,7 +196,6 @@ export default function Home() {
         id="contact"
         className="section contactSection"
       >
-
         {/* CONTACT HEADING */}
 
         <div className="contactSectionHeading">
@@ -210,7 +206,6 @@ export default function Home() {
           </p>
         </div>
 
-
         <div className="contactGrid">
 
           {/* ================= LEFT SIDE ================= */}
@@ -218,7 +213,6 @@ export default function Home() {
           <div className="contactInfo">
 
             <h2>Direct Contact</h2>
-
 
             {/* CALL US */}
 
@@ -236,7 +230,6 @@ export default function Home() {
                 <h3>+91 6303688516</h3>
               </div>
             </a>
-
 
             {/* WHATSAPP */}
 
@@ -257,7 +250,6 @@ export default function Home() {
               </div>
             </a>
 
-
             {/* EMAIL */}
 
             <a
@@ -277,8 +269,7 @@ export default function Home() {
               </div>
             </a>
 
-
-            {/* OFFICE LOCATION */}
+            {/* ================= OFFICE LOCATION ================= */}
 
             <div className="contactDetailsBlock">
 
@@ -290,20 +281,19 @@ export default function Home() {
                 <h3>Sree Krishna Housing Projects</h3>
 
                 <p>
-                  2nd Floor, American Towers,
+                  Saideep Towers,
                   <br />
-                  Opp. Ruchi Medicals,
-                  Leela Mahal Circle,
+                  20-03-131, B4, Leela Mahal Road,
                   <br />
-                  TML By Pass Road,
-                  Tirupati - 517501
+                  Srinivasa Nagar, Akkarampalle,
+                  <br />
+                  Tirupati, Andhra Pradesh - 517501
                 </p>
               </div>
 
             </div>
 
-
-            {/* BUSINESS HOURS */}
+            {/* ================= BUSINESS HOURS ================= */}
 
             <div className="contactDetailsBlock">
 
@@ -323,8 +313,7 @@ export default function Home() {
 
             </div>
 
-
-            {/* GOOGLE MAP */}
+            {/* ================= GOOGLE MAP ================= */}
 
             <div className="contactMap">
 
@@ -337,12 +326,11 @@ export default function Home() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              />
 
             </div>
 
           </div>
-
 
           {/* ================= RIGHT SIDE - CONTACT FORM ================= */}
 
@@ -355,7 +343,6 @@ export default function Home() {
               Fill out the form below.
             </p>
 
-
             <form>
 
               <label>Full Name</label>
@@ -365,14 +352,12 @@ export default function Home() {
                 placeholder="Your Name"
               />
 
-
               <label>Phone Number</label>
 
               <input
                 type="tel"
                 placeholder="+91 6303688516"
               />
-
 
               <label>Email (Optional)</label>
 
@@ -381,14 +366,12 @@ export default function Home() {
                 placeholder="you@example.com"
               />
 
-
               <label>Message</label>
 
               <textarea
                 placeholder="How can we help you?"
                 rows={5}
               />
-
 
               <button
                 className="btn gold"

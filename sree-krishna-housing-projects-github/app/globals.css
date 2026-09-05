@@ -746,74 +746,56 @@ main {
 }
 
 
-/* =========================================
-   OFFICE LOCATION
-========================================= */
+/* ================= OFFICE LOCATION ================= */
 
-.officeLocation {
-  margin-top: 34px;
-  padding: 28px;
-
-  background: #ffffff;
-
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
+.officeInfo {
+  margin-top: 30px;
 }
 
-.officeLocation h2 {
-  margin-bottom: 26px;
+.officeInfo > h2 {
+  margin-bottom: 24px;
   font-size: 24px;
-  color: #2d3743;
+  font-weight: 700;
+  color: #2f3d4c;
 }
 
-.locationDetails,
-.businessHours {
+.officeDetailsBlock {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-}
-
-.locationDetails {
   margin-bottom: 26px;
 }
 
-.businessHours {
-  padding-top: 22px;
-  border-top: 1px solid #e7e9eb;
+.officeDetailsIcon {
+  width: 24px;
+  height: 24px;
+  color: #b89a5a;
+  flex-shrink: 0;
+  margin-top: 3px;
 }
 
-.locationIcon {
-  width: 34px;
-  min-width: 34px;
-  height: 34px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 22px;
-  line-height: 1;
+.officeDetailsIcon svg {
+  width: 24px;
+  height: 24px;
 }
 
-.locationDetails h3,
-.businessHours h3 {
-  margin: 0 0 8px;
-  font-size: 16px;
-  color: #4b535c;
+.officeDetailsContent {
+  flex: 1;
 }
 
-.locationDetails p,
-.businessHours p {
+.officeDetailsContent h3 {
   margin: 0 0 6px;
-  color: #59636e;
-  line-height: 1.65;
+  font-size: 17px;
+  font-weight: 700;
+  color: #344150;
 }
 
-.businessHours p:last-child {
-  margin-bottom: 0;
+.officeDetailsContent p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #5c6876;
 }
-
-
 /* =========================================
    GOOGLE MAP
 ========================================= */
