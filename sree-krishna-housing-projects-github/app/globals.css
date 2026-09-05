@@ -554,6 +554,10 @@ main {
   gap: 28px;
 }
 
+/* =========================================
+   PROPERTY CARDS
+========================================= */
+
 .card {
   min-width: 0;
 
@@ -565,6 +569,7 @@ main {
   background: #ffffff;
 
   border: 1px solid #d9dde2;
+
   border-radius: 8px;
 
   transition: 0.25s ease;
@@ -572,39 +577,67 @@ main {
 
 .card:hover {
   transform: translateY(-4px);
+
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
-.propertyImage {
-  display: block;
 
+/* =========================================
+   PROPERTY IMAGE
+========================================= */
+
+.propertyImage {
   width: 100%;
-  min-width: 100%;
+
   height: 230px;
-  flex: 0 0 230px;
+
+  flex-shrink: 0;
 
   background-size: cover;
-  background-position: center center;
+
+  background-position: center;
+
   background-repeat: no-repeat;
 }
 
+
+/* =========================================
+   PROPERTY IMAGES
+========================================= */
+
 .img0 {
-  background-image: url("/property1.jpg");
+  background-image: url("/property1.png");
 }
 
 .img1 {
-  background-image: url("/property2.jpg");
+  background-image: url("/property2.png");
 }
 
 .img2 {
-  background-image: url("/property3.jpg");
+  background-image: url("/property3.png");
 }
+
+
+/* =========================================
+   CARD CONTENT
+========================================= */
 
 .cardBody {
-  width: 100%;
-
   padding: 24px;
+
+  background: #ffffff;
+
+  flex: 1;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* =========================================
+   PROPERTY TAG
+========================================= */
 
 .tag {
   display: inline-block;
@@ -620,24 +653,67 @@ main {
   border-radius: 3px;
 
   font-size: 11px;
+
   font-weight: 700;
 }
 
+
+/* =========================================
+   PROPERTY TITLE
+========================================= */
+
 .cardBody h3 {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 
   font-size: 22px;
+
+  color: #2f3b48;
 }
 
+
+/* =========================================
+   PROPERTY LOCATION
+========================================= */
+
 .cardBody p {
-  margin-bottom: 20px;
+  margin: 0 0 20px;
+
+  color: #66717d;
 }
+
+
+/* =========================================
+   VIEW DETAILS
+========================================= */
 
 .cardBody a {
   color: var(--gold-dark);
+
   font-weight: 600;
+
+  text-decoration: none;
 }
 
+.cardBody a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .propertyImage {
+    height: 210px;
+  }
+}
+
+@media (max-width: 600px) {
+  .propertyImage {
+    height: 200px;
+  }
+}
 
 /* =========================================
    SERVICES
@@ -682,7 +758,7 @@ main {
 ========================================= */
 
 .contactSection {
-  background: #f5f6f8;
+  background: #ffffff;
 }
 
 .contactGrid {
@@ -697,44 +773,58 @@ main {
   margin-bottom: 25px;
 }
 
+
+/* =========================================
+   DIRECT CONTACT BOXES
+========================================= */
+
 .contactBox {
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 14px;
+  padding: 20px 24px;
   background: #ffffff;
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #d9dde2;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .contactBox:hover {
   transform: translateY(-2px);
+  border-color: #cfc39f;
   box-shadow: 0 10px 25px rgba(31, 42, 55, 0.08);
 }
 
 .contactIcon {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #f6f1e7;
+  background: #f1f3f5;
   border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.contactBox > div:last-child {
+  min-width: 0;
 }
 
 .contactBox small {
-  color: #7b838c;
+  display: block;
+  color: #5b6572;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .contactBox h3 {
-  margin-top: 5px;
-  font-size: 16px;
-  color: #34404b;
+  margin: 5px 0 0;
+  color: #263445;
+  font-size: 18px;
+  line-height: 1.4;
   overflow-wrap: anywhere;
 }
 
@@ -744,61 +834,66 @@ main {
 ========================================= */
 
 .officeLocation {
-  margin-top: 34px;
-  padding: 28px;
-
-  background: #ffffff;
-
-  border: 1px solid #e1e4e8;
-  border-radius: 8px;
+  margin-top: 45px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .officeLocation h2 {
-  margin-bottom: 26px;
-  font-size: 24px;
-  color: #2d3743;
+  margin: 0 0 25px;
+  color: #263445;
+  font-size: 26px;
+  line-height: 1.3;
 }
 
 .locationDetails,
 .businessHours {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 18px;
 }
 
 .locationDetails {
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 .businessHours {
-  padding-top: 22px;
-  border-top: 1px solid #e7e9eb;
+  padding-top: 0;
+  border-top: none;
 }
 
 .locationIcon {
-  width: 34px;
-  min-width: 34px;
-  height: 34px;
-
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-
+  color: var(--gold);
   font-size: 22px;
   line-height: 1;
 }
 
+.locationDetails > div:last-child,
+.businessHours > div:last-child {
+  min-width: 0;
+}
+
 .locationDetails h3,
 .businessHours h3 {
-  margin: 0 0 8px;
-  font-size: 16px;
-  color: #4b535c;
+  margin: 0 0 5px;
+  color: #4b5563;
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .locationDetails p,
 .businessHours p {
-  margin: 0 0 6px;
-  color: #59636e;
+  margin: 0 0 4px;
+  color: #596575;
+  font-size: 17px;
   line-height: 1.65;
 }
 
@@ -815,9 +910,7 @@ main {
   width: 100%;
   margin-top: 28px;
   overflow: hidden;
-
   background: #ffffff;
-
   border: 1px solid #d8dde2;
   border-radius: 8px;
 }
@@ -839,20 +932,14 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   margin-top: 20px;
-
   padding: 11px 18px;
-
   background: transparent;
   color: #8f733f;
-
   border: 1px solid #b79a61;
   border-radius: 5px;
-
   font-size: 14px;
   font-weight: 600;
-
   transition: all 0.2s ease;
 }
 
@@ -868,18 +955,33 @@ main {
 ========================================= */
 
 @media (max-width: 900px) {
-
   .contactGrid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
 }
 
 @media (max-width: 600px) {
+  .contactBox {
+    padding: 18px;
+  }
+
+  .contactIcon {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .contactBox h3 {
+    font-size: 16px;
+  }
 
   .officeLocation {
-    padding: 22px 18px;
+    margin-top: 38px;
+  }
+
+  .officeLocation h2 {
+    font-size: 24px;
   }
 
   .locationDetails,
@@ -892,10 +994,14 @@ main {
     min-width: 30px;
   }
 
+  .locationDetails p,
+  .businessHours p {
+    font-size: 16px;
+  }
+
   .mapContainer iframe {
     height: 300px;
   }
-
 }
 
 
@@ -2265,4 +2371,39 @@ footer p {
     margin-left: 6%;
   }
 
+}
+/* =========================================
+   HOME FEATURED PROPERTY IMAGES ONLY
+========================================= */
+
+.propertyImage {
+  width: 100%;
+  height: 280px;
+
+  display: block;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* PROPERTY 1 */
+
+.img0 {
+  background-image: url("/property1.png");
+}
+
+
+/* PROPERTY 2 */
+
+.img1 {
+  background-image: url("/property2.png");
+}
+
+
+/* PROPERTY 3 */
+
+.img2 {
+  background-image: url("/property3.png");
 }
