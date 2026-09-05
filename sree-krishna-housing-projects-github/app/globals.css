@@ -582,14 +582,16 @@ main {
 .img0,
 .img1,
 .img2 {
-  width: 100%;
-  height: 100px;
+  width: 100% !important;
+  height: 100px !important;
+  min-height: 100px !important;
+  max-height: 100px !important;
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  flex: 0 0 100px !important;
 
-  flex: 0 0 100px;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 .img0 {
