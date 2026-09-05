@@ -9,34 +9,18 @@ export async function POST(request: Request) {
 
     if (!body.name || !body.phone) {
       return NextResponse.json(
-        {
-          error: "Name and phone are required"
-        },
-        {
-          status: 400
-        }
+        { error: "Name and phone are required" },
+        { status: 400 }
       );
     }
 
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (!supabaseUrl || !supabaseKey) {
-      console.error("Missing Supabase environment variables");
-
-      return NextResponse.json(
-        {
-          error: "Supabase environment variables are missing"
-        },
-        {
-          status: 500
-        }
-      );
-    }
+    /* =========================
+       SUPABASE
+    ========================= */
 
     const supabase = createClient(
-      supabaseUrl,
-      supabaseKey
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
 
     const { data, error } = await supabase
@@ -50,34 +34,101 @@ export async function POST(request: Request) {
       .select();
 
     if (error) {
-      console.error("Supabase error:", error);
+      console.error("SUPABASE ERROR:", error);
 
       return NextResponse.json(
         {
-          error: error.message
+          error: "Supabase error: " + error.message
         },
-        {
-          status: 400
-        }
+        { status: 400 }
       );
     }
 
-    console.log("Booking saved successfully:", data);
+    console.log("Supabase success:", data);
+
+    /* =========================
+       RESEND EMAIL
+    ========================= */
+
+    try {
+      const emailResponse = await fetch(
+        "https://api.resend.com/emails",
+        {
+          method: "POST",
+
+          headers: {
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            from: "Sree Krishna Housing Projects <onboarding@resend.dev>",
+
+            to: [
+              process.env.SITE_VISIT_RECEIVER_EMAIL
+            ],
+
+            subject: "New Site Visit Booking",
+
+            html: `
+              <h2>New Site Visit Booking</h2>
+
+              <p><strong>Name:</strong> ${body.name}</p>
+
+              <p><strong>Phone:</strong> ${body.phone}</p>
+
+              <p>
+                <strong>Preferred Date:</strong>
+                ${body.preferredDate || "Not specified"}
+              </p>
+
+              <p>
+                <strong>Preferred Time:</strong>
+                ${body.preferredTime || "Not specified"}
+              </p>
+
+              <br/>
+
+              <p>Sree Krishna Housing Projects Website</p>
+            `
+          })
+        }
+      );
+
+      const emailData = await emailResponse.text();
+
+      console.log(
+        "Resend status:",
+        emailResponse.status
+      );
+
+      console.log(
+        "Resend response:",
+        emailData
+      );
+
+    } catch (emailError) {
+
+      console.error(
+        "RESEND FETCH ERROR:",
+        emailError
+      );
+
+      // Don't fail booking if email fails
+    }
 
     return NextResponse.json({
       success: true,
-      data
+      message: "Booking stored successfully"
     });
 
-  } catch (error) {
-    console.error("API error:", error);
+  } catch (error: any) {
+
+    console.error("SERVER ERROR:", error);
 
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unknown error"
+        error: error?.message || "Server error"
       },
       {
         status: 500
