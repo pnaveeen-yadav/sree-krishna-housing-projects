@@ -579,7 +579,7 @@ main {
   background-repeat: no-repeat;
 }
 
-.img0,
+/* .img0,
 .img1,
 .img2 {
   width: 100%;
@@ -590,7 +590,17 @@ main {
   background-repeat: no-repeat;
 
   flex: 0 0 100px;
-}
+} */
+.img0,
+.img1,
+.img2 {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+} 
 
 .img0 {
   background-image: url("/property1.jpg");
