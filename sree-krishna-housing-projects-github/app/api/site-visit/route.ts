@@ -3,246 +3,132 @@ import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
   try {
-    /* =========================
-       GET REQUEST DATA
-    ========================= */
-
+    // Get request body
     const body = await request.json();
 
     console.log("Received booking:", body);
 
-    const {
-      name,
-      phone,
-      preferredDate,
-      preferredTime
-    } = body;
-
-    /* =========================
-       VALIDATION
-    ========================= */
-
-    if (!name || !phone) {
+    // Validate required fields
+    if (!body.name || !body.phone) {
       return NextResponse.json(
         {
-          error: "Name and phone are required"
+          error: "Name and phone are required",
         },
         {
-          status: 400
+          status: 400,
         }
       );
     }
 
     /* =========================
-       ENVIRONMENT VARIABLES
+       SUPABASE
     ========================= */
 
-    const supabaseUrl =
-      process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey =
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-    const supabaseKey =
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
-
-    if (!supabaseUrl) {
-      console.error(
-        "NEXT_PUBLIC_SUPABASE_URL is missing"
-      );
+    // Check environment variables
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.error("Supabase environment variables are missing");
 
       return NextResponse.json(
         {
-          error: "Supabase URL is missing"
+          error: "Supabase configuration is missing",
         },
         {
-          status: 500
+          status: 500,
         }
       );
     }
-
-    if (!supabaseKey) {
-      console.error(
-        "NEXT_PUBLIC_SUPABASE_ANON_KEY is missing"
-      );
-
-      return NextResponse.json(
-        {
-          error: "Supabase anonymous key is missing"
-        },
-        {
-          status: 500
-        }
-      );
-    }
-
-    console.log(
-      "Supabase URL:",
-      supabaseUrl
-    );
-
-    console.log(
-      "Supabase key exists:",
-      Boolean(supabaseKey)
-    );
-
-    /* =========================
-       CREATE SUPABASE CLIENT
-    ========================= */
 
     const supabase = createClient(
       supabaseUrl,
-      supabaseKey
+      supabaseAnonKey
     );
 
-    /* =========================
-       STORE BOOKING
-    ========================= */
+    // Insert booking into Supabase
+    const { error } = await supabase
+      .from("site_visits")
+      .insert({
+        name: body.name,
+        phone: body.phone,
+        preferred_date: body.preferredDate || null,
+        preferred_time: body.preferredTime || null,
+      });
 
-    let bookingData;
-
-    try {
-      const { data, error } = await supabase
-        .from("site_visits")
-        .insert({
-          name: name.trim(),
-          phone: phone.trim(),
-          preferred_date:
-            preferredDate || null,
-          preferred_time:
-            preferredTime || null
-        })
-        .select();
-
-      if (error) {
-        console.error(
-          "SUPABASE DATABASE ERROR:",
-          error
-        );
-
-        return NextResponse.json(
-          {
-            error: "Supabase database error",
-            details: error.message
-          },
-          {
-            status: 400
-          }
-        );
-      }
-
-      bookingData = data;
-
-      console.log(
-        "SUPABASE SUCCESS:",
-        bookingData
-      );
-
-    } catch (supabaseError: any) {
-
-      console.error(
-        "SUPABASE FETCH ERROR:",
-        supabaseError
-      );
-
-      console.error(
-        "SUPABASE ERROR MESSAGE:",
-        supabaseError?.message
-      );
-
-      console.error(
-        "SUPABASE ERROR CAUSE:",
-        supabaseError?.cause
-      );
+    // Check Supabase error
+    if (error) {
+      console.error("SUPABASE ERROR:", error);
 
       return NextResponse.json(
         {
-          error:
-            "Supabase connection failed",
-
-          details:
-            supabaseError?.message ||
-            "Unknown error",
-
-          cause:
-            supabaseError?.cause?.message ||
-            "No additional details"
+          error: "Supabase database error",
+          details: error.message,
         },
         {
-          status: 500
+          status: 400,
         }
       );
     }
 
+    console.log("Booking stored successfully");
+
     /* =========================
-       SEND EMAIL USING RESEND
+       RESEND EMAIL
     ========================= */
 
     try {
-
-      const resendApiKey =
-        process.env.RESEND_API_KEY;
-
-      const receiverEmail =
-        process.env.SITE_VISIT_RECEIVER_EMAIL;
-
-      if (!resendApiKey) {
+      // Check email configuration
+      if (
+        !process.env.RESEND_API_KEY ||
+        !process.env.SITE_VISIT_RECEIVER_EMAIL
+      ) {
         console.error(
-          "RESEND_API_KEY is missing"
+          "Resend environment variables are missing"
         );
-      }
-
-      if (!receiverEmail) {
-        console.error(
-          "SITE_VISIT_RECEIVER_EMAIL is missing"
-        );
-      }
-
-      if (resendApiKey && receiverEmail) {
-
+      } else {
         const emailResponse = await fetch(
           "https://api.resend.com/emails",
           {
             method: "POST",
 
             headers: {
-              Authorization:
-                `Bearer ${resendApiKey}`,
-
-              "Content-Type":
-                "application/json"
+              Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+              "Content-Type": "application/json",
             },
 
             body: JSON.stringify({
-
               from:
                 "Sree Krishna Housing Projects <onboarding@resend.dev>",
 
               to: [
-                receiverEmail
+                process.env.SITE_VISIT_RECEIVER_EMAIL,
               ],
 
-              subject:
-                "New Site Visit Booking",
+              subject: "New Site Visit Booking",
 
               html: `
                 <h2>New Site Visit Booking</h2>
 
                 <p>
                   <strong>Name:</strong>
-                  ${name}
+                  ${body.name}
                 </p>
 
                 <p>
                   <strong>Phone:</strong>
-                  ${phone}
+                  ${body.phone}
                 </p>
 
                 <p>
                   <strong>Preferred Date:</strong>
-                  ${preferredDate || "Not specified"}
+                  ${body.preferredDate || "Not specified"}
                 </p>
 
                 <p>
                   <strong>Preferred Time:</strong>
-                  ${preferredTime || "Not specified"}
+                  ${body.preferredTime || "Not specified"}
                 </p>
 
                 <br />
@@ -250,36 +136,39 @@ export async function POST(request: Request) {
                 <p>
                   Sree Krishna Housing Projects Website
                 </p>
-              `
-            })
+              `,
+            }),
           }
         );
 
-        const emailData =
-          await emailResponse.text();
+        const emailData = await emailResponse.text();
 
         console.log(
-          "RESEND STATUS:",
+          "Resend status:",
           emailResponse.status
         );
 
         console.log(
-          "RESEND RESPONSE:",
+          "Resend response:",
           emailData
         );
 
+        // Log error but don't fail booking
+        if (!emailResponse.ok) {
+          console.error(
+            "Resend email failed:",
+            emailData
+          );
+        }
       }
-
-    } catch (emailError: any) {
-
+    } catch (emailError) {
       console.error(
-        "RESEND ERROR:",
+        "RESEND FETCH ERROR:",
         emailError
       );
 
-      // Booking is already saved.
-      // Do not fail the booking if email fails.
-
+      // Booking is already stored successfully
+      // Don't fail the booking because email failed
     }
 
     /* =========================
@@ -289,32 +178,24 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: true,
-
-        message:
-          "Booking stored successfully",
-
-        data: bookingData
+        message: "Booking stored successfully",
       },
       {
-        status: 200
+        status: 200,
       }
     );
 
   } catch (error: any) {
-
-    console.error(
-      "SERVER ERROR:",
-      error
-    );
+    console.error("SERVER ERROR:", error);
 
     return NextResponse.json(
       {
         error:
           error?.message ||
-          "Internal server error"
+          "Internal server error",
       },
       {
-        status: 500
+        status: 500,
       }
     );
   }
