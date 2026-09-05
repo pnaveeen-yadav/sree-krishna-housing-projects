@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 export const runtime = "nodejs";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -37,10 +40,7 @@ export async function POST(request: Request) {
       });
 
     if (supabaseError) {
-      console.error(
-        "Supabase error:",
-        supabaseError
-      );
+      console.error("Supabase error:", supabaseError);
 
       return NextResponse.json(
         {
@@ -59,17 +59,8 @@ export async function POST(request: Request) {
     let emailSent = false;
 
     try {
-      const resendApiKey =
-        process.env.RESEND_API_KEY;
-
       const receiverEmail =
         process.env.SITE_VISIT_RECEIVER_EMAIL;
-
-      if (!resendApiKey) {
-        throw new Error(
-          "RESEND_API_KEY is missing"
-        );
-      }
 
       if (!receiverEmail) {
         throw new Error(
@@ -77,83 +68,66 @@ export async function POST(request: Request) {
         );
       }
 
-      const emailResponse = await fetch(
-        "https://api.resend.com/emails",
-        {
-          method: "POST",
+      const { error: resendError } =
+        await resend.emails.send({
+          from:
+            "Sree Krishna Housing Projects <onboarding@resend.dev>",
 
-          headers: {
-            Authorization:
-              `Bearer ${resendApiKey}`,
+          to: [receiverEmail],
 
-            "Content-Type":
-              "application/json"
-          },
+          subject:
+            "New Site Visit Booking",
 
-          body: JSON.stringify({
-            from:
-              "Sree Krishna Housing Projects <onboarding@resend.dev>",
+          html: `
+            <h2>New Site Visit Booking</h2>
 
-            to: [receiverEmail],
+            <hr />
 
-            subject:
-              "New Site Visit Booking",
+            <p>
+              <strong>Name:</strong>
+              ${body.name}
+            </p>
 
-            html: `
-              <h2>New Site Visit Booking</h2>
+            <p>
+              <strong>Phone:</strong>
+              ${body.phone}
+            </p>
 
-              <hr />
+            <p>
+              <strong>Preferred Date:</strong>
+              ${body.preferredDate || "Not specified"}
+            </p>
 
-              <p>
-                <strong>Name:</strong>
-                ${body.name}
-              </p>
+            <p>
+              <strong>Preferred Time:</strong>
+              ${body.preferredTime || "Not specified"}
+            </p>
 
-              <p>
-                <strong>Phone:</strong>
-                ${body.phone}
-              </p>
+            <p>
+              <strong>Message:</strong>
+              ${body.message || "No message provided"}
+            </p>
 
-              <p>
-                <strong>Preferred Date:</strong>
-                ${body.preferredDate || "Not specified"}
-              </p>
+            <br />
 
-              <p>
-                <strong>Preferred Time:</strong>
-                ${body.preferredTime || "Not specified"}
-              </p>
+            <hr />
 
-              <p>
-                <strong>Message:</strong>
-                ${body.message || "No message provided"}
-              </p>
+            <p>
+              <strong>
+                Sree Krishna Housing Projects
+              </strong>
+            </p>
 
-              <br />
+            <p>
+              New booking received from your website.
+            </p>
+          `
+        });
 
-              <hr />
-
-              <p>
-                <strong>
-                  Sree Krishna Housing Projects
-                </strong>
-              </p>
-
-              <p>
-                New booking received from your website.
-              </p>
-            `
-          })
-        }
-      );
-
-      if (!emailResponse.ok) {
-        const emailError =
-          await emailResponse.text();
-
+      if (resendError) {
         console.error(
-          "Resend API error:",
-          emailError
+          "Resend error:",
+          resendError
         );
       } else {
         emailSent = true;
