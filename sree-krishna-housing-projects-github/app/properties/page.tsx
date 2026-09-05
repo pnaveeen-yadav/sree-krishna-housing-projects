@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MapPin } from "lucide-react";
 
 const properties = [
   {
@@ -337,8 +336,8 @@ export default function Properties() {
 
                     <p className="propertyLocation">
 
-                      <span className="locationIcon">
-                        <MapPin size={16} />
+                      <span>
+                        📍
                       </span>
 
                       {property.location}
