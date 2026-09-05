@@ -274,6 +274,12 @@ export default function Properties() {
               </select>
 
             </div>
+            <button
+              type="button"
+              className="applyFiltersButton"
+            >
+              Apply Filters
+            </button>    
 
           </aside>
 

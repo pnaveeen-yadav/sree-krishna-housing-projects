@@ -554,10 +554,6 @@ main {
   gap: 28px;
 }
 
-/* =========================================
-   PROPERTY CARDS
-========================================= */
-
 .card {
   min-width: 0;
 
@@ -569,7 +565,6 @@ main {
   background: #ffffff;
 
   border: 1px solid #d9dde2;
-
   border-radius: 8px;
 
   transition: 0.25s ease;
@@ -577,67 +572,39 @@ main {
 
 .card:hover {
   transform: translateY(-4px);
-
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
-
-/* =========================================
-   PROPERTY IMAGE
-========================================= */
-
 .propertyImage {
+  display: block;
+
   width: 100%;
-
+  min-width: 100%;
   height: 230px;
-
-  flex-shrink: 0;
+  flex: 0 0 230px;
 
   background-size: cover;
-
-  background-position: center;
-
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
-
-/* =========================================
-   PROPERTY IMAGES
-========================================= */
-
 .img0 {
-  background-image: url("/property1.png");
+  background-image: url("/property1.jpg");
 }
 
 .img1 {
-  background-image: url("/property2.png");
+  background-image: url("/property2.jpg");
 }
 
 .img2 {
-  background-image: url("/property3.png");
+  background-image: url("/property3.jpg");
 }
-
-
-/* =========================================
-   CARD CONTENT
-========================================= */
 
 .cardBody {
+  width: 100%;
+
   padding: 24px;
-
-  background: #ffffff;
-
-  flex: 1;
-
-  position: relative;
-
-  z-index: 2;
 }
-
-
-/* =========================================
-   PROPERTY TAG
-========================================= */
 
 .tag {
   display: inline-block;
@@ -653,67 +620,24 @@ main {
   border-radius: 3px;
 
   font-size: 11px;
-
   font-weight: 700;
 }
 
-
-/* =========================================
-   PROPERTY TITLE
-========================================= */
-
 .cardBody h3 {
-  margin: 0 0 10px;
+  margin-bottom: 10px;
 
   font-size: 22px;
-
-  color: #2f3b48;
 }
-
-
-/* =========================================
-   PROPERTY LOCATION
-========================================= */
 
 .cardBody p {
-  margin: 0 0 20px;
-
-  color: #66717d;
+  margin-bottom: 20px;
 }
-
-
-/* =========================================
-   VIEW DETAILS
-========================================= */
 
 .cardBody a {
   color: var(--gold-dark);
-
   font-weight: 600;
-
-  text-decoration: none;
 }
 
-.cardBody a:hover {
-  text-decoration: underline;
-}
-
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width: 900px) {
-  .propertyImage {
-    height: 210px;
-  }
-}
-
-@media (max-width: 600px) {
-  .propertyImage {
-    height: 200px;
-  }
-}
 
 /* =========================================
    SERVICES
@@ -2341,39 +2265,4 @@ footer p {
     margin-left: 6%;
   }
 
-}
-/* =========================================
-   HOME FEATURED PROPERTY IMAGES ONLY
-========================================= */
-
-.propertyImage {
-  width: 100%;
-  height: 280px;
-
-  display: block;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-
-/* PROPERTY 1 */
-
-.img0 {
-  background-image: url("/property1.png");
-}
-
-
-/* PROPERTY 2 */
-
-.img1 {
-  background-image: url("/property2.png");
-}
-
-
-/* PROPERTY 3 */
-
-.img2 {
-  background-image: url("/property3.png");
 }
