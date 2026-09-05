@@ -582,7 +582,7 @@ main {
 .img0,
 .img1,
 .img2 {
-  height: 160px;
+  height: 100px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
