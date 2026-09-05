@@ -129,7 +129,24 @@ export default function Properties() {
 
       {/* ================= HERO ================= */}
 
-      <section className="propertiesHero">
+      <section
+        className="propertiesHero"
+        style={{
+          backgroundImage: `
+            linear-gradient(
+              90deg,
+              rgba(255, 255, 255, 0.96) 0%,
+              rgba(255, 255, 255, 0.88) 35%,
+              rgba(255, 255, 255, 0.45) 58%,
+              rgba(255, 255, 255, 0.08) 100%
+            ),
+            url("/open-plots-bg.png")
+          `,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
 
         <div className="propertiesHeroContent">
 
@@ -206,7 +223,8 @@ export default function Properties() {
                 <option>Renigunta</option>
 
                 <option>Chandragiri</option>
-                <option>Gajulamandyam</option>                
+
+                <option>Gajulamandyam</option>
 
               </select>
 
@@ -275,12 +293,14 @@ export default function Properties() {
               </select>
 
             </div>
+
+
             <button
               type="button"
               className="applyFiltersButton"
             >
               Apply Filters
-            </button>    
+            </button>
 
           </aside>
 

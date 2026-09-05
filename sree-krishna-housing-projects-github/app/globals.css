@@ -1033,9 +1033,25 @@ footer p {
 ========================================= */
 
 .propertiesHero {
-  padding: 65px 5% 45px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e8eb;
+  min-height: 280px;
+
+  padding: 70px 6%;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.75) 40%,
+      rgba(255, 255, 255, 0.15) 70%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    url("/open-plots-bg.png");
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
 }
 
 .propertiesHeroContent {
