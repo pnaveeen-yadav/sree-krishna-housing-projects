@@ -66,94 +66,150 @@ export default function AdminLoginPage() {
 
   return (
     <main className="adminLoginPage">
+
+      <div className="adminLoginBackground" />
+
       <div className="adminLoginCard">
 
-        <div className="adminLoginLogo">
-          <div className="adminLogoIcon">
-            SK
-          </div>
+        {/* BRAND SECTION */}
 
-          <div>
-            <h1>Sree Krishna Housing Projects</h1>
-            <p>Administration Portal</p>
-          </div>
-        </div>
+        <div className="adminLoginBrand">
 
-        <div className="adminLoginHeading">
-          <h2>Admin Login</h2>
+          <img
+            src="/logo.webp"
+            alt="Sree Krishna Housing Projects"
+            className="adminLoginLogo"
+          />
+
+          <div className="adminLoginBrandDivider" />
 
           <p>
-            Sign in to manage your website,
-            properties and customer enquiries.
+            Administration Portal
           </p>
+
         </div>
 
-        <form
-          className="adminLoginForm"
-          onSubmit={handleLogin}
-        >
 
-          <div className="adminFormGroup">
+        {/* LOGIN CONTENT */}
 
-            <label htmlFor="email">
-              Email Address
-            </label>
+        <div className="adminLoginContent">
 
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-              required
-            />
+          <div className="adminLoginHeading">
+
+            <p className="adminLoginEyebrow">
+              SECURE ADMIN ACCESS
+            </p>
+
+            <h1>
+              Admin Login
+            </h1>
+
+            <p>
+              Sign in to manage your website,
+              properties and customer enquiries.
+            </p>
 
           </div>
 
-          <div className="adminFormGroup">
 
-            <label htmlFor="password">
-              Password
-            </label>
+          {/* LOGIN FORM */}
 
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-              required
-            />
-
-          </div>
-
-          {error && (
-            <div className="adminLoginError">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="adminLoginButton"
-            disabled={loading}
+          <form
+            className="adminLoginForm"
+            onSubmit={handleLogin}
           >
-            {loading
-              ? "Signing In..."
-              : "Sign In"}
-          </button>
 
-        </form>
+            {/* EMAIL */}
 
-        <p className="adminLoginFooter">
-          Secure administration access
-        </p>
+            <div className="adminLoginFormGroup">
+
+              <label htmlFor="email">
+                Email Address
+              </label>
+
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+                disabled={loading}
+                required
+              />
+
+            </div>
+
+
+            {/* PASSWORD */}
+
+            <div className="adminLoginFormGroup">
+
+              <label htmlFor="password">
+                Password
+              </label>
+
+              <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+                disabled={loading}
+                required
+              />
+
+            </div>
+
+
+            {/* ERROR */}
+
+            {error && (
+
+              <div
+                className="adminLoginError"
+                role="alert"
+              >
+                {error}
+              </div>
+
+            )}
+
+
+            {/* BUTTON */}
+
+            <button
+              type="submit"
+              className="adminLoginButton"
+              disabled={loading}
+            >
+              {loading
+                ? "Signing In..."
+                : "Sign In"}
+            </button>
+
+          </form>
+
+
+          {/* FOOTER */}
+
+          <div className="adminLoginFooter">
+
+            <span>🔒</span>
+
+            <p>
+              Secure administration access
+            </p>
+
+          </div>
+
+        </div>
 
       </div>
+
     </main>
   );
 }
