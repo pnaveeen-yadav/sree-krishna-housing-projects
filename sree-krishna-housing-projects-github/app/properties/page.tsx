@@ -1,69 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-
-const properties = [
-  {
-    name: "Premium Open Plots",
-    location: "Tirupati Central",
-    type: "Open Plots",
-    size: "1500 Sq.ft",
-    price: "₹ 12 Lakhs",
-    image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    name: "Krishna Enclave",
-    location: "Renigunta",
-    type: "Residential",
-    size: "1200 Sq.ft",
-    price: "₹ 18 Lakhs",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    name: "Modern Villas",
-    location: "Chandragiri",
-    type: "Villas",
-    size: "2000 Sq.ft",
-    price: "₹ 45 Lakhs",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    name: "Residential Plots",
-    location: "Gajulamandyam",
-    type: "Open Plots",
-    size: "1800 Sq.ft",
-    price: "₹ 15 Lakhs",
-    image:
-      "https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    name: "Commercial Property",
-    location: "Tirupati Centarl",
-    type: "Commercial",
-    size: "2500 Sq.ft",
-    price: "₹ 60 Lakhs",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    name: "New Project",
-    location: "Renigunta",
-    type: "Residential",
-    size: "1400 Sq.ft",
-    price: "₹ 20 Lakhs",
-    image:
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80",
-  },
-];
+import { useMemo, useState } from "react";
+import { properties } from "../../lib/properties";
 
 export default function Properties() {
   const [selectedType, setSelectedType] = useState("All");
-  const [location, setLocation] = useState("All Locations");
-  const [budget, setBudget] = useState("Any Budget");
+
+  const [location, setLocation] =
+    useState("All Locations");
+
+  const [budget, setBudget] =
+    useState("Any Budget");
 
   const propertyTypes = [
     "All",
@@ -73,20 +21,62 @@ export default function Properties() {
     "Commercial",
   ];
 
-  const filteredProperties = properties.filter((property) => {
-    const typeMatch =
-      selectedType === "All" || property.type === selectedType;
+  const locations = [
+    "All Locations",
+    ...Array.from(
+      new Set(properties.map((property) => property.location))
+    ),
+  ];
 
-    const locationMatch =
-      location === "All Locations" ||
-      property.location === location;
+  const filteredProperties = useMemo(() => {
+    return properties.filter((property) => {
+      const typeMatch =
+        selectedType === "All" ||
+        property.type === selectedType;
 
-    return typeMatch && locationMatch;
-  });
+      const locationMatch =
+        location === "All Locations" ||
+        property.location === location;
+
+      let budgetMatch = true;
+
+      const priceNumber = Number(
+        property.price
+          .replace(/[^\d.]/g, "")
+          .replace("Lakhs", "")
+      );
+
+      if (budget === "Less than 50L") {
+        budgetMatch = priceNumber < 50;
+      }
+
+      if (budget === "50L - 1Cr") {
+        budgetMatch =
+          priceNumber >= 50 &&
+          priceNumber <= 100;
+      }
+
+      if (budget === "1 Cr+") {
+        budgetMatch = priceNumber > 100;
+      }
+
+      return (
+        typeMatch &&
+        locationMatch &&
+        budgetMatch
+      );
+    });
+  }, [
+    selectedType,
+    location,
+    budget,
+  ]);
 
   function clearFilters() {
     setSelectedType("All");
+
     setLocation("All Locations");
+
     setBudget("Any Budget");
   }
 
@@ -105,7 +95,10 @@ export default function Properties() {
         </Link>
 
         <nav>
-          <Link href="/">Home</Link>
+
+          <Link href="/">
+            Home
+          </Link>
 
           <Link href="/properties">
             Properties
@@ -115,12 +108,20 @@ export default function Properties() {
             Services
           </Link>
 
+          <Link href="/#testimonials">
+            Testimonials
+          </Link>
+
           <Link href="/#contact">
             Contact
           </Link>
+
         </nav>
 
-        <Link href="/visit" className="btn gold">
+        <Link
+          href="/visit"
+          className="btn gold"
+        >
           Book Site Visit
         </Link>
 
@@ -142,8 +143,11 @@ export default function Properties() {
             ),
             url("/open-plots-bg.png")
           `,
+
           backgroundSize: "cover",
+
           backgroundPosition: "center",
+
           backgroundRepeat: "no-repeat",
         }}
       >
@@ -159,8 +163,9 @@ export default function Properties() {
           </h1>
 
           <p>
-            Explore our carefully selected properties in prime locations.
-            Find the perfect open plot, residential property, villa, or
+            Explore our carefully selected properties
+            in prime locations. Find the perfect open
+            plot, residential property, villa, or
             commercial investment opportunity.
           </p>
 
@@ -198,7 +203,7 @@ export default function Properties() {
             </div>
 
 
-            <div className="filterDivider"></div>
+            <div className="filterDivider" />
 
 
             {/* ================= LOCATION ================= */}
@@ -216,15 +221,17 @@ export default function Properties() {
                   setLocation(e.target.value)
                 }
               >
-                <option>All Locations</option>
 
-                <option>Tirupati</option>
-
-                <option>Renigunta</option>
-
-                <option>Chandragiri</option>
-
-                <option>Gajulamandyam</option>
+                {locations.map(
+                  (locationName) => (
+                    <option
+                      key={locationName}
+                      value={locationName}
+                    >
+                      {locationName}
+                    </option>
+                  )
+                )}
 
               </select>
 
@@ -248,16 +255,20 @@ export default function Properties() {
                   <button
                     key={type}
                     type="button"
+
                     className={`filterChip ${
                       selectedType === type
                         ? "active"
                         : ""
                     }`}
+
                     onClick={() =>
                       setSelectedType(type)
                     }
                   >
+
                     {type}
+
                   </button>
 
                 ))}
@@ -282,13 +293,22 @@ export default function Properties() {
                   setBudget(e.target.value)
                 }
               >
-                <option>Any Budget</option>
 
-                <option>Less than 50L</option>
+                <option>
+                  Any Budget
+                </option>
 
-                <option>50L - 1Cr</option>
+                <option>
+                  Less than 50L
+                </option>
 
-                <option>1 Cr+</option>
+                <option>
+                  50L - 1Cr
+                </option>
+
+                <option>
+                  1 Cr+
+                </option>
 
               </select>
 
@@ -315,7 +335,7 @@ export default function Properties() {
 
                 <article
                   className="propertyCard"
-                  key={property.name}
+                  key={property.id}
                 >
 
 
@@ -333,12 +353,16 @@ export default function Properties() {
                     <div className="propertyBadges">
 
                       <span className="statusBadge">
-                        AVAILABLE
+
+                        {property.status}
+
                       </span>
 
 
                       <span className="categoryBadge">
+
                         {property.type}
+
                       </span>
 
                     </div>
@@ -351,7 +375,9 @@ export default function Properties() {
                   <div className="propertyCardBody">
 
                     <h2>
+
                       {property.name}
+
                     </h2>
 
 
@@ -366,13 +392,12 @@ export default function Properties() {
                     </p>
 
 
-                    <div className="propertyDivider"></div>
+                    <div className="propertyDivider" />
 
 
-                    {/* PROPERTY INFORMATION */}
+                    {/* ================= PROPERTY INFORMATION ================= */}
 
                     <div className="propertyInfo">
-
 
                       <div>
 
@@ -387,7 +412,7 @@ export default function Properties() {
                       </div>
 
 
-                      <div className="infoDivider"></div>
+                      <div className="infoDivider" />
 
 
                       <div>
@@ -405,26 +430,62 @@ export default function Properties() {
                     </div>
 
 
-                    <div className="propertyDivider"></div>
+                    <div className="propertyDivider" />
 
 
-                    {/* PRICE */}
+                    {/* ================= PRICE & ACTIONS ================= */}
 
                     <div className="propertyBottom">
 
                       <strong>
+
                         {property.price}
+
                       </strong>
 
 
                       <div className="propertyActions">
 
+
+                        {/* DETAILS */}
+
                         <Link
-                          href="/visit"
+                          href={`/properties/${property.id}`}
+                          className="detailsButton"
+                        >
+
+                          Details
+
+                        </Link>
+
+
+                        {/* ENQUIRE */}
+
+                        <a
+                          href={`mailto:sreekrishna.housingprojects@gmail.com?subject=${encodeURIComponent(
+                            `Property Enquiry - ${property.name}`
+                          )}&body=${encodeURIComponent(
+                            `Hello Sree Krishna Housing Projects,
+
+I am interested in the following property:
+
+Property: ${property.name}
+Location: ${property.location}
+Price: ${property.price}
+
+Please share more details.
+
+Name:
+Phone:`
+                          )}`}
+
                           className="enquireButton"
                         >
+
                           Enquire
-                        </Link>
+
+                        </a>
+
 
                       </div>
 
@@ -445,7 +506,8 @@ export default function Properties() {
                 </h2>
 
                 <p>
-                  Try changing your filters to see more properties.
+                  Try changing your filters to see
+                  more properties.
                 </p>
 
 
@@ -454,7 +516,9 @@ export default function Properties() {
                   className="btn gold"
                   onClick={clearFilters}
                 >
+
                   Clear Filters
+
                 </button>
 
               </div>

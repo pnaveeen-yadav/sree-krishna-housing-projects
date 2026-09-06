@@ -2323,3 +2323,1513 @@ footer p {
   }
 
 }
+/* =====================================================
+   PROPERTY DETAILS PAGE
+   Scoped styles - does not affect other pages
+===================================================== */
+
+.propertyDetailsPage {
+  min-height: 100vh;
+  background: #f5f6f8;
+  color: #2d3742;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.propertyDetailsNav {
+  background: #ffffff;
+}
+
+
+/* =====================================================
+   MAIN SECTION
+===================================================== */
+
+.propertyDetailsSection {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 35px 5% 80px;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.backToProperties {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-bottom: 28px;
+
+  color: #4c5660;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition: color 0.2s ease;
+}
+
+.backToProperties:hover {
+  color: #b79a61;
+}
+
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.propertyDetailsLayout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    340px;
+
+  gap: 32px;
+
+  align-items: start;
+}
+
+
+.propertyDetailsContent {
+  min-width: 0;
+}
+
+
+/* =====================================================
+   PROPERTY GALLERY
+===================================================== */
+
+.propertyGallery {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(220px, 0.8fr);
+
+  gap: 14px;
+
+  margin-bottom: 30px;
+}
+
+
+.propertyMainImage {
+  height: 420px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #e9ecef;
+}
+
+
+.propertyMainImage img {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+.propertyGalleryGrid {
+  display: grid;
+
+  grid-template-rows:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+.propertyGalleryItem {
+  min-height: 0;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #e9ecef;
+}
+
+
+.propertyGalleryItem img {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   PROPERTY TITLE
+===================================================== */
+
+.propertyTitleSection {
+  padding-bottom: 28px;
+
+  border-bottom:
+    1px solid #dde1e5;
+}
+
+
+.propertyDetailsBadges {
+  display: flex;
+
+  gap: 9px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 18px;
+}
+
+
+.propertyStatusLarge,
+.propertyTypeLarge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 7px 12px;
+
+  border-radius: 5px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+
+.propertyStatusLarge {
+  background: #b79a61;
+
+  color: #ffffff;
+}
+
+
+.propertyTypeLarge {
+  background: #35404a;
+
+  color: #ffffff;
+}
+
+
+.propertyTitleSection h1 {
+  margin: 0 0 12px;
+
+  color: #293541;
+
+  font-size: clamp(
+    32px,
+    4vw,
+    46px
+  );
+
+  line-height: 1.2;
+}
+
+
+.propertyDetailsLocation {
+  margin: 0 0 18px;
+
+  color: #69737d;
+
+  font-size: 17px;
+}
+
+
+.propertyDetailsPrice {
+  margin: 0;
+
+  color: #26323d;
+
+  font-size: 32px;
+
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   PROPERTY OVERVIEW
+===================================================== */
+
+.propertyOverview {
+  padding: 35px 0;
+
+  border-bottom:
+    1px solid #dde1e5;
+}
+
+
+.propertyOverview h2,
+.propertyDescription h2,
+.propertyHighlights h2 {
+  margin: 0 0 24px;
+
+  color: #2d3844;
+
+  font-size: 27px;
+}
+
+
+.propertyOverviewGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+
+.overviewItem {
+  padding: 20px;
+
+  background: #ffffff;
+
+  border:
+    1px solid #e1e5e8;
+
+  border-radius: 8px;
+}
+
+
+.overviewItem span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #7a838c;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+
+.overviewItem strong {
+  display: block;
+
+  color: #2e3944;
+
+  font-size: 16px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.propertyDescription {
+  padding: 35px 0;
+
+  border-bottom:
+    1px solid #dde1e5;
+}
+
+
+.propertyDescription p {
+  margin: 0;
+
+  max-width: 900px;
+
+  color: #5f6973;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   PROPERTY HIGHLIGHTS
+===================================================== */
+
+.propertyHighlights {
+  padding: 35px 0;
+}
+
+
+.highlightsGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
+}
+
+
+.highlightsGrid div {
+  padding: 16px 18px;
+
+  background: #ffffff;
+
+  border:
+    1px solid #e1e5e8;
+
+  border-radius: 7px;
+
+  color: #48535d;
+
+  font-size: 15px;
+
+  font-weight: 500;
+}
+
+
+/* =====================================================
+   RIGHT ACTION CARD
+===================================================== */
+
+.propertyActionCard {
+  position: sticky;
+
+  top: 25px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border:
+    1px solid #dce1e5;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 12px 30px
+    rgba(35, 45, 55, 0.07);
+}
+
+
+.propertyActionCard h2 {
+  margin: 0 0 8px;
+
+  color: #293541;
+
+  font-size: 22px;
+}
+
+
+.propertyActionCard > p {
+  margin: 0 0 24px;
+
+  color: #6b747d;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   BOOK BUTTON
+===================================================== */
+
+.propertyBookButton {
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+  padding: 12px 20px;
+
+  box-sizing: border-box;
+
+  background: #25292d;
+
+  border: 1px solid #25292d;
+
+  border-radius: 5px;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.propertyBookButton:hover {
+  background: #3b4147;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =====================================================
+   ENQUIRE BUTTON
+===================================================== */
+
+.propertyEnquireButton {
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 12px 20px;
+
+  background: #ffffff;
+
+  border:
+    1px solid #5d6670;
+
+  border-radius: 5px;
+
+  color: #35404a;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.propertyEnquireButton:hover {
+  background: #f4f5f6;
+}
+
+
+/* =====================================================
+   ACTION DIVIDER
+===================================================== */
+
+.propertyActionDivider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 22px 0;
+
+  background: #e4e7ea;
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.propertyQuickActions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+
+.propertyQuickActions a {
+  min-height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 8px;
+
+  background: #f7f8f9;
+
+  border-radius: 5px;
+
+  color: #35404a;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease;
+}
+
+
+.propertyQuickActions a:hover {
+  background: #eceff1;
+}
+
+
+.propertyFreeText {
+  margin:
+    20px 0 0 !important;
+
+  text-align: center;
+
+  color: #8a9299 !important;
+
+  font-size: 12px !important;
+}
+
+
+/* =====================================================
+   TABLET RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+  .propertyDetailsLayout {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+
+  .propertyActionCard {
+    position: static;
+  }
+
+
+  .propertyOverviewGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .propertyDetailsSection {
+    padding:
+      25px 15px 60px;
+  }
+
+
+  .propertyGallery {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .propertyMainImage {
+    height: 300px;
+  }
+
+
+  .propertyGalleryGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    grid-template-rows:
+      none;
+
+    height: 150px;
+  }
+
+
+  .propertyOverviewGrid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .highlightsGrid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .propertyTitleSection h1 {
+    font-size: 32px;
+  }
+
+
+  .propertyDetailsPrice {
+    font-size: 27px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .propertyMainImage {
+    height: 250px;
+  }
+
+
+  .propertyGalleryGrid {
+    height: 120px;
+  }
+
+
+  .propertyQuickActions {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .propertyActionCard {
+    padding: 22px;
+  }
+
+}
+/* =====================================================
+   PROPERTY DETAILS PAGE
+   app/properties/[id]/page.tsx
+===================================================== */
+
+.propertyDetailsPage {
+  min-height: 100vh;
+  background: #f5f6f8;
+  color: #27313d;
+}
+
+
+/* =========================================
+   PROPERTY DETAILS NAVIGATION
+========================================= */
+
+.propertyDetailsNav {
+  background: #ffffff;
+}
+
+
+/* =========================================
+   MAIN DETAILS SECTION
+========================================= */
+
+.propertyDetailsSection {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 40px 5% 80px;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.backToProperties {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 25px;
+
+  color: #56616b;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backToProperties:hover {
+  color: #b79a61;
+
+  transform: translateX(-2px);
+}
+
+
+/* =========================================
+   PROPERTY IMAGE GALLERY
+========================================= */
+
+.propertyGallery {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(260px, 1fr);
+
+  gap: 16px;
+
+  margin-bottom: 35px;
+}
+
+
+.mainPropertyImage {
+  min-height: 440px;
+
+  overflow: hidden;
+
+  background: #e8ebee;
+
+  border-radius: 10px;
+}
+
+
+.mainPropertyImage img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.propertyGalleryGrid {
+  display: grid;
+
+  grid-template-rows:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+.galleryImage {
+  min-height: 210px;
+
+  overflow: hidden;
+
+  background: #e8ebee;
+
+  border-radius: 10px;
+}
+
+
+.galleryImage img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.35s ease;
+}
+
+
+.galleryImage:hover img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================
+   MAIN PROPERTY DETAILS LAYOUT
+========================================= */
+
+.propertyDetailsLayout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    330px;
+
+  gap: 32px;
+
+  align-items: start;
+}
+
+
+/* =========================================
+   MAIN DETAILS CONTENT
+========================================= */
+
+.propertyDetailsMain {
+  min-width: 0;
+
+  padding: 35px;
+
+  background: #ffffff;
+
+  border: 1px solid #e0e4e8;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 25px rgba(31, 42, 55, 0.05);
+}
+
+
+/* =========================================
+   DETAIL BADGES
+========================================= */
+
+.detailBadges {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 20px;
+}
+
+
+.detailStatusBadge,
+.detailTypeBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 30px;
+
+  padding: 7px 12px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+
+.detailStatusBadge {
+  background: #b79a61;
+
+  color: #ffffff;
+}
+
+
+.detailTypeBadge {
+  background: #30363b;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   PROPERTY TITLE
+========================================= */
+
+.propertyDetailsMain > h1 {
+  margin: 0 0 12px;
+
+  color: #293440;
+
+  font-size: clamp(32px, 4vw, 48px);
+
+  line-height: 1.15;
+}
+
+
+/* =========================================
+   PROPERTY LOCATION
+========================================= */
+
+.detailLocation {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0;
+
+  color: #68727d;
+
+  font-size: 16px;
+}
+
+
+.detailLocation span {
+  color: #b79a61;
+}
+
+
+/* =========================================
+   PROPERTY PRICE
+========================================= */
+
+.detailPrice {
+  margin: 22px 0 0;
+
+  color: #293440;
+
+  font-size: 32px;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   SECTION DIVIDER
+========================================= */
+
+.detailSectionDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 30px 0;
+
+  background: #e5e8eb;
+}
+
+
+/* =========================================
+   OVERVIEW
+========================================= */
+
+.propertyOverview h2,
+.propertyDescription h2,
+.propertyFeatures h2 {
+  margin: 0 0 24px;
+
+  color: #303a46;
+
+  font-size: 26px;
+}
+
+
+.propertyOverviewGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 26px 20px;
+}
+
+
+.overviewItem {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.overviewItem span {
+  color: #7a838d;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  letter-spacing: 1px;
+}
+
+
+.overviewItem strong {
+  color: #303a46;
+
+  font-size: 18px;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.propertyDescription {
+  margin-top: 42px;
+
+  padding-top: 32px;
+
+  border-top: 1px solid #e5e8eb;
+}
+
+
+.propertyDescription p {
+  margin: 0;
+
+  color: #626d78;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   PROPERTY FEATURES
+========================================= */
+
+.propertyFeatures {
+  margin-top: 42px;
+
+  padding-top: 32px;
+
+  border-top: 1px solid #e5e8eb;
+}
+
+
+.featuresGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px 20px;
+}
+
+
+.featureItem {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #56616b;
+
+  font-size: 15px;
+}
+
+
+.featureItem span {
+  width: 23px;
+  height: 23px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1e9db;
+
+  color: #9a7c43;
+
+  border-radius: 50%;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================
+   ENQUIRY CARD
+========================================= */
+
+.propertyEnquiryCard {
+  position: sticky;
+
+  top: 95px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe3e7;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 8px 25px rgba(31, 42, 55, 0.06);
+}
+
+
+.propertyEnquiryCard h2 {
+  margin: 0 0 10px;
+
+  color: #303a46;
+
+  font-size: 23px;
+
+  line-height: 1.35;
+}
+
+
+.propertyEnquiryCard > p {
+  margin: 0 0 24px;
+
+  color: #68727d;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   ENQUIRY BUTTONS
+========================================= */
+
+.detailBookButton,
+.detailRequestButton {
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+  padding: 12px 18px;
+
+  border-radius: 5px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.detailBookButton {
+  background: #25282b;
+
+  color: #ffffff;
+
+  border: 1px solid #25282b;
+}
+
+
+.detailBookButton:hover {
+  background: #17191b;
+
+  transform: translateY(-1px);
+}
+
+
+.detailRequestButton {
+  background: #ffffff;
+
+  color: #35404a;
+
+  border: 1px solid #59616a;
+}
+
+
+.detailRequestButton:hover {
+  background: #f4f5f6;
+}
+
+
+/* =========================================
+   ENQUIRY DIVIDER
+========================================= */
+
+.enquiryDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 24px 0;
+
+  background: #e6e9ec;
+}
+
+
+/* =========================================
+   QUICK CONTACT BUTTONS
+========================================= */
+
+.quickContactButtons {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+
+.quickContactButton {
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 10px;
+
+  background: #f8f9fa;
+
+  color: #35404a;
+
+  border: 1px solid #edf0f2;
+
+  border-radius: 5px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.quickContactButton:hover {
+  background: #f1f2f3;
+
+  border-color: #d9dde1;
+}
+
+
+/* =========================================
+   ENQUIRY NOTE
+========================================= */
+
+.propertyEnquiryCard .enquiryNote {
+  margin: 22px 0 0;
+
+  text-align: center;
+
+  color: #7a838d;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   BOTTOM ACTIONS
+========================================= */
+
+.propertyBottomActions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 35px;
+}
+
+
+.backPropertiesButton,
+.bottomBookVisitButton {
+  min-height: 48px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 22px;
+
+  border-radius: 5px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.backPropertiesButton {
+  background: #ffffff;
+
+  color: #35404a;
+
+  border: 1px solid #59616a;
+}
+
+
+.backPropertiesButton:hover {
+  background: #f3f4f5;
+}
+
+
+.bottomBookVisitButton {
+  background: #b79a61;
+
+  color: #ffffff;
+
+  border: 1px solid #b79a61;
+}
+
+
+.bottomBookVisitButton:hover {
+  background: #9f824c;
+}
+
+
+/* =========================================
+   PROPERTY DETAILS RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+
+  .propertyDetailsLayout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      300px;
+  }
+
+
+  .propertyOverviewGrid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 1000px) {
+
+  .propertyGallery {
+    grid-template-columns: 1fr;
+  }
+
+
+  .mainPropertyImage {
+    min-height: 420px;
+  }
+
+
+  .propertyGalleryGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    grid-template-rows: none;
+  }
+
+
+  .propertyDetailsLayout {
+    grid-template-columns: 1fr;
+  }
+
+
+  .propertyEnquiryCard {
+    position: static;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .propertyDetailsSection {
+    padding:
+      25px 20px 60px;
+  }
+
+
+  .mainPropertyImage {
+    min-height: 330px;
+  }
+
+
+  .propertyDetailsMain {
+    padding: 25px;
+  }
+
+
+  .propertyOverviewGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .propertyDetailsMain > h1 {
+    font-size: 34px;
+  }
+
+
+  .detailPrice {
+    font-size: 28px;
+  }
+
+}
+
+
+@media (max-width: 560px) {
+
+  .propertyDetailsSection {
+    padding:
+      20px 15px 50px;
+  }
+
+
+  .mainPropertyImage {
+    min-height: 260px;
+  }
+
+
+  .propertyGalleryGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .galleryImage {
+    min-height: 220px;
+  }
+
+
+  .propertyDetailsMain {
+    padding: 22px 18px;
+  }
+
+
+  .propertyOverviewGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .propertyBottomActions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .backPropertiesButton,
+  .bottomBookVisitButton {
+    width: 100%;
+  }
+
+
+  .quickContactButtons {
+    grid-template-columns: 1fr;
+  }
+
+}
