@@ -1,15 +1,20 @@
 /* =========================================================
    SREE KRISHNA HOUSING PROJECTS
-   ADMIN PANEL
-========================================================= */
+   ADMIN PANEL ONLY
+   ========================================================= */
 
-* {
+/* =========================================================
+   ADMIN ROOT
+   ========================================================= */
+
+.adminLayout,
+.adminLayout * {
   box-sizing: border-box;
 }
 
 /* =========================================================
    ADMIN LAYOUT
-========================================================= */
+   ========================================================= */
 
 .adminLayout {
   min-height: 100vh;
@@ -20,64 +25,143 @@
 
 /* =========================================================
    SIDEBAR
-========================================================= */
+   ========================================================= */
 
 .adminSidebar {
   width: 250px;
-  min-height: 100vh;
+  min-width: 250px;
+  height: 100vh;
+
   background: #29323d;
   color: #ffffff;
+
   position: fixed;
   left: 0;
   top: 0;
+  bottom: 0;
+
   padding: 24px 12px;
+
   display: flex;
   flex-direction: column;
+
   z-index: 100;
+  overflow-y: auto;
 }
+
+/* =========================================================
+   BRAND
+   ========================================================= */
 
 .adminBrand {
   padding: 0 14px 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 18px;
 }
 
 .adminBrand h2 {
   margin: 0;
+  padding: 0;
+
   font-size: 21px;
+  line-height: 1.2;
+
   font-weight: 700;
   color: #ffffff;
 }
 
 .adminBrand p {
   margin: 4px 0 0;
+  padding: 0;
+
   font-size: 13px;
+  line-height: 1.4;
+
   color: #c8ced5;
 }
 
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
 .adminNav {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
+
   gap: 7px;
 }
 
-.adminNav a,
-.adminNav button {
+/* Links */
+
+.adminNav a {
   width: 100%;
+  min-height: 50px;
+
   display: flex;
   align-items: center;
+
   gap: 13px;
-  padding: 14px 16px;
+
+  padding: 13px 16px;
+
+  border-radius: 9px;
+
+  background: transparent;
+  border: none;
+
+  color: #d9dee4;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Buttons inside navigation */
+
+.adminNav button {
+  width: 100%;
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 13px 16px;
+
   border-radius: 9px;
   border: none;
+
   background: transparent;
+
   color: #d9dee4;
-  text-decoration: none;
+
   font-size: 15px;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
   cursor: pointer;
-  transition: 0.2s ease;
+
   text-align: left;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
+
+/* Hover */
 
 .adminNav a:hover,
 .adminNav button:hover {
@@ -85,90 +169,177 @@
   color: #ffffff;
 }
 
+/* Active */
+
 .adminNav a.active {
   background: #b5965b;
   color: #ffffff;
 }
 
+/* =========================================================
+   SIDEBAR BOTTOM
+   ========================================================= */
+
 .adminSidebarBottom {
+  width: 100%;
+
   margin-top: auto;
+
   padding-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
 }
+
+.adminSidebarBottom a {
+  width: 100%;
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 12px 16px;
+
+  border-radius: 9px;
+
+  color: #d9dee4;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+.adminSidebarBottom a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
 
 .adminLogoutButton {
   width: 100%;
+  min-height: 46px;
+
   padding: 13px 16px;
+
   border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
   background: transparent;
+
   color: #ffffff;
-  cursor: pointer;
+
   font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .adminLogoutButton:hover {
   background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* =========================================================
    MAIN CONTENT
-========================================================= */
+   ========================================================= */
 
 .adminMainContent {
   margin-left: 250px;
+
   width: calc(100% - 250px);
+
   min-height: 100vh;
+
   padding: 30px 32px;
+
+  overflow-x: hidden;
 }
 
 /* =========================================================
    HEADER
-========================================================= */
+   ========================================================= */
 
 .adminHeader {
+  width: 100%;
+
   display: flex;
+
   justify-content: space-between;
   align-items: flex-start;
+
   gap: 20px;
+
   margin-bottom: 28px;
 }
 
 .adminWelcome {
   margin: 0 0 5px;
+
   font-size: 13px;
-  color: #8b7651;
-  letter-spacing: 1px;
   font-weight: 600;
+
+  color: #8b7651;
+
+  letter-spacing: 1px;
 }
 
 .adminHeader h1 {
   margin: 0;
+
   font-size: 32px;
+  line-height: 1.2;
+
   color: #29323d;
+
   font-weight: 700;
 }
 
 .adminHeader > div > p:not(.adminWelcome) {
   margin: 6px 0 0;
+
   color: #66717d;
+
   font-size: 15px;
+  line-height: 1.5;
 }
 
 /* =========================================================
    BUTTONS
-========================================================= */
+   ========================================================= */
 
 .adminPrimaryButton {
   border: none;
+
   background: #a8813f;
+
   color: #ffffff;
+
   padding: 13px 20px;
+
   border-radius: 9px;
+
   font-size: 14px;
   font-weight: 600;
+
   cursor: pointer;
+
   white-space: nowrap;
-  transition: 0.2s ease;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .adminPrimaryButton:hover {
@@ -176,20 +347,30 @@
   transform: translateY(-1px);
 }
 
+/* =========================================================
+   PROPERTY ACTION BUTTONS
+   ========================================================= */
+
 .adminEditButton,
 .adminToggleButton,
 .adminDeleteButton {
   padding: 10px 15px;
+
   border-radius: 7px;
+
   font-size: 13px;
   font-weight: 600;
+
   cursor: pointer;
+
   transition: 0.2s ease;
 }
 
 .adminEditButton {
   background: #ffffff;
+
   border: 1px solid #a8813f;
+
   color: #8e6d34;
 }
 
@@ -200,7 +381,9 @@
 
 .adminToggleButton {
   background: #eef2f5;
+
   border: 1px solid #d7dde3;
+
   color: #44505c;
 }
 
@@ -210,7 +393,9 @@
 
 .adminDeleteButton {
   background: #fff5f4;
+
   border: 1px solid #e8b8b3;
+
   color: #c84a40;
 }
 
@@ -226,28 +411,35 @@
 
 /* =========================================================
    LOADING PAGE
-========================================================= */
+   ========================================================= */
 
 .adminLoadingPage {
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
+
   background: #f4f6f8;
 }
 
 .adminLoadingPage p {
   margin-top: 15px;
+
   color: #64707c;
 }
 
 .adminLoader {
   width: 42px;
   height: 42px;
+
   border: 4px solid #e1e5e8;
   border-top-color: #a8813f;
+
   border-radius: 50%;
+
   animation: adminSpin 0.8s linear infinite;
 }
 
@@ -259,77 +451,105 @@
 
 /* =========================================================
    PROPERTIES SECTION
-========================================================= */
+   ========================================================= */
 
 .adminPropertiesSection {
   width: 100%;
 }
 
+/* =========================================================
+   PROPERTIES GRID
+   ========================================================= */
+
 .adminPropertiesGrid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(330px, 1fr)
-  );
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(330px, 1fr));
+
   gap: 22px;
+
+  width: 100%;
 }
 
 /* =========================================================
    PROPERTY CARD
-========================================================= */
+   ========================================================= */
 
 .adminPropertyCard {
   background: #ffffff;
+
   border: 1px solid #dce1e5;
+
   border-radius: 14px;
+
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
-  transition: 0.2s ease;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .adminPropertyCard:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* =========================================================
    PROPERTY IMAGE
-========================================================= */
+   ========================================================= */
 
 .adminPropertyImage {
   width: 100%;
   height: 210px;
+
   position: relative;
+
   background: #edf0f2;
+
   overflow: hidden;
 }
 
 .adminPropertyImage img {
   width: 100%;
   height: 100%;
+
   display: block;
+
   object-fit: cover;
 }
 
 .adminNoImage {
   width: 100%;
   height: 100%;
+
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   font-size: 55px;
 }
 
 /* =========================================================
    STATUS BADGE
-========================================================= */
+   ========================================================= */
 
 .adminStatus {
   position: absolute;
+
   top: 13px;
   right: 13px;
+
   padding: 7px 11px;
+
   border-radius: 20px;
+
   font-size: 12px;
   font-weight: 600;
 }
@@ -346,7 +566,7 @@
 
 /* =========================================================
    PROPERTY CONTENT
-========================================================= */
+   ========================================================= */
 
 .adminPropertyContent {
   padding: 20px;
@@ -354,29 +574,37 @@
 
 .adminPropertyContent h2 {
   margin: 0 0 8px;
+
   color: #29323d;
+
   font-size: 21px;
   font-weight: 700;
+
   line-height: 1.3;
 }
 
 .adminPropertyLocation {
   margin: 0;
+
   color: #707b86;
+
   font-size: 14px;
 }
 
 /* =========================================================
    PROPERTY DETAILS
-========================================================= */
+   ========================================================= */
 
 .adminPropertyDetails {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
+
   gap: 15px;
 
   margin-top: 18px;
+
   padding: 14px 0;
 
   border-top: 1px solid #edf0f2;
@@ -390,38 +618,45 @@
 
 .adminPropertyDetails strong {
   color: #9a7131;
+
   font-size: 18px;
+
   white-space: nowrap;
 }
 
 /* =========================================================
    PROPERTY STATUS TEXT
-========================================================= */
+   ========================================================= */
 
 .adminPropertyStatus {
   margin: 15px 0;
+
   color: #69747e;
+
   font-size: 14px;
 }
 
 /* =========================================================
    PROPERTY ACTIONS
-========================================================= */
+   ========================================================= */
 
 .adminPropertyActions {
   display: flex;
+
   gap: 9px;
+
   flex-wrap: wrap;
 }
 
 .adminPropertyActions button {
   flex: 1;
+
   min-width: 90px;
 }
 
 /* =========================================================
    EMPTY STATE
-========================================================= */
+   ========================================================= */
 
 .adminEmptyState {
   width: 100%;
@@ -436,7 +671,9 @@
   text-align: center;
 
   background: #ffffff;
+
   border: 1px dashed #ccd3d9;
+
   border-radius: 14px;
 
   padding: 40px;
@@ -444,29 +681,33 @@
 
 .adminEmptyIcon {
   font-size: 55px;
+
   margin-bottom: 15px;
 }
 
 .adminEmptyState h2 {
   margin: 0;
+
   color: #29323d;
 }
 
 .adminEmptyState p {
   color: #6c7782;
+
   margin: 10px 0 22px;
 }
 
 /* =========================================================
    DASHBOARD WELCOME BANNER
-========================================================= */
+   ========================================================= */
 
 .adminWelcomeBanner {
-  background: linear-gradient(
-    135deg,
-    #29323d,
-    #3d4955
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #29323d,
+      #3d4955
+    );
 
   color: #ffffff;
 
@@ -479,30 +720,41 @@
 
 .adminWelcomeBanner span {
   color: #d7b979;
+
   font-size: 12px;
   font-weight: 700;
+
   letter-spacing: 1px;
 }
 
 .adminWelcomeBanner h2 {
   margin: 10px 0;
+
   font-size: 27px;
+
+  line-height: 1.3;
 }
 
 .adminWelcomeBanner p {
   margin: 0;
+
   max-width: 650px;
+
   color: #d8dde2;
+
   line-height: 1.6;
 }
 
 /* =========================================================
    DASHBOARD STATS
-========================================================= */
+   ========================================================= */
 
 .adminStatsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
   gap: 18px;
 
   margin-bottom: 30px;
@@ -510,13 +762,17 @@
 
 .adminStatCard {
   display: flex;
+
   align-items: center;
+
   gap: 15px;
 
   padding: 20px;
 
   background: #ffffff;
+
   border: 1px solid #dde2e6;
+
   border-radius: 12px;
 }
 
@@ -524,11 +780,15 @@
   width: 48px;
   height: 48px;
 
+  min-width: 48px;
+
   display: flex;
+
   justify-content: center;
   align-items: center;
 
   background: #f7f0e2;
+
   border-radius: 10px;
 
   font-size: 22px;
@@ -536,19 +796,23 @@
 
 .adminStatCard span {
   display: block;
+
   color: #717b85;
+
   font-size: 13px;
+
   margin-bottom: 4px;
 }
 
 .adminStatCard strong {
   font-size: 17px;
+
   color: #29323d;
 }
 
 /* =========================================================
    QUICK ACTIONS
-========================================================= */
+   ========================================================= */
 
 .adminQuickActions {
   margin-top: 20px;
@@ -560,18 +824,24 @@
 
 .adminSectionHeading h2 {
   margin: 0;
+
   color: #29323d;
+
   font-size: 23px;
 }
 
 .adminSectionHeading p {
   margin: 5px 0 0;
+
   color: #737d87;
 }
 
 .adminActionsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
   gap: 18px;
 }
 
@@ -579,38 +849,50 @@
   background: #ffffff;
 
   border: 1px solid #dde2e6;
+
   border-radius: 12px;
 
   padding: 22px;
 
-  transition: 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .adminActionCard:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
 .adminActionIcon {
   font-size: 28px;
+
   margin-bottom: 15px;
 }
 
 .adminActionCard h3 {
   margin: 0 0 9px;
+
   color: #29323d;
 }
 
 .adminActionCard p {
   color: #6e7882;
+
   font-size: 14px;
+
   line-height: 1.5;
+
+  margin: 0;
 }
 
 .adminActionCard button {
-  margin-top: 12px;
+  margin-top: 16px;
 
   background: transparent;
+
   border: none;
 
   color: #9a7131;
@@ -625,14 +907,17 @@
 
 /* =========================================================
    ADMIN USER
-========================================================= */
+   ========================================================= */
 
 .adminUserInfo {
   display: flex;
+
   align-items: center;
+
   gap: 10px;
 
   background: #ffffff;
+
   border: 1px solid #dde2e6;
 
   padding: 9px 14px;
@@ -644,13 +929,17 @@
   width: 38px;
   height: 38px;
 
+  min-width: 38px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 50%;
 
   background: #a8813f;
+
   color: #ffffff;
 
   font-weight: 700;
@@ -658,21 +947,26 @@
 
 .adminUserInfo strong {
   display: block;
+
   font-size: 13px;
 }
 
 .adminUserInfo span {
   display: block;
+
   font-size: 11px;
+
   color: #7a838b;
+
   margin-top: 2px;
 }
 
 /* =========================================================
-   FORM STYLES
-========================================================= */
+   FORM CONTAINER
+   ========================================================= */
 
 .adminFormContainer {
+  width: 100%;
   max-width: 1000px;
 }
 
@@ -680,14 +974,22 @@
   background: #ffffff;
 
   border: 1px solid #dce1e5;
+
   border-radius: 14px;
 
   padding: 28px;
 }
 
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
 .adminFormGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 20px;
 }
 
@@ -700,6 +1002,10 @@
   grid-column: 1 / -1;
 }
 
+/* =========================================================
+   FORM LABEL
+   ========================================================= */
+
 .adminFormGroup label {
   margin-bottom: 8px;
 
@@ -709,6 +1015,10 @@
   font-weight: 600;
 }
 
+/* =========================================================
+   FORM INPUTS
+   ========================================================= */
+
 .adminFormGroup input,
 .adminFormGroup select,
 .adminFormGroup textarea {
@@ -717,6 +1027,7 @@
   padding: 12px 14px;
 
   border: 1px solid #d6dce1;
+
   border-radius: 8px;
 
   background: #ffffff;
@@ -726,10 +1037,13 @@
   font-size: 14px;
 
   outline: none;
+
+  font-family: inherit;
 }
 
 .adminFormGroup textarea {
   min-height: 130px;
+
   resize: vertical;
 }
 
@@ -743,9 +1057,15 @@
     rgba(168, 129, 63, 0.1);
 }
 
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
 .adminFormActions {
   display: flex;
+
   justify-content: flex-end;
+
   gap: 12px;
 
   margin-top: 28px;
@@ -755,6 +1075,7 @@
   padding: 12px 20px;
 
   border: 1px solid #d3d9de;
+
   border-radius: 8px;
 
   background: #ffffff;
@@ -764,39 +1085,71 @@
   font-weight: 600;
 
   cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.adminSecondaryButton:hover {
+  background: #f5f7f8;
 }
 
 /* =========================================================
-   RESPONSIVE - TABLET
-========================================================= */
+   TABLET
+   ========================================================= */
 
 @media (max-width: 1100px) {
 
   .adminStatsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
   .adminActionsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
 }
 
 /* =========================================================
-   RESPONSIVE - MOBILE
-========================================================= */
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 768px) {
+
+  .adminLayout {
+    flex-direction: column;
+  }
 
   .adminSidebar {
     position: relative;
 
     width: 100%;
+    min-width: 100%;
+
+    height: auto;
     min-height: auto;
+
+    padding: 20px 12px;
+
+    overflow: visible;
   }
 
-  .adminLayout {
-    flex-direction: column;
+  .adminBrand {
+    padding-bottom: 18px;
+  }
+
+  .adminNav {
+    gap: 6px;
+  }
+
+  .adminNav a,
+  .adminNav button {
+    min-height: 46px;
+  }
+
+  .adminSidebarBottom {
+    margin-top: 20px;
   }
 
   .adminMainContent {
@@ -843,7 +1196,7 @@
 
 /* =========================================================
    SMALL MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 480px) {
 
@@ -869,6 +1222,18 @@
 
   .adminWelcomeBanner {
     padding: 22px;
+  }
+
+  .adminFormCard {
+    padding: 18px;
+  }
+
+  .adminFormActions {
+    flex-direction: column;
+  }
+
+  .adminFormActions button {
+    width: 100%;
   }
 
 }

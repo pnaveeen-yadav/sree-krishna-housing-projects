@@ -17,81 +17,80 @@ export default function AdminSidebar() {
   };
 
   const isActive = (path: string) => {
-    return pathname === path;
+    if (path === "/admin/dashboard") {
+      return pathname === "/admin/dashboard";
+    }
+
+    return pathname.startsWith(path);
   };
 
   return (
     <aside className="adminSidebar">
-      <div className="adminSidebarTop">
-        <div className="adminBrand">
-          <div className="adminBrandIcon">
-            SK
-          </div>
+      <div className="adminBrand">
+        <span className="adminBrandSmall">SK</span>
 
-          <div>
-            <h2>Sree Krishna</h2>
-            <span>Admin Panel</span>
-          </div>
-        </div>
+        <h2>Sree Krishna</h2>
 
-        <nav className="adminNavigation">
-          <Link
-            href="/admin/dashboard"
-            className={
-              isActive("/admin/dashboard")
-                ? "adminNavItem active"
-                : "adminNavItem"
-            }
-          >
-            <span className="adminNavIcon">⌂</span>
-            Dashboard
-          </Link>
-
-          <Link
-            href="/admin/properties"
-            className={
-              pathname.startsWith("/admin/properties")
-                ? "adminNavItem active"
-                : "adminNavItem"
-            }
-          >
-            <span className="adminNavIcon">🏠</span>
-            Properties
-          </Link>
-
-          <Link
-            href="/admin/enquiries"
-            className={
-              pathname.startsWith("/admin/enquiries")
-                ? "adminNavItem active"
-                : "adminNavItem"
-            }
-          >
-            <span className="adminNavIcon">✉</span>
-            Enquiries
-          </Link>
-
-          <Link
-            href="/admin/site-visits"
-            className={
-              pathname.startsWith("/admin/site-visits")
-                ? "adminNavItem active"
-                : "adminNavItem"
-            }
-          >
-            <span className="adminNavIcon">📅</span>
-            Site Visits
-          </Link>
-        </nav>
+        <p>Admin Panel</p>
       </div>
+
+      <nav className="adminNav">
+        <Link
+          href="/admin/dashboard"
+          className={
+            isActive("/admin/dashboard")
+              ? "adminNavLink active"
+              : "adminNavLink"
+          }
+        >
+          <span className="adminNavIcon">⌂</span>
+          <span>Dashboard</span>
+        </Link>
+
+        <Link
+          href="/admin/properties"
+          className={
+            isActive("/admin/properties")
+              ? "adminNavLink active"
+              : "adminNavLink"
+          }
+        >
+          <span className="adminNavIcon">🏠</span>
+          <span>Properties</span>
+        </Link>
+
+        <Link
+          href="/admin/enquiries"
+          className={
+            isActive("/admin/enquiries")
+              ? "adminNavLink active"
+              : "adminNavLink"
+          }
+        >
+          <span className="adminNavIcon">✉</span>
+          <span>Enquiries</span>
+        </Link>
+
+        <Link
+          href="/admin/site-visits"
+          className={
+            isActive("/admin/site-visits")
+              ? "adminNavLink active"
+              : "adminNavLink"
+          }
+        >
+          <span className="adminNavIcon">▣</span>
+          <span>Site Visits</span>
+        </Link>
+      </nav>
 
       <div className="adminSidebarBottom">
         <Link
           href="/"
-          className="adminNavItem"
+          className="adminViewWebsite"
         >
-          <span className="adminNavIcon">↗</span>
-          View Website
+          <span>↗</span>
+          <span>View Website</span>
         </Link>
 
         <button
@@ -99,8 +98,8 @@ export default function AdminSidebar() {
           className="adminLogoutButton"
           onClick={handleLogout}
         >
-          <span className="adminNavIcon">↪</span>
-          Logout
+          <span>↪</span>
+          <span>Logout</span>
         </button>
       </div>
     </aside>
