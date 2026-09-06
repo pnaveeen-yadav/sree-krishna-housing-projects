@@ -3,23 +3,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import AdminSidebar from "@/components/admin/AdminSidebar";
-
-import { adminSupabase } from "@/lib/adminSupabase";
+import AdminSidebar from "../../../components/admin/AdminSidebar";
+import { adminSupabase } from "../../../lib/adminSupabase";
 
 export default function AdminDashboardPage() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
-
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     const checkAdminAccess = async () => {
       const {
-        data: {
-          user,
-        },
+        data: { user },
       } = await adminSupabase.auth.getUser();
 
       if (!user) {
@@ -45,7 +41,6 @@ export default function AdminDashboardPage() {
       }
 
       setUserEmail(user.email || "");
-
       setLoading(false);
     };
 
@@ -57,36 +52,26 @@ export default function AdminDashboardPage() {
       <main className="adminLoadingPage">
         <div className="adminLoader"></div>
 
-        <p>
-          Loading Admin Dashboard...
-        </p>
+        <p>Loading Admin Dashboard...</p>
       </main>
     );
   }
 
   return (
     <main className="adminLayout">
-
       <AdminSidebar />
 
       <section className="adminMainContent">
-
         <header className="adminHeader">
-
           <div>
-
             <p className="adminWelcome">
               Welcome back
             </p>
 
-            <h1>
-              Dashboard
-            </h1>
-
+            <h1>Dashboard</h1>
           </div>
 
           <div className="adminUserInfo">
-
             <div className="adminUserAvatar">
               {userEmail.charAt(0).toUpperCase()}
             </div>
@@ -94,20 +79,13 @@ export default function AdminDashboardPage() {
             <div>
               <strong>Administrator</strong>
 
-              <span>
-                {userEmail}
-              </span>
+              <span>{userEmail}</span>
             </div>
-
           </div>
-
         </header>
 
-
         <section className="adminWelcomeBanner">
-
           <div>
-
             <span>
               SREE KRISHNA HOUSING PROJECTS
             </span>
@@ -121,130 +99,77 @@ export default function AdminDashboardPage() {
               enquiries and site visit bookings without
               modifying your website code.
             </p>
-
           </div>
-
         </section>
 
-
         <section className="adminStatsGrid">
-
           <div className="adminStatCard">
-
             <div className="adminStatIcon">
               🏠
             </div>
 
             <div>
+              <span>Properties</span>
 
-              <span>
-                Properties
-              </span>
-
-              <strong>
-                Manage
-              </strong>
-
+              <strong>Manage</strong>
             </div>
-
           </div>
 
-
           <div className="adminStatCard">
-
             <div className="adminStatIcon">
               ✉
             </div>
 
             <div>
+              <span>Customer Enquiries</span>
 
-              <span>
-                Customer Enquiries
-              </span>
-
-              <strong>
-                View
-              </strong>
-
+              <strong>View</strong>
             </div>
-
           </div>
 
-
           <div className="adminStatCard">
-
             <div className="adminStatIcon">
               📅
             </div>
 
             <div>
+              <span>Site Visits</span>
 
-              <span>
-                Site Visits
-              </span>
-
-              <strong>
-                Manage
-              </strong>
-
+              <strong>Manage</strong>
             </div>
-
           </div>
 
-
           <div className="adminStatCard">
-
             <div className="adminStatIcon">
               ✎
             </div>
 
             <div>
+              <span>Website Content</span>
 
-              <span>
-                Website Content
-              </span>
-
-              <strong>
-                Update
-              </strong>
-
+              <strong>Update</strong>
             </div>
-
           </div>
-
         </section>
 
-
         <section className="adminQuickActions">
-
           <div className="adminSectionHeading">
-
             <div>
-
-              <h2>
-                Quick Actions
-              </h2>
+              <h2>Quick Actions</h2>
 
               <p>
                 Choose what you would like to manage.
               </p>
-
             </div>
-
           </div>
 
-
           <div className="adminActionsGrid">
-
             <div className="adminActionCard">
-
               <div className="adminActionIcon">
                 🏠
               </div>
 
-              <h3>
-                Manage Properties
-              </h3>
+              <h3>Manage Properties</h3>
 
               <p>
                 Add, edit or remove property
@@ -258,19 +183,14 @@ export default function AdminDashboardPage() {
               >
                 Manage Properties →
               </button>
-
             </div>
 
-
             <div className="adminActionCard">
-
               <div className="adminActionIcon">
                 🖼
               </div>
 
-              <h3>
-                Manage Images
-              </h3>
+              <h3>Manage Images</h3>
 
               <p>
                 Upload and manage property
@@ -284,19 +204,14 @@ export default function AdminDashboardPage() {
               >
                 Manage Images →
               </button>
-
             </div>
 
-
             <div className="adminActionCard">
-
               <div className="adminActionIcon">
                 ✉
               </div>
 
-              <h3>
-                View Enquiries
-              </h3>
+              <h3>View Enquiries</h3>
 
               <p>
                 View customers interested
@@ -310,19 +225,14 @@ export default function AdminDashboardPage() {
               >
                 View Enquiries →
               </button>
-
             </div>
 
-
             <div className="adminActionCard">
-
               <div className="adminActionIcon">
                 📅
               </div>
 
-              <h3>
-                Site Visits
-              </h3>
+              <h3>Site Visits</h3>
 
               <p>
                 Manage customer site
@@ -336,15 +246,10 @@ export default function AdminDashboardPage() {
               >
                 View Bookings →
               </button>
-
             </div>
-
           </div>
-
         </section>
-
       </section>
-
     </main>
   );
 }
