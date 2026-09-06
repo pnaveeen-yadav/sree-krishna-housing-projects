@@ -1,39 +1,93 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  getPropertyById,
-  properties,
-} from "../../../lib/properties";
+import { properties } from "../../../lib/properties";
 
-type PropertyDetailsPageProps = {
+type PropertyDetails = (typeof properties)[number] & {
+  images?: string[];
+  gallery?: string[];
+  status?: string;
+  description?: string;
+  highlights?: string[];
+  facing?: string;
+  approvals?: string;
+  possession?: string;
+  totalPlots?: string;
+};
+
+type PageProps = {
   params: Promise<{
     id: string;
   }>;
 };
 
-export function generateStaticParams() {
-  return properties.map((property) => ({
-    id: property.id,
-  }));
-}
-
-export default async function PropertyDetailsPage(
-  {
-    params,
-  }: PropertyDetailsPageProps
-) {
+export default async function PropertyDetailsPage({
+  params,
+}: PageProps) {
   const { id } = await params;
 
-  const property = getPropertyById(id);
+  const property = properties.find(
+    (item) => String(item.id) === id
+  ) as PropertyDetails | undefined;
 
   if (!property) {
     notFound();
   }
 
+  /*
+    =====================================================
+    PROPERTY IMAGES
+
+    Supports:
+    images: []
+    OR
+    gallery: []
+    OR
+    image: ""
+    =====================================================
+  */
+
+  const propertyImages =
+    property.images && property.images.length > 0
+      ? property.images
+      : property.gallery && property.gallery.length > 0
+      ? property.gallery
+      : [property.image];
+
+  /*
+    =====================================================
+    MAKE SURE WE HAVE ENOUGH IMAGES FOR THE GALLERY
+
+    The same main image will be used as fallback if
+    additional gallery images are not available.
+    =====================================================
+  */
+
+  const galleryImages = [...propertyImages];
+
+  while (galleryImages.length < 7) {
+    galleryImages.push(propertyImages[0]);
+  }
+
+  const description =
+    property.description ||
+    `${property.name} is a carefully selected property by Sree Krishna Housing Projects. It offers an excellent opportunity for buyers and investors looking for a quality property in a prime location.`;
+
+  const highlights =
+    property.highlights && property.highlights.length > 0
+      ? property.highlights
+      : [
+          "Prime Location",
+          "Excellent Connectivity",
+          "Investment Opportunity",
+          "Professional Customer Support",
+        ];
+
   return (
     <main className="propertyDetailsPage">
 
-      {/* ================= HEADER ================= */}
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
 
       <header className="nav propertyDetailsNav">
 
@@ -46,7 +100,6 @@ export default async function PropertyDetailsPage(
             alt="Sree Krishna Housing Projects"
           />
         </Link>
-
 
         <nav>
 
@@ -62,16 +115,11 @@ export default async function PropertyDetailsPage(
             Services
           </Link>
 
-          <Link href="/#testimonials">
-            Testimonials
-          </Link>
-
           <Link href="/#contact">
             Contact
           </Link>
 
         </nav>
-
 
         <Link
           href="/visit"
@@ -83,12 +131,11 @@ export default async function PropertyDetailsPage(
       </header>
 
 
-      {/* ================= MAIN CONTENT ================= */}
+      {/* =====================================================
+          PROPERTY DETAILS SECTION
+      ===================================================== */}
 
       <section className="propertyDetailsSection">
-
-
-        {/* ================= BACK ================= */}
 
         <Link
           href="/properties"
@@ -98,103 +145,198 @@ export default async function PropertyDetailsPage(
         </Link>
 
 
-        {/* ================= IMAGE GALLERY ================= */}
-
-        <div className="propertyGallery">
-
-          <div className="mainPropertyImage">
-
-            <img
-              src={property.images[0]}
-              alt={property.name}
-            />
-
-          </div>
-
-
-          <div className="propertyGalleryGrid">
-
-            {property.images
-              .slice(1)
-              .map((image, index) => (
-
-                <div
-                  className="galleryImage"
-                  key={`${property.id}-${index}`}
-                >
-
-                  <img
-                    src={image}
-                    alt={`${property.name} ${index + 2}`}
-                  />
-
-                </div>
-
-              ))}
-
-          </div>
-
-        </div>
-
-
-        {/* ================= PROPERTY CONTENT ================= */}
+        {/* =====================================================
+            MAIN LAYOUT
+        ===================================================== */}
 
         <div className="propertyDetailsLayout">
 
 
-          {/* ================= LEFT CONTENT ================= */}
+          {/* =====================================================
+              LEFT SIDE
+          ===================================================== */}
 
-          <div className="propertyDetailsMain">
-
-
-            {/* ================= BADGES ================= */}
-
-            <div className="detailBadges">
-
-              <span className="detailStatusBadge">
-                {property.status}
-              </span>
-
-              <span className="detailTypeBadge">
-                {property.type}
-              </span>
-
-            </div>
+          <div className="propertyDetailsContent">
 
 
-            {/* ================= TITLE ================= */}
+            {/* =====================================================
+                IMAGE GALLERY
+            ===================================================== */}
 
-            <h1>
-              {property.name}
-            </h1>
-
-
-            {/* ================= LOCATION ================= */}
-
-            <p className="detailLocation">
-
-              <span>
-                📍
-              </span>
-
-              {property.location}
-
-            </p>
+            <section className="propertyGallery">
 
 
-            {/* ================= PRICE ================= */}
+              {/* =====================================================
+                  MAIN IMAGE
+              ===================================================== */}
 
-            <h2 className="detailPrice">
+              <div className="propertyMainImage">
 
-              {property.price}
+                <img
+                  src={galleryImages[0]}
+                  alt={property.name}
+                />
 
-            </h2>
+              </div>
 
 
-            <div className="detailSectionDivider" />
+              {/* =====================================================
+                  SMALL IMAGE GRID
+
+                  2 COLUMNS
+                  3 ROWS
+
+                  Same style as your reference image.
+              ===================================================== */}
+
+              <div className="propertyGalleryGrid">
 
 
-            {/* ================= PROPERTY INFORMATION ================= */}
+                {/* IMAGE 1 */}
+
+                <div className="propertyGalleryItem">
+
+                  <img
+                    src={galleryImages[1]}
+                    alt={`${property.name} gallery 1`}
+                  />
+
+                </div>
+
+
+                {/* IMAGE 2 */}
+
+                <div className="propertyGalleryItem">
+
+                  <img
+                    src={galleryImages[2]}
+                    alt={`${property.name} gallery 2`}
+                  />
+
+                </div>
+
+
+                {/* IMAGE 3 */}
+
+                <div className="propertyGalleryItem">
+
+                  <img
+                    src={galleryImages[3]}
+                    alt={`${property.name} gallery 3`}
+                  />
+
+                </div>
+
+
+                {/* IMAGE 4 */}
+
+                <div className="propertyGalleryItem">
+
+                  <img
+                    src={galleryImages[4]}
+                    alt={`${property.name} gallery 4`}
+                  />
+
+                </div>
+
+
+                {/* IMAGE 5 */}
+
+                <div className="propertyGalleryItem">
+
+                  <img
+                    src={galleryImages[5]}
+                    alt={`${property.name} gallery 5`}
+                  />
+
+                </div>
+
+
+                {/* =====================================================
+                    MORE PHOTOS
+                ===================================================== */}
+
+                <div className="propertyGalleryItem morePhotosItem">
+
+                  <img
+                    src={galleryImages[6]}
+                    alt={`${property.name} gallery`}
+                  />
+
+                  <div className="morePhotosOverlay">
+
+                    <strong>
+                      +{Math.max(
+                        propertyImages.length - 6,
+                        0
+                      )}
+                    </strong>
+
+                    <span>
+                      More Photos
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            {/* =====================================================
+                PROPERTY TITLE
+            ===================================================== */}
+
+            <section className="propertyTitleSection">
+
+
+              <div className="propertyDetailsBadges">
+
+                <span className="propertyStatusLarge">
+
+                  {property.status || "AVAILABLE"}
+
+                </span>
+
+
+                <span className="propertyTypeLarge">
+
+                  {property.type}
+
+                </span>
+
+              </div>
+
+
+              <h1>
+
+                {property.name}
+
+              </h1>
+
+
+              <p className="propertyDetailsLocation">
+
+                📍 {property.location}
+
+              </p>
+
+
+              <p className="propertyDetailsPrice">
+
+                {property.price}
+
+              </p>
+
+
+            </section>
+
+
+            {/* =====================================================
+                PROPERTY OVERVIEW
+            ===================================================== */}
 
             <section className="propertyOverview">
 
@@ -209,11 +351,11 @@ export default async function PropertyDetailsPage(
                 <div className="overviewItem">
 
                   <span>
-                    CONFIGURATION
+                    PROPERTY TYPE
                   </span>
 
                   <strong>
-                    {property.configuration}
+                    {property.type}
                   </strong>
 
                 </div>
@@ -226,7 +368,7 @@ export default async function PropertyDetailsPage(
                   </span>
 
                   <strong>
-                    {property.area}
+                    {property.size}
                   </strong>
 
                 </div>
@@ -239,7 +381,7 @@ export default async function PropertyDetailsPage(
                   </span>
 
                   <strong>
-                    {property.facing}
+                    {property.facing || "Not Specified"}
                   </strong>
 
                 </div>
@@ -248,11 +390,11 @@ export default async function PropertyDetailsPage(
                 <div className="overviewItem">
 
                   <span>
-                    TOTAL FLOORS
+                    APPROVALS
                   </span>
 
                   <strong>
-                    {property.totalFloors}
+                    {property.approvals || "Available"}
                   </strong>
 
                 </div>
@@ -261,11 +403,11 @@ export default async function PropertyDetailsPage(
                 <div className="overviewItem">
 
                   <span>
-                    PARKING
+                    LOCATION
                   </span>
 
                   <strong>
-                    {property.parking}
+                    {property.location}
                   </strong>
 
                 </div>
@@ -274,24 +416,11 @@ export default async function PropertyDetailsPage(
                 <div className="overviewItem">
 
                   <span>
-                    BATHROOMS
+                    PROJECT STATUS
                   </span>
 
                   <strong>
-                    {property.bathrooms}
-                  </strong>
-
-                </div>
-
-
-                <div className="overviewItem">
-
-                  <span>
-                    BALCONIES
-                  </span>
-
-                  <strong>
-                    {property.balconies}
+                    {property.status || "Available"}
                   </strong>
 
                 </div>
@@ -304,7 +433,20 @@ export default async function PropertyDetailsPage(
                   </span>
 
                   <strong>
-                    {property.possession}
+                    {property.possession || "Contact Us"}
+                  </strong>
+
+                </div>
+
+
+                <div className="overviewItem">
+
+                  <span>
+                    TOTAL UNITS
+                  </span>
+
+                  <strong>
+                    {property.totalPlots || "Contact Us"}
                   </strong>
 
                 </div>
@@ -315,7 +457,9 @@ export default async function PropertyDetailsPage(
             </section>
 
 
-            {/* ================= DESCRIPTION ================= */}
+            {/* =====================================================
+                DESCRIPTION
+            ===================================================== */}
 
             <section className="propertyDescription">
 
@@ -323,37 +467,35 @@ export default async function PropertyDetailsPage(
                 Description
               </h2>
 
+
               <p>
-                {property.description}
+
+                {description}
+
               </p>
 
             </section>
 
 
-            {/* ================= FEATURES ================= */}
+            {/* =====================================================
+                HIGHLIGHTS
+            ===================================================== */}
 
-            <section className="propertyFeatures">
+            <section className="propertyHighlights">
 
               <h2>
-                Property Features
+                Property Highlights
               </h2>
 
 
-              <div className="featuresGrid">
+              <div className="highlightsGrid">
 
-                {property.features.map(
-                  (feature) => (
+                {highlights.map(
+                  (highlight, index) => (
 
-                    <div
-                      key={feature}
-                      className="featureItem"
-                    >
+                    <div key={index}>
 
-                      <span>
-                        ✓
-                      </span>
-
-                      {feature}
+                      ✓ {highlight}
 
                     </div>
 
@@ -368,32 +510,42 @@ export default async function PropertyDetailsPage(
           </div>
 
 
-          {/* ================= RIGHT SIDEBAR ================= */}
+          {/* =====================================================
+              RIGHT SIDE ACTION CARD
+          ===================================================== */}
 
-          <aside className="propertyEnquiryCard">
+          <aside className="propertyActionCard">
 
 
             <h2>
-              Interested in this property?
+              Interested in this Property?
             </h2>
 
 
             <p>
+
               Our experts are here to help you.
+
             </p>
 
 
-            {/* ================= BOOK SITE VISIT ================= */}
+            {/* =====================================================
+                BOOK SITE VISIT
+            ===================================================== */}
 
             <Link
               href="/visit"
-              className="detailBookButton"
+              className="propertyBookButton"
             >
-              Book Site Visit
+
+              📅 Book Site Visit
+
             </Link>
 
 
-            {/* ================= REQUEST DETAILS ================= */}
+            {/* =====================================================
+                ENQUIRE
+            ===================================================== */}
 
             <a
               href={`mailto:sreekrishna.housingprojects@gmail.com?subject=${encodeURIComponent(
@@ -410,27 +562,32 @@ Price: ${property.price}
 Please share more details.
 
 Name:
-Phone:
-Email:`
+Phone:`
               )}`}
-              className="detailRequestButton"
+              className="propertyEnquireButton"
             >
-              Request Details
+
+              Enquire Now
+
             </a>
 
 
-            <div className="enquiryDivider" />
+            <div className="propertyActionDivider" />
 
 
-            {/* ================= CONTACT BUTTONS ================= */}
+            {/* =====================================================
+                QUICK ACTIONS
+            ===================================================== */}
 
-            <div className="quickContactButtons">
+            <div className="propertyQuickActions">
+
 
               <a
                 href="tel:+916303688516"
-                className="quickContactButton"
               >
-                ☎ Call Now
+
+                📞 Call Now
+
               </a>
 
 
@@ -438,16 +595,20 @@ Email:`
                 href="https://wa.me/916303688516"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="quickContactButton"
               >
-                ◯ WhatsApp
+
+                💬 WhatsApp
+
               </a>
+
 
             </div>
 
 
-            <p className="enquiryNote">
-              No obligation. 100% Free Consultation.
+            <p className="propertyFreeText">
+
+              No obligation. Free consultation.
+
             </p>
 
 
@@ -455,29 +616,6 @@ Email:`
 
 
         </div>
-
-
-        {/* ================= BOTTOM ACTIONS ================= */}
-
-        <div className="propertyBottomActions">
-
-          <Link
-            href="/properties"
-            className="backPropertiesButton"
-          >
-            ← View All Properties
-          </Link>
-
-
-          <Link
-            href="/visit"
-            className="bottomBookVisitButton"
-          >
-            Book Site Visit
-          </Link>
-
-        </div>
-
 
       </section>
 
