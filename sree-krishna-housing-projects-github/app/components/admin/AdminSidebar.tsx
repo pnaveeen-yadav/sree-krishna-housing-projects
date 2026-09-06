@@ -27,10 +27,12 @@ export default function AdminSidebar() {
   return (
     <aside className="adminSidebar">
       <div className="adminBrand">
-        <span className="adminBrandSmall">SK</span>
+        <img
+          src="/logo.webp"
+          alt="Sree Krishna Housing Projects"
+          className="adminLogo"
 
-        <h2>Sree Krishna</h2>
-
+        />
         <p>Admin Panel</p>
       </div>
 

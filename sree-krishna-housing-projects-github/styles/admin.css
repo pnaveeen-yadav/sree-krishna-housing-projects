@@ -54,30 +54,22 @@
    ========================================================= */
 
 .adminBrand {
-  padding: 0 14px 25px;
+  padding: 24px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  margin-bottom: 18px;
 }
 
-.adminBrand h2 {
-  margin: 0;
-  padding: 0;
-
-  font-size: 21px;
-  line-height: 1.2;
-
-  font-weight: 700;
-  color: #ffffff;
+.adminLogo {
+  width: 180px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin-bottom: 6px;
 }
 
 .adminBrand p {
-  margin: 4px 0 0;
-  padding: 0;
-
-  font-size: 13px;
-  line-height: 1.4;
-
-  color: #c8ced5;
+  margin: 0;
+  font-size: 15px;
+  color: #ffffff;
 }
 
 /* =========================================================
@@ -1236,4 +1228,67 @@
     width: 100%;
   }
 
+}
+/* ================================
+   ADMIN TABLES
+================================ */
+
+.adminTableWrapper {
+  width: 100%;
+  overflow-x: auto;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 12px;
+}
+
+
+.adminDataTable {
+  width: 100%;
+
+  min-width: 850px;
+
+  border-collapse: collapse;
+}
+
+
+.adminDataTable th {
+  padding: 16px;
+
+  text-align: left;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #6b7280;
+
+  background: #f9fafb;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
+.adminDataTable td {
+  padding: 16px;
+
+  font-size: 14px;
+
+  color: #374151;
+
+  border-bottom: 1px solid #f1f1f1;
+
+  vertical-align: top;
+}
+
+
+.adminDataTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+.adminDataTable tbody tr:hover {
+  background: #fafafa;
 }
