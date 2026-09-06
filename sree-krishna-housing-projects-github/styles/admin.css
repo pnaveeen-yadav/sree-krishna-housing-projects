@@ -1292,3 +1292,488 @@
 .adminDataTable tbody tr:hover {
   background: #fafafa;
 }
+/* =========================================================
+   ADMIN LOGIN PAGE
+   ISOLATED STYLES
+========================================================= */
+
+.adminLoginPage,
+.adminLoginPage * {
+  box-sizing: border-box;
+}
+
+.adminLoginPage {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px 20px;
+
+  overflow: hidden;
+
+  background: #f4f6f8;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.adminLoginBackground {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(41, 50, 61, 0.97),
+      rgba(55, 67, 80, 0.95)
+    );
+
+  z-index: 0;
+}
+
+.adminLoginBackground::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  top: -220px;
+  left: -150px;
+
+  background:
+    rgba(181, 150, 91, 0.12);
+}
+
+.adminLoginBackground::after {
+  content: "";
+
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  border-radius: 50%;
+
+  bottom: -300px;
+  right: -200px;
+
+  background:
+    rgba(181, 150, 91, 0.1);
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.adminLoginCard {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+  max-width: 480px;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   LOGIN BRAND
+========================================================= */
+
+.adminLoginBrand {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 32px 30px 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #29323d,
+      #35414d
+    );
+}
+
+.adminLoginLogo {
+  width: 210px;
+
+  max-width: 100%;
+
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   BRAND DIVIDER
+========================================================= */
+
+.adminLoginBrandDivider {
+  width: 55px;
+
+  height: 2px;
+
+  margin: 18px 0 13px;
+
+  background: #b5965b;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   BRAND TEXT
+========================================================= */
+
+.adminLoginBrand p {
+  margin: 0;
+
+  color: #d8dde2;
+
+  font-size: 14px;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   LOGIN CONTENT
+========================================================= */
+
+.adminLoginContent {
+  padding: 34px;
+}
+
+
+/* =========================================================
+   LOGIN HEADING
+========================================================= */
+
+.adminLoginHeading {
+  margin-bottom: 28px;
+}
+
+.adminLoginEyebrow {
+  margin: 0 0 8px;
+
+  color: #a8813f;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.adminLoginHeading h1 {
+  margin: 0 0 10px;
+
+  color: #29323d;
+
+  font-size: 30px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+}
+
+.adminLoginHeading > p:not(
+  .adminLoginEyebrow
+) {
+  margin: 0;
+
+  color: #6d7781;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   LOGIN FORM
+========================================================= */
+
+.adminLoginForm {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.adminLoginFormGroup {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.adminLoginFormGroup label {
+  margin-bottom: 8px;
+
+  color: #3d4751;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.adminLoginFormGroup input {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d8dee3;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #29323d;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.adminLoginFormGroup input::placeholder {
+  color: #9aa3aa;
+}
+
+.adminLoginFormGroup input:focus {
+  border-color: #a8813f;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(168, 129, 63, 0.12);
+}
+
+.adminLoginFormGroup input:disabled {
+  background: #f5f6f7;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.adminLoginError {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  background: #fff3f2;
+
+  border: 1px solid #efc3bf;
+
+  border-radius: 8px;
+
+  color: #c44035;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.adminLoginButton {
+  width: 100%;
+
+  height: 50px;
+
+  margin-top: 4px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #a8813f;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.adminLoginButton:hover:not(:disabled) {
+  background: #8e6d34;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px
+    rgba(168, 129, 63, 0.25);
+}
+
+.adminLoginButton:disabled {
+  opacity: 0.7;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOGIN FOOTER
+========================================================= */
+
+.adminLoginFooter {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 25px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid #edf0f2;
+
+  color: #78828b;
+
+  font-size: 13px;
+}
+
+.adminLoginFooter span {
+  font-size: 14px;
+}
+
+.adminLoginFooter p {
+  margin: 0;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .adminLoginPage {
+    padding: 20px 15px;
+  }
+
+  .adminLoginCard {
+    max-width: 100%;
+  }
+
+  .adminLoginBrand {
+    padding:
+      28px
+      20px
+      22px;
+  }
+
+  .adminLoginLogo {
+    width: 190px;
+  }
+
+  .adminLoginContent {
+    padding: 28px 22px;
+  }
+
+  .adminLoginHeading h1 {
+    font-size: 27px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .adminLoginContent {
+    padding:
+      25px
+      18px;
+  }
+
+  .adminLoginLogo {
+    width: 170px;
+  }
+
+  .adminLoginBrand {
+    padding:
+      25px
+      18px
+      20px;
+  }
+
+}
