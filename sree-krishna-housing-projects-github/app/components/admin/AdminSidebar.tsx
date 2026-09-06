@@ -13,6 +13,7 @@ export default function AdminSidebar() {
     await adminSupabase.auth.signOut();
 
     router.push("/admin/login");
+    router.refresh();
   };
 
   const isActive = (path: string) => {
@@ -21,91 +22,76 @@ export default function AdminSidebar() {
 
   return (
     <aside className="adminSidebar">
+      <div className="adminSidebarTop">
+        <div className="adminBrand">
+          <div className="adminBrandIcon">
+            SK
+          </div>
 
-      <div className="adminSidebarBrand">
-
-        <div className="adminSidebarLogo">
-          SK
+          <div>
+            <h2>Sree Krishna</h2>
+            <span>Admin Panel</span>
+          </div>
         </div>
 
-        <div>
-          <h2>Sree Krishna</h2>
-          <span>ADMIN PANEL</span>
-        </div>
+        <nav className="adminNavigation">
+          <Link
+            href="/admin/dashboard"
+            className={
+              isActive("/admin/dashboard")
+                ? "adminNavItem active"
+                : "adminNavItem"
+            }
+          >
+            <span className="adminNavIcon">⌂</span>
+            Dashboard
+          </Link>
 
+          <Link
+            href="/admin/properties"
+            className={
+              pathname.startsWith("/admin/properties")
+                ? "adminNavItem active"
+                : "adminNavItem"
+            }
+          >
+            <span className="adminNavIcon">🏠</span>
+            Properties
+          </Link>
+
+          <Link
+            href="/admin/enquiries"
+            className={
+              pathname.startsWith("/admin/enquiries")
+                ? "adminNavItem active"
+                : "adminNavItem"
+            }
+          >
+            <span className="adminNavIcon">✉</span>
+            Enquiries
+          </Link>
+
+          <Link
+            href="/admin/site-visits"
+            className={
+              pathname.startsWith("/admin/site-visits")
+                ? "adminNavItem active"
+                : "adminNavItem"
+            }
+          >
+            <span className="adminNavIcon">📅</span>
+            Site Visits
+          </Link>
+        </nav>
       </div>
 
-      <nav className="adminNavigation">
-
-        <Link
-          href="/admin/dashboard"
-          className={
-            isActive("/admin/dashboard")
-              ? "adminNavItem active"
-              : "adminNavItem"
-          }
-        >
-          <span>▦</span>
-          Dashboard
-        </Link>
-
-        <Link
-          href="/admin/properties"
-          className={
-            pathname.startsWith("/admin/properties")
-              ? "adminNavItem active"
-              : "adminNavItem"
-          }
-        >
-          <span>⌂</span>
-          Properties
-        </Link>
-
-        <Link
-          href="/admin/enquiries"
-          className={
-            pathname.startsWith("/admin/enquiries")
-              ? "adminNavItem active"
-              : "adminNavItem"
-          }
-        >
-          <span>✉</span>
-          Enquiries
-        </Link>
-
-        <Link
-          href="/admin/site-visits"
-          className={
-            pathname.startsWith("/admin/site-visits")
-              ? "adminNavItem active"
-              : "adminNavItem"
-          }
-        >
-          <span>◫</span>
-          Site Visits
-        </Link>
-
-        <Link
-          href="/admin/content"
-          className={
-            pathname.startsWith("/admin/content")
-              ? "adminNavItem active"
-              : "adminNavItem"
-          }
-        >
-          <span>✎</span>
-          Website Content
-        </Link>
-
-      </nav>
-
       <div className="adminSidebarBottom">
-
         <Link
           href="/"
-          className="adminViewWebsite"
+          className="adminNavItem"
         >
-          ↗ View Website
+          <span className="adminNavIcon">↗</span>
+          View Website
         </Link>
 
         <button
@@ -113,11 +99,10 @@ export default function AdminSidebar() {
           className="adminLogoutButton"
           onClick={handleLogout}
         >
-          ↪ Logout
+          <span className="adminNavIcon">↪</span>
+          Logout
         </button>
-
       </div>
-
     </aside>
   );
 }
