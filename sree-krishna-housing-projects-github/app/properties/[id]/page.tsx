@@ -1,18 +1,46 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { properties } from "../../../lib/properties";
 
-type PropertyDetails = (typeof properties)[number] & {
-  images?: string[];
-  gallery?: string[];
-  status?: string;
-  description?: string;
-  highlights?: string[];
-  facing?: string;
-  approvals?: string;
-  possession?: string;
-  totalPlots?: string;
-};
+import { supabase } from "@/lib/supabase";
+
+interface Property {
+  id: string;
+
+  title: string;
+  property_type: string | null;
+  location: string | null;
+  price: string | null;
+  area: string | null;
+
+  description: string | null;
+
+  amenities: string[] | null;
+
+  image_urls: string[] | null;
+  main_image: string | null;
+  gallery_images: string[] | null;
+
+  status: string | null;
+
+  configuration: string | null;
+  facing: string | null;
+  total_floors: string | null;
+
+  parking: string | null;
+  bathrooms: string | null;
+  balconies: string | null;
+
+  possession: string | null;
+  approvals: string | null;
+
+  project_status: string | null;
+
+  badge: string | null;
+  category: string | null;
+
+  is_featured: boolean | null;
+  is_active: boolean | null;
+}
 
 type PageProps = {
   params: Promise<{
@@ -25,56 +53,143 @@ export default async function PropertyDetailsPage({
 }: PageProps) {
   const { id } = await params;
 
-  const property = properties.find(
-    (item) => String(item.id) === id
-  ) as PropertyDetails | undefined;
+  const { data, error } = await supabase
+    .from("properties")
+    .select(`
+      id,
+      title,
+      property_type,
+      location,
+      price,
+      area,
+      description,
+      amenities,
+      image_urls,
+      main_image,
+      gallery_images,
+      status,
+      configuration,
+      facing,
+      total_floors,
+      parking,
+      bathrooms,
+      balconies,
+      possession,
+      approvals,
+      project_status,
+      badge,
+      category,
+      is_featured,
+      is_active
+    `)
+    .eq("id", id)
+    .eq("is_active", true)
+    .single();
 
-  if (!property) {
+  if (error || !data) {
     notFound();
   }
 
-  /*
-    =====================================================
-    PROPERTY IMAGES
+  const property = data as Property;
 
-    Supports:
-    images: []
-    OR
-    gallery: []
-    OR
-    image: ""
-    =====================================================
+  /*
+    =====================================
+    PROPERTY IMAGES
+    =====================================
   */
 
-  const propertyImages =
-    property.images && property.images.length > 0
-      ? property.images
-      : property.gallery && property.gallery.length > 0
-      ? property.gallery
-      : [property.image];
+  const propertyImages: string[] = [];
 
   /*
-    =====================================================
-    MAKE SURE WE HAVE ENOUGH IMAGES FOR THE GALLERY
+    Main Image
+  */
 
-    The same main image will be used as fallback if
-    additional gallery images are not available.
-    =====================================================
+  if (property.main_image) {
+    propertyImages.push(property.main_image);
+  }
+
+  /*
+    Gallery Images
+  */
+
+  if (
+    Array.isArray(property.gallery_images)
+  ) {
+    property.gallery_images.forEach(
+      (image) => {
+        if (
+          image &&
+          !propertyImages.includes(image)
+        ) {
+          propertyImages.push(image);
+        }
+      }
+    );
+  }
+
+  /*
+    Image URLs
+  */
+
+  if (
+    Array.isArray(property.image_urls)
+  ) {
+    property.image_urls.forEach(
+      (image) => {
+        if (
+          image &&
+          !propertyImages.includes(image)
+        ) {
+          propertyImages.push(image);
+        }
+      }
+    );
+  }
+
+  /*
+    If no image exists
+  */
+
+  if (propertyImages.length === 0) {
+    propertyImages.push(
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+    );
+  }
+
+  /*
+    =====================================
+    GALLERY IMAGES
+    =====================================
   */
 
   const galleryImages = [...propertyImages];
 
   while (galleryImages.length < 7) {
-    galleryImages.push(propertyImages[0]);
+    galleryImages.push(
+      propertyImages[0]
+    );
   }
+
+  /*
+    =====================================
+    DESCRIPTION
+    =====================================
+  */
 
   const description =
     property.description ||
-    `${property.name} is a carefully selected property by Sree Krishna Housing Projects. It offers an excellent opportunity for buyers and investors looking for a quality property in a prime location.`;
+    `${property.title} is a carefully selected property by Sree Krishna Housing Projects. It offers an excellent opportunity for buyers and investors looking for a quality property in a prime location.`;
+
+  /*
+    =====================================
+    HIGHLIGHTS / AMENITIES
+    =====================================
+  */
 
   const highlights =
-    property.highlights && property.highlights.length > 0
-      ? property.highlights
+    property.amenities &&
+    property.amenities.length > 0
+      ? property.amenities
       : [
           "Prime Location",
           "Excellent Connectivity",
@@ -82,12 +197,41 @@ export default async function PropertyDetailsPage({
           "Professional Customer Support",
         ];
 
+  /*
+    =====================================
+    DISPLAY VALUES
+    =====================================
+  */
+
+  const propertyType =
+    property.property_type ||
+    "Property";
+
+  const propertyStatus =
+    property.project_status ||
+    property.status ||
+    "AVAILABLE";
+
+  const propertyArea =
+    property.area ||
+    "Not Specified";
+
+  const propertyPrice =
+    property.price ||
+    "Contact Us";
+
+  /*
+    =====================================
+    PAGE
+    =====================================
+  */
+
   return (
     <main className="propertyDetailsPage">
 
-      {/* =====================================================
+      {/* =====================================
           HEADER
-      ===================================================== */}
+      ===================================== */}
 
       <header className="nav propertyDetailsNav">
 
@@ -100,6 +244,7 @@ export default async function PropertyDetailsPage({
             alt="Sree Krishna Housing Projects"
           />
         </Link>
+
 
         <nav>
 
@@ -121,6 +266,7 @@ export default async function PropertyDetailsPage({
 
         </nav>
 
+
         <Link
           href="/visit"
           className="btn gold"
@@ -131,9 +277,9 @@ export default async function PropertyDetailsPage({
       </header>
 
 
-      {/* =====================================================
-          PROPERTY DETAILS SECTION
-      ===================================================== */}
+      {/* =====================================
+          PROPERTY DETAILS
+      ===================================== */}
 
       <section className="propertyDetailsSection">
 
@@ -145,49 +291,36 @@ export default async function PropertyDetailsPage({
         </Link>
 
 
-        {/* =====================================================
-            MAIN LAYOUT
-        ===================================================== */}
-
         <div className="propertyDetailsLayout">
 
 
-          {/* =====================================================
+          {/* =====================================
               LEFT SIDE
-          ===================================================== */}
+          ===================================== */}
 
           <div className="propertyDetailsContent">
 
 
-            {/* =====================================================
+            {/* =====================================
                 IMAGE GALLERY
-            ===================================================== */}
+            ===================================== */}
 
             <section className="propertyGallery">
 
 
-              {/* =====================================================
-                  MAIN IMAGE
-              ===================================================== */}
+              {/* MAIN IMAGE */}
 
               <div className="propertyMainImage">
 
                 <img
                   src={galleryImages[0]}
-                  alt={property.name}
+                  alt={property.title}
                 />
 
               </div>
 
 
-              {/* =====================================================
-                  SMALL IMAGE GRID
-
-                  2 COLUMNS
-                  3 ROWS
-
-                  Same style as your reference image.
-              ===================================================== */}
+              {/* GALLERY */}
 
               <div className="propertyGalleryGrid">
 
@@ -198,7 +331,7 @@ export default async function PropertyDetailsPage({
 
                   <img
                     src={galleryImages[1]}
-                    alt={`${property.name} gallery 1`}
+                    alt={`${property.title} gallery 1`}
                   />
 
                 </div>
@@ -210,7 +343,7 @@ export default async function PropertyDetailsPage({
 
                   <img
                     src={galleryImages[2]}
-                    alt={`${property.name} gallery 2`}
+                    alt={`${property.title} gallery 2`}
                   />
 
                 </div>
@@ -222,7 +355,7 @@ export default async function PropertyDetailsPage({
 
                   <img
                     src={galleryImages[3]}
-                    alt={`${property.name} gallery 3`}
+                    alt={`${property.title} gallery 3`}
                   />
 
                 </div>
@@ -234,7 +367,7 @@ export default async function PropertyDetailsPage({
 
                   <img
                     src={galleryImages[4]}
-                    alt={`${property.name} gallery 4`}
+                    alt={`${property.title} gallery 4`}
                   />
 
                 </div>
@@ -246,22 +379,21 @@ export default async function PropertyDetailsPage({
 
                   <img
                     src={galleryImages[5]}
-                    alt={`${property.name} gallery 5`}
+                    alt={`${property.title} gallery 5`}
                   />
 
                 </div>
 
 
-                {/* =====================================================
-                    MORE PHOTOS
-                ===================================================== */}
+                {/* MORE PHOTOS */}
 
                 <div className="propertyGalleryItem morePhotosItem">
 
                   <img
                     src={galleryImages[6]}
-                    alt={`${property.name} gallery`}
+                    alt={`${property.title} gallery`}
                   />
+
 
                   <div className="morePhotosOverlay">
 
@@ -280,14 +412,15 @@ export default async function PropertyDetailsPage({
 
                 </div>
 
+
               </div>
 
             </section>
 
 
-            {/* =====================================================
+            {/* =====================================
                 PROPERTY TITLE
-            ===================================================== */}
+            ===================================== */}
 
             <section className="propertyTitleSection">
 
@@ -296,14 +429,14 @@ export default async function PropertyDetailsPage({
 
                 <span className="propertyStatusLarge">
 
-                  {property.status || "AVAILABLE"}
+                  {propertyStatus}
 
                 </span>
 
 
                 <span className="propertyTypeLarge">
 
-                  {property.type}
+                  {propertyType}
 
                 </span>
 
@@ -312,21 +445,23 @@ export default async function PropertyDetailsPage({
 
               <h1>
 
-                {property.name}
+                {property.title}
 
               </h1>
 
 
               <p className="propertyDetailsLocation">
 
-                📍 {property.location}
+                📍{" "}
+                {property.location ||
+                  "Location not specified"}
 
               </p>
 
 
               <p className="propertyDetailsPrice">
 
-                {property.price}
+                {propertyPrice}
 
               </p>
 
@@ -334,11 +469,12 @@ export default async function PropertyDetailsPage({
             </section>
 
 
-            {/* =====================================================
+            {/* =====================================
                 PROPERTY OVERVIEW
-            ===================================================== */}
+            ===================================== */}
 
             <section className="propertyOverview">
+
 
               <h2>
                 Property Overview
@@ -348,6 +484,8 @@ export default async function PropertyDetailsPage({
               <div className="propertyOverviewGrid">
 
 
+                {/* PROPERTY TYPE */}
+
                 <div className="overviewItem">
 
                   <span>
@@ -355,11 +493,13 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.type}
+                    {propertyType}
                   </strong>
 
                 </div>
 
+
+                {/* AREA */}
 
                 <div className="overviewItem">
 
@@ -368,11 +508,13 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.size}
+                    {propertyArea}
                   </strong>
 
                 </div>
 
+
+                {/* FACING */}
 
                 <div className="overviewItem">
 
@@ -381,11 +523,14 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.facing || "Not Specified"}
+                    {property.facing ||
+                      "Not Specified"}
                   </strong>
 
                 </div>
 
+
+                {/* APPROVALS */}
 
                 <div className="overviewItem">
 
@@ -394,11 +539,14 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.approvals || "Available"}
+                    {property.approvals ||
+                      "Contact Us"}
                   </strong>
 
                 </div>
 
+
+                {/* LOCATION */}
 
                 <div className="overviewItem">
 
@@ -407,11 +555,14 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.location}
+                    {property.location ||
+                      "Not Specified"}
                   </strong>
 
                 </div>
 
+
+                {/* PROJECT STATUS */}
 
                 <div className="overviewItem">
 
@@ -420,11 +571,13 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.status || "Available"}
+                    {propertyStatus}
                   </strong>
 
                 </div>
 
+
+                {/* POSSESSION */}
 
                 <div className="overviewItem">
 
@@ -433,20 +586,24 @@ export default async function PropertyDetailsPage({
                   </span>
 
                   <strong>
-                    {property.possession || "Contact Us"}
+                    {property.possession ||
+                      "Contact Us"}
                   </strong>
 
                 </div>
 
 
+                {/* TOTAL FLOORS */}
+
                 <div className="overviewItem">
 
                   <span>
-                    TOTAL UNITS
+                    TOTAL FLOORS
                   </span>
 
                   <strong>
-                    {property.totalPlots || "Contact Us"}
+                    {property.total_floors ||
+                      "Not Specified"}
                   </strong>
 
                 </div>
@@ -454,12 +611,98 @@ export default async function PropertyDetailsPage({
 
               </div>
 
+
             </section>
 
 
-            {/* =====================================================
+            {/* =====================================
+                ADDITIONAL DETAILS
+            ===================================== */}
+
+            <section className="propertyOverview">
+
+
+              <h2>
+                Additional Details
+              </h2>
+
+
+              <div className="propertyOverviewGrid">
+
+
+                {/* CONFIGURATION */}
+
+                <div className="overviewItem">
+
+                  <span>
+                    CONFIGURATION
+                  </span>
+
+                  <strong>
+                    {property.configuration ||
+                      "Not Specified"}
+                  </strong>
+
+                </div>
+
+
+                {/* PARKING */}
+
+                <div className="overviewItem">
+
+                  <span>
+                    PARKING
+                  </span>
+
+                  <strong>
+                    {property.parking ||
+                      "Not Specified"}
+                  </strong>
+
+                </div>
+
+
+                {/* BATHROOMS */}
+
+                <div className="overviewItem">
+
+                  <span>
+                    BATHROOMS
+                  </span>
+
+                  <strong>
+                    {property.bathrooms ||
+                      "Not Applicable"}
+                  </strong>
+
+                </div>
+
+
+                {/* BALCONIES */}
+
+                <div className="overviewItem">
+
+                  <span>
+                    BALCONIES
+                  </span>
+
+                  <strong>
+                    {property.balconies ||
+                      "Not Applicable"}
+                  </strong>
+
+                </div>
+
+
+              </div>
+
+
+            </section>
+
+
+            {/* =====================================
                 DESCRIPTION
-            ===================================================== */}
+            ===================================== */}
 
             <section className="propertyDescription">
 
@@ -477,11 +720,12 @@ export default async function PropertyDetailsPage({
             </section>
 
 
-            {/* =====================================================
+            {/* =====================================
                 HIGHLIGHTS
-            ===================================================== */}
+            ===================================== */}
 
             <section className="propertyHighlights">
+
 
               <h2>
                 Property Highlights
@@ -504,15 +748,16 @@ export default async function PropertyDetailsPage({
 
               </div>
 
+
             </section>
 
 
           </div>
 
 
-          {/* =====================================================
+          {/* =====================================
               RIGHT SIDE ACTION CARD
-          ===================================================== */}
+          ===================================== */}
 
           <aside className="propertyActionCard">
 
@@ -523,15 +768,11 @@ export default async function PropertyDetailsPage({
 
 
             <p>
-
               Our experts are here to help you.
-
             </p>
 
 
-            {/* =====================================================
-                BOOK SITE VISIT
-            ===================================================== */}
+            {/* BOOK SITE VISIT */}
 
             <Link
               href="/visit"
@@ -543,21 +784,22 @@ export default async function PropertyDetailsPage({
             </Link>
 
 
-            {/* =====================================================
-                ENQUIRE
-            ===================================================== */}
+            {/* ENQUIRE */}
 
             <a
               href={`mailto:sreekrishna.housingprojects@gmail.com?subject=${encodeURIComponent(
-                `Property Enquiry - ${property.name}`
+                `Property Enquiry - ${property.title}`
               )}&body=${encodeURIComponent(
                 `Hello Sree Krishna Housing Projects,
 
 I am interested in the following property:
 
-Property: ${property.name}
-Location: ${property.location}
-Price: ${property.price}
+Property: ${property.title}
+Location: ${
+                  property.location ||
+                  "Not specified"
+                }
+Price: ${propertyPrice}
 
 Please share more details.
 
@@ -575,9 +817,7 @@ Phone:`
             <div className="propertyActionDivider" />
 
 
-            {/* =====================================================
-                QUICK ACTIONS
-            ===================================================== */}
+            {/* QUICK ACTIONS */}
 
             <div className="propertyQuickActions">
 
@@ -617,7 +857,9 @@ Phone:`
 
         </div>
 
+
       </section>
+
 
     </main>
   );
