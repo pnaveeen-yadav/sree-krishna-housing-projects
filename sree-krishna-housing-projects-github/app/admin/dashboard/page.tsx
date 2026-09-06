@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import AdminSidebar from "@/components/admin/AdminSidebar";
+import AdminSidebar from "@/app/components/admin/AdminSidebar";
 import { adminSupabase } from "@/lib/adminSupabase";
 
 export default function AdminDashboardPage() {
