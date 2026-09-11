@@ -82,6 +82,41 @@ export const metadata: Metadata = {
   },
 };
 
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "@id": "https://www.sreekrishnahousingprojects.com/#business",
+  name: "Sree Krishna Housing Projects",
+  url: "https://www.sreekrishnahousingprojects.com/",
+  logo: "https://www.sreekrishnahousingprojects.com/logo.webp",
+  image: "https://www.sreekrishnahousingprojects.com/logo.webp",
+  email: "housingprojects@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress:
+      "Saideep Towers, 20-03-131, B4, Leela Mahal Road, Srinivasa Nagar, Akkarampalle",
+    addressLocality: "Tirupati",
+    addressRegion: "Andhra Pradesh",
+    postalCode: "517501",
+    addressCountry: "IN",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -89,7 +124,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessJsonLd),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
