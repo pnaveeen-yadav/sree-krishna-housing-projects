@@ -2016,112 +2016,245 @@
 
 
 /* =========================================================
+   MOBILE ADMIN MENU
+   Desktop sidebar remains unchanged.
+   On mobile, the sidebar becomes a slide-out drawer.
+   ========================================================= */
+
+.adminMobileMenuButton,
+.adminMobileCloseButton,
+.adminSidebarOverlay {
+  display: none;
+}
+
+
+/* =========================================================
    MOBILE ADMIN PANEL
    ========================================================= */
 
 @media (max-width: 768px) {
 
   .adminLayout {
-    flex-direction: column;
+    display: block;
+    min-height: 100vh;
   }
 
+  .adminMobileMenuButton {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    width: 46px;
+    height: 46px;
 
-  .adminSidebar {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 11px;
+
+    background: #29323d;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+
+    z-index: 1001;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .adminMobileMenuButton:hover {
+    background: #35414d;
+  }
+
+  .adminMobileMenuButton:active {
+    transform: scale(0.96);
+  }
+
+  .adminSidebarOverlay {
+    position: fixed;
+    inset: 0;
 
     width: 100%;
-    min-width: 100%;
+    height: 100%;
 
-    height: auto;
-    min-height: auto;
+    display: block;
+
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    background: rgba(0, 0, 0, 0.48);
+
+    cursor: pointer;
+    z-index: 1002;
+  }
+
+  .adminSidebar {
+    position: fixed !important;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: min(300px, 84vw) !important;
+    min-width: 0 !important;
+
+    height: 100vh !important;
+    min-height: 100vh !important;
+
+    display: flex;
 
     padding: 20px 12px;
 
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    transform: translateX(-105%);
+
+    transition: transform 0.28s ease;
+
+    z-index: 1003;
+
+    box-shadow: 12px 0 35px rgba(0, 0, 0, 0.25);
   }
 
+  .adminSidebar.adminSidebarMobileOpen {
+    transform: translateX(0);
+  }
+
+  .adminMobileCloseButton {
+    position: absolute;
+
+    top: 16px;
+    right: 14px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 18px;
+    line-height: 1;
+
+    cursor: pointer;
+    z-index: 2;
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .adminMobileCloseButton:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
 
   .adminBrand {
-    padding-bottom: 18px;
+    position: relative;
+
+    padding: 42px 14px 18px;
+    margin-bottom: 18px;
   }
 
+  .adminLogo {
+    width: 190px;
+    max-width: calc(100% - 20px);
+  }
 
   .adminNav {
     gap: 6px;
   }
 
-
   .adminNav a,
   .adminNav button {
+    min-height: 48px;
+    padding: 12px 15px;
+    font-size: 15px;
+  }
+
+  .adminSidebarBottom {
+    margin-top: auto;
+    padding-top: 24px;
+    padding-bottom: 4px;
+    gap: 10px;
+  }
+
+  .adminSidebarBottom a {
     min-height: 46px;
   }
 
-
-  .adminSidebarBottom {
-    margin-top: 20px;
+  .adminLogoutButton {
+    min-height: 48px;
   }
-
 
   .adminMainContent {
     width: 100%;
-
+    min-height: 100vh;
     margin-left: 0;
-
-    padding: 20px 16px;
+    padding: 78px 16px 20px;
   }
-
 
   .adminHeader {
     flex-direction: column;
+    gap: 14px;
   }
-
 
   .adminHeader h1 {
     font-size: 27px;
   }
 
-
   .adminStatsGrid {
     grid-template-columns: 1fr;
   }
-
 
   .adminActionsGrid {
     grid-template-columns: 1fr;
   }
 
-
   .adminPropertiesGrid {
     grid-template-columns: 1fr;
   }
-
 
   .adminFormGrid {
     grid-template-columns: 1fr;
   }
 
-
   .adminFormGroup.fullWidth {
     grid-column: auto;
   }
-
 
   .adminUserInfo {
     width: 100%;
   }
 
-
   .adminPropertyInfo {
     flex-direction: column;
-
     align-items: flex-start;
   }
-
 
   .adminPropertyActions {
     flex-direction: column;
   }
-
 
   .adminPropertyActions button {
     width: 100%;
