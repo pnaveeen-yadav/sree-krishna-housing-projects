@@ -131,6 +131,41 @@ export default function AdminSiteVisitsPage() {
     setDeleting(false);
   };
 
+  const deleteVisit = async (id: string, name: string) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete the site visit for "${name}"?`
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setDeleting(true);
+    setError("");
+
+    const { error } = await adminSupabase
+      .from("site_visits")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error("Error deleting site visit:", error);
+      setError(error.message);
+      setDeleting(false);
+      return;
+    }
+
+    setVisits((current) =>
+      current.filter((visit) => visit.id !== id)
+    );
+
+    setSelectedIds((current) =>
+      current.filter((selectedId) => selectedId !== id)
+    );
+
+    setDeleting(false);
+  };
+
   if (loading) {
     return (
       <main className="adminLoadingPage">
@@ -235,11 +270,12 @@ export default function AdminSiteVisitsPage() {
                 style={{
                   width: "100%",
                   borderCollapse: "collapse",
-                  minWidth: "600px",
+                  minWidth: "700px",
                 }}
               >
                 <thead>
                   <tr>
+                    {/* Select All */}
                     <th
                       style={{
                         padding: "16px",
@@ -263,6 +299,7 @@ export default function AdminSiteVisitsPage() {
                       />
                     </th>
 
+                    {/* Name */}
                     <th
                       style={{
                         padding: "16px",
@@ -276,6 +313,7 @@ export default function AdminSiteVisitsPage() {
                       Name
                     </th>
 
+                    {/* Phone */}
                     <th
                       style={{
                         padding: "16px",
@@ -289,6 +327,7 @@ export default function AdminSiteVisitsPage() {
                       Phone
                     </th>
 
+                    {/* Date */}
                     <th
                       style={{
                         padding: "16px",
@@ -302,6 +341,7 @@ export default function AdminSiteVisitsPage() {
                       Date
                     </th>
 
+                    {/* Time */}
                     <th
                       style={{
                         padding: "16px",
@@ -313,6 +353,20 @@ export default function AdminSiteVisitsPage() {
                       }}
                     >
                       Time
+                    </th>
+
+                    {/* Action */}
+                    <th
+                      style={{
+                        padding: "16px",
+                        textAlign: "center",
+                        borderBottom:
+                          "1px solid #e5e7eb",
+                        background: "#f9fafb",
+                        fontSize: "14px",
+                      }}
+                    >
+                      Action
                     </th>
                   </tr>
                 </thead>
@@ -331,6 +385,7 @@ export default function AdminSiteVisitsPage() {
                             : "#ffffff",
                         }}
                       >
+                        {/* Checkbox */}
                         <td
                           style={{
                             padding: "16px",
@@ -354,6 +409,7 @@ export default function AdminSiteVisitsPage() {
                           />
                         </td>
 
+                        {/* Name */}
                         <td
                           style={{
                             padding: "16px",
@@ -365,6 +421,7 @@ export default function AdminSiteVisitsPage() {
                           {visit.name || "-"}
                         </td>
 
+                        {/* Phone */}
                         <td
                           style={{
                             padding: "16px",
@@ -376,6 +433,7 @@ export default function AdminSiteVisitsPage() {
                           {visit.phone || "-"}
                         </td>
 
+                        {/* Date */}
                         <td
                           style={{
                             padding: "16px",
@@ -387,6 +445,7 @@ export default function AdminSiteVisitsPage() {
                           {visit.preferred_date || "-"}
                         </td>
 
+                        {/* Time */}
                         <td
                           style={{
                             padding: "16px",
@@ -396,6 +455,30 @@ export default function AdminSiteVisitsPage() {
                           }}
                         >
                           {visit.preferred_time || "-"}
+                        </td>
+
+                        {/* Individual Delete */}
+                        <td
+                          style={{
+                            padding: "16px",
+                            textAlign: "center",
+                            borderBottom:
+                              "1px solid #f0f0f0",
+                          }}
+                        >
+                          <button
+                            type="button"
+                            className="adminRowDeleteButton"
+                            onClick={() =>
+                              deleteVisit(
+                                visit.id,
+                                visit.name
+                              )
+                            }
+                            disabled={deleting}
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     );
