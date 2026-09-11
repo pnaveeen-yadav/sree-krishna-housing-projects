@@ -109,25 +109,25 @@ export default function AdminSiteVisitsPage() {
     setDeleting(true);
     setError("");
 
+    const idsToDelete = [...selectedIds];
+
     const { error } = await adminSupabase
       .from("site_visits")
       .delete()
-      .in("id", selectedIds);
+      .in("id", idsToDelete);
 
     if (error) {
       console.error("Error deleting site visits:", error);
-      setError(error.message);
+      setError(`Unable to delete site visits: ${error.message}`);
       setDeleting(false);
       return;
     }
 
-    setVisits((current) =>
-      current.filter(
-        (visit) => !selectedIds.includes(visit.id)
-      )
-    );
-
     setSelectedIds([]);
+
+    // Reload from Supabase to confirm the database state
+    await loadVisits();
+
     setDeleting(false);
   };
 
@@ -150,18 +150,17 @@ export default function AdminSiteVisitsPage() {
 
     if (error) {
       console.error("Error deleting site visit:", error);
-      setError(error.message);
+      setError(`Unable to delete site visit: ${error.message}`);
       setDeleting(false);
       return;
     }
 
-    setVisits((current) =>
-      current.filter((visit) => visit.id !== id)
-    );
-
     setSelectedIds((current) =>
       current.filter((selectedId) => selectedId !== id)
     );
+
+    // Reload from Supabase to confirm the database state
+    await loadVisits();
 
     setDeleting(false);
   };
