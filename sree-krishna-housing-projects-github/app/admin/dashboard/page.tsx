@@ -102,8 +102,18 @@ export default function AdminDashboardPage() {
           </div>
         </section>
 
+        {/* ================= DASHBOARD SHORTCUTS ================= */}
+
         <section className="adminStatsGrid">
-          <div className="adminStatCard">
+
+          {/* PROPERTIES */}
+          <button
+            type="button"
+            className="adminStatCard"
+            onClick={() =>
+              router.push("/admin/properties")
+            }
+          >
             <div className="adminStatIcon">
               🏠
             </div>
@@ -113,9 +123,16 @@ export default function AdminDashboardPage() {
 
               <strong>Manage</strong>
             </div>
-          </div>
+          </button>
 
-          <div className="adminStatCard">
+          {/* ENQUIRIES */}
+          <button
+            type="button"
+            className="adminStatCard"
+            onClick={() =>
+              router.push("/admin/enquiries")
+            }
+          >
             <div className="adminStatIcon">
               ✉
             </div>
@@ -125,9 +142,16 @@ export default function AdminDashboardPage() {
 
               <strong>View</strong>
             </div>
-          </div>
+          </button>
 
-          <div className="adminStatCard">
+          {/* SITE VISITS */}
+          <button
+            type="button"
+            className="adminStatCard"
+            onClick={() =>
+              router.push("/admin/site-visits")
+            }
+          >
             <div className="adminStatIcon">
               📅
             </div>
@@ -137,9 +161,16 @@ export default function AdminDashboardPage() {
 
               <strong>Manage</strong>
             </div>
-          </div>
+          </button>
 
-          <div className="adminStatCard">
+          {/* HOME PAGE EDITOR */}
+          <button
+            type="button"
+            className="adminStatCard"
+            onClick={() =>
+              router.push("/admin/home")
+            }
+          >
             <div className="adminStatIcon">
               ✎
             </div>
@@ -149,8 +180,11 @@ export default function AdminDashboardPage() {
 
               <strong>Update</strong>
             </div>
-          </div>
+          </button>
+
         </section>
+
+        {/* ================= QUICK ACTIONS ================= */}
 
         <section className="adminQuickActions">
           <div className="adminSectionHeading">
@@ -164,6 +198,8 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="adminActionsGrid">
+
+            {/* MANAGE PROPERTIES */}
             <div className="adminActionCard">
               <div className="adminActionIcon">
                 🏠
@@ -177,6 +213,7 @@ export default function AdminDashboardPage() {
               </p>
 
               <button
+                type="button"
                 onClick={() =>
                   router.push("/admin/properties")
                 }
@@ -185,6 +222,7 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
+            {/* MANAGE IMAGES */}
             <div className="adminActionCard">
               <div className="adminActionIcon">
                 🖼
@@ -198,6 +236,7 @@ export default function AdminDashboardPage() {
               </p>
 
               <button
+                type="button"
                 onClick={() =>
                   router.push("/admin/properties")
                 }
@@ -206,6 +245,7 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
+            {/* ENQUIRIES */}
             <div className="adminActionCard">
               <div className="adminActionIcon">
                 ✉
@@ -219,6 +259,7 @@ export default function AdminDashboardPage() {
               </p>
 
               <button
+                type="button"
                 onClick={() =>
                   router.push("/admin/enquiries")
                 }
@@ -227,6 +268,7 @@ export default function AdminDashboardPage() {
               </button>
             </div>
 
+            {/* SITE VISITS */}
             <div className="adminActionCard">
               <div className="adminActionIcon">
                 📅
@@ -240,6 +282,7 @@ export default function AdminDashboardPage() {
               </p>
 
               <button
+                type="button"
                 onClick={() =>
                   router.push("/admin/site-visits")
                 }
@@ -247,6 +290,7 @@ export default function AdminDashboardPage() {
                 View Bookings →
               </button>
             </div>
+
           </div>
         </section>
       </section>
