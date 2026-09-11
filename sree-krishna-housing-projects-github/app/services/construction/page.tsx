@@ -56,24 +56,26 @@ export default function ConstructionServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "55px",
-          paddingBottom: "45px",
+          paddingTop: "45px",
+          paddingBottom: "20px",
         }}
       >
         <div className="sectionHead">
           <div>
             <p
               className="eyebrow dark"
-              style={{ marginBottom: "8px" }}
+              style={{
+                marginBottom: "6px",
+              }}
             >
               CONSTRUCTION
             </p>
 
             <h1
               style={{
-                fontSize: "44px",
+                fontSize: "42px",
                 lineHeight: "1.15",
-                marginBottom: "12px",
+                margin: "0 0 10px",
               }}
             >
               Construction
@@ -82,8 +84,9 @@ export default function ConstructionServicesPage() {
             <p
               style={{
                 fontSize: "18px",
-                lineHeight: "1.7",
-                maxWidth: "1050px",
+                lineHeight: "1.6",
+                maxWidth: "1100px",
+                margin: 0,
               }}
             >
               Premium residential and commercial construction with
@@ -99,8 +102,8 @@ export default function ConstructionServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "20px",
-          paddingBottom: "55px",
+          paddingTop: "15px",
+          paddingBottom: "45px",
         }}
       >
         <div
@@ -108,7 +111,7 @@ export default function ConstructionServicesPage() {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "28px",
+            gap: "20px",
           }}
         >
           {services.map((service) => (
@@ -117,8 +120,8 @@ export default function ConstructionServicesPage() {
               key={service.title}
               style={{
                 width: "100%",
-                minHeight: "190px",
-                padding: "38px 40px",
+                minHeight: "175px",
+                padding: "32px 40px",
                 position: "relative",
                 boxSizing: "border-box",
               }}
@@ -127,8 +130,8 @@ export default function ConstructionServicesPage() {
                 style={{
                   fontSize: "30px",
                   lineHeight: "1.25",
-                  margin: "0 0 14px",
-                  maxWidth: "75%",
+                  margin: "0 0 12px",
+                  maxWidth: "78%",
                 }}
               >
                 {service.title}
@@ -137,7 +140,7 @@ export default function ConstructionServicesPage() {
               <p
                 style={{
                   fontSize: "17px",
-                  lineHeight: "1.7",
+                  lineHeight: "1.65",
                   margin: 0,
                   maxWidth: "78%",
                 }}
@@ -150,7 +153,7 @@ export default function ConstructionServicesPage() {
                 style={{
                   position: "absolute",
                   right: "38px",
-                  bottom: "30px",
+                  bottom: "28px",
                   fontSize: "17px",
                   fontWeight: 700,
                   color: "inherit",
@@ -169,8 +172,8 @@ export default function ConstructionServicesPage() {
       <section
         className="section muted"
         style={{
-          paddingTop: "65px",
-          paddingBottom: "65px",
+          paddingTop: "50px",
+          paddingBottom: "50px",
         }}
       >
         <div className="split">
@@ -181,9 +184,9 @@ export default function ConstructionServicesPage() {
 
             <h2
               style={{
-                fontSize: "38px",
+                fontSize: "36px",
                 lineHeight: "1.2",
-                marginTop: "8px",
+                marginTop: "6px",
               }}
             >
               Built With Quality From Foundation to Finish
@@ -194,7 +197,8 @@ export default function ConstructionServicesPage() {
             <p
               style={{
                 fontSize: "17px",
-                lineHeight: "1.7",
+                lineHeight: "1.65",
+                marginTop: 0,
               }}
             >
               Every construction project needs careful planning,
@@ -206,7 +210,7 @@ export default function ConstructionServicesPage() {
             <p
               style={{
                 fontSize: "17px",
-                lineHeight: "1.7",
+                lineHeight: "1.65",
               }}
             >
               Our focus is on practical construction, quality
@@ -221,8 +225,8 @@ export default function ConstructionServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "65px",
-          paddingBottom: "65px",
+          paddingTop: "50px",
+          paddingBottom: "50px",
         }}
       >
         <div className="split">
@@ -233,9 +237,9 @@ export default function ConstructionServicesPage() {
 
             <h2
               style={{
-                fontSize: "38px",
+                fontSize: "36px",
                 lineHeight: "1.2",
-                marginTop: "8px",
+                marginTop: "6px",
               }}
             >
               Quality Construction You Can Rely On
@@ -265,7 +269,7 @@ export default function ConstructionServicesPage() {
 
           <h2
             style={{
-              fontSize: "38px",
+              fontSize: "36px",
               lineHeight: "1.2",
             }}
           >
@@ -275,7 +279,7 @@ export default function ConstructionServicesPage() {
           <p
             style={{
               fontSize: "17px",
-              lineHeight: "1.7",
+              lineHeight: "1.65",
             }}
           >
             Talk to our team about your requirements and get
@@ -283,7 +287,13 @@ export default function ConstructionServicesPage() {
           </p>
         </div>
 
-        <div className="actions">
+        <div
+          className="actions"
+          style={{
+            display: "flex",
+            gap: "10px",
+          }}
+        >
           <Link href="/visit" className="btn gold">
             Book a Site Visit
           </Link>
