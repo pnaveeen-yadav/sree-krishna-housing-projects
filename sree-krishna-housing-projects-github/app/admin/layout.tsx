@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import "@/styles/admin.css";
 import { adminSupabase } from "@/lib/adminSupabase";
 
-const IDLE_TIMEOUT = 2 * 60 * 1000; // 2 minutes
+const IDLE_TIMEOUT = 5 * 60 * 1000; // 2 minutes
 
 export default function AdminLayout({
   children,
