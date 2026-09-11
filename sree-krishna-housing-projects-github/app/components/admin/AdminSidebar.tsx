@@ -31,12 +31,12 @@ export default function AdminSidebar() {
           src="/logo.webp"
           alt="Sree Krishna Housing Projects"
           className="adminLogo"
-
         />
         <p>Admin Panel</p>
       </div>
 
       <nav className="adminNav">
+        {/* Dashboard */}
         <Link
           href="/admin/dashboard"
           className={
@@ -49,6 +49,20 @@ export default function AdminSidebar() {
           <span>Dashboard</span>
         </Link>
 
+        {/* Home */}
+        <Link
+          href="/admin/home"
+          className={
+            isActive("/admin/home")
+              ? "adminNavLink active"
+              : "adminNavLink"
+          }
+        >
+          <span className="adminNavIcon">🏠</span>
+          <span>Home</span>
+        </Link>
+
+        {/* Properties */}
         <Link
           href="/admin/properties"
           className={
@@ -61,6 +75,7 @@ export default function AdminSidebar() {
           <span>Properties</span>
         </Link>
 
+        {/* Enquiries */}
         <Link
           href="/admin/enquiries"
           className={
@@ -73,6 +88,7 @@ export default function AdminSidebar() {
           <span>Enquiries</span>
         </Link>
 
+        {/* Site Visits */}
         <Link
           href="/admin/site-visits"
           className={
