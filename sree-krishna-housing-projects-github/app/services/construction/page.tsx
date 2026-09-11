@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Property Consultant in Tirupati",
+  title: "Construction Services in Tirupati",
   description:
-    "Professional property consultation services in Tirupati covering property selection, investment consultation, due diligence guidance, market and location consultation, and buying and selling assistance.",
+    "Reliable construction services in Tirupati including residential construction, commercial construction, renovation, remodeling, project management and site development.",
   keywords: [
-    "property consultant in Tirupati",
-    "property consultation Tirupati",
-    "real estate consultant Tirupati",
-    "property advisor Tirupati",
-    "real estate consultant in Tirupati",
-    "property investment consultant Tirupati",
-    "property buying assistance Tirupati",
-    "property selling assistance Tirupati",
+    "construction services in Tirupati",
+    "construction company in Tirupati",
+    "residential construction Tirupati",
+    "commercial construction Tirupati",
+    "building construction Tirupati",
+    "renovation services Tirupati",
+    "construction project management Tirupati",
+    "site development Tirupati",
     "Sree Krishna Housing Projects",
   ],
   alternates: {
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
       "https://www.sreekrishnahousingprojects.com/services/construction",
   },
   openGraph: {
-    title: "Property Consultant in Tirupati",
+    title: "Construction Services in Tirupati",
     description:
-      "Professional property consultation and real estate guidance services in Tirupati.",
+      "Reliable residential, commercial, renovation, remodeling, project management and site development services in Tirupati.",
     url: "https://www.sreekrishnahousingprojects.com/services/construction",
     siteName: "Sree Krishna Housing Projects",
     type: "website",
@@ -31,35 +31,36 @@ export const metadata: Metadata = {
   },
 };
 
+
 const services = [
   {
-    title: "Property Selection & Guidance",
+    title: "Residential Home Construction",
     description:
-      "Understand your requirements, budget and priorities and get practical guidance while choosing a suitable property.",
+      "Custom-built villas and independent houses designed to reflect your lifestyle, using quality materials and experienced craftsmanship.",
   },
   {
-    title: "Investment Consultation",
+    title: "Commercial Building Construction",
     description:
-      "Evaluate property opportunities with a focus on location, budget, future potential and long-term investment considerations.",
+      "Functional and well-planned commercial spaces, offices, retail buildings and other projects delivered with attention to quality and timelines.",
   },
   {
-    title: "Property Due Diligence Guidance",
+    title: "Turnkey Project Execution",
     description:
-      "Get practical support in understanding property documents, approvals and important checks before moving forward.",
+      "End-to-end construction support covering planning, execution, coordination and finishing, so your project is handled with greater convenience.",
   },
   {
-    title: "Market & Location Consultation",
+    title: "Renovation & Structural Modifications",
     description:
-      "Make better property decisions with guidance on locations, surrounding development and important market considerations.",
+      "Modernizing existing spaces through renovation, layout improvements, structural modifications and practical design upgrades.",
   },
   {
-    title: "Buying & Selling Assistance",
+    title: "Quality & Stage-wise Inspection",
     description:
-      "Professional support through the buying or selling process, helping make property transactions clearer and more convenient.",
+      "Quality-focused checks throughout construction to help maintain material standards, workmanship and overall project quality.",
   },
 ];
 
-export default function ConsultingServicesPage() {
+export default function ConstructionServicesPage() {
   return (
     <main className="propertyDetailsPage">
       {/* HEADER */}
@@ -88,12 +89,11 @@ export default function ConsultingServicesPage() {
         className="section"
         style={{
           paddingTop: "45px",
-          paddingBottom: "5px",
+          paddingBottom: "20px",
         }}
       >
         <div className="sectionHead">
           <div>
-            {/* BACK TO SERVICES */}
             <Link
               href="/#services"
               style={{
@@ -114,7 +114,7 @@ export default function ConsultingServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              PROPERTY CONSULTING
+              CONSTRUCTION
             </p>
 
             <h1
@@ -124,7 +124,7 @@ export default function ConsultingServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Consulting
+              Construction
             </h1>
 
             <p
@@ -135,11 +135,10 @@ export default function ConsultingServicesPage() {
                 margin: 0,
               }}
             >
-              Practical property consultation to help you make
-              confident decisions. From choosing the right property
-              to understanding locations, documents and investment
-              considerations, we provide clear guidance at every
-              stage.
+              Premium residential and commercial construction with
+              uncompromising quality assurance. From foundation to
+              finish, we focus on structural integrity, practical
+              planning and a high standard of workmanship.
             </p>
           </div>
         </div>
@@ -149,7 +148,7 @@ export default function ConsultingServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "5px",
+          paddingTop: "15px",
           paddingBottom: "45px",
         }}
       >
@@ -236,7 +235,7 @@ export default function ConsultingServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Clear Advice. Better Property Decisions.
+              Built With Quality From Foundation to Finish
             </h2>
           </div>
 
@@ -248,9 +247,10 @@ export default function ConsultingServicesPage() {
                 marginTop: 0,
               }}
             >
-              Property decisions involve more than price. Location,
-              purpose, documentation, future potential and personal
-              requirements all need to be considered.
+              Every construction project needs careful planning,
+              reliable execution and attention to detail. We work to
+              understand the customer's requirements before moving
+              into execution.
             </p>
 
             <p
@@ -259,9 +259,9 @@ export default function ConsultingServicesPage() {
                 lineHeight: "1.65",
               }}
             >
-              We aim to make the process easier by understanding your
-              needs first and then providing practical,
-              straightforward guidance.
+              Our focus is on practical construction, quality
+              workmanship, clear communication and timely progress
+              throughout the project.
             </p>
           </div>
         </div>
@@ -288,7 +288,7 @@ export default function ConsultingServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Guidance Built Around Your Requirements
+              Quality Construction You Can Rely On
             </h2>
           </div>
 
@@ -298,10 +298,10 @@ export default function ConsultingServicesPage() {
               fontSize: "17px",
             }}
           >
-            <span>✓ Clear and practical guidance</span>
-            <span>✓ Customer-focused consultation</span>
-            <span>✓ Location and property insights</span>
+            <span>✓ Quality-focused workmanship</span>
+            <span>✓ Practical project planning</span>
             <span>✓ Transparent communication</span>
+            <span>✓ Reliable customer support</span>
           </div>
         </div>
       </section>
@@ -310,7 +310,7 @@ export default function ConsultingServicesPage() {
       <section className="visit">
         <div>
           <p className="eyebrow">
-            MAKE YOUR NEXT PROPERTY DECISION WITH CONFIDENCE
+            LET&apos;S BUILD TOGETHER
           </p>
 
           <h2
@@ -319,7 +319,7 @@ export default function ConsultingServicesPage() {
               lineHeight: "1.2",
             }}
           >
-            Need Property Guidance?
+            Planning Your Construction Project?
           </h2>
 
           <p
@@ -328,8 +328,8 @@ export default function ConsultingServicesPage() {
               lineHeight: "1.65",
             }}
           >
-            Tell us what you are looking for and our team will help
-            you understand the available options.
+            Talk to our team about your requirements and get
+            professional guidance for your construction project.
           </p>
         </div>
 

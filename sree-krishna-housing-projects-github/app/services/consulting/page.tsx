@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Land Development Services in Tirupati",
+  title: "Property Consultant in Tirupati",
   description:
-    "Land development services in Tirupati including feasibility planning, layout development, infrastructure development, approvals coordination and site execution.",
+    "Professional property consultation services in Tirupati covering property selection, investment consultation, due diligence guidance, market and location consultation, and buying and selling assistance.",
   keywords: [
-    "land development in Tirupati",
-    "land development services Tirupati",
-    "land development company Tirupati",
-    "layout development Tirupati",
-    "residential layout development Tirupati",
-    "site development Tirupati",
-    "infrastructure development Tirupati",
-    "land feasibility Tirupati",
+    "property consultant in Tirupati",
+    "property consultation Tirupati",
+    "real estate consultant Tirupati",
+    "property advisor Tirupati",
+    "real estate consultant in Tirupati",
+    "property investment consultant Tirupati",
+    "property buying assistance Tirupati",
+    "property selling assistance Tirupati",
     "Sree Krishna Housing Projects",
   ],
   alternates: {
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
       "https://www.sreekrishnahousingprojects.com/services/consulting",
   },
   openGraph: {
-    title: "Land Development Services in Tirupati",
+    title: "Property Consultant in Tirupati",
     description:
-      "Professional land development, layout planning, infrastructure and site development support in Tirupati.",
+      "Professional property consultation and real estate guidance services in Tirupati.",
     url: "https://www.sreekrishnahousingprojects.com/services/consulting",
     siteName: "Sree Krishna Housing Projects",
     type: "website",
@@ -33,33 +33,33 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    title: "Land Feasibility & Planning",
+    title: "Property Selection & Guidance",
     description:
-      "Practical assessment of land requirements, development possibilities and planning considerations before starting a project.",
+      "Understand your requirements, budget and priorities and get practical guidance while choosing a suitable property.",
   },
   {
-    title: "Layout & Development Support",
+    title: "Investment Consultation",
     description:
-      "Guidance for developing land into well-planned residential layouts with attention to access, usability and overall planning.",
+      "Evaluate property opportunities with a focus on location, budget, future potential and long-term investment considerations.",
   },
   {
-    title: "Infrastructure Development",
+    title: "Property Due Diligence Guidance",
     description:
-      "Support for essential development requirements such as internal roads, drainage, utilities and other site infrastructure.",
+      "Get practical support in understanding property documents, approvals and important checks before moving forward.",
   },
   {
-    title: "Approvals & Development Coordination",
+    title: "Market & Location Consultation",
     description:
-      "Assistance in understanding development requirements and coordinating the important stages of the development process.",
+      "Make better property decisions with guidance on locations, surrounding development and important market considerations.",
   },
   {
-    title: "Site Development & Execution",
+    title: "Buying & Selling Assistance",
     description:
-      "Professional support for site preparation and development work with a focus on quality, planning and timely execution.",
+      "Professional support through the buying or selling process, helping make property transactions clearer and more convenient.",
   },
 ];
 
-export default function LandDevelopmentServicesPage() {
+export default function ConsultingServicesPage() {
   return (
     <main className="propertyDetailsPage">
       {/* HEADER */}
@@ -114,7 +114,7 @@ export default function LandDevelopmentServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              LAND DEVELOPMENT
+              PROPERTY CONSULTING
             </p>
 
             <h1
@@ -124,7 +124,7 @@ export default function LandDevelopmentServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Land Development
+              Consulting
             </h1>
 
             <p
@@ -135,9 +135,11 @@ export default function LandDevelopmentServicesPage() {
                 margin: 0,
               }}
             >
-              Transforming land into thoughtfully planned and usable
-              developments through practical planning, infrastructure
-              support and quality-focused execution.
+              Practical property consultation to help you make
+              confident decisions. From choosing the right property
+              to understanding locations, documents and investment
+              considerations, we provide clear guidance at every
+              stage.
             </p>
           </div>
         </div>
@@ -234,7 +236,7 @@ export default function LandDevelopmentServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Planned Development With Long-Term Value in Mind
+              Clear Advice. Better Property Decisions.
             </h2>
           </div>
 
@@ -246,9 +248,9 @@ export default function LandDevelopmentServicesPage() {
                 marginTop: 0,
               }}
             >
-              Successful land development starts with understanding
-              the site, its requirements and the intended use of the
-              property.
+              Property decisions involve more than price. Location,
+              purpose, documentation, future potential and personal
+              requirements all need to be considered.
             </p>
 
             <p
@@ -257,9 +259,9 @@ export default function LandDevelopmentServicesPage() {
                 lineHeight: "1.65",
               }}
             >
-              We focus on practical planning and coordinated
-              execution so that development work is organised,
-              useful and aligned with the project&apos;s objectives.
+              We aim to make the process easier by understanding your
+              needs first and then providing practical,
+              straightforward guidance.
             </p>
           </div>
         </div>
@@ -286,7 +288,7 @@ export default function LandDevelopmentServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Development Focused On Quality & Practicality
+              Guidance Built Around Your Requirements
             </h2>
           </div>
 
@@ -296,10 +298,10 @@ export default function LandDevelopmentServicesPage() {
               fontSize: "17px",
             }}
           >
-            <span>✓ Practical development planning</span>
-            <span>✓ Quality-focused execution</span>
-            <span>✓ Coordinated project support</span>
-            <span>✓ Clear customer communication</span>
+            <span>✓ Clear and practical guidance</span>
+            <span>✓ Customer-focused consultation</span>
+            <span>✓ Location and property insights</span>
+            <span>✓ Transparent communication</span>
           </div>
         </div>
       </section>
@@ -308,7 +310,7 @@ export default function LandDevelopmentServicesPage() {
       <section className="visit">
         <div>
           <p className="eyebrow">
-            READY TO DEVELOP YOUR LAND?
+            MAKE YOUR NEXT PROPERTY DECISION WITH CONFIDENCE
           </p>
 
           <h2
@@ -317,7 +319,7 @@ export default function LandDevelopmentServicesPage() {
               lineHeight: "1.2",
             }}
           >
-            Let&apos;s Discuss Your Development Plan
+            Need Property Guidance?
           </h2>
 
           <p
@@ -326,8 +328,8 @@ export default function LandDevelopmentServicesPage() {
               lineHeight: "1.65",
             }}
           >
-            Share your land development requirements with our team
-            and get practical guidance for the next steps.
+            Tell us what you are looking for and our team will help
+            you understand the available options.
           </p>
         </div>
 
