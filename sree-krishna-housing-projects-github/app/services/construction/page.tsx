@@ -56,8 +56,8 @@ export default function ConstructionServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "45px",
-          paddingBottom: "20px",
+          paddingTop: "30px",
+          paddingBottom: "5px",
         }}
       >
         <div className="sectionHead">
