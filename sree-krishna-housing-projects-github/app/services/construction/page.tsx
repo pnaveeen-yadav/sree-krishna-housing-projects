@@ -18,13 +18,13 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical:
-      "https://www.sreekrishnahousingprojects.com/services/consulting",
+      "https://www.sreekrishnahousingprojects.com/services/construction",
   },
   openGraph: {
     title: "Property Consultant in Tirupati",
     description:
       "Professional property consultation and real estate guidance services in Tirupati.",
-    url: "https://www.sreekrishnahousingprojects.com/services/consulting",
+    url: "https://www.sreekrishnahousingprojects.com/services/construction",
     siteName: "Sree Krishna Housing Projects",
     type: "website",
     locale: "en_IN",
