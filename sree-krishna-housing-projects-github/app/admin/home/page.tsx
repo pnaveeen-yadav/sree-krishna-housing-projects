@@ -25,6 +25,8 @@ type LegacyServices = {
   items?: {
     title: string;
     description: string;
+    learnMore?: string;
+    link?: string;
   }[];
 };
 
@@ -76,6 +78,8 @@ interface HomeContent {
     items: {
       title: string;
       description: string;
+      learnMore: string;
+      link: string;
     }[];
   };
 
@@ -117,6 +121,15 @@ interface HomeContent {
     location: string;
   };
 }
+
+const DEFAULT_SERVICE_LINKS = [
+  "/services/construction",
+  "/services/consulting",
+  "/services/land-development",
+  "/services/property-transactions",
+];
+
+const DEFAULT_SERVICE_LEARN_MORE = "LEARN MORE →";
 
 const DEFAULT_CONTENT: HomeContent = {
   hero: {
@@ -172,21 +185,29 @@ const DEFAULT_CONTENT: HomeContent = {
         title: "Open Plot Development",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: DEFAULT_SERVICE_LEARN_MORE,
+        link: DEFAULT_SERVICE_LINKS[0],
       },
       {
         title: "Residential Properties",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: DEFAULT_SERVICE_LEARN_MORE,
+        link: DEFAULT_SERVICE_LINKS[1],
       },
       {
         title: "Construction Services",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: DEFAULT_SERVICE_LEARN_MORE,
+        link: DEFAULT_SERVICE_LINKS[2],
       },
       {
         title: "Property Consultation",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: DEFAULT_SERVICE_LEARN_MORE,
+        link: DEFAULT_SERVICE_LINKS[3],
       },
     ],
   },
@@ -353,7 +374,16 @@ export default function AdminHomePage() {
                 Array.isArray(savedServices?.items) &&
                 savedServices.items.length > 0
               ) {
-                return savedServices.items;
+                return savedServices.items.map((item, itemIndex) => ({
+                  title: item.title || "",
+                  description: item.description || "",
+                  learnMore:
+                    item.learnMore || DEFAULT_SERVICE_LEARN_MORE,
+                  link:
+                    item.link ||
+                    DEFAULT_SERVICE_LINKS[itemIndex] ||
+                    "#",
+                }));
               }
 
               return [
@@ -364,6 +394,8 @@ export default function AdminHomePage() {
                   description:
                     savedServices?.service1Description ||
                     DEFAULT_CONTENT.services.items[0].description,
+                  learnMore: DEFAULT_SERVICE_LEARN_MORE,
+                  link: DEFAULT_SERVICE_LINKS[0],
                 },
                 {
                   title:
@@ -372,6 +404,8 @@ export default function AdminHomePage() {
                   description:
                     savedServices?.service2Description ||
                     DEFAULT_CONTENT.services.items[1].description,
+                  learnMore: DEFAULT_SERVICE_LEARN_MORE,
+                  link: DEFAULT_SERVICE_LINKS[1],
                 },
                 {
                   title:
@@ -380,6 +414,8 @@ export default function AdminHomePage() {
                   description:
                     savedServices?.service3Description ||
                     DEFAULT_CONTENT.services.items[2].description,
+                  learnMore: DEFAULT_SERVICE_LEARN_MORE,
+                  link: DEFAULT_SERVICE_LINKS[2],
                 },
                 {
                   title:
@@ -388,6 +424,8 @@ export default function AdminHomePage() {
                   description:
                     savedServices?.service4Description ||
                     DEFAULT_CONTENT.services.items[3].description,
+                  learnMore: DEFAULT_SERVICE_LEARN_MORE,
+                  link: DEFAULT_SERVICE_LINKS[3],
                 },
               ];
             })(),
@@ -561,7 +599,7 @@ export default function AdminHomePage() {
 
   const updateServiceItem = (
     index: number,
-    field: "title" | "description",
+    field: "title" | "description" | "learnMore" | "link",
     value: string
   ) => {
     setContent((previous) => ({
@@ -584,7 +622,12 @@ export default function AdminHomePage() {
         ...previous.services,
         items: [
           ...previous.services.items,
-          { title: "", description: "" },
+          {
+            title: "",
+            description: "",
+            learnMore: DEFAULT_SERVICE_LEARN_MORE,
+            link: "#",
+          },
         ],
       },
     }));
@@ -1453,6 +1496,47 @@ export default function AdminHomePage() {
                       )
                     }
                   />
+
+                  <div className={styles.formGrid}>
+                    <Field
+                      label="Learn More Text"
+                      value={service.learnMore}
+                      onChange={(value) =>
+                        updateServiceItem(
+                          index,
+                          "learnMore",
+                          value
+                        )
+                      }
+                    />
+
+                    <Field
+                      label="Learn More Link"
+                      value={service.link}
+                      onChange={(value) =>
+                        updateServiceItem(
+                          index,
+                          "link",
+                          value
+                        )
+                      }
+                    />
+                  </div>
+
+                  <div
+                    style={{
+                      marginTop: "12px",
+                      padding: "10px 12px",
+                      borderRadius: "8px",
+                      background: "rgba(194, 153, 79, 0.08)",
+                      border: "1px solid rgba(194, 153, 79, 0.18)",
+                      fontSize: "13px",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    The public service cards use a hover lift/shadow
+                    effect. No separate setting is required here.
+                  </div>
                 </div>
               )
             )}

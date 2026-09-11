@@ -78,6 +78,8 @@ interface HomeContent {
     items?: {
       title: string;
       description: string;
+      learnMore?: string;
+      link?: string;
     }[];
   };
 
@@ -197,21 +199,29 @@ const DEFAULT_CONTENT: HomeContent = {
         title: "Open Plot Development",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: "LEARN MORE →",
+        link: "/services/construction",
       },
       {
         title: "Residential Properties",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: "LEARN MORE →",
+        link: "/services/consulting",
       },
       {
         title: "Construction Services",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: "LEARN MORE →",
+        link: "/services/land-development",
       },
       {
         title: "Property Consultation",
         description:
           "Professional support to help you make confident property decisions.",
+        learnMore: "LEARN MORE →",
+        link: "/services/property-transactions",
       },
     ],
   },
@@ -361,7 +371,20 @@ export default function Home() {
           items:
             Array.isArray(data.content.services?.items) &&
             data.content.services.items.length > 0
-              ? data.content.services.items
+              ? data.content.services.items.map((item, itemIndex) => ({
+                  title: item.title || "",
+                  description: item.description || "",
+                  learnMore: item.learnMore || "LEARN MORE →",
+                  link:
+                    item.link ||
+                    [
+                      "/services/construction",
+                      "/services/consulting",
+                      "/services/land-development",
+                      "/services/property-transactions",
+                    ][itemIndex] ||
+                    "#",
+                }))
               : [
                   {
                     title:
@@ -370,6 +393,8 @@ export default function Home() {
                     description:
                       data.content.services?.service1Description ||
                       DEFAULT_CONTENT.services.items![0].description,
+                    learnMore: "LEARN MORE →",
+                    link: "/services/construction",
                   },
                   {
                     title:
@@ -378,6 +403,8 @@ export default function Home() {
                     description:
                       data.content.services?.service2Description ||
                       DEFAULT_CONTENT.services.items![1].description,
+                    learnMore: "LEARN MORE →",
+                    link: "/services/consulting",
                   },
                   {
                     title:
@@ -386,6 +413,8 @@ export default function Home() {
                     description:
                       data.content.services?.service3Description ||
                       DEFAULT_CONTENT.services.items![2].description,
+                    learnMore: "LEARN MORE →",
+                    link: "/services/land-development",
                   },
                   {
                     title:
@@ -394,6 +423,8 @@ export default function Home() {
                     description:
                       data.content.services?.service4Description ||
                       DEFAULT_CONTENT.services.items![3].description,
+                    learnMore: "LEARN MORE →",
+                    link: "/services/property-transactions",
                   },
                 ],
         },
@@ -795,23 +826,13 @@ export default function Home() {
           {(content.services.items || []).map(
             (service, index) => (
               <Link
-                href={
-                  index === 0
-                    ? "/services/construction"
-                    : index === 1
-                    ? "/services/consulting"
-                    : index === 2
-                    ? "/services/land-development"
-                    : index === 3
-                    ? "/services/property-transactions"
-                    : "#"
-                }
+                href={service.link || "#"}
                 className="service"
                 key={`${service.title}-${index}`}
                 style={{
                   color: "inherit",
                   textDecoration: "none",
-                  cursor: index < 4 ? "pointer" : "default",
+                  cursor: service.link && service.link !== "#" ? "pointer" : "default",
                 }}
               >
                 <h3>
@@ -823,7 +844,7 @@ export default function Home() {
                 </p>
 
                 <span className="serviceLearnMore">
-                  LEARN MORE <span aria-hidden="true">→</span>
+                  {service.learnMore || "LEARN MORE →"}
                 </span>
               </Link>
             )
