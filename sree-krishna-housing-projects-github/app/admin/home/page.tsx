@@ -11,6 +11,23 @@ import { adminSupabase } from "@/lib/adminSupabase";
 import AdminSidebar from "@/app/components/admin/AdminSidebar";
 import styles from "./HomeEditor.module.css";
 
+type LegacyServices = {
+  eyebrow?: string;
+  title?: string;
+  service1Title?: string;
+  service1Description?: string;
+  service2Title?: string;
+  service2Description?: string;
+  service3Title?: string;
+  service3Description?: string;
+  service4Title?: string;
+  service4Description?: string;
+  items?: {
+    title: string;
+    description: string;
+  }[];
+};
+
 interface HomeContent {
   hero: {
     eyebrow: string;
@@ -33,14 +50,18 @@ interface HomeContent {
   };
 
   stats: {
-    stat1Number: string;
-    stat1Label: string;
-    stat2Number: string;
-    stat2Label: string;
-    stat3Number: string;
-    stat3Label: string;
-    stat4Number: string;
-    stat4Label: string;
+    stat1Number?: string;
+    stat1Label?: string;
+    stat2Number?: string;
+    stat2Label?: string;
+    stat3Number?: string;
+    stat3Label?: string;
+    stat4Number?: string;
+    stat4Label?: string;
+    items: {
+      number: string;
+      label: string;
+    }[];
   };
 
   properties: {
@@ -129,6 +150,12 @@ const DEFAULT_CONTENT: HomeContent = {
     stat3Label: "Projects",
     stat4Number: "100%",
     stat4Label: "Commitment",
+    items: [
+      { number: "10+", label: "Years Experience" },
+      { number: "100+", label: "Happy Customers" },
+      { number: "25+", label: "Projects" },
+      { number: "100%", label: "Commitment" },
+    ],
   },
 
   properties: {
@@ -270,6 +297,44 @@ export default function AdminHomePage() {
           stats: {
             ...DEFAULT_CONTENT.stats,
             ...(saved.stats || {}),
+            items:
+              Array.isArray(saved.stats?.items) &&
+              saved.stats.items.length > 0
+                ? saved.stats.items
+                : [
+                    {
+                      number:
+                        saved.stats?.stat1Number ||
+                        DEFAULT_CONTENT.stats.items[0].number,
+                      label:
+                        saved.stats?.stat1Label ||
+                        DEFAULT_CONTENT.stats.items[0].label,
+                    },
+                    {
+                      number:
+                        saved.stats?.stat2Number ||
+                        DEFAULT_CONTENT.stats.items[1].number,
+                      label:
+                        saved.stats?.stat2Label ||
+                        DEFAULT_CONTENT.stats.items[1].label,
+                    },
+                    {
+                      number:
+                        saved.stats?.stat3Number ||
+                        DEFAULT_CONTENT.stats.items[2].number,
+                      label:
+                        saved.stats?.stat3Label ||
+                        DEFAULT_CONTENT.stats.items[2].label,
+                    },
+                    {
+                      number:
+                        saved.stats?.stat4Number ||
+                        DEFAULT_CONTENT.stats.items[3].number,
+                      label:
+                        saved.stats?.stat4Label ||
+                        DEFAULT_CONTENT.stats.items[3].label,
+                    },
+                  ],
           },
 
           properties: {
@@ -280,44 +345,52 @@ export default function AdminHomePage() {
           services: {
             ...DEFAULT_CONTENT.services,
             ...(saved.services || {}),
-            items:
-              Array.isArray(saved.services?.items) &&
-              saved.services.items.length > 0
-                ? saved.services.items
-                : [
-                    {
-                      title:
-                        saved.services?.service1Title ||
-                        DEFAULT_CONTENT.services.items[0].title,
-                      description:
-                        saved.services?.service1Description ||
-                        DEFAULT_CONTENT.services.items[0].description,
-                    },
-                    {
-                      title:
-                        saved.services?.service2Title ||
-                        DEFAULT_CONTENT.services.items[1].title,
-                      description:
-                        saved.services?.service2Description ||
-                        DEFAULT_CONTENT.services.items[1].description,
-                    },
-                    {
-                      title:
-                        saved.services?.service3Title ||
-                        DEFAULT_CONTENT.services.items[2].title,
-                      description:
-                        saved.services?.service3Description ||
-                        DEFAULT_CONTENT.services.items[2].description,
-                    },
-                    {
-                      title:
-                        saved.services?.service4Title ||
-                        DEFAULT_CONTENT.services.items[3].title,
-                      description:
-                        saved.services?.service4Description ||
-                        DEFAULT_CONTENT.services.items[3].description,
-                    },
-                  ],
+            items: (() => {
+              const savedServices =
+                saved.services as LegacyServices | undefined;
+
+              if (
+                Array.isArray(savedServices?.items) &&
+                savedServices.items.length > 0
+              ) {
+                return savedServices.items;
+              }
+
+              return [
+                {
+                  title:
+                    savedServices?.service1Title ||
+                    DEFAULT_CONTENT.services.items[0].title,
+                  description:
+                    savedServices?.service1Description ||
+                    DEFAULT_CONTENT.services.items[0].description,
+                },
+                {
+                  title:
+                    savedServices?.service2Title ||
+                    DEFAULT_CONTENT.services.items[1].title,
+                  description:
+                    savedServices?.service2Description ||
+                    DEFAULT_CONTENT.services.items[1].description,
+                },
+                {
+                  title:
+                    savedServices?.service3Title ||
+                    DEFAULT_CONTENT.services.items[2].title,
+                  description:
+                    savedServices?.service3Description ||
+                    DEFAULT_CONTENT.services.items[2].description,
+                },
+                {
+                  title:
+                    savedServices?.service4Title ||
+                    DEFAULT_CONTENT.services.items[3].title,
+                  description:
+                    savedServices?.service4Description ||
+                    DEFAULT_CONTENT.services.items[3].description,
+                },
+              ];
+            })(),
           },
 
           contact: {
@@ -403,16 +476,45 @@ export default function AdminHomePage() {
     ========================================================
   */
 
-  const updateStats = (
-    field: keyof HomeContent["stats"],
+  const updateStatItem = (
+    index: number,
+    field: "number" | "label",
     value: string
   ) => {
     setContent((previous) => ({
       ...previous,
-
       stats: {
         ...previous.stats,
-        [field]: value,
+        items: previous.stats.items.map((item, itemIndex) =>
+          itemIndex === index
+            ? { ...item, [field]: value }
+            : item
+        ),
+      },
+    }));
+  };
+
+  const addStat = () => {
+    setContent((previous) => ({
+      ...previous,
+      stats: {
+        ...previous.stats,
+        items: [
+          ...previous.stats.items,
+          { number: "", label: "" },
+        ],
+      },
+    }));
+  };
+
+  const deleteStat = (index: number) => {
+    setContent((previous) => ({
+      ...previous,
+      stats: {
+        ...previous.stats,
+        items: previous.stats.items.filter(
+          (_, itemIndex) => itemIndex !== index
+        ),
       },
     }));
   };
@@ -449,6 +551,7 @@ export default function AdminHomePage() {
   ) => {
     setContent((previous) => ({
       ...previous,
+
       services: {
         ...previous.services,
         [field]: value,
@@ -461,21 +564,42 @@ export default function AdminHomePage() {
     field: "title" | "description",
     value: string
   ) => {
-    setContent((previous) => {
-      const items = [...previous.services.items];
-      items[index] = {
-        ...items[index],
-        [field]: value,
-      };
+    setContent((previous) => ({
+      ...previous,
+      services: {
+        ...previous.services,
+        items: previous.services.items.map((item, itemIndex) =>
+          itemIndex === index
+            ? { ...item, [field]: value }
+            : item
+        ),
+      },
+    }));
+  };
 
-      return {
-        ...previous,
-        services: {
-          ...previous.services,
-          items,
-        },
-      };
-    });
+  const addService = () => {
+    setContent((previous) => ({
+      ...previous,
+      services: {
+        ...previous.services,
+        items: [
+          ...previous.services.items,
+          { title: "", description: "" },
+        ],
+      },
+    }));
+  };
+
+  const deleteService = (index: number) => {
+    setContent((previous) => ({
+      ...previous,
+      services: {
+        ...previous.services,
+        items: previous.services.items.filter(
+          (_, itemIndex) => itemIndex !== index
+        ),
+      },
+    }));
   };
 
   /*
@@ -1083,104 +1207,91 @@ export default function AdminHomePage() {
         <EditorSection
           number="03"
           title="Statistics"
-          description="Edit the four statistics displayed in the About section."
+          description="Add, edit or delete the statistics displayed in the About section."
         >
           <div
             className={
               styles.statsGrid
             }
           >
-            <StatCard
-              number={
-                content.stats
-                  .stat1Number
-              }
-              label={
-                content.stats
-                  .stat1Label
-              }
-              onNumberChange={(value) =>
-                updateStats(
-                  "stat1Number",
-                  value
-                )
-              }
-              onLabelChange={(value) =>
-                updateStats(
-                  "stat1Label",
-                  value
-                )
-              }
-            />
+            {content.stats.items.map((stat, index) => (
+              <div
+                className={styles.statCard}
+                key={`stat-${index}`}
+                style={{
+                  position: "relative",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    deleteStat(index)
+                  }
+                  aria-label={`Delete statistic ${index + 1}`}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    border: "none",
+                    background: "transparent",
+                    color: "#b42318",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                    lineHeight: 1,
+                    padding: "4px",
+                  }}
+                >
+                  🗑️
+                </button>
 
-            <StatCard
-              number={
-                content.stats
-                  .stat2Number
-              }
-              label={
-                content.stats
-                  .stat2Label
-              }
-              onNumberChange={(value) =>
-                updateStats(
-                  "stat2Number",
-                  value
-                )
-              }
-              onLabelChange={(value) =>
-                updateStats(
-                  "stat2Label",
-                  value
-                )
-              }
-            />
+                <Field
+                  label="Number"
+                  value={stat.number}
+                  onChange={(value) =>
+                    updateStatItem(
+                      index,
+                      "number",
+                      value
+                    )
+                  }
+                />
 
-            <StatCard
-              number={
-                content.stats
-                  .stat3Number
-              }
-              label={
-                content.stats
-                  .stat3Label
-              }
-              onNumberChange={(value) =>
-                updateStats(
-                  "stat3Number",
-                  value
-                )
-              }
-              onLabelChange={(value) =>
-                updateStats(
-                  "stat3Label",
-                  value
-                )
-              }
-            />
+                <Field
+                  label="Label"
+                  value={stat.label}
+                  onChange={(value) =>
+                    updateStatItem(
+                      index,
+                      "label",
+                      value
+                    )
+                  }
+                />
+              </div>
+            ))}
+          </div>
 
-            <StatCard
-              number={
-                content.stats
-                  .stat4Number
-              }
-              label={
-                content.stats
-                  .stat4Label
-              }
-              onNumberChange={(value) =>
-                updateStats(
-                  "stat4Number",
-                  value
-                )
-              }
-              onLabelChange={(value) =>
-                updateStats(
-                  "stat4Label",
-                  value
-                )
-              }
-            />
+          <div
+            style={{
+              marginTop: "16px",
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <button
+              type="button"
+              onClick={addStat}
+              style={{
+                border: "1px solid rgba(0,0,0,0.12)",
+                borderRadius: "8px",
+                padding: "10px 14px",
+                background: "#fff",
+                cursor: "pointer",
+                font: "inherit",
+              }}
+            >
+              + Add Statistic
+            </button>
           </div>
         </EditorSection>
 
@@ -1245,55 +1356,129 @@ export default function AdminHomePage() {
         <EditorSection
           number="05"
           title="Services"
-          description="Edit the services section and all service descriptions."
+          description="Add, edit or delete services displayed on the home page."
         >
           <div className={styles.formStack}>
             <Field
               label="Eyebrow"
-              value={content.services.eyebrow}
+              value={
+                content.services
+                  .eyebrow
+              }
               onChange={(value) =>
-                updateServices("eyebrow", value)
+                updateServices(
+                  "eyebrow",
+                  value
+                )
               }
             />
 
             <Field
               label="Title"
-              value={content.services.title}
+              value={
+                content.services
+                  .title
+              }
               onChange={(value) =>
-                updateServices("title", value)
+                updateServices(
+                  "title",
+                  value
+                )
               }
             />
 
-            {content.services.items.map((service, index) => (
-              <div
-                key={`service-${index}`}
-                className={styles.formStack}
-              >
-                <div className={styles.subHeading}>
-                  Service {index + 1}
+            {content.services.items.map(
+              (service, index) => (
+                <div
+                  key={`service-${index}`}
+                  style={{
+                    position: "relative",
+                    padding: "18px",
+                    border: "1px solid rgba(0,0,0,0.10)",
+                    borderRadius: "10px",
+                    marginTop: "8px",
+                  }}
+                >
+                  <div
+                    className={styles.subHeading}
+                    style={{
+                      paddingRight: "36px",
+                    }}
+                  >
+                    Service {index + 1}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      deleteService(index)
+                    }
+                    aria-label={`Delete service ${index + 1}`}
+                    style={{
+                      position: "absolute",
+                      top: "14px",
+                      right: "14px",
+                      border: "none",
+                      background: "transparent",
+                      color: "#b42318",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                      lineHeight: 1,
+                      padding: "4px",
+                    }}
+                  >
+                    🗑️
+                  </button>
+
+                  <Field
+                    label="Service Title"
+                    value={service.title}
+                    onChange={(value) =>
+                      updateServiceItem(
+                        index,
+                        "title",
+                        value
+                      )
+                    }
+                  />
+
+                  <TextArea
+                    label="Description"
+                    value={service.description}
+                    onChange={(value) =>
+                      updateServiceItem(
+                        index,
+                        "description",
+                        value
+                      )
+                    }
+                  />
                 </div>
+              )
+            )}
 
-                <Field
-                  label="Service Title"
-                  value={service.title}
-                  onChange={(value) =>
-                    updateServiceItem(index, "title", value)
-                  }
-                />
-
-                <TextArea
-                  label="Description"
-                  value={service.description}
-                  onChange={(value) =>
-                    updateServiceItem(
-                      index,
-                      "description",
-                      value
-                    )
-                  }
-                />
-              </div>
-            ))}
+            <div
+              style={{
+                marginTop: "8px",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <button
+                type="button"
+                onClick={addService}
+                style={{
+                  border: "1px solid rgba(0,0,0,0.12)",
+                  borderRadius: "8px",
+                  padding: "10px 14px",
+                  background: "#fff",
+                  cursor: "pointer",
+                  font: "inherit",
+                }}
+              >
+                + Add Service
+              </button>
+            </div>
           </div>
         </EditorSection>
 
@@ -1889,52 +2074,6 @@ function TextArea({
           onChange(
             event.target.value
           )
-        }
-      />
-    </div>
-  );
-}
-
-/*
-  ============================================================
-  STAT CARD
-  ============================================================
-*/
-
-function StatCard({
-  number,
-  label,
-  onNumberChange,
-  onLabelChange,
-}: {
-  number: string;
-  label: string;
-  onNumberChange: (
-    value: string
-  ) => void;
-  onLabelChange: (
-    value: string
-  ) => void;
-}) {
-  return (
-    <div
-      className={
-        styles.statCard
-      }
-    >
-      <Field
-        label="Number"
-        value={number}
-        onChange={
-          onNumberChange
-        }
-      />
-
-      <Field
-        label="Label"
-        value={label}
-        onChange={
-          onLabelChange
         }
       />
     </div>
