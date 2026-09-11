@@ -371,7 +371,7 @@ export default function Home() {
           items:
             Array.isArray(data.content.services?.items) &&
             data.content.services.items.length > 0
-              ? data.content.services.items.map((item, itemIndex) => ({
+              ? data.content.services.items.map((item: { title?: string; description?: string; learnMore?: string; link?: string }, itemIndex: number) => ({
                   title: item.title || "",
                   description: item.description || "",
                   learnMore: item.learnMore || "LEARN MORE →",
