@@ -793,13 +793,31 @@ export default function Home() {
         <div className="services">
           {(content.services.items || []).map(
             (service, index) => (
-              <div
+              <Link
+                href={
+                  index === 0
+                    ? "/services/construction"
+                    : index === 1
+                    ? "/services/consulting"
+                    : index === 2
+                    ? "/services/land-development"
+                    : index === 3
+                    ? "/services/property-transactions"
+                    : "#"
+                }
                 className="service"
                 key={`${service.title}-${index}`}
+                style={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  cursor: index < 4 ? "pointer" : "default",
+                }}
               >
-                <b>
-                  {String(index + 1).padStart(2, "0")}
-                </b>
+                {index > 1 && (
+                  <b>
+                    {String(index + 1).padStart(2, "0")}
+                  </b>
+                )}
 
                 <h3>
                   {service.title}
@@ -808,7 +826,7 @@ export default function Home() {
                 <p>
                   {service.description}
                 </p>
-              </div>
+              </Link>
             )
           )}
         </div>

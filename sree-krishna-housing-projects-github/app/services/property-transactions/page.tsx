@@ -68,7 +68,7 @@ export default function PropertyTransactionsServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              PROPERTY TRANSACTIONS
+              PROPERTY BUYING & SELLING
             </p>
 
             <h1
