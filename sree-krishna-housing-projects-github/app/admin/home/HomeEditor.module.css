@@ -5,8 +5,11 @@
 }
 
 .editorMain {
-  flex: 1;
+  margin-left: 250px;
+  width: calc(100% - 250px);
   min-width: 0;
+  min-height: 100vh;
+  box-sizing: border-box;
   padding: 32px;
   overflow-x: hidden;
 }
@@ -411,6 +414,8 @@
 
 @media (max-width: 768px) {
   .editorMain {
+    margin-left: 0;
+    width: 100%;
     padding: 18px 14px 30px;
   }
 
