@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import SiteVisitForm from "./components/SiteVisitForm";
 import { supabase } from "@/lib/supabase";
 
