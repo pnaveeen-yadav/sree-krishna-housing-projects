@@ -17,7 +17,6 @@ export default function VisitPage() {
           <Link href="/">Home</Link>
           <Link href="/properties">Properties</Link>
           <Link href="/#services">Services</Link>
-          <Link href="/#testimonials">Testimonials</Link>
           <Link href="/#contact">Contact</Link>
         </nav>
 
