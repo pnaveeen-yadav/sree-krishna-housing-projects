@@ -62,6 +62,20 @@ export default function PropertyTransactionsServicesPage() {
       >
         <div className="sectionHead">
           <div>
+            <Link
+              href="/#services"
+              style={{
+                display: "inline-block",
+                marginBottom: "10px",
+                fontSize: "16px",
+                fontWeight: 600,
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              ← Back to Services
+            </Link>
+
             <p
               className="eyebrow dark"
               style={{

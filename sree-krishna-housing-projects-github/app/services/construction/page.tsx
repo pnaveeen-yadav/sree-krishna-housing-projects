@@ -2,33 +2,33 @@ import Link from "next/link";
 
 const services = [
   {
-    title: "Residential Home Construction",
+    title: "Property Selection & Guidance",
     description:
-      "Custom-built villas and independent houses designed to reflect your lifestyle, using quality materials and experienced craftsmanship.",
+      "Understand your requirements, budget and priorities and get practical guidance while choosing a suitable property.",
   },
   {
-    title: "Commercial Building Construction",
+    title: "Investment Consultation",
     description:
-      "Functional and well-planned commercial spaces, offices, retail buildings and other projects delivered with attention to quality and timelines.",
+      "Evaluate property opportunities with a focus on location, budget, future potential and long-term investment considerations.",
   },
   {
-    title: "Turnkey Project Execution",
+    title: "Property Due Diligence Guidance",
     description:
-      "End-to-end construction support covering planning, execution, coordination and finishing, so your project is handled with greater convenience.",
+      "Get practical support in understanding property documents, approvals and important checks before moving forward.",
   },
   {
-    title: "Renovation & Structural Modifications",
+    title: "Market & Location Consultation",
     description:
-      "Modernizing existing spaces through renovation, layout improvements, structural modifications and practical design upgrades.",
+      "Make better property decisions with guidance on locations, surrounding development and important market considerations.",
   },
   {
-    title: "Quality & Stage-wise Inspection",
+    title: "Buying & Selling Assistance",
     description:
-      "Quality-focused checks throughout construction to help maintain material standards, workmanship and overall project quality.",
+      "Professional support through the buying or selling process, helping make property transactions clearer and more convenient.",
   },
 ];
 
-export default function ConstructionServicesPage() {
+export default function ConsultingServicesPage() {
   return (
     <main className="propertyDetailsPage">
       {/* HEADER */}
@@ -57,7 +57,7 @@ export default function ConstructionServicesPage() {
         className="section"
         style={{
           paddingTop: "45px",
-          paddingBottom: "20px",
+          paddingBottom: "5px",
         }}
       >
         <div className="sectionHead">
@@ -66,8 +66,8 @@ export default function ConstructionServicesPage() {
               href="/#services"
               style={{
                 display: "inline-block",
-                marginBottom: "14px",
-                fontSize: "15px",
+                marginBottom: "10px",
+                fontSize: "16px",
                 fontWeight: 600,
                 color: "inherit",
                 textDecoration: "none",
@@ -82,7 +82,7 @@ export default function ConstructionServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              CONSTRUCTION
+              PROPERTY CONSULTING
             </p>
 
             <h1
@@ -92,7 +92,7 @@ export default function ConstructionServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Construction
+              Consulting
             </h1>
 
             <p
@@ -103,10 +103,11 @@ export default function ConstructionServicesPage() {
                 margin: 0,
               }}
             >
-              Premium residential and commercial construction with
-              uncompromising quality assurance. From foundation to
-              finish, we focus on structural integrity, practical
-              planning and a high standard of workmanship.
+              Practical property consultation to help you make
+              confident decisions. From choosing the right property
+              to understanding locations, documents and investment
+              considerations, we provide clear guidance at every
+              stage.
             </p>
           </div>
         </div>
@@ -116,7 +117,7 @@ export default function ConstructionServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "15px",
+          paddingTop: "5px",
           paddingBottom: "45px",
         }}
       >
@@ -203,7 +204,7 @@ export default function ConstructionServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Built With Quality From Foundation to Finish
+              Clear Advice. Better Property Decisions.
             </h2>
           </div>
 
@@ -215,10 +216,9 @@ export default function ConstructionServicesPage() {
                 marginTop: 0,
               }}
             >
-              Every construction project needs careful planning,
-              reliable execution and attention to detail. We work to
-              understand the customer's requirements before moving
-              into execution.
+              Property decisions involve more than price. Location,
+              purpose, documentation, future potential and personal
+              requirements all need to be considered.
             </p>
 
             <p
@@ -227,9 +227,9 @@ export default function ConstructionServicesPage() {
                 lineHeight: "1.65",
               }}
             >
-              Our focus is on practical construction, quality
-              workmanship, clear communication and timely progress
-              throughout the project.
+              We aim to make the process easier by understanding your
+              needs first and then providing practical,
+              straightforward guidance.
             </p>
           </div>
         </div>
@@ -256,7 +256,7 @@ export default function ConstructionServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Quality Construction You Can Rely On
+              Guidance Built Around Your Requirements
             </h2>
           </div>
 
@@ -266,10 +266,10 @@ export default function ConstructionServicesPage() {
               fontSize: "17px",
             }}
           >
-            <span>✓ Quality-focused workmanship</span>
-            <span>✓ Practical project planning</span>
+            <span>✓ Clear and practical guidance</span>
+            <span>✓ Customer-focused consultation</span>
+            <span>✓ Location and property insights</span>
             <span>✓ Transparent communication</span>
-            <span>✓ Reliable customer support</span>
           </div>
         </div>
       </section>
@@ -278,7 +278,7 @@ export default function ConstructionServicesPage() {
       <section className="visit">
         <div>
           <p className="eyebrow">
-            LET&apos;S BUILD TOGETHER
+            MAKE YOUR NEXT PROPERTY DECISION WITH CONFIDENCE
           </p>
 
           <h2
@@ -287,7 +287,7 @@ export default function ConstructionServicesPage() {
               lineHeight: "1.2",
             }}
           >
-            Planning Your Construction Project?
+            Need Property Guidance?
           </h2>
 
           <p
@@ -296,8 +296,8 @@ export default function ConstructionServicesPage() {
               lineHeight: "1.65",
             }}
           >
-            Talk to our team about your requirements and get
-            professional guidance for your construction project.
+            Tell us what you are looking for and our team will help
+            you understand the available options.
           </p>
         </div>
 
