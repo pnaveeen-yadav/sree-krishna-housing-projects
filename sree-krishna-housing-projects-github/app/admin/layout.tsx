@@ -60,7 +60,7 @@ export default function AdminLayout({
   }, [pathname, router]);
 
   /*
-   * AUTOMATIC LOGOUT AFTER 2 MINUTES OF INACTIVITY
+   * AUTOMATIC LOGOUT AFTER  MINUTES OF INACTIVITY
    */
   useEffect(() => {
     // Don't start idle timer on login page
@@ -90,7 +90,7 @@ export default function AdminLayout({
 
     /*
      * Any of these activities will reset
-     * the 2-minute inactivity timer.
+     * the 5-minute inactivity timer.
      */
     const events = [
       "mousemove",
