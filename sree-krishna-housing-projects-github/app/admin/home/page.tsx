@@ -52,14 +52,10 @@ interface HomeContent {
   services: {
     eyebrow: string;
     title: string;
-    service1Title: string;
-    service1Description: string;
-    service2Title: string;
-    service2Description: string;
-    service3Title: string;
-    service3Description: string;
-    service4Title: string;
-    service4Description: string;
+    items: {
+      title: string;
+      description: string;
+    }[];
   };
 
   contact: {
@@ -144,22 +140,28 @@ const DEFAULT_CONTENT: HomeContent = {
   services: {
     eyebrow: "WHAT WE DO",
     title: "Complete Real Estate Services",
-
-    service1Title: "Open Plot Development",
-    service1Description:
-      "Professional support to help you make confident property decisions.",
-
-    service2Title: "Residential Properties",
-    service2Description:
-      "Professional support to help you make confident property decisions.",
-
-    service3Title: "Construction Services",
-    service3Description:
-      "Professional support to help you make confident property decisions.",
-
-    service4Title: "Property Consultation",
-    service4Description:
-      "Professional support to help you make confident property decisions.",
+    items: [
+      {
+        title: "Open Plot Development",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+      {
+        title: "Residential Properties",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+      {
+        title: "Construction Services",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+      {
+        title: "Property Consultation",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+    ],
   },
 
   contact: {
@@ -278,6 +280,44 @@ export default function AdminHomePage() {
           services: {
             ...DEFAULT_CONTENT.services,
             ...(saved.services || {}),
+            items:
+              Array.isArray(saved.services?.items) &&
+              saved.services.items.length > 0
+                ? saved.services.items
+                : [
+                    {
+                      title:
+                        saved.services?.service1Title ||
+                        DEFAULT_CONTENT.services.items[0].title,
+                      description:
+                        saved.services?.service1Description ||
+                        DEFAULT_CONTENT.services.items[0].description,
+                    },
+                    {
+                      title:
+                        saved.services?.service2Title ||
+                        DEFAULT_CONTENT.services.items[1].title,
+                      description:
+                        saved.services?.service2Description ||
+                        DEFAULT_CONTENT.services.items[1].description,
+                    },
+                    {
+                      title:
+                        saved.services?.service3Title ||
+                        DEFAULT_CONTENT.services.items[2].title,
+                      description:
+                        saved.services?.service3Description ||
+                        DEFAULT_CONTENT.services.items[2].description,
+                    },
+                    {
+                      title:
+                        saved.services?.service4Title ||
+                        DEFAULT_CONTENT.services.items[3].title,
+                      description:
+                        saved.services?.service4Description ||
+                        DEFAULT_CONTENT.services.items[3].description,
+                    },
+                  ],
           },
 
           contact: {
@@ -404,17 +444,38 @@ export default function AdminHomePage() {
   */
 
   const updateServices = (
-    field: keyof HomeContent["services"],
+    field: "eyebrow" | "title",
     value: string
   ) => {
     setContent((previous) => ({
       ...previous,
-
       services: {
         ...previous.services,
         [field]: value,
       },
     }));
+  };
+
+  const updateServiceItem = (
+    index: number,
+    field: "title" | "description",
+    value: string
+  ) => {
+    setContent((previous) => {
+      const items = [...previous.services.items];
+      items[index] = {
+        ...items[index],
+        [field]: value,
+      };
+
+      return {
+        ...previous,
+        services: {
+          ...previous.services,
+          items,
+        },
+      };
+    });
   };
 
   /*
@@ -1184,180 +1245,55 @@ export default function AdminHomePage() {
         <EditorSection
           number="05"
           title="Services"
-          description="Edit the services section and all four service descriptions."
+          description="Edit the services section and all service descriptions."
         >
           <div className={styles.formStack}>
             <Field
               label="Eyebrow"
-              value={
-                content.services
-                  .eyebrow
-              }
+              value={content.services.eyebrow}
               onChange={(value) =>
-                updateServices(
-                  "eyebrow",
-                  value
-                )
+                updateServices("eyebrow", value)
               }
             />
 
             <Field
               label="Title"
-              value={
-                content.services
-                  .title
-              }
+              value={content.services.title}
               onChange={(value) =>
-                updateServices(
-                  "title",
-                  value
-                )
+                updateServices("title", value)
               }
             />
 
-            <div
-              className={
-                styles.subHeading
-              }
-            >
-              Service 1
-            </div>
+            {content.services.items.map((service, index) => (
+              <div
+                key={`service-${index}`}
+                className={styles.formStack}
+              >
+                <div className={styles.subHeading}>
+                  Service {index + 1}
+                </div>
 
-            <Field
-              label="Service Title"
-              value={
-                content.services
-                  .service1Title
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service1Title",
-                  value
-                )
-              }
-            />
+                <Field
+                  label="Service Title"
+                  value={service.title}
+                  onChange={(value) =>
+                    updateServiceItem(index, "title", value)
+                  }
+                />
 
-            <TextArea
-              label="Description"
-              value={
-                content.services
-                  .service1Description
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service1Description",
-                  value
-                )
-              }
-            />
-
-            <div
-              className={
-                styles.subHeading
-              }
-            >
-              Service 2
-            </div>
-
-            <Field
-              label="Service Title"
-              value={
-                content.services
-                  .service2Title
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service2Title",
-                  value
-                )
-              }
-            />
-
-            <TextArea
-              label="Description"
-              value={
-                content.services
-                  .service2Description
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service2Description",
-                  value
-                )
-              }
-            />
-
-            <div
-              className={
-                styles.subHeading
-              }
-            >
-              Service 3
-            </div>
-
-            <Field
-              label="Service Title"
-              value={
-                content.services
-                  .service3Title
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service3Title",
-                  value
-                )
-              }
-            />
-
-            <TextArea
-              label="Description"
-              value={
-                content.services
-                  .service3Description
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service3Description",
-                  value
-                )
-              }
-            />
-
-            <div
-              className={
-                styles.subHeading
-              }
-            >
-              Service 4
-            </div>
-
-            <Field
-              label="Service Title"
-              value={
-                content.services
-                  .service4Title
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service4Title",
-                  value
-                )
-              }
-            />
-
-            <TextArea
-              label="Description"
-              value={
-                content.services
-                  .service4Description
-              }
-              onChange={(value) =>
-                updateServices(
-                  "service4Description",
-                  value
-                )
-              }
-            />
+                <TextArea
+                  label="Description"
+                  value={service.description}
+                  onChange={(value) =>
+                    updateServiceItem(
+                      index,
+                      "description",
+                      value
+                    )
+                  }
+                />
+              </div>
+            ))}
           </div>
         </EditorSection>
 
@@ -1827,37 +1763,54 @@ function EditorSection({
   description: string;
   children: ReactNode;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <section
-      className={
-        styles.editorCard
-      }
-    >
-      <div
-        className={
-          styles.cardHeader
-        }
+    <section className={styles.editorCard}>
+      <button
+        type="button"
+        className={styles.cardHeader}
+        onClick={() => setIsOpen((previous) => !previous)}
+        aria-expanded={isOpen}
+        style={{
+          width: "100%",
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
+          textAlign: "left",
+          font: "inherit",
+          color: "inherit",
+        }}
       >
         <div>
-          <span
-            className={
-              styles.sectionNumber
-            }
-          >
+          <span className={styles.sectionNumber}>
             {number}
           </span>
 
           <div>
             <h2>{title}</h2>
-
-            <p>
-              {description}
-            </p>
+            <p>{description}</p>
           </div>
         </div>
-      </div>
 
-      {children}
+        <span
+          aria-hidden="true"
+          style={{
+            fontSize: "24px",
+            lineHeight: 1,
+            marginLeft: "auto",
+            paddingLeft: "16px",
+            transition: "transform 0.2s ease",
+            transform: isOpen
+              ? "rotate(180deg)"
+              : "rotate(0deg)",
+          }}
+        >
+          ▾
+        </span>
+      </button>
+
+      {isOpen && children}
     </section>
   );
 }

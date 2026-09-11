@@ -62,14 +62,18 @@ interface HomeContent {
   services: {
     eyebrow: string;
     title: string;
-    service1Title: string;
-    service1Description: string;
-    service2Title: string;
-    service2Description: string;
-    service3Title: string;
-    service3Description: string;
-    service4Title: string;
-    service4Description: string;
+    service1Title?: string;
+    service1Description?: string;
+    service2Title?: string;
+    service2Description?: string;
+    service3Title?: string;
+    service3Description?: string;
+    service4Title?: string;
+    service4Description?: string;
+    items?: {
+      title: string;
+      description: string;
+    }[];
   };
 
   contact: {
@@ -176,6 +180,29 @@ const DEFAULT_CONTENT: HomeContent = {
     service4Title: "Property Consultation",
     service4Description:
       "Professional support to help you make confident property decisions.",
+
+    items: [
+      {
+        title: "Open Plot Development",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+      {
+        title: "Residential Properties",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+      {
+        title: "Construction Services",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+      {
+        title: "Property Consultation",
+        description:
+          "Professional support to help you make confident property decisions.",
+      },
+    ],
   },
 
   contact: {
@@ -282,6 +309,44 @@ export default function Home() {
         services: {
           ...DEFAULT_CONTENT.services,
           ...(data.content.services || {}),
+          items:
+            Array.isArray(data.content.services?.items) &&
+            data.content.services.items.length > 0
+              ? data.content.services.items
+              : [
+                  {
+                    title:
+                      data.content.services?.service1Title ||
+                      DEFAULT_CONTENT.services.items![0].title,
+                    description:
+                      data.content.services?.service1Description ||
+                      DEFAULT_CONTENT.services.items![0].description,
+                  },
+                  {
+                    title:
+                      data.content.services?.service2Title ||
+                      DEFAULT_CONTENT.services.items![1].title,
+                    description:
+                      data.content.services?.service2Description ||
+                      DEFAULT_CONTENT.services.items![1].description,
+                  },
+                  {
+                    title:
+                      data.content.services?.service3Title ||
+                      DEFAULT_CONTENT.services.items![2].title,
+                    description:
+                      data.content.services?.service3Description ||
+                      DEFAULT_CONTENT.services.items![2].description,
+                  },
+                  {
+                    title:
+                      data.content.services?.service4Title ||
+                      DEFAULT_CONTENT.services.items![3].title,
+                    description:
+                      data.content.services?.service4Description ||
+                      DEFAULT_CONTENT.services.items![3].description,
+                  },
+                ],
         },
 
         contact: {
@@ -710,53 +775,26 @@ export default function Home() {
         </h2>
 
         <div className="services">
-          {[
-            {
-              title:
-                content.services.service1Title,
-              description:
-                content.services
-                  .service1Description,
-            },
-            {
-              title:
-                content.services.service2Title,
-              description:
-                content.services
-                  .service2Description,
-            },
-            {
-              title:
-                content.services.service3Title,
-              description:
-                content.services
-                  .service3Description,
-            },
-            {
-              title:
-                content.services.service4Title,
-              description:
-                content.services
-                  .service4Description,
-            },
-          ].map((service, index) => (
-            <div
-              className="service"
-              key={`${service.title}-${index}`}
-            >
-              <b>
-                0{index + 1}
-              </b>
+          {(content.services.items || []).map(
+            (service, index) => (
+              <div
+                className="service"
+                key={`${service.title}-${index}`}
+              >
+                <b>
+                  {String(index + 1).padStart(2, "0")}
+                </b>
 
-              <h3>
-                {service.title}
-              </h3>
+                <h3>
+                  {service.title}
+                </h3>
 
-              <p>
-                {service.description}
-              </p>
-            </div>
-          ))}
+                <p>
+                  {service.description}
+                </p>
+              </div>
+            )
+          )}
         </div>
       </section>
 
