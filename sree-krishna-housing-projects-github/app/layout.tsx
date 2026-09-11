@@ -2,9 +2,72 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sree Krishna Housing Projects",
+  metadataBase: new URL("https://sreekrishnahousingprojects.com"),
+
+  title: {
+    default: "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
+    template: "%s | Sree Krishna Housing Projects",
+  },
+
   description:
-    "Trusted Real Estate & Construction Experts in Tirupati",
+    "Sree Krishna Housing Projects provides real estate, property consultation, construction and land development services in Tirupati.",
+
+  keywords: [
+    "real estate in Tirupati",
+    "real estate company in Tirupati",
+    "real estate developers in Tirupati",
+    "property consultant in Tirupati",
+    "construction company in Tirupati",
+    "construction services in Tirupati",
+    "land development in Tirupati",
+    "properties in Tirupati",
+    "plots for sale in Tirupati",
+    "Sree Krishna Housing Projects",
+  ],
+
+  authors: [
+    {
+      name: "Sree Krishna Housing Projects",
+    },
+  ],
+
+  creator: "Sree Krishna Housing Projects",
+  publisher: "Sree Krishna Housing Projects",
+
+  alternates: {
+    canonical: "https://sreekrishnahousingprojects.com/",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://sreekrishnahousingprojects.com/",
+    siteName: "Sree Krishna Housing Projects",
+    title:
+      "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
+    description:
+      "Real estate, property consultation, construction and land development services in Tirupati.",
+    locale: "en_IN",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
+    description:
+      "Real estate, property consultation, construction and land development services in Tirupati.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
