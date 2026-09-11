@@ -1,4 +1,36 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Property Buying & Selling Services in Tirupati",
+  description:
+    "Property buying and selling assistance in Tirupati with documentation guidance, transaction coordination and practical property consultation.",
+  keywords: [
+    "property buying in Tirupati",
+    "property selling in Tirupati",
+    "property dealers in Tirupati",
+    "property transactions Tirupati",
+    "property buying assistance Tirupati",
+    "property selling assistance Tirupati",
+    "real estate services Tirupati",
+    "property consultant Tirupati",
+    "property documentation guidance Tirupati",
+    "Sree Krishna Housing Projects",
+  ],
+  alternates: {
+    canonical:
+      "https://sreekrishnahousingprojects.com/services/property-transactions",
+  },
+  openGraph: {
+    title: "Property Buying & Selling Services in Tirupati",
+    description:
+      "Reliable property buying, selling, documentation and transaction support in Tirupati.",
+    url: "https://sreekrishnahousingprojects.com/services/property-transactions",
+    siteName: "Sree Krishna Housing Projects",
+    type: "website",
+    locale: "en_IN",
+  },
+};
 
 const services = [
   {
@@ -62,12 +94,13 @@ export default function PropertyTransactionsServicesPage() {
       >
         <div className="sectionHead">
           <div>
+            {/* BACK TO SERVICES */}
             <Link
               href="/#services"
               style={{
                 display: "inline-block",
-                marginBottom: "10px",
-                fontSize: "16px",
+                marginBottom: "14px",
+                fontSize: "15px",
                 fontWeight: 600,
                 color: "inherit",
                 textDecoration: "none",

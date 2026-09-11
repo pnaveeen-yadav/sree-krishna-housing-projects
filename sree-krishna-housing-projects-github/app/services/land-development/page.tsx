@@ -1,4 +1,35 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Land Development Services in Tirupati",
+  description:
+    "Land development services in Tirupati including feasibility planning, layout development, infrastructure development, approvals coordination and site execution.",
+  keywords: [
+    "land development in Tirupati",
+    "land development services Tirupati",
+    "land development company Tirupati",
+    "layout development Tirupati",
+    "residential layout development Tirupati",
+    "site development Tirupati",
+    "infrastructure development Tirupati",
+    "land feasibility Tirupati",
+    "Sree Krishna Housing Projects",
+  ],
+  alternates: {
+    canonical:
+      "https://sreekrishnahousingprojects.com/services/land-development",
+  },
+  openGraph: {
+    title: "Land Development Services in Tirupati",
+    description:
+      "Professional land development, layout planning, infrastructure and site development support in Tirupati.",
+    url: "https://sreekrishnahousingprojects.com/services/land-development",
+    siteName: "Sree Krishna Housing Projects",
+    type: "website",
+    locale: "en_IN",
+  },
+};
 
 const services = [
   {
@@ -62,12 +93,13 @@ export default function LandDevelopmentServicesPage() {
       >
         <div className="sectionHead">
           <div>
+            {/* BACK TO SERVICES */}
             <Link
               href="/#services"
               style={{
                 display: "inline-block",
-                marginBottom: "10px",
-                fontSize: "16px",
+                marginBottom: "14px",
+                fontSize: "15px",
                 fontWeight: 600,
                 color: "inherit",
                 textDecoration: "none",
@@ -227,7 +259,7 @@ export default function LandDevelopmentServicesPage() {
             >
               We focus on practical planning and coordinated
               execution so that development work is organised,
-              useful and aligned with the project's objectives.
+              useful and aligned with the project&apos;s objectives.
             </p>
           </div>
         </div>

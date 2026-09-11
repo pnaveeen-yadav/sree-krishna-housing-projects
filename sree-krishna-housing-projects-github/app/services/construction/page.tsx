@@ -1,4 +1,35 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Construction Services in Tirupati",
+  description:
+    "Reliable construction services in Tirupati including residential construction, commercial construction, renovation, remodeling, project management and site development.",
+  keywords: [
+    "construction services in Tirupati",
+    "construction company in Tirupati",
+    "residential construction Tirupati",
+    "commercial construction Tirupati",
+    "building construction Tirupati",
+    "renovation services Tirupati",
+    "construction project management Tirupati",
+    "site development Tirupati",
+    "Sree Krishna Housing Projects",
+  ],
+  alternates: {
+    canonical:
+      "https://sreekrishnahousingprojects.com/services/construction",
+  },
+  openGraph: {
+    title: "Construction Services in Tirupati",
+    description:
+      "Reliable residential, commercial, renovation, remodeling, project management and site development services in Tirupati.",
+    url: "https://sreekrishnahousingprojects.com/services/construction",
+    siteName: "Sree Krishna Housing Projects",
+    type: "website",
+    locale: "en_IN",
+  },
+};
 
 const services = [
   {

@@ -1,4 +1,35 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Property Consultant in Tirupati",
+  description:
+    "Professional property consultation services in Tirupati covering property selection, investment consultation, due diligence guidance, market and location consultation, and buying and selling assistance.",
+  keywords: [
+    "property consultant in Tirupati",
+    "property consultation Tirupati",
+    "real estate consultant Tirupati",
+    "property advisor Tirupati",
+    "real estate consultant in Tirupati",
+    "property investment consultant Tirupati",
+    "property buying assistance Tirupati",
+    "property selling assistance Tirupati",
+    "Sree Krishna Housing Projects",
+  ],
+  alternates: {
+    canonical:
+      "https://sreekrishnahousingprojects.com/services/consulting",
+  },
+  openGraph: {
+    title: "Property Consultant in Tirupati",
+    description:
+      "Professional property consultation and real estate guidance services in Tirupati.",
+    url: "https://sreekrishnahousingprojects.com/services/consulting",
+    siteName: "Sree Krishna Housing Projects",
+    type: "website",
+    locale: "en_IN",
+  },
+};
 
 const services = [
   {
