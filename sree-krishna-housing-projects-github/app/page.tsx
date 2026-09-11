@@ -43,14 +43,18 @@ interface HomeContent {
   };
 
   stats: {
-    stat1Number: string;
-    stat1Label: string;
-    stat2Number: string;
-    stat2Label: string;
-    stat3Number: string;
-    stat3Label: string;
-    stat4Number: string;
-    stat4Label: string;
+    stat1Number?: string;
+    stat1Label?: string;
+    stat2Number?: string;
+    stat2Label?: string;
+    stat3Number?: string;
+    stat3Label?: string;
+    stat4Number?: string;
+    stat4Label?: string;
+    items: {
+      number: string;
+      label: string;
+    }[];
   };
 
   properties: {
@@ -153,6 +157,12 @@ const DEFAULT_CONTENT: HomeContent = {
     stat3Label: "Projects",
     stat4Number: "100%",
     stat4Label: "Commitment",
+    items: [
+      { number: "10+", label: "Years Experience" },
+      { number: "100+", label: "Happy Customers" },
+      { number: "25+", label: "Projects" },
+      { number: "100%", label: "Commitment" },
+    ],
   },
 
   properties: {
@@ -299,6 +309,44 @@ export default function Home() {
         stats: {
           ...DEFAULT_CONTENT.stats,
           ...(data.content.stats || {}),
+          items:
+            Array.isArray(data.content.stats?.items) &&
+            data.content.stats.items.length > 0
+              ? data.content.stats.items
+              : [
+                  {
+                    number:
+                      data.content.stats?.stat1Number ||
+                      DEFAULT_CONTENT.stats.items[0].number,
+                    label:
+                      data.content.stats?.stat1Label ||
+                      DEFAULT_CONTENT.stats.items[0].label,
+                  },
+                  {
+                    number:
+                      data.content.stats?.stat2Number ||
+                      DEFAULT_CONTENT.stats.items[1].number,
+                    label:
+                      data.content.stats?.stat2Label ||
+                      DEFAULT_CONTENT.stats.items[1].label,
+                  },
+                  {
+                    number:
+                      data.content.stats?.stat3Number ||
+                      DEFAULT_CONTENT.stats.items[2].number,
+                    label:
+                      data.content.stats?.stat3Label ||
+                      DEFAULT_CONTENT.stats.items[2].label,
+                  },
+                  {
+                    number:
+                      data.content.stats?.stat4Number ||
+                      DEFAULT_CONTENT.stats.items[3].number,
+                    label:
+                      data.content.stats?.stat4Label ||
+                      DEFAULT_CONTENT.stats.items[3].label,
+                  },
+                ],
         },
 
         properties: {
@@ -601,45 +649,13 @@ export default function Home() {
         </div>
 
         <div className="stats">
-          <div>
-            <b>
-              {content.stats.stat1Number}
-            </b>
+          {content.stats.items.map((stat, index) => (
+            <div key={`${stat.number}-${stat.label}-${index}`}>
+              <b>{stat.number}</b>
 
-            <span>
-              {content.stats.stat1Label}
-            </span>
-          </div>
-
-          <div>
-            <b>
-              {content.stats.stat2Number}
-            </b>
-
-            <span>
-              {content.stats.stat2Label}
-            </span>
-          </div>
-
-          <div>
-            <b>
-              {content.stats.stat3Number}
-            </b>
-
-            <span>
-              {content.stats.stat3Label}
-            </span>
-          </div>
-
-          <div>
-            <b>
-              {content.stats.stat4Number}
-            </b>
-
-            <span>
-              {content.stats.stat4Label}
-            </span>
-          </div>
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
