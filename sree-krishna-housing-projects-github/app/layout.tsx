@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sreekrishnahousingprojects.com"),
+  metadataBase: new URL(
+    "https://www.sreekrishnahousingprojects.com"
+  ),
 
   title: {
-    default: "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
+    default:
+      "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
     template: "%s | Sree Krishna Housing Projects",
   },
 
@@ -35,24 +38,32 @@ export const metadata: Metadata = {
   publisher: "Sree Krishna Housing Projects",
 
   alternates: {
-    canonical: "https://sreekrishnahousingprojects.com/",
+    canonical:
+      "https://www.sreekrishnahousingprojects.com/",
   },
 
   openGraph: {
     type: "website",
-    url: "https://sreekrishnahousingprojects.com/",
+
+    url: "https://www.sreekrishnahousingprojects.com/",
+
     siteName: "Sree Krishna Housing Projects",
+
     title:
       "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
+
     description:
       "Real estate, property consultation, construction and land development services in Tirupati.",
+
     locale: "en_IN",
   },
 
   twitter: {
     card: "summary_large_image",
+
     title:
       "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
+
     description:
       "Real estate, property consultation, construction and land development services in Tirupati.",
   },
@@ -60,6 +71,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -72,9 +84,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
       <body>{children}</body>
