@@ -1,0 +1,526 @@
+.adminLayout {
+  min-height: 100vh;
+  display: flex;
+  background: #f5f6f8;
+}
+
+.editorMain {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+  overflow-x: hidden;
+}
+
+/* ================= TOP BAR ================= */
+
+.topBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.pageEyebrow {
+  display: inline-block;
+  margin-bottom: 5px;
+  color: #9b6a22;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.topBar h1 {
+  margin: 0 0 6px;
+  color: #17202a;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.topBar p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ================= SAVE BUTTON ================= */
+
+.saveButton {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 7px;
+  background: #9b6a22;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.saveButton:hover {
+  background: #7f5519;
+  transform: translateY(-1px);
+}
+
+.saveButton:active {
+  transform: translateY(0);
+}
+
+.saveButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ================= MESSAGES ================= */
+
+.successMessage,
+.errorMessage {
+  margin-bottom: 20px;
+  padding: 13px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.successMessage {
+  border: 1px solid #bbf7d0;
+  background: #ecfdf3;
+  color: #166534;
+}
+
+.errorMessage {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* ================= EDITOR CARD ================= */
+
+.editorCard {
+  margin-bottom: 22px;
+  overflow: hidden;
+  border: 1px solid #e3e6ea;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+.cardHeader {
+  padding: 21px 24px;
+  border-bottom: 1px solid #edf0f2;
+  background: #fcfcfd;
+}
+
+.cardHeader > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.cardHeader h2 {
+  margin: 0 0 4px;
+  color: #1f2937;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.cardHeader p {
+  margin: 0;
+  color: #737b87;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sectionNumber {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: #f4ead9;
+  color: #8a5d1d;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* ================= FORMS ================= */
+
+.formStack {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 19px;
+  padding: 24px;
+}
+
+.formStack .formGrid {
+  padding: 0;
+}
+
+.field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d8dde3;
+  border-radius: 7px;
+  outline: none;
+  background: #ffffff;
+  color: #1f2937;
+  font-family: inherit;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.field input {
+  min-height: 44px;
+  padding: 10px 13px;
+}
+
+.field textarea {
+  min-height: 100px;
+  padding: 11px 13px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #9ca3af;
+}
+
+.field input:hover,
+.field textarea:hover {
+  border-color: #c5cbd2;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #b3833a;
+  box-shadow: 0 0 0 3px rgba(179, 131, 58, 0.11);
+}
+
+/* ================= SUB HEADING ================= */
+
+.subHeading {
+  padding: 0 24px;
+  margin-top: 1px;
+  margin-bottom: -2px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.formStack > .subHeading {
+  padding: 0;
+}
+
+/* ================= POINT / SERVICE CARD ================= */
+
+.pointCard {
+  margin: 0 24px;
+  padding: 19px;
+  border: 1px solid #e4e7eb;
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+.pointCard h3 {
+  margin: 0 0 17px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.pointCard .formStack {
+  padding: 0;
+}
+
+/* ================= STATISTICS ================= */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  padding: 24px;
+}
+
+.statCard {
+  padding: 17px;
+  border: 1px solid #e4e7eb;
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+.statCard .field + .field {
+  margin-top: 15px;
+}
+
+/* ================= IMAGE UPLOAD ================= */
+
+.uploadBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px;
+  border: 1px dashed #cdd3da;
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+.uploadBox > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uploadBox strong {
+  color: #374151;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.uploadBox span {
+  color: #7b8490;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.uploadButton {
+  position: relative;
+  flex-shrink: 0;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #263238;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.uploadButton:hover {
+  background: #111827;
+}
+
+.uploadButton input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploadButton input:disabled {
+  cursor: not-allowed;
+}
+
+/* ================= IMAGE PREVIEW ================= */
+
+.imagePreview {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e3e6ea;
+  border-radius: 8px;
+  background: #f3f4f6;
+}
+
+.imagePreview img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+/* ================= BOTTOM SAVE ================= */
+
+.bottomSave {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 0 30px;
+}
+
+/* ================= LOADING ================= */
+
+.loading {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1100px) {
+  .editorMain {
+    padding: 24px;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .editorMain {
+    padding: 18px 14px 30px;
+  }
+
+  .topBar {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .topBar h1 {
+    font-size: 27px;
+  }
+
+  .topBar .saveButton {
+    width: 100%;
+  }
+
+  .cardHeader {
+    padding: 18px;
+  }
+
+  .cardHeader h2 {
+    font-size: 17px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .formStack {
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .subHeading {
+    padding: 0 18px;
+  }
+
+  .formStack > .subHeading {
+    padding: 0;
+  }
+
+  .pointCard {
+    margin: 0 18px;
+    padding: 16px;
+  }
+
+  .pointCard .formGrid {
+    padding: 0;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .uploadBox {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .uploadButton {
+    width: 100%;
+  }
+
+  .imagePreview img {
+    height: 220px;
+  }
+
+  .bottomSave {
+    padding-bottom: 20px;
+  }
+
+  .bottomSave .saveButton {
+    width: 100%;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+  .editorMain {
+    padding: 14px 10px 24px;
+  }
+
+  .editorCard {
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+
+  .cardHeader {
+    padding: 16px;
+  }
+
+  .cardHeader > div {
+    gap: 10px;
+  }
+
+  .sectionNumber {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .field input {
+    min-height: 42px;
+  }
+
+  .imagePreview img {
+    height: 190px;
+  }
+}

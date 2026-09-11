@@ -21,13 +21,297 @@ interface Property {
   display_order: number | null;
 }
 
+interface HomeContent {
+  hero: {
+    eyebrow: string;
+    title: string;
+    highlight: string;
+    description: string;
+    primaryButton: string;
+    secondaryButton: string;
+    backgroundImage: string;
+  };
+
+  about: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    point1: string;
+    point2: string;
+    point3: string;
+    point4: string;
+  };
+
+  stats: {
+    stat1Number: string;
+    stat1Label: string;
+    stat2Number: string;
+    stat2Label: string;
+    stat3Number: string;
+    stat3Label: string;
+    stat4Number: string;
+    stat4Label: string;
+  };
+
+  properties: {
+    eyebrow: string;
+    title: string;
+    viewAll: string;
+  };
+
+  services: {
+    eyebrow: string;
+    title: string;
+    service1Title: string;
+    service1Description: string;
+    service2Title: string;
+    service2Description: string;
+    service3Title: string;
+    service3Description: string;
+    service4Title: string;
+    service4Description: string;
+  };
+
+  contact: {
+    title: string;
+    description: string;
+    phone: string;
+    whatsapp: string;
+    email: string;
+    officeTitle: string;
+    officeName: string;
+    address: string;
+    businessHours: string;
+  };
+
+  contactForm: {
+    title: string;
+    description: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    buttonText: string;
+  };
+
+  siteVisit: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    buttonText: string;
+  };
+
+  footer: {
+    description: string;
+    location: string;
+  };
+}
+
+/*
+  These are the current Home Page values.
+
+  They act as a fallback so the existing website
+  continues to work even if the CMS has no content.
+*/
+const DEFAULT_CONTENT: HomeContent = {
+  hero: {
+    eyebrow: "TIRUPATI • REAL ESTATE • CONSTRUCTION",
+    title: "Find a Place You’ll Love to Call",
+    highlight: "Home.",
+    description:
+      "Discover quality open plots, residential properties and construction opportunities with Sree Krishna Housing Projects.",
+    primaryButton: "Explore Properties",
+    secondaryButton: "Book a Site Visit",
+    backgroundImage: "/hero.png",
+  },
+
+  about: {
+    eyebrow: "ABOUT US",
+    title: "Your Trusted Property Partner in Tirupati",
+    description:
+      "We help customers explore carefully selected property opportunities with a focus on transparency, quality and customer support.",
+    point1: "Transparent Process",
+    point2: "Prime Locations",
+    point3: "Customer Support",
+    point4: "Investment Guidance",
+  },
+
+  stats: {
+    stat1Number: "10+",
+    stat1Label: "Years Experience",
+    stat2Number: "100+",
+    stat2Label: "Happy Customers",
+    stat3Number: "25+",
+    stat3Label: "Projects",
+    stat4Number: "100%",
+    stat4Label: "Commitment",
+  },
+
+  properties: {
+    eyebrow: "FEATURED",
+    title: "Explore Our Properties",
+    viewAll: "View All →",
+  },
+
+  services: {
+    eyebrow: "WHAT WE DO",
+    title: "Complete Real Estate Services",
+
+    service1Title: "Open Plot Development",
+    service1Description:
+      "Professional support to help you make confident property decisions.",
+
+    service2Title: "Residential Properties",
+    service2Description:
+      "Professional support to help you make confident property decisions.",
+
+    service3Title: "Construction Services",
+    service3Description:
+      "Professional support to help you make confident property decisions.",
+
+    service4Title: "Property Consultation",
+    service4Description:
+      "Professional support to help you make confident property decisions.",
+  },
+
+  contact: {
+    title: "Get in Touch",
+    description:
+      "We are here to answer your questions and guide you home.",
+    phone: "+91 6303688516",
+    whatsapp: "https://wa.me/916303688516",
+    email: "sreekrishna.housingprojects@gmail.com",
+    officeTitle: "Office Location",
+    officeName: "Sree Krishna Housing Projects",
+    address:
+      "Saideep Towers, 20-03-131, B4,\nLeela Mahal Road, Srinivasa Nagar,\nAkkarampalle, Tirupati,\nAndhra Pradesh - 517501",
+    businessHours: "Mon - Sat: 9:00 AM - 6:00 PM\nSunday: Closed",
+  },
+
+  contactForm: {
+    title: "Send us a Message",
+    description:
+      "Interested in a property? Have a question? Fill out the form below.",
+    nameLabel: "Full Name",
+    namePlaceholder: "Your Name",
+    phoneLabel: "Phone Number",
+    phonePlaceholder: "Your Number",
+    emailLabel: "Email (Optional)",
+    emailPlaceholder: "you@example.com",
+    messageLabel: "Message",
+    messagePlaceholder: "How can we help you?",
+    buttonText: "Send Message →",
+  },
+
+  siteVisit: {
+    eyebrow: "BOOK A VISIT",
+    title: "See Your Future Property in Person",
+    description:
+      "Submit your details and our team can contact you regarding a site visit.",
+    buttonText: "Schedule Your Visit",
+  },
+
+  footer: {
+    description: "Trusted Real Estate & Construction Experts in Tirupati.",
+    location: "Tirupati, Andhra Pradesh",
+  },
+};
+
 export default function Home() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [propertiesLoading, setPropertiesLoading] = useState(true);
 
+  const [content, setContent] =
+    useState<HomeContent>(DEFAULT_CONTENT);
+
   useEffect(() => {
+    loadHomeContent();
     loadFeaturedProperties();
   }, []);
+
+  /*
+    ========================================================
+    LOAD HOME PAGE CMS CONTENT
+    ========================================================
+  */
+
+  const loadHomeContent = async () => {
+    const { data, error } = await supabase
+      .from("home_page_content")
+      .select("content")
+      .eq("id", true)
+      .maybeSingle();
+
+    if (error) {
+      console.error(
+        "Error loading home page content:",
+        error
+      );
+      return;
+    }
+
+    if (data?.content) {
+      setContent({
+        ...DEFAULT_CONTENT,
+        ...data.content,
+
+        hero: {
+          ...DEFAULT_CONTENT.hero,
+          ...(data.content.hero || {}),
+        },
+
+        about: {
+          ...DEFAULT_CONTENT.about,
+          ...(data.content.about || {}),
+        },
+
+        stats: {
+          ...DEFAULT_CONTENT.stats,
+          ...(data.content.stats || {}),
+        },
+
+        properties: {
+          ...DEFAULT_CONTENT.properties,
+          ...(data.content.properties || {}),
+        },
+
+        services: {
+          ...DEFAULT_CONTENT.services,
+          ...(data.content.services || {}),
+        },
+
+        contact: {
+          ...DEFAULT_CONTENT.contact,
+          ...(data.content.contact || {}),
+        },
+
+        contactForm: {
+          ...DEFAULT_CONTENT.contactForm,
+          ...(data.content.contactForm || {}),
+        },
+
+        siteVisit: {
+          ...DEFAULT_CONTENT.siteVisit,
+          ...(data.content.siteVisit || {}),
+        },
+
+        footer: {
+          ...DEFAULT_CONTENT.footer,
+          ...(data.content.footer || {}),
+        },
+      });
+    }
+  };
+
+  /*
+    ========================================================
+    LOAD FEATURED PROPERTIES
+    ========================================================
+  */
 
   const loadFeaturedProperties = async () => {
     setPropertiesLoading(true);
@@ -37,31 +321,33 @@ export default function Home() {
       Load active + featured properties
     */
 
-    const { data: featuredProperties, error: featuredError } =
-      await supabase
-        .from("properties")
-        .select(`
-          id,
-          title,
-          location,
-          property_type,
-          area,
-          price,
-          main_image,
-          image_urls,
-          gallery_images,
-          status,
-          project_status,
-          is_featured,
-          is_active,
-          display_order
-        `)
-        .eq("is_active", true)
-        .eq("is_featured", true)
-        .order("display_order", {
-          ascending: true,
-        })
-        .limit(3);
+    const {
+      data: featuredProperties,
+      error: featuredError,
+    } = await supabase
+      .from("properties")
+      .select(`
+        id,
+        title,
+        location,
+        property_type,
+        area,
+        price,
+        main_image,
+        image_urls,
+        gallery_images,
+        status,
+        project_status,
+        is_featured,
+        is_active,
+        display_order
+      `)
+      .eq("is_active", true)
+      .eq("is_featured", true)
+      .order("display_order", {
+        ascending: true,
+      })
+      .limit(3);
 
     if (featuredError) {
       console.error(
@@ -91,30 +377,32 @@ export default function Home() {
       load first 3 active properties.
     */
 
-    const { data: activeProperties, error: activeError } =
-      await supabase
-        .from("properties")
-        .select(`
-          id,
-          title,
-          location,
-          property_type,
-          area,
-          price,
-          main_image,
-          image_urls,
-          gallery_images,
-          status,
-          project_status,
-          is_featured,
-          is_active,
-          display_order
-        `)
-        .eq("is_active", true)
-        .order("display_order", {
-          ascending: true,
-        })
-        .limit(3);
+    const {
+      data: activeProperties,
+      error: activeError,
+    } = await supabase
+      .from("properties")
+      .select(`
+        id,
+        title,
+        location,
+        property_type,
+        area,
+        price,
+        main_image,
+        image_urls,
+        gallery_images,
+        status,
+        project_status,
+        is_featured,
+        is_active,
+        display_order
+      `)
+      .eq("is_active", true)
+      .order("display_order", {
+        ascending: true,
+      })
+      .limit(3);
 
     if (activeError) {
       console.error(
@@ -134,7 +422,9 @@ export default function Home() {
 
   return (
     <main>
-      {/* ================= HEADER ================= */}
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
 
       <header className="nav">
         <a href="/" className="brand">
@@ -147,36 +437,44 @@ export default function Home() {
         <nav>
           <a href="/">Home</a>
 
-          <a href="/properties">Properties</a>
+          <a href="/properties">
+            Properties
+          </a>
 
-          <a href="#services">Services</a>
+          <a href="#services">
+            Services
+          </a>
 
-          <a href="#contact">Contact</a>
+          <a href="#contact">
+            Contact
+          </a>
         </nav>
 
-        <a className="btn gold" href="/visit">
+        <a
+          className="btn gold"
+          href="/visit"
+        >
           Book Site Visit
         </a>
       </header>
 
-      {/* ================= HERO ================= */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
 
       <section className="hero">
         <div className="heroOverlay">
           <p className="eyebrow">
-            TIRUPATI • REAL ESTATE • CONSTRUCTION
+            {content.hero.eyebrow}
           </p>
 
           <h1>
-            Find a Place You’ll Love to Call{" "}
-            <em>Home.</em>
+            {content.hero.title}{" "}
+            <em>{content.hero.highlight}</em>
           </h1>
 
           <p>
-            Discover quality open plots,
-            residential properties and
-            construction opportunities
-            with Sree Krishna Housing Projects.
+            {content.hero.description}
           </p>
 
           <div className="actions">
@@ -184,20 +482,22 @@ export default function Home() {
               className="btn gold"
               href="/properties"
             >
-              Explore Properties
+              {content.hero.primaryButton}
             </a>
 
             <a
               className="btn outline"
               href="/visit"
             >
-              Book a Site Visit
+              {content.hero.secondaryButton}
             </a>
           </div>
         </div>
       </section>
 
-      {/* ================= ABOUT ================= */}
+      {/* =====================================================
+          ABOUT
+      ===================================================== */}
 
       <section
         id="about"
@@ -205,91 +505,97 @@ export default function Home() {
       >
         <div>
           <p className="eyebrow dark">
-            ABOUT US
+            {content.about.eyebrow}
           </p>
 
           <h2>
-            Your Trusted Property Partner
-            in Tirupati
+            {content.about.title}
           </h2>
 
           <p>
-            We help customers explore carefully
-            selected property opportunities with
-            a focus on transparency, quality and
-            customer support.
+            {content.about.description}
           </p>
 
           <div className="checks">
             <span>
-              ✓ Transparent Process
+              ✓ {content.about.point1}
             </span>
 
             <span>
-              ✓ Prime Locations
+              ✓ {content.about.point2}
             </span>
 
             <span>
-              ✓ Customer Support
+              ✓ {content.about.point3}
             </span>
 
             <span>
-              ✓ Investment Guidance
+              ✓ {content.about.point4}
             </span>
           </div>
         </div>
 
         <div className="stats">
           <div>
-            <b>10+</b>
+            <b>
+              {content.stats.stat1Number}
+            </b>
 
             <span>
-              Years Experience
+              {content.stats.stat1Label}
             </span>
           </div>
 
           <div>
-            <b>100+</b>
+            <b>
+              {content.stats.stat2Number}
+            </b>
 
             <span>
-              Happy Customers
+              {content.stats.stat2Label}
             </span>
           </div>
 
           <div>
-            <b>25+</b>
+            <b>
+              {content.stats.stat3Number}
+            </b>
 
             <span>
-              Projects
+              {content.stats.stat3Label}
             </span>
           </div>
 
           <div>
-            <b>100%</b>
+            <b>
+              {content.stats.stat4Number}
+            </b>
 
             <span>
-              Commitment
+              {content.stats.stat4Label}
             </span>
           </div>
         </div>
       </section>
 
-      {/* ================= FEATURED PROPERTIES ================= */}
+      {/* =====================================================
+          FEATURED PROPERTIES
+      ===================================================== */}
 
       <section className="section muted">
         <div className="sectionHead">
           <div>
             <p className="eyebrow dark">
-              FEATURED
+              {content.properties.eyebrow}
             </p>
 
             <h2>
-              Explore Our Properties
+              {content.properties.title}
             </h2>
           </div>
 
           <a href="/properties">
-            View All →
+            {content.properties.viewAll}
           </a>
         </div>
 
@@ -387,50 +693,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= SERVICES ================= */}
+      {/* =====================================================
+          SERVICES
+      ===================================================== */}
 
       <section
         id="services"
         className="section"
       >
         <p className="eyebrow dark">
-          WHAT WE DO
+          {content.services.eyebrow}
         </p>
 
         <h2>
-          Complete Real Estate Services
+          {content.services.title}
         </h2>
 
         <div className="services">
           {[
-            "Open Plot Development",
-            "Residential Properties",
-            "Construction Services",
-            "Property Consultation",
+            {
+              title:
+                content.services.service1Title,
+              description:
+                content.services
+                  .service1Description,
+            },
+            {
+              title:
+                content.services.service2Title,
+              description:
+                content.services
+                  .service2Description,
+            },
+            {
+              title:
+                content.services.service3Title,
+              description:
+                content.services
+                  .service3Description,
+            },
+            {
+              title:
+                content.services.service4Title,
+              description:
+                content.services
+                  .service4Description,
+            },
           ].map((service, index) => (
             <div
               className="service"
-              key={service}
+              key={`${service.title}-${index}`}
             >
               <b>
                 0{index + 1}
               </b>
 
               <h3>
-                {service}
+                {service.title}
               </h3>
 
               <p>
-                Professional support to help
-                you make confident property
-                decisions.
+                {service.description}
               </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ================= CONTACT ================= */}
+      {/* =====================================================
+          CONTACT
+      ===================================================== */}
 
       <section
         id="contact"
@@ -438,12 +770,11 @@ export default function Home() {
       >
         <div className="contactSectionHeading">
           <h2>
-            Get in Touch
+            {content.contact.title}
           </h2>
 
           <p>
-            We are here to answer your questions
-            and guide you home.
+            {content.contact.description}
           </p>
         </div>
 
@@ -453,8 +784,13 @@ export default function Home() {
               Direct Contact
             </h2>
 
+            {/* PHONE */}
+
             <a
-              href="tel:+916303688516"
+              href={`tel:${content.contact.phone.replace(
+                /\s/g,
+                ""
+              )}`}
               className="contactBox"
             >
               <div className="contactIcon">
@@ -467,13 +803,15 @@ export default function Home() {
                 </small>
 
                 <h3>
-                  +91 6303688516
+                  {content.contact.phone}
                 </h3>
               </div>
             </a>
 
+            {/* WHATSAPP */}
+
             <a
-              href="https://wa.me/916303688516"
+              href={content.contact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="contactBox"
@@ -493,8 +831,10 @@ export default function Home() {
               </div>
             </a>
 
+            {/* EMAIL */}
+
             <a
-              href="mailto:sreekrishna.housingprojects@gmail.com"
+              href={`mailto:${content.contact.email}`}
               className="contactBox"
             >
               <div className="contactIcon">
@@ -507,14 +847,16 @@ export default function Home() {
                 </small>
 
                 <h3>
-                  sreekrishna.housingprojects@gmail.com
+                  {content.contact.email}
                 </h3>
               </div>
             </a>
 
+            {/* OFFICE */}
+
             <div className="office-location">
               <h2>
-                Office Location
+                {content.contact.officeTitle}
               </h2>
 
               <div className="office-info-item">
@@ -524,20 +866,27 @@ export default function Home() {
 
                 <div className="office-info-content">
                   <strong>
-                    Sree Krishna Housing Projects
+                    {content.contact.officeName}
                   </strong>
 
                   <p>
-                    Saideep Towers, 20-03-131, B4,
-                    <br />
-                    Leela Mahal Road, Srinivasa Nagar,
-                    <br />
-                    Akkarampalle, Tirupati,
-                    <br />
-                    Andhra Pradesh - 517501
+                    {content.contact.address
+                      .split("\n")
+                      .map((line, index) => (
+                        <span key={index}>
+                          {line}
+                          {index <
+                            content.contact.address.split(
+                              "\n"
+                            ).length -
+                              1 && <br />}
+                        </span>
+                      ))}
                   </p>
                 </div>
               </div>
+
+              {/* BUSINESS HOURS */}
 
               <div className="office-info-item">
                 <div className="office-icon">
@@ -550,12 +899,23 @@ export default function Home() {
                   </strong>
 
                   <p>
-                    Mon - Sat: 9:00 AM - 6:00 PM
-                    <br />
-                    Sunday: Closed
+                    {content.contact.businessHours
+                      .split("\n")
+                      .map((line, index) => (
+                        <span key={index}>
+                          {line}
+                          {index <
+                            content.contact.businessHours.split(
+                              "\n"
+                            ).length -
+                              1 && <br />}
+                        </span>
+                      ))}
                   </p>
                 </div>
               </div>
+
+              {/* GOOGLE MAP */}
 
               <div className="office-map">
                 <iframe
@@ -578,49 +938,59 @@ export default function Home() {
 
           <div className="contactForm">
             <h2>
-              Send us a Message
+              {content.contactForm.title}
             </h2>
 
             <p>
-              Interested in a property?
-              Have a question?
-              Fill out the form below.
+              {content.contactForm.description}
             </p>
 
             <form>
               <label>
-                Full Name
+                {content.contactForm.nameLabel}
               </label>
 
               <input
                 type="text"
-                placeholder="Your Name"
+                placeholder={
+                  content.contactForm
+                    .namePlaceholder
+                }
               />
 
               <label>
-                Phone Number
+                {content.contactForm.phoneLabel}
               </label>
 
               <input
                 type="tel"
-                placeholder="Your Number"
+                placeholder={
+                  content.contactForm
+                    .phonePlaceholder
+                }
               />
 
               <label>
-                Email (Optional)
+                {content.contactForm.emailLabel}
               </label>
 
               <input
                 type="email"
-                placeholder="you@example.com"
+                placeholder={
+                  content.contactForm
+                    .emailPlaceholder
+                }
               />
 
               <label>
-                Message
+                {content.contactForm.messageLabel}
               </label>
 
               <textarea
-                placeholder="How can we help you?"
+                placeholder={
+                  content.contactForm
+                    .messagePlaceholder
+                }
                 rows={5}
               />
 
@@ -628,14 +998,16 @@ export default function Home() {
                 className="btn gold"
                 type="submit"
               >
-                Send Message →
+                {content.contactForm.buttonText}
               </button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* ================= SITE VISIT ================= */}
+      {/* =====================================================
+          SITE VISIT
+      ===================================================== */}
 
       <section
         id="visit"
@@ -643,31 +1015,31 @@ export default function Home() {
       >
         <div>
           <p className="eyebrow">
-            BOOK A VISIT
+            {content.siteVisit.eyebrow}
           </p>
 
           <h2>
-            See Your Future Property
-            in Person
+            {content.siteVisit.title}
           </h2>
 
           <p>
-            Submit your details and our team
-            can contact you regarding a site visit.
+            {content.siteVisit.description}
           </p>
 
           <a
             className="btn gold"
             href="/visit"
           >
-            Schedule Your Visit
+            {content.siteVisit.buttonText}
           </a>
         </div>
 
         <SiteVisitForm />
       </section>
 
-      {/* ================= FOOTER ================= */}
+      {/* =====================================================
+          FOOTER
+      ===================================================== */}
 
       <footer>
         <div className="brand">
@@ -678,12 +1050,11 @@ export default function Home() {
         </div>
 
         <p>
-          Trusted Real Estate & Construction
-          Experts in Tirupati.
+          {content.footer.description}
         </p>
 
         <p>
-          Tirupati, Andhra Pradesh
+          {content.footer.location}
         </p>
 
         <small>
@@ -692,6 +1063,26 @@ export default function Home() {
           All Rights Reserved.
         </small>
       </footer>
+
+      {/* =====================================================
+          HERO BACKGROUND FROM CMS
+          Only overrides the background image.
+          Existing hero styling/animation remains untouched.
+      ===================================================== */}
+
+      <style jsx global>{`
+        .hero::before {
+          background-image:
+            linear-gradient(
+              90deg,
+              rgba(5, 10, 15, 0.82) 0%,
+              rgba(5, 10, 15, 0.65) 42%,
+              rgba(5, 10, 15, 0.30) 70%,
+              rgba(5, 10, 15, 0.15) 100%
+            ),
+            url("${content.hero.backgroundImage}");
+        }
+      `}</style>
     </main>
   );
 }
