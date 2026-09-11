@@ -96,8 +96,7 @@ export default function AdminDashboardPage() {
 
             <p>
               Update properties, images, customer
-              enquiries and site visit bookings without
-              modifying your website code.
+              enquiries and site visit bookings.
             </p>
           </div>
         </section>
