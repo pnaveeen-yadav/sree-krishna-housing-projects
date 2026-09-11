@@ -2,65 +2,65 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Property Buying & Selling Services in Tirupati",
+  title: "Construction Services in Tirupati",
   description:
-    "Property buying and selling assistance in Tirupati with documentation guidance, transaction coordination and practical property consultation.",
+    "Reliable construction services in Tirupati including residential construction, commercial construction, renovation, remodeling, project management and site development.",
   keywords: [
-    "property buying in Tirupati",
-    "property selling in Tirupati",
-    "property dealers in Tirupati",
-    "property transactions Tirupati",
-    "property buying assistance Tirupati",
-    "property selling assistance Tirupati",
-    "real estate services Tirupati",
-    "property consultant Tirupati",
-    "property documentation guidance Tirupati",
+    "construction services in Tirupati",
+    "construction company in Tirupati",
+    "residential construction Tirupati",
+    "commercial construction Tirupati",
+    "building construction Tirupati",
+    "renovation services Tirupati",
+    "construction project management Tirupati",
+    "site development Tirupati",
     "Sree Krishna Housing Projects",
   ],
   alternates: {
     canonical:
-      "https://sreekrishnahousingprojects.com/services/property-transactions",
+      "https://www.sreekrishnahousingprojects.com/services/construction",
   },
   openGraph: {
-    title: "Property Buying & Selling Services in Tirupati",
+    title: "Construction Services in Tirupati",
     description:
-      "Reliable property buying, selling, documentation and transaction support in Tirupati.",
-    url: "https://sreekrishnahousingprojects.com/services/property-transactions",
+      "Reliable residential, commercial, renovation, remodeling, project management and site development services in Tirupati.",
+    url: "https://www.sreekrishnahousingprojects.com/services/construction",
     siteName: "Sree Krishna Housing Projects",
     type: "website",
     locale: "en_IN",
   },
 };
 
+
 const services = [
   {
-    title: "Property Buying Assistance",
+    title: "Residential Home Construction",
     description:
-      "Support in understanding available properties, comparing options and moving through the purchase process with greater clarity.",
+      "Custom-built villas and independent houses designed to reflect your lifestyle, using quality materials and experienced craftsmanship.",
   },
   {
-    title: "Property Selling Assistance",
+    title: "Commercial Building Construction",
     description:
-      "Practical assistance for property owners looking to present, position and sell their property efficiently.",
+      "Functional and well-planned commercial spaces, offices, retail buildings and other projects delivered with attention to quality and timelines.",
   },
   {
-    title: "Documentation Guidance",
+    title: "Turnkey Project Execution",
     description:
-      "Guidance on the key documents and information that should be understood during a property transaction.",
+      "End-to-end construction support covering planning, execution, coordination and finishing, so your project is handled with greater convenience.",
   },
   {
-    title: "Transaction Coordination",
+    title: "Renovation & Structural Modifications",
     description:
-      "Support in coordinating important stages of the transaction between customers and relevant parties.",
+      "Modernizing existing spaces through renovation, layout improvements, structural modifications and practical design upgrades.",
   },
   {
-    title: "Property Consultation",
+    title: "Quality & Stage-wise Inspection",
     description:
-      "Clear guidance on property-related decisions so buyers and sellers can move forward with greater confidence.",
+      "Quality-focused checks throughout construction to help maintain material standards, workmanship and overall project quality.",
   },
 ];
 
-export default function PropertyTransactionsServicesPage() {
+export default function ConstructionServicesPage() {
   return (
     <main className="propertyDetailsPage">
       {/* HEADER */}
@@ -89,12 +89,11 @@ export default function PropertyTransactionsServicesPage() {
         className="section"
         style={{
           paddingTop: "45px",
-          paddingBottom: "5px",
+          paddingBottom: "20px",
         }}
       >
         <div className="sectionHead">
           <div>
-            {/* BACK TO SERVICES */}
             <Link
               href="/#services"
               style={{
@@ -115,7 +114,7 @@ export default function PropertyTransactionsServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              PROPERTY BUYING & SELLING
+              CONSTRUCTION
             </p>
 
             <h1
@@ -125,7 +124,7 @@ export default function PropertyTransactionsServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Property Transactions
+              Construction
             </h1>
 
             <p
@@ -136,9 +135,10 @@ export default function PropertyTransactionsServicesPage() {
                 margin: 0,
               }}
             >
-              Reliable support for buying and selling property,
-              with clear communication and practical assistance
-              throughout the transaction process.
+              Premium residential and commercial construction with
+              uncompromising quality assurance. From foundation to
+              finish, we focus on structural integrity, practical
+              planning and a high standard of workmanship.
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function PropertyTransactionsServicesPage() {
       <section
         className="section"
         style={{
-          paddingTop: "5px",
+          paddingTop: "15px",
           paddingBottom: "45px",
         }}
       >
@@ -235,7 +235,7 @@ export default function PropertyTransactionsServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Making Property Transactions Clearer & Easier
+              Built With Quality From Foundation to Finish
             </h2>
           </div>
 
@@ -247,9 +247,10 @@ export default function PropertyTransactionsServicesPage() {
                 marginTop: 0,
               }}
             >
-              Buying or selling property involves several important
-              decisions and stages. Clear information and proper
-              coordination can make the process much smoother.
+              Every construction project needs careful planning,
+              reliable execution and attention to detail. We work to
+              understand the customer's requirements before moving
+              into execution.
             </p>
 
             <p
@@ -258,9 +259,9 @@ export default function PropertyTransactionsServicesPage() {
                 lineHeight: "1.65",
               }}
             >
-              Our team works with customers to understand their
-              requirements and provide practical support throughout
-              the transaction journey.
+              Our focus is on practical construction, quality
+              workmanship, clear communication and timely progress
+              throughout the project.
             </p>
           </div>
         </div>
@@ -287,7 +288,7 @@ export default function PropertyTransactionsServicesPage() {
                 marginTop: "6px",
               }}
             >
-              Professional Support At Every Stage
+              Quality Construction You Can Rely On
             </h2>
           </div>
 
@@ -297,10 +298,10 @@ export default function PropertyTransactionsServicesPage() {
               fontSize: "17px",
             }}
           >
-            <span>✓ Clear communication</span>
-            <span>✓ Customer-focused assistance</span>
-            <span>✓ Practical transaction guidance</span>
-            <span>✓ Reliable support</span>
+            <span>✓ Quality-focused workmanship</span>
+            <span>✓ Practical project planning</span>
+            <span>✓ Transparent communication</span>
+            <span>✓ Reliable customer support</span>
           </div>
         </div>
       </section>
@@ -309,7 +310,7 @@ export default function PropertyTransactionsServicesPage() {
       <section className="visit">
         <div>
           <p className="eyebrow">
-            PLANNING A PROPERTY TRANSACTION?
+            LET&apos;S BUILD TOGETHER
           </p>
 
           <h2
@@ -318,7 +319,7 @@ export default function PropertyTransactionsServicesPage() {
               lineHeight: "1.2",
             }}
           >
-            Let&apos;s Make Your Next Move Easier
+            Planning Your Construction Project?
           </h2>
 
           <p
@@ -327,8 +328,8 @@ export default function PropertyTransactionsServicesPage() {
               lineHeight: "1.65",
             }}
           >
-            Talk to our team about buying or selling property and
-            understand the next steps with confidence.
+            Talk to our team about your requirements and get
+            professional guidance for your construction project.
           </p>
         </div>
 
