@@ -31,6 +31,7 @@ const services = [
 export default function ConstructionServicesPage() {
   return (
     <main className="propertyDetailsPage">
+      {/* HEADER */}
       <header className="nav propertyDetailsNav">
         <Link href="/" className="brand">
           <img
@@ -52,30 +53,62 @@ export default function ConstructionServicesPage() {
       </header>
 
       {/* INTRO */}
-      <section className="section">
+      <section
+        className="section"
+        style={{
+          paddingTop: "55px",
+          paddingBottom: "45px",
+        }}
+      >
         <div className="sectionHead">
           <div>
-            <p className="eyebrow dark">CONSTRUCTION</p>
+            <p
+              className="eyebrow dark"
+              style={{ marginBottom: "8px" }}
+            >
+              CONSTRUCTION
+            </p>
 
-            <h1>Construction</h1>
+            <h1
+              style={{
+                fontSize: "44px",
+                lineHeight: "1.15",
+                marginBottom: "12px",
+              }}
+            >
+              Construction
+            </h1>
 
-            <p>
+            <p
+              style={{
+                fontSize: "18px",
+                lineHeight: "1.7",
+                maxWidth: "1050px",
+              }}
+            >
               Premium residential and commercial construction with
-              uncompromising quality assurance. From foundation to finish,
-              we focus on structural integrity, practical planning and a
-              high standard of workmanship.
+              uncompromising quality assurance. From foundation to
+              finish, we focus on structural integrity, practical
+              planning and a high standard of workmanship.
             </p>
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section className="section">
+      <section
+        className="section"
+        style={{
+          paddingTop: "20px",
+          paddingBottom: "55px",
+        }}
+      >
         <div
           className="services"
           style={{
-            display: "grid",
-            gap: "30px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "28px",
           }}
         >
           {services.map((service) => (
@@ -83,23 +116,46 @@ export default function ConstructionServicesPage() {
               className="service"
               key={service.title}
               style={{
+                width: "100%",
+                minHeight: "190px",
+                padding: "38px 40px",
                 position: "relative",
-                minHeight: "180px",
+                boxSizing: "border-box",
               }}
             >
-              <h2>{service.title}</h2>
+              <h2
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "1.25",
+                  margin: "0 0 14px",
+                  maxWidth: "75%",
+                }}
+              >
+                {service.title}
+              </h2>
 
-              <p>{service.description}</p>
+              <p
+                style={{
+                  fontSize: "17px",
+                  lineHeight: "1.7",
+                  margin: 0,
+                  maxWidth: "78%",
+                }}
+              >
+                {service.description}
+              </p>
 
               <Link
                 href="/#contact"
                 style={{
                   position: "absolute",
-                  right: "32px",
-                  bottom: "28px",
+                  right: "38px",
+                  bottom: "30px",
+                  fontSize: "17px",
                   fontWeight: 700,
                   color: "inherit",
                   textDecoration: "none",
+                  whiteSpace: "nowrap",
                 }}
               >
                 Enquire Now&nbsp; →
@@ -110,25 +166,49 @@ export default function ConstructionServicesPage() {
       </section>
 
       {/* OUR APPROACH */}
-      <section className="section muted">
+      <section
+        className="section muted"
+        style={{
+          paddingTop: "65px",
+          paddingBottom: "65px",
+        }}
+      >
         <div className="split">
           <div>
-            <p className="eyebrow dark">OUR APPROACH</p>
+            <p className="eyebrow dark">
+              OUR APPROACH
+            </p>
 
-            <h2>
+            <h2
+              style={{
+                fontSize: "38px",
+                lineHeight: "1.2",
+                marginTop: "8px",
+              }}
+            >
               Built With Quality From Foundation to Finish
             </h2>
           </div>
 
           <div>
-            <p>
+            <p
+              style={{
+                fontSize: "17px",
+                lineHeight: "1.7",
+              }}
+            >
               Every construction project needs careful planning,
               reliable execution and attention to detail. We work to
-              understand the customer's requirements before moving into
-              execution.
+              understand the customer's requirements before moving
+              into execution.
             </p>
 
-            <p>
+            <p
+              style={{
+                fontSize: "17px",
+                lineHeight: "1.7",
+              }}
+            >
               Our focus is on practical construction, quality
               workmanship, clear communication and timely progress
               throughout the project.
@@ -138,17 +218,36 @@ export default function ConstructionServicesPage() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section className="section">
+      <section
+        className="section"
+        style={{
+          paddingTop: "65px",
+          paddingBottom: "65px",
+        }}
+      >
         <div className="split">
           <div>
-            <p className="eyebrow dark">WHY CHOOSE US</p>
+            <p className="eyebrow dark">
+              WHY CHOOSE US
+            </p>
 
-            <h2>
+            <h2
+              style={{
+                fontSize: "38px",
+                lineHeight: "1.2",
+                marginTop: "8px",
+              }}
+            >
               Quality Construction You Can Rely On
             </h2>
           </div>
 
-          <div className="checks">
+          <div
+            className="checks"
+            style={{
+              fontSize: "17px",
+            }}
+          >
             <span>✓ Quality-focused workmanship</span>
             <span>✓ Practical project planning</span>
             <span>✓ Transparent communication</span>
@@ -164,11 +263,21 @@ export default function ConstructionServicesPage() {
             LET&apos;S BUILD TOGETHER
           </p>
 
-          <h2>
+          <h2
+            style={{
+              fontSize: "38px",
+              lineHeight: "1.2",
+            }}
+          >
             Planning Your Construction Project?
           </h2>
 
-          <p>
+          <p
+            style={{
+              fontSize: "17px",
+              lineHeight: "1.7",
+            }}
+          >
             Talk to our team about your requirements and get
             professional guidance for your construction project.
           </p>
