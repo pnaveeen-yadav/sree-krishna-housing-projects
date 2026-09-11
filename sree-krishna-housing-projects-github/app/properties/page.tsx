@@ -567,9 +567,6 @@ export default function Properties() {
               Services
             </Link>
 
-            <Link href="/#testimonials">
-              Testimonials
-            </Link>
 
             <Link href="/#contact">
               Contact
@@ -715,9 +712,7 @@ export default function Properties() {
           </Link>
 
 
-          <Link href="/#testimonials">
-            Testimonials
-          </Link>
+
 
 
           <Link href="/#contact">
