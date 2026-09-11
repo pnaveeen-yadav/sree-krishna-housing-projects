@@ -2375,3 +2375,35 @@
   }
 
 }
+.adminDeleteButton {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #b42318;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.adminDeleteButton:hover {
+  background: #991b1b;
+}
+
+.adminDeleteButton:active {
+  transform: scale(0.98);
+}
+
+.adminDeleteButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .adminDeleteButton {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}

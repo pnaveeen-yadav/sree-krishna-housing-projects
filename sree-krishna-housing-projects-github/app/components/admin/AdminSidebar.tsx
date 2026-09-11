@@ -74,6 +74,7 @@ export default function AdminSidebar() {
           />
 
           <p>Admin Panel</p>
+          <span>{userEmail}</span>
         </div>
 
         <nav className="adminNav">

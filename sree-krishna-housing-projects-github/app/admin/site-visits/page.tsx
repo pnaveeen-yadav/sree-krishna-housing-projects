@@ -6,13 +6,21 @@ import { useRouter } from "next/navigation";
 import AdminSidebar from "@/app/components/admin/AdminSidebar";
 import { adminSupabase } from "@/lib/adminSupabase";
 
-type SiteVisit = Record<string, unknown>;
+type SiteVisit = {
+  id: string;
+  name: string;
+  phone: string;
+  preferred_date: string | null;
+  preferred_time: string | null;
+};
 
 export default function AdminSiteVisitsPage() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
   const [visits, setVisits] = useState<SiteVisit[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -50,7 +58,10 @@ export default function AdminSiteVisitsPage() {
 
     const { data, error } = await adminSupabase
       .from("site_visits")
-      .select("*");
+      .select(
+        "id, name, phone, preferred_date, preferred_time"
+      )
+      .order("created_at", { ascending: false });
 
     if (error) {
       console.error("Error loading site visits:", error);
@@ -60,34 +71,78 @@ export default function AdminSiteVisitsPage() {
     }
 
     setVisits(data || []);
+    setSelectedIds([]);
     setLoading(false);
   };
 
-  const formatValue = (value: unknown) => {
-    if (value === null || value === undefined) {
-      return "-";
+  const toggleSelect = (id: string) => {
+    setSelectedIds((current) =>
+      current.includes(id)
+        ? current.filter((selectedId) => selectedId !== id)
+        : [...current, id]
+    );
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.length === visits.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(visits.map((visit) => visit.id));
+    }
+  };
+
+  const deleteSelected = async () => {
+    if (selectedIds.length === 0) {
+      return;
     }
 
-    if (typeof value === "boolean") {
-      return value ? "Yes" : "No";
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${selectedIds.length} selected site visit${
+        selectedIds.length > 1 ? "s" : ""
+      }?`
+    );
+
+    if (!confirmed) {
+      return;
     }
 
-    if (typeof value === "object") {
-      return JSON.stringify(value);
+    setDeleting(true);
+    setError("");
+
+    const { error } = await adminSupabase
+      .from("site_visits")
+      .delete()
+      .in("id", selectedIds);
+
+    if (error) {
+      console.error("Error deleting site visits:", error);
+      setError(error.message);
+      setDeleting(false);
+      return;
     }
 
-    return String(value);
+    setVisits((current) =>
+      current.filter(
+        (visit) => !selectedIds.includes(visit.id)
+      )
+    );
+
+    setSelectedIds([]);
+    setDeleting(false);
   };
 
   if (loading) {
     return (
       <main className="adminLoadingPage">
         <div className="adminLoader"></div>
-
         <p>Loading Site Visits...</p>
       </main>
     );
   }
+
+  const allSelected =
+    visits.length > 0 &&
+    selectedIds.length === visits.length;
 
   return (
     <main className="adminLayout">
@@ -108,12 +163,33 @@ export default function AdminSiteVisitsPage() {
             </p>
           </div>
 
-          <button
-            className="adminPrimaryButton"
-            onClick={loadVisits}
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+            }}
           >
-            Refresh
-          </button>
+            {selectedIds.length > 0 && (
+              <button
+                className="adminDeleteButton"
+                onClick={deleteSelected}
+                disabled={deleting}
+              >
+                {deleting
+                  ? "Deleting..."
+                  : `Delete Selected (${selectedIds.length})`}
+              </button>
+            )}
+
+            <button
+              className="adminPrimaryButton"
+              onClick={loadVisits}
+              disabled={deleting}
+            >
+              Refresh
+            </button>
+          </div>
         </header>
 
         <section className="adminPropertiesSection">
@@ -159,49 +235,171 @@ export default function AdminSiteVisitsPage() {
                 style={{
                   width: "100%",
                   borderCollapse: "collapse",
-                  minWidth: "700px",
+                  minWidth: "600px",
                 }}
               >
                 <thead>
                   <tr>
-                    {Object.keys(visits[0]).map((key) => (
-                      <th
-                        key={key}
+                    <th
+                      style={{
+                        padding: "16px",
+                        width: "50px",
+                        textAlign: "center",
+                        borderBottom:
+                          "1px solid #e5e7eb",
+                        background: "#f9fafb",
+                      }}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={allSelected}
+                        onChange={toggleSelectAll}
+                        aria-label="Select all site visits"
                         style={{
-                          padding: "16px",
-                          textAlign: "left",
-                          borderBottom:
-                            "1px solid #e5e7eb",
-                          textTransform: "capitalize",
-                          background: "#f9fafb",
-                          fontSize: "14px",
+                          width: "17px",
+                          height: "17px",
+                          cursor: "pointer",
                         }}
-                      >
-                        {key.replace(/_/g, " ")}
-                      </th>
-                    ))}
+                      />
+                    </th>
+
+                    <th
+                      style={{
+                        padding: "16px",
+                        textAlign: "left",
+                        borderBottom:
+                          "1px solid #e5e7eb",
+                        background: "#f9fafb",
+                        fontSize: "14px",
+                      }}
+                    >
+                      Name
+                    </th>
+
+                    <th
+                      style={{
+                        padding: "16px",
+                        textAlign: "left",
+                        borderBottom:
+                          "1px solid #e5e7eb",
+                        background: "#f9fafb",
+                        fontSize: "14px",
+                      }}
+                    >
+                      Phone
+                    </th>
+
+                    <th
+                      style={{
+                        padding: "16px",
+                        textAlign: "left",
+                        borderBottom:
+                          "1px solid #e5e7eb",
+                        background: "#f9fafb",
+                        fontSize: "14px",
+                      }}
+                    >
+                      Date
+                    </th>
+
+                    <th
+                      style={{
+                        padding: "16px",
+                        textAlign: "left",
+                        borderBottom:
+                          "1px solid #e5e7eb",
+                        background: "#f9fafb",
+                        fontSize: "14px",
+                      }}
+                    >
+                      Time
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  {visits.map((visit, index) => (
-                    <tr key={String(visit.id || index)}>
-                      {Object.keys(visits[0]).map((key) => (
+                  {visits.map((visit) => {
+                    const isSelected =
+                      selectedIds.includes(visit.id);
+
+                    return (
+                      <tr
+                        key={visit.id}
+                        style={{
+                          background: isSelected
+                            ? "#fffaf0"
+                            : "#ffffff",
+                        }}
+                      >
                         <td
-                          key={key}
+                          style={{
+                            padding: "16px",
+                            textAlign: "center",
+                            borderBottom:
+                              "1px solid #f0f0f0",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() =>
+                              toggleSelect(visit.id)
+                            }
+                            aria-label={`Select ${visit.name}`}
+                            style={{
+                              width: "17px",
+                              height: "17px",
+                              cursor: "pointer",
+                            }}
+                          />
+                        </td>
+
+                        <td
                           style={{
                             padding: "16px",
                             borderBottom:
                               "1px solid #f0f0f0",
                             fontSize: "14px",
-                            verticalAlign: "top",
                           }}
                         >
-                          {formatValue(visit[key])}
+                          {visit.name || "-"}
                         </td>
-                      ))}
-                    </tr>
-                  ))}
+
+                        <td
+                          style={{
+                            padding: "16px",
+                            borderBottom:
+                              "1px solid #f0f0f0",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {visit.phone || "-"}
+                        </td>
+
+                        <td
+                          style={{
+                            padding: "16px",
+                            borderBottom:
+                              "1px solid #f0f0f0",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {visit.preferred_date || "-"}
+                        </td>
+
+                        <td
+                          style={{
+                            padding: "16px",
+                            borderBottom:
+                              "1px solid #f0f0f0",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {visit.preferred_time || "-"}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

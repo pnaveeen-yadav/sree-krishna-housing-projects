@@ -68,7 +68,7 @@ export default function AdminDashboardPage() {
               Welcome back
             </p>
 
-            <h1>Dashboard</h1>
+            <h1>ADMIN DASHBOARD</h1>
           </div>
 
           <div className="adminUserInfo">
@@ -77,9 +77,9 @@ export default function AdminDashboardPage() {
             </div>
 
             <div>
-              <strong>Administrator</strong>
+              <strong>Admin</strong>
 
-              <span>{userEmail}</span>
+
             </div>
           </div>
         </header>
