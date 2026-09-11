@@ -814,12 +814,6 @@ export default function Home() {
                   cursor: index < 4 ? "pointer" : "default",
                 }}
               >
-                {index > 1 && (
-                  <b>
-                    {String(index + 1).padStart(2, "0")}
-                  </b>
-                )}
-
                 <h3>
                   {service.title}
                 </h3>
@@ -827,6 +821,10 @@ export default function Home() {
                 <p>
                   {service.description}
                 </p>
+
+                <span className="serviceLearnMore">
+                  LEARN MORE <span aria-hidden="true">→</span>
+                </span>
               </Link>
             )
           )}
@@ -1154,6 +1152,37 @@ export default function Home() {
               rgba(5, 10, 15, 0.15) 100%
             ),
             url("${content.hero.backgroundImage}");
+        }
+
+        .services .service {
+          display: flex;
+          flex-direction: column;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .services .service:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+          border-color: rgba(191, 154, 83, 0.55);
+        }
+
+        .serviceLearnMore {
+          margin-top: auto;
+          padding-top: 24px;
+          color: #bd9855;
+          font-size: 15px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+        }
+
+        .serviceLearnMore span {
+          display: inline-block;
+          margin-left: 5px;
+          transition: transform 0.2s ease;
+        }
+
+        .services .service:hover .serviceLearnMore span {
+          transform: translateX(4px);
         }
       `}</style>
     </main>
