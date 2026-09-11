@@ -2042,7 +2042,7 @@
   .adminMobileMenuButton {
     position: fixed;
     top: 14px;
-    left: 14px;
+    right: 14px;
     width: 46px;
     height: 46px;
 
