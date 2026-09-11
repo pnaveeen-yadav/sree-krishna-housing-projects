@@ -62,6 +62,21 @@ export default function ConsultingServicesPage() {
       >
         <div className="sectionHead">
           <div>
+            {/* BACK TO SERVICES */}
+            <Link
+              href="/#services"
+              style={{
+                display: "inline-block",
+                marginBottom: "14px",
+                fontSize: "15px",
+                fontWeight: 600,
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              ← Back to Services
+            </Link>
+
             <p
               className="eyebrow dark"
               style={{
