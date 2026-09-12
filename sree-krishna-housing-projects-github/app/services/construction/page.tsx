@@ -114,7 +114,7 @@ export default function ConstructionServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              CONSTRUCTION
+              Construction Services in Tirupati
             </p>
 
             <h1
@@ -135,10 +135,7 @@ export default function ConstructionServicesPage() {
                 margin: 0,
               }}
             >
-              Premium residential and commercial construction with
-              uncompromising quality assurance. From foundation to
-              finish, we focus on structural integrity, practical
-              planning and a high standard of workmanship.
+              Professional construction services in Tirupati for residential and commercial projects, including turnkey execution, renovation and site development.
             </p>
           </div>
         </div>

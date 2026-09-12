@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const baseUrl = "https://www.sreekrishnahousingprojects.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://www.sreekrishnahousingprojects.com"
-  ),
+  metadataBase: new URL(baseUrl),
 
   title: {
     default:
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Sree Krishna Housing Projects provides real estate, property consultation, construction and land development services in Tirupati.",
+    "Sree Krishna Housing Projects offers real estate, property consultation, construction and land development services in Tirupati, Andhra Pradesh.",
 
   keywords: [
     "real estate in Tirupati",
@@ -38,22 +38,19 @@ export const metadata: Metadata = {
   publisher: "Sree Krishna Housing Projects",
 
   alternates: {
-    canonical:
-      "https://www.sreekrishnahousingprojects.com/",
+    canonical: baseUrl,
   },
 
   openGraph: {
     type: "website",
-
-    url: "https://www.sreekrishnahousingprojects.com/",
-
+    url: baseUrl,
     siteName: "Sree Krishna Housing Projects",
 
     title:
       "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
 
     description:
-      "Real estate, property consultation, construction and land development services in Tirupati.",
+      "Real estate, property consultation, construction and land development services in Tirupati, Andhra Pradesh.",
 
     locale: "en_IN",
   },
@@ -65,7 +62,7 @@ export const metadata: Metadata = {
       "Sree Krishna Housing Projects | Real Estate & Construction in Tirupati",
 
     description:
-      "Real estate, property consultation, construction and land development services in Tirupati.",
+      "Real estate, property consultation, construction and land development services in Tirupati, Andhra Pradesh.",
   },
 
   robots: {
@@ -85,24 +82,50 @@ export const metadata: Metadata = {
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
-  "@id": "https://www.sreekrishnahousingprojects.com/#business",
+
+  "@id": `${baseUrl}/#business`,
+
   name: "Sree Krishna Housing Projects",
-  url: "https://www.sreekrishnahousingprojects.com/",
-  logo: "https://www.sreekrishnahousingprojects.com/logo.webp",
-  image: "https://www.sreekrishnahousingprojects.com/logo.webp",
-  email: "housingprojects@gmail.com",
+
+  url: baseUrl,
+
+  logo: `${baseUrl}/logo.webp`,
+
+  image: `${baseUrl}/logo.webp`,
+
+  email: "sreekrishna.housingprojects@gmail.com",
+
   address: {
     "@type": "PostalAddress",
+
     streetAddress:
       "Saideep Towers, 20-03-131, B4, Leela Mahal Road, Srinivasa Nagar, Akkarampalle",
+
     addressLocality: "Tirupati",
+
     addressRegion: "Andhra Pradesh",
+
     postalCode: "517501",
+
     addressCountry: "IN",
   },
+
+  areaServed: {
+    "@type": "City",
+    name: "Tirupati",
+  },
+
+  serviceType: [
+    "Real Estate",
+    "Property Consultation",
+    "Construction Services",
+    "Land Development",
+  ],
+
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
+
       dayOfWeek: [
         "Monday",
         "Tuesday",
@@ -111,10 +134,27 @@ const localBusinessJsonLd = {
         "Friday",
         "Saturday",
       ],
+
       opens: "09:00",
       closes: "18:00",
     },
   ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+
+  "@type": "WebSite",
+
+  "@id": `${baseUrl}/#website`,
+
+  name: "Sree Krishna Housing Projects",
+
+  url: baseUrl,
+
+  publisher: {
+    "@id": `${baseUrl}/#business`,
+  },
 };
 
 export default function RootLayout({
@@ -131,6 +171,14 @@ export default function RootLayout({
             __html: JSON.stringify(localBusinessJsonLd),
           }}
         />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd),
+          }}
+        />
+
         {children}
       </body>
     </html>

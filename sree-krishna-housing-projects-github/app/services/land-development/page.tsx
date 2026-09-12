@@ -124,7 +124,7 @@ export default function LandDevelopmentServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Land Development
+              Land Development Services in Tirupati
             </h1>
 
             <p
@@ -135,9 +135,9 @@ export default function LandDevelopmentServicesPage() {
                 margin: 0,
               }}
             >
-              Transforming land into thoughtfully planned and usable
-              developments through practical planning, infrastructure
-              support and quality-focused execution.
+              Professional land development services in Tirupati focused on
+  practical planning, infrastructure support and quality-focused
+  execution.
             </p>
           </div>
         </div>

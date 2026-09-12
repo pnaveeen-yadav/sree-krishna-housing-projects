@@ -114,7 +114,7 @@ export default function ConsultingServicesPage() {
                 marginBottom: "6px",
               }}
             >
-              PROPERTY CONSULTING
+              Consulting
             </p>
 
             <h1
@@ -124,7 +124,7 @@ export default function ConsultingServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Consulting
+              Property Consultant in Tirupati
             </h1>
 
             <p

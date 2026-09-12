@@ -152,7 +152,7 @@ const DEFAULT_CONTENT: HomeContent = {
   },
 
   stats: {
-    stat1Number: "10+",
+    stat1Number: "12+",
     stat1Label: "Years Experience",
     stat2Number: "100+",
     stat2Label: "Happy Customers",
@@ -161,7 +161,7 @@ const DEFAULT_CONTENT: HomeContent = {
     stat4Number: "100%",
     stat4Label: "Commitment",
     items: [
-      { number: "10+", label: "Years Experience" },
+      { number: "12+", label: "Years Experience" },
       { number: "100+", label: "Happy Customers" },
       { number: "25+", label: "Projects" },
       { number: "100%", label: "Commitment" },

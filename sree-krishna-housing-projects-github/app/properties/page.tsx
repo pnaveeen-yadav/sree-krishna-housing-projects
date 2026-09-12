@@ -773,18 +773,15 @@ export default function Properties() {
 
 
           <h1>
-            Find Your Ideal Property
+            Properties for Sale in Tirupati
           </h1>
 
 
           <p>
 
-            Explore our carefully selected
-            properties in prime locations.
-            Find the perfect open plot,
-            residential property, villa,
-            or commercial investment
-            opportunity.
+            Explore residential plots, villas, apartments and other properties
+  for sale in Tirupati. Find a property that suits your needs,
+  location preferences and investment goals.
 
           </p>
 

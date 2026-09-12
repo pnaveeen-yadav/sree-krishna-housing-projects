@@ -47,7 +47,7 @@ export default function ContactPage() {
         {/* LEFT SIDE */}
         <section className="contactLeft">
 
-          <h1>Direct Contact</h1>
+          <h1>Contact Sree Krishna Housing Projects in Tirupati</h1>
 
           <div className="contactCards">
 

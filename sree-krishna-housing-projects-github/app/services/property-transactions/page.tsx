@@ -125,7 +125,7 @@ export default function PropertyTransactionsServicesPage() {
                 margin: "0 0 10px",
               }}
             >
-              Property Transactions
+               Property Buying & Selling in Tirupati
             </h1>
 
             <p
@@ -136,9 +136,9 @@ export default function PropertyTransactionsServicesPage() {
                 margin: 0,
               }}
             >
-              Reliable support for buying and selling property,
-              with clear communication and practical assistance
-              throughout the transaction process.
+              Professional property buying and selling assistance in Tirupati,
+with clear communication and practical support throughout the
+transaction process.
             </p>
           </div>
         </div>
